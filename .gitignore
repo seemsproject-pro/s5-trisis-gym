@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build
+dist/
+build/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.vercel/
+
+# ML & Local Data
+ml/data/raw/
+ml/data/processed/
+ml/artifacts/*.joblib
+ml/artifacts/*.pkl
+*.pyc
+__pycache__/
+.venv/
+venv/
