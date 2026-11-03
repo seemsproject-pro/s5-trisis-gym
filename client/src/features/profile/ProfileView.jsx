@@ -79,32 +79,32 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
       <section className="space-y-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#6D28D9] flex items-center justify-center">
-              <User className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-300 flex items-center justify-center">
+              <User className="w-4 h-4 text-amber-400" />
             </div>
-            <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Profil Kebugaran</h1>
+            <h1 className="text-xl font-extrabold text-white tracking-tight">Profil Kebugaran</h1>
           </div>
           <StatusBadge status="DEMO" size="sm" />
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-400">
           Kelola data biometrik dan preferensi latihan Anda untuk menyesuaikan rekomendasi.
         </p>
       </section>
 
       {/* Member Card Summary Strip */}
-      <section className="bg-white border border-slate-100 rounded-3xl p-5 shadow-[0_4px_20px_rgba(15,23,42,0.04)] space-y-3">
+      <section className="bg-[#131520] border border-white/10 rounded-3xl p-5 shadow-[0_4px_25px_rgba(0,0,0,0.3)] space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-sm font-extrabold text-slate-900">{user?.name}</h2>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">{user?.memberId}</p>
+            <h2 className="text-sm font-extrabold text-white">{user?.name}</h2>
+            <p className="text-xs text-purple-300 font-mono mt-0.5">{user?.memberId}</p>
           </div>
-          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          <span className="text-xs font-bold text-emerald-300 bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-800/40">
             {user?.planName || 'Annual Regular'}
           </span>
         </div>
-        <div className="pt-3 border-t border-slate-100 flex justify-between text-xs text-slate-400">
-          <span>Terakhir Diperbarui: <strong className="text-slate-600">{profile.lastUpdated || 'Hari ini'}</strong></span>
-          <span className="text-[#6D28D9] font-medium">Tersimpan di Browser</span>
+        <div className="pt-3 border-t border-white/10 flex justify-between text-xs text-slate-400">
+          <span>Terakhir Diperbarui: <strong className="text-slate-200">{profile.lastUpdated || 'Hari ini'}</strong></span>
+          <span className="text-amber-300 font-medium">Tersimpan di Browser</span>
         </div>
       </section>
 
@@ -112,30 +112,30 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
       <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
         {/* Form Global Success / Error */}
         {saveSuccess && (
-          <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-2 text-emerald-800 text-xs font-bold animate-in fade-in">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+          <div className="p-3.5 rounded-2xl bg-emerald-950/50 border border-emerald-800/40 flex items-center gap-2 text-emerald-300 text-xs font-bold animate-in fade-in">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
             <span>Profil kebugaran berhasil disimpan! Rekomendasi latihan diperbarui otomatis.</span>
           </div>
         )}
 
         {errors.form && (
-          <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+          <div className="p-3.5 rounded-2xl bg-rose-950/50 border border-rose-800/40 text-rose-300 text-xs font-medium">
             {errors.form}
           </div>
         )}
 
         {/* Section 1: Data Fisik Tubuh */}
-        <div className="bg-white border border-slate-100 rounded-3xl p-5 md:p-6 space-y-4 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-          <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-purple-50 text-[#6D28D9] flex items-center justify-center">
-              <Activity className="w-3.5 h-3.5" />
+        <div className="bg-[#131520] border border-white/10 rounded-3xl p-5 md:p-6 space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.3)]">
+          <h3 className="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
+            <div className="w-6 h-6 rounded-lg bg-purple-950/60 border border-purple-800/40 text-purple-300 flex items-center justify-center">
+              <Activity className="w-3.5 h-3.5 text-amber-400" />
             </div>
             Data Biometrik Fisik
           </h3>
 
           {/* Gender Selector */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold text-slate-300 mb-1.5">
               Jenis Kelamin (untuk kalkulasi laju basal BMR)
             </label>
             <div className="grid grid-cols-2 gap-2.5">
@@ -144,8 +144,8 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 onClick={() => handleChange('gender', 'male')}
                 className={`py-2.5 text-xs font-bold rounded-2xl border transition-all cursor-pointer ${
                   formData.gender === 'male'
-                    ? 'bg-purple-100/70 border-purple-300 text-[#6D28D9] shadow-xs'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                    ? 'bg-[#5D4E75] border-purple-400/40 text-white shadow-xs'
+                    : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
                 }`}
               >
                 Pria
@@ -155,8 +155,8 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 onClick={() => handleChange('gender', 'female')}
                 className={`py-2.5 text-xs font-bold rounded-2xl border transition-all cursor-pointer ${
                   formData.gender === 'female'
-                    ? 'bg-purple-100/70 border-purple-300 text-[#6D28D9] shadow-xs'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                    ? 'bg-[#5D4E75] border-purple-400/40 text-white shadow-xs'
+                    : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
                 }`}
               >
                 Wanita
@@ -167,7 +167,7 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
           {/* Usia, Tinggi, Berat in Grid */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-300 mb-1">
                 Usia (Tahun)
               </label>
               <input
@@ -176,15 +176,15 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 max="90"
                 value={formData.age}
                 onChange={(e) => handleChange('age', e.target.value)}
-                className={`w-full px-3.5 py-2.5 text-xs bg-slate-50 border rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white transition-colors ${
-                  errors.age ? 'border-rose-400 bg-rose-50/50' : 'border-slate-200'
+                className={`w-full px-3.5 py-2.5 text-xs bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors ${
+                  errors.age ? 'border-rose-500 bg-rose-950/20' : 'border-white/10'
                 }`}
               />
-              {errors.age && <p className="text-[10px] text-rose-600 mt-1 font-medium">{errors.age}</p>}
+              {errors.age && <p className="text-[10px] text-rose-400 mt-1 font-medium">{errors.age}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-300 mb-1">
                 Tinggi Badan (cm)
               </label>
               <input
@@ -193,15 +193,15 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 max="230"
                 value={formData.height}
                 onChange={(e) => handleChange('height', e.target.value)}
-                className={`w-full px-3.5 py-2.5 text-xs bg-slate-50 border rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white transition-colors ${
-                  errors.height ? 'border-rose-400 bg-rose-50/50' : 'border-slate-200'
+                className={`w-full px-3.5 py-2.5 text-xs bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors ${
+                  errors.height ? 'border-rose-500 bg-rose-950/20' : 'border-white/10'
                 }`}
               />
-              {errors.height && <p className="text-[10px] text-rose-600 mt-1 font-medium">{errors.height}</p>}
+              {errors.height && <p className="text-[10px] text-rose-400 mt-1 font-medium">{errors.height}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-300 mb-1">
                 Berat Badan (kg)
               </label>
               <input
@@ -210,15 +210,15 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 max="250"
                 value={formData.weight}
                 onChange={(e) => handleChange('weight', e.target.value)}
-                className={`w-full px-3.5 py-2.5 text-xs bg-slate-50 border rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white transition-colors ${
-                  errors.weight ? 'border-rose-400 bg-rose-50/50' : 'border-slate-200'
+                className={`w-full px-3.5 py-2.5 text-xs bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors ${
+                  errors.weight ? 'border-rose-500 bg-rose-950/20' : 'border-white/10'
                 }`}
               />
-              {errors.weight && <p className="text-[10px] text-rose-600 mt-1 font-medium">{errors.weight}</p>}
+              {errors.weight && <p className="text-[10px] text-rose-400 mt-1 font-medium">{errors.weight}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-300 mb-1">
                 Target Berat (kg)
               </label>
               <input
@@ -227,16 +227,16 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                 max="250"
                 value={formData.targetWeight}
                 onChange={(e) => handleChange('targetWeight', e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white transition-colors"
+                className="w-full px-3.5 py-2.5 text-xs bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors"
               />
             </div>
           </div>
         </div>
 
         {/* Section 2: Preferensi Program Latihan */}
-        <div className="bg-white border border-slate-100 rounded-3xl p-5 md:p-6 space-y-4 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-          <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+        <div className="bg-[#131520] border border-white/10 rounded-3xl p-5 md:p-6 space-y-4 shadow-[0_4px_25px_rgba(0,0,0,0.3)]">
+          <h3 className="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
+            <div className="w-6 h-6 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center">
               <Target className="w-3.5 h-3.5" />
             </div>
             Target & Frekuensi Latihan
@@ -244,7 +244,7 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
 
           {/* Fitness Goal */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold text-slate-300 mb-1.5">
               Tujuan Kebugaran Utama
             </label>
             <div className="space-y-2">
@@ -258,19 +258,19 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                   onClick={() => handleChange('fitnessGoal', g.id)}
                   className={`p-3.5 rounded-2xl border cursor-pointer transition-all ${
                     formData.fitnessGoal === g.id
-                      ? 'bg-purple-50/70 border-purple-300 shadow-xs'
-                      : 'bg-slate-50/50 border-slate-200 hover:border-slate-300'
+                      ? 'bg-[#221B30] border-purple-400/50 shadow-xs'
+                      : 'bg-white/5 border-white/10 hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-xs font-extrabold ${formData.fitnessGoal === g.id ? 'text-[#6D28D9]' : 'text-slate-800'}`}>
+                    <span className={`text-xs font-extrabold ${formData.fitnessGoal === g.id ? 'text-purple-200' : 'text-slate-200'}`}>
                       {g.label}
                     </span>
                     {formData.fitnessGoal === g.id && (
-                      <span className="w-2 h-2 rounded-full bg-[#6D28D9]" />
+                      <span className="w-2 h-2 rounded-full bg-amber-400" />
                     )}
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">{g.desc}</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">{g.desc}</p>
                 </div>
               ))}
             </div>
@@ -279,10 +279,10 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
           {/* Days Per Week */}
           <div>
             <div className="flex justify-between items-center mb-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-slate-300">
                 Frekuensi Latihan per Minggu
               </label>
-              <span className="text-xs font-black text-[#6D28D9] px-2.5 py-0.5 bg-purple-50 rounded-full border border-purple-100">
+              <span className="text-xs font-black text-amber-300 px-2.5 py-0.5 bg-amber-400/10 rounded-full border border-amber-400/30">
                 {formData.daysPerWeek} Hari
               </span>
             </div>
@@ -294,8 +294,8 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                   onClick={() => handleChange('daysPerWeek', day)}
                   className={`py-2 text-xs font-bold rounded-2xl border transition-all cursor-pointer ${
                     Number(formData.daysPerWeek) === day
-                      ? 'bg-[#6D28D9] text-white border-[#6D28D9] shadow-sm'
-                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black border-amber-300 shadow-sm'
+                      : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'
                   }`}
                 >
                   {day}x
@@ -309,7 +309,7 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
 
           {/* Experience Level */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold text-slate-300 mb-1.5">
               Tingkat Pengalaman Gym
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -324,8 +324,8 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
                   onClick={() => handleChange('experienceLevel', exp.id)}
                   className={`py-2 text-xs font-bold rounded-2xl border transition-all cursor-pointer ${
                     formData.experienceLevel === exp.id
-                      ? 'bg-purple-100 text-[#6D28D9] border-purple-300 font-extrabold shadow-xs'
-                      : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                      ? 'bg-[#5D4E75] text-white border-purple-400/40 font-extrabold shadow-xs'
+                      : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
                   }`}
                 >
                   {exp.label}
@@ -342,24 +342,24 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
             disabled={isSubmitting}
             className={`w-full min-h-[48px] rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${
               isDirty
-                ? 'bg-[#6D28D9] hover:bg-[#5B21B6] text-white shadow-purple-600/25 active:scale-[0.98]'
-                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                ? 'bg-[#5D4E75] hover:bg-[#6D5D88] text-white border border-purple-400/40 shadow-purple-950/40 active:scale-[0.98]'
+                : 'bg-white/5 hover:bg-white/10 text-slate-400 border border-white/10'
             }`}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
                 Menyimpan Data...
               </>
             ) : (
               <>
-                <Save className="w-4 h-4" />
+                <Save className="w-4 h-4 text-amber-300" />
                 {isDirty ? 'Simpan Perubahan Profil' : 'Data Profil Terkini'}
               </>
             )}
           </button>
           {isDirty && (
-            <p className="text-[11px] text-center text-[#6D28D9] mt-1.5 font-bold">
+            <p className="text-[11px] text-center text-amber-300 mt-1.5 font-bold">
               Ada perubahan profil yang belum disimpan.
             </p>
           )}

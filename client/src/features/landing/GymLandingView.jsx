@@ -62,7 +62,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       numericPrice: 25000,
       period: '/ kunjungan',
       badge: 'Fleksibel',
-      badgeColor: 'bg-slate-100 text-slate-700 border-slate-200',
+      badgeColor: 'bg-white/10 text-slate-300 border-white/10',
       desc: 'Bayar sekali untuk latihan fleksibel hari ini tanpa komitmen bulanan.',
       features: [
         'Akses penuh semua alat beban & kardio',
@@ -80,7 +80,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       numericPrice: 175000,
       period: '/ bulan',
       badge: 'Diskon Kampus',
-      badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
+      badgeColor: 'bg-blue-950/60 text-blue-300 border-blue-800/40',
       desc: 'Tarif spesial khusus mahasiswa & pelajar dengan kartu identitas aktif.',
       features: [
         'Akses tak terbatas 30 hari penuh',
@@ -98,7 +98,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       numericPrice: 225000,
       period: '/ bulan',
       badge: 'Paling Diminati',
-      badgeColor: 'bg-purple-100 text-[#6D28D9] border-purple-200',
+      badgeColor: 'bg-purple-950/60 text-purple-300 border-purple-800/40',
       desc: 'Pilihan paling favorit untuk konsistensi pembentukan otot dan kebugaran.',
       features: [
         'Akses tak terbatas 30 hari penuh',
@@ -117,7 +117,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       numericPrice: 1950000,
       period: '/ tahun',
       badge: 'Hemat 30%',
-      badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+      badgeColor: 'bg-amber-950/60 text-amber-300 border-amber-800/40',
       desc: 'Komitmen transformasi 1 tahun dengan harga paling hemat & benefit VIP.',
       features: [
         'Akses 365 hari penuh tanpa batas',
@@ -176,7 +176,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       time: '06.00 - 10.00 WIB',
       percent: 30,
       label: 'Sangat Tenang',
-      color: 'text-emerald-600 bg-emerald-50 border-emerald-200',
+      color: 'text-emerald-400 bg-emerald-950/50 border-emerald-800/40',
       barColor: 'bg-emerald-500',
       note: 'Waktu terbaik untuk latihan fokus tanpa antre alat sama sekali. Udara pagi segar dan adem.'
     },
@@ -184,7 +184,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       time: '11.00 - 15.00 WIB',
       percent: 45,
       label: 'Cukup Lengang',
-      color: 'text-blue-600 bg-blue-50 border-blue-200',
+      color: 'text-blue-400 bg-blue-950/50 border-blue-800/40',
       barColor: 'bg-blue-500',
       note: 'Ideal untuk mahasiswa di jeda jam kuliah atau pekerja fleksibel. Ruang gerak sangat leluasa.'
     },
@@ -192,7 +192,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       time: '16.00 - 19.30 WIB',
       percent: 75,
       label: 'Ramai & Berenergi',
-      color: 'text-amber-600 bg-amber-50 border-amber-200',
+      color: 'text-amber-400 bg-amber-950/50 border-amber-800/40',
       barColor: 'bg-amber-500',
       note: 'Jam puncak sepulang kuliah dan kerja. Suasana sangat bersemangat dan saling memotivasi.'
     },
@@ -200,8 +200,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       time: '20.00 - 22.00 WIB',
       percent: 40,
       label: 'Kondusif & Rileks',
-      color: 'text-purple-600 bg-purple-50 border-purple-200',
-      barColor: 'bg-[#6D28D9]',
+      color: 'text-purple-300 bg-purple-950/50 border-purple-800/40',
+      barColor: 'bg-[#8B78A5]',
       note: 'Suasana mulai tenang kembali, cocok untuk sesi latihan malam santai sebelum istirahat.'
     }
   };
@@ -261,49 +261,55 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FD] text-slate-900 font-sans selection:bg-[#6D28D9] selection:text-white">
+    <div className="min-h-screen bg-[#0B0D14] text-slate-100 font-sans selection:bg-[#4E3F66] selection:text-white">
+      {/* Ambient background glow effects */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-900/15 blur-[120px] rounded-full" />
+        <div className="absolute top-[40%] right-[-100px] w-[500px] h-[500px] bg-amber-500/10 blur-[140px] rounded-full" />
+      </div>
+
       {/* ============================================================== */}
       {/* 1. TOP NAVBAR */}
       {/* ============================================================== */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.02)] px-4 md:px-8 py-3.5 transition-all">
+      <header className="sticky top-0 z-40 bg-[#0B0D14]/90 backdrop-blur-md border-b border-white/10 shadow-[0_2px_15px_rgba(0,0,0,0.5)] px-4 md:px-8 py-3.5 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-white border border-amber-300/80 flex items-center justify-center shadow-xs overflow-hidden p-0.5 shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-white/10 border border-amber-400/40 flex items-center justify-center shadow-xs overflow-hidden p-0.5 shrink-0 ring-2 ring-amber-400/10">
               <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-black text-lg tracking-tight text-slate-900">
-                  TRISIS<span className="text-amber-500 font-black">GYM</span>
+                <span className="font-black text-lg tracking-tight text-white">
+                  TRISIS<span className="text-amber-400 font-black">GYM</span>
                 </span>
                 <StatusBadge status="DEMO" size="xs" />
               </div>
-              <p className="text-[10px] text-slate-400 font-medium leading-none">Fitness Club • Est. Bogor, Indonesia</p>
+              <p className="text-[10px] text-slate-400 font-semibold leading-none">Fitness Club • Est. Bogor, Indonesia</p>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-600">
-            <a href="#hero" className="hover:text-[#581C87] transition-colors">Beranda</a>
-            <a href="#kepadatan" className="hover:text-[#581C87] transition-colors">Live Crowd</a>
-            <a href="#fasilitas" className="hover:text-[#581C87] transition-colors">Fasilitas</a>
-            <a href="#kalkulator" className="hover:text-[#581C87] transition-colors">Kalkulator Hemat</a>
-            <a href="#paket" className="hover:text-[#581C87] transition-colors">Pilihan Paket</a>
-            <a href="#faq" className="hover:text-[#581C87] transition-colors">FAQ</a>
+          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-300">
+            <a href="#hero" className="hover:text-amber-400 transition-colors">Beranda</a>
+            <a href="#kepadatan" className="hover:text-amber-400 transition-colors">Live Crowd</a>
+            <a href="#fasilitas" className="hover:text-amber-400 transition-colors">Fasilitas</a>
+            <a href="#kalkulator" className="hover:text-amber-400 transition-colors">Kalkulator Hemat</a>
+            <a href="#paket" className="hover:text-amber-400 transition-colors">Pilihan Paket</a>
+            <a href="#faq" className="hover:text-amber-400 transition-colors">FAQ</a>
           </nav>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenLogin}
-              className="text-xs font-bold px-3.5 py-2 rounded-xl text-slate-700 hover:text-[#581C87] hover:bg-amber-50/60 transition-colors cursor-pointer"
+              className="text-xs font-bold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10 transition-all cursor-pointer"
             >
               Masuk Akun
             </button>
             <button
               onClick={() => setSelectedPlanModal(plans[2])}
-              className="text-xs font-extrabold px-4 py-2 rounded-xl bg-gradient-to-r from-[#6D28D9] via-[#581C87] to-purple-900 hover:from-[#5B21B6] hover:to-[#4C1D95] text-white shadow-md shadow-purple-900/20 border border-amber-400/40 active:scale-[0.98] transition-all cursor-pointer flex items-center gap-1.5"
+              className="text-xs font-extrabold px-4 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98] transition-all cursor-pointer flex items-center gap-1.5"
             >
               <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
               <span>Gabung Member</span>
@@ -315,42 +321,39 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       {/* 2. DYNAMIC HERO SECTION WITH INTERACTIVE LIVE APP PREVIEW */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20 px-4 md:px-8 border-b border-slate-100 bg-gradient-to-b from-white via-[#F8F9FD] to-[#F8F9FD]">
-        {/* Subtle Ambient Background Gradients */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-purple-100/40 via-purple-50/20 to-transparent blur-3xl pointer-events-none -z-10" />
-
+      <section id="hero" className="relative overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20 px-4 md:px-8 border-b border-white/10 bg-gradient-to-b from-[#10131F] via-[#0B0D14] to-[#0B0D14]">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Headline, Value Props & CTAs */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
             {/* Top Interactive Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/90 border border-amber-300/80 text-xs font-bold text-amber-950 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-xs font-bold text-amber-300 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Est. Bogor, Indonesia</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.15]">
               Latihan Lebih Terarah, <br />
-              Bangun Fisik Impian di <span className="bg-gradient-to-r from-[#581C87] via-[#6D28D9] to-amber-500 bg-clip-text text-transparent">Trisis Gym</span>.
+              Bangun Fisik Impian di <span className="bg-gradient-to-r from-purple-300 via-purple-200 to-amber-400 bg-clip-text text-transparent">Trisis Gym</span>.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm md:text-base text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-sm md:text-base text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Gym modern ramah pemula dengan alat beban lengkap, suasana bebas intimidasi, serta portal pintar untuk memantau presensi, workout split, dan nutrisi harian.
             </p>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-[11px] font-semibold text-slate-600">
-              <span className="px-3 py-1 rounded-full bg-white border border-slate-200/80 shadow-xs flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-amber-500" />
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-[11px] font-semibold text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-[#131520] border border-white/10 shadow-xs flex items-center gap-1.5">
+                <Award className="w-3.5 h-3.5 text-amber-400" />
                 Rating 4.9/5 dari 500+ Member
               </span>
-              <span className="px-3 py-1 rounded-full bg-white border border-slate-200/80 shadow-xs flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="px-3 py-1 rounded-full bg-[#131520] border border-white/10 shadow-xs flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 Tanpa Biaya Admin Tersembunyi
               </span>
-              <span className="px-3 py-1 rounded-full bg-amber-50/70 border border-amber-200/80 shadow-xs flex items-center gap-1.5 text-amber-900">
-                <Users className="w-3.5 h-3.5 text-amber-600" />
+              <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 shadow-xs flex items-center gap-1.5 text-amber-300">
+                <Users className="w-3.5 h-3.5 text-amber-400" />
                 Diskon Khusus Mahasiswa Bogor (IPB, Pakuan, UIKA)
               </span>
             </div>
@@ -359,7 +362,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-3">
               <a
                 href="#paket"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#6D28D9] via-[#581C87] to-[#4C1D95] hover:from-[#5B21B6] hover:to-[#3B0764] active:scale-[0.98] text-white font-extrabold text-sm shadow-lg shadow-purple-900/25 border border-amber-400/30 transition-all flex items-center justify-center gap-2 cursor-pointer group"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-extrabold text-sm shadow-lg shadow-purple-950/40 border border-purple-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer group"
               >
                 <span>Pilih Paket Membership</span>
                 <ArrowRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
@@ -367,25 +370,25 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               <button
                 onClick={onQuickDemoLogin}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white hover:bg-amber-50/40 border border-amber-200 hover:border-amber-300 text-slate-800 font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 hover:text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-amber-500" />
+                <Sparkles className="w-4 h-4 text-amber-400" />
                 <span>Coba Portal Member Demo (1-Klik)</span>
               </button>
             </div>
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-3 gap-2.5 pt-4 max-w-md mx-auto lg:mx-0">
-              <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(15,23,42,0.03)] text-center">
-                <span className="text-lg font-black text-slate-900 block">50+</span>
+              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
+                <span className="text-lg font-black text-white block">50+</span>
                 <span className="text-[10px] text-slate-400 font-medium">Unit Alat Lengkap</span>
               </div>
-              <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(15,23,42,0.03)] text-center">
-                <span className="text-lg font-black text-amber-600 block">Rp 25k</span>
+              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
+                <span className="text-lg font-black text-amber-400 block">Rp 25k</span>
                 <span className="text-[10px] text-slate-400 font-medium">Mulai Per-Visit</span>
               </div>
-              <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(15,23,42,0.03)] text-center">
-                <span className="text-lg font-black text-emerald-600 block">16 Jam</span>
+              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
+                <span className="text-lg font-black text-emerald-400 block">16 Jam</span>
                 <span className="text-[10px] text-slate-400 font-medium">Operasional Harian</span>
               </div>
             </div>
@@ -393,31 +396,31 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
           {/* Right Column: INTERACTIVE LIVE APP PREVIEW CARD */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-3xl p-5 md:p-6 shadow-[0_10px_35px_rgba(109,40,217,0.08)] border border-purple-100/80 space-y-4 relative">
+            <div className="bg-[#131520] rounded-3xl p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/10 space-y-4 relative">
               {/* Floating Top Badge */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#6D28D9] flex items-center justify-center">
-                    <Sparkles className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-300 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Fitur Aplikasi Pendamping</span>
-                    <strong className="text-xs font-black text-slate-900">Trisis Member Companion</strong>
+                    <strong className="text-xs font-black text-white">Trisis Member Companion</strong>
                   </div>
                 </div>
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-950/50 text-emerald-300 border border-emerald-800/40">
                   Interactive Preview
                 </span>
               </div>
 
               {/* Interactive Tabs */}
-              <div className="grid grid-cols-3 p-1 bg-slate-100 rounded-2xl text-[11px] font-bold">
+              <div className="grid grid-cols-3 p-1 bg-white/5 rounded-2xl text-[11px] font-bold border border-white/5">
                 <button
                   onClick={() => setHeroInteractiveTab('card')}
                   className={`py-2 rounded-xl transition-all cursor-pointer ${
                     heroInteractiveTab === 'card'
-                      ? 'bg-white text-[#6D28D9] shadow-xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
                   Digital Pass
@@ -426,8 +429,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                   onClick={() => setHeroInteractiveTab('streak')}
                   className={`py-2 rounded-xl transition-all cursor-pointer ${
                     heroInteractiveTab === 'streak'
-                      ? 'bg-white text-[#6D28D9] shadow-xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
                   Streak Presensi
@@ -436,8 +439,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                   onClick={() => setHeroInteractiveTab('coach')}
                   className={`py-2 rounded-xl transition-all cursor-pointer ${
                     heroInteractiveTab === 'coach'
-                      ? 'bg-white text-[#6D28D9] shadow-xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
                   AI Coach
@@ -447,11 +450,11 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               {/* Dynamic Interactive Tab Content */}
               <div className="min-h-[220px] flex flex-col justify-center">
                 {heroInteractiveTab === 'card' && (
-                  <div className="rounded-2xl p-4 bg-gradient-to-br from-[#3B0764] via-[#581C87] to-[#1E1B4B] text-white shadow-xl shadow-purple-950/20 border-2 border-amber-400/40 space-y-3 animate-in fade-in duration-200 relative overflow-hidden">
+                  <div className="rounded-2xl p-4 bg-gradient-to-br from-[#1E192E] via-[#141624] to-[#0D0F18] text-white shadow-xl shadow-black/50 border-2 border-amber-400/50 space-y-3 animate-in fade-in duration-200 relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500" />
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-white border border-amber-300/80 p-0.5 flex items-center justify-center shrink-0">
+                        <div className="w-6 h-6 rounded-lg bg-white/10 border border-amber-400/50 p-0.5 flex items-center justify-center shrink-0">
                           <img src="/logo.png" alt="Trisis Logo" className="w-full h-full object-contain" />
                         </div>
                         <span className="font-black text-xs tracking-wider text-amber-300 uppercase">TRISIS MEMBER PASS</span>
@@ -462,31 +465,31 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     </div>
 
                     <div className="space-y-0.5">
-                      <span className="text-[10px] text-purple-200 block">Nama Anggota:</span>
-                      <strong className="text-sm font-extrabold block">Budi Santoso</strong>
+                      <span className="text-[10px] text-slate-400 block">Nama Anggota:</span>
+                      <strong className="text-sm font-extrabold block text-white">Budi Santoso</strong>
                       <span className="text-[10px] text-purple-300 font-mono">TRISIS-DEMO-2026-089</span>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[10px] text-purple-200">
-                      <span>Berlaku s/d: 10 Jan 2027</span>
-                      <span className="font-semibold text-white">QR Check-in Siap</span>
+                    <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[10px] text-slate-300">
+                      <span>Berlaku s/d: 31 Des 2026</span>
+                      <span className="font-semibold text-emerald-400">QR Check-in Siap</span>
                     </div>
                   </div>
                 )}
 
                 {heroInteractiveTab === 'streak' && (
-                  <div className="rounded-2xl p-4 bg-amber-50/70 border border-amber-200/80 space-y-3 animate-in fade-in duration-200">
+                  <div className="rounded-2xl p-4 bg-[#181C2B] border border-white/10 space-y-3 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black">
-                          <Flame className="w-4 h-4" />
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 flex items-center justify-center font-black">
+                          <Flame className="w-4 h-4 fill-slate-950" />
                         </div>
                         <div>
-                          <strong className="text-xs font-black text-slate-900 block">12 Hari Beruntun</strong>
-                          <span className="text-[10px] text-slate-500">Streak Latihan Konsisten</span>
+                          <strong className="text-xs font-black text-white block">12 Hari Beruntun</strong>
+                          <span className="text-[10px] text-slate-400">Streak Latihan Konsisten</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold text-amber-300 bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full">
                         Level: Rajin
                       </span>
                     </div>
@@ -497,7 +500,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                         <div key={idx} className="space-y-1">
                           <span className="text-slate-400 block text-[9px]">{day}</span>
                           <div className={`w-full py-1.5 rounded-lg font-bold ${
-                            idx < 5 ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-400'
+                            idx < 5 ? 'bg-emerald-500 text-slate-950' : 'bg-white/5 text-slate-500'
                           }`}>
                             {idx < 5 ? '✓' : '-'}
                           </div>
@@ -505,31 +508,31 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                       ))}
                     </div>
 
-                    <p className="text-[10px] text-slate-500 leading-tight pt-1">
+                    <p className="text-[10px] text-slate-400 leading-tight pt-1">
                       Check-in mandiri di gym untuk otomatis memperbarui streak dan riwayat aktivitas Anda.
                     </p>
                   </div>
                 )}
 
                 {heroInteractiveTab === 'coach' && (
-                  <div className="rounded-2xl p-4 bg-purple-50/70 border border-purple-200/80 space-y-2.5 animate-in fade-in duration-200">
+                  <div className="rounded-2xl p-4 bg-[#181C2B] border border-purple-500/30 space-y-2.5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-[#6D28D9] uppercase tracking-wider bg-white px-2 py-0.5 rounded-full border border-purple-100">
+                      <span className="text-[10px] font-bold text-purple-200 uppercase tracking-wider bg-purple-950/60 px-2 py-0.5 rounded-full border border-purple-800/40">
                         ✨ Coach Trisis AI (Gemini)
                       </span>
                       <span className="text-[10px] font-semibold text-slate-400">PPL Split</span>
                     </div>
 
                     <div className="space-y-1">
-                      <h4 className="text-xs font-black text-slate-900">Push Day (Chest, Shoulders & Triceps)</h4>
-                      <p className="text-[11px] text-slate-600 leading-relaxed">
+                      <h4 className="text-xs font-black text-white">Push Day (Chest, Shoulders & Triceps)</h4>
+                      <p className="text-[11px] text-slate-300 leading-relaxed">
                         Hari ini 4 gerakan terfokus: Bench Press, Incline DB Press, Lateral Raise, dan Dips.
                       </p>
                     </div>
 
-                    <div className="p-2 bg-white rounded-xl border border-purple-100 flex items-center justify-between text-[10px]">
-                      <span className="text-slate-500">Target Nutrisi:</span>
-                      <strong className="text-[#6D28D9]">2.200 kkal • 135g Protein</strong>
+                    <div className="p-2 bg-white/5 rounded-xl border border-white/5 flex items-center justify-between text-[10px]">
+                      <span className="text-slate-400">Target Nutrisi:</span>
+                      <strong className="text-amber-300">2.200 kkal • 135g Protein</strong>
                     </div>
                   </div>
                 )}
@@ -538,10 +541,10 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               {/* Bottom Test Button */}
               <button
                 onClick={onQuickDemoLogin}
-                className="w-full py-2.5 rounded-2xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
+                className="w-full py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <span>Buka Demo Interaktif Penuh</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
             </div>
           </div>
@@ -553,19 +556,19 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       <section id="kepadatan" className="py-12 md:py-16 px-4 md:px-8 max-w-5xl mx-auto space-y-6">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/80 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30 shadow-2xs">
             Smart Gym Experience
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Status Kepadatan & Waktu Latihan Terbaik
           </h2>
-          <p className="text-xs md:text-sm text-slate-500">
+          <p className="text-xs md:text-sm text-slate-400">
             Ketahui estimasi kepadatan pengunjung Trisis Gym Bogor agar sesi latihanmu lebih efisien dan bebas antre alat.
           </p>
         </div>
 
         {/* Interactive Crowd Meter Box */}
-        <div className="bg-white border border-slate-100 rounded-3xl p-5 md:p-6 shadow-[0_4px_25px_rgba(15,23,42,0.04)] space-y-5">
+        <div className="bg-[#131520] border border-white/10 rounded-3xl p-5 md:p-6 shadow-[0_4px_30px_rgba(0,0,0,0.4)] space-y-5">
           {/* Slot Tabs */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
@@ -581,11 +584,11 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                   onClick={() => setCrowdTime(slot.id)}
                   className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
                     isActive 
-                      ? 'border-[#6D28D9] bg-purple-50/70 shadow-xs ring-1 ring-[#6D28D9]' 
-                      : 'border-slate-100 hover:bg-slate-50 text-slate-600'
+                      ? 'border-purple-400/60 bg-[#221B30] shadow-xs ring-1 ring-purple-400/40' 
+                      : 'border-white/10 hover:bg-white/5 text-slate-400 hover:text-white'
                   }`}
                 >
-                  <strong className={`block text-xs font-extrabold ${isActive ? 'text-[#6D28D9]' : 'text-slate-800'}`}>
+                  <strong className={`block text-xs font-extrabold ${isActive ? 'text-purple-200' : 'text-slate-200'}`}>
                     {slot.title}
                   </strong>
                   <span className="text-[10px] text-slate-400 font-medium">{slot.time} WIB</span>
@@ -595,32 +598,32 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
           </div>
 
           {/* Active Slot Status Display */}
-          <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-100 space-y-3">
+          <div className="p-4 rounded-2xl bg-[#181C2B] border border-white/10 space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-[#6D28D9]" />
-                <span className="text-xs font-bold text-slate-900">
+                <Activity className="w-4 h-4 text-purple-300" />
+                <span className="text-xs font-bold text-white">
                   Waktu: {crowdSlots[crowdTime].time}
                 </span>
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${crowdSlots[crowdTime].color}`}>
                   {crowdSlots[crowdTime].label}
                 </span>
               </div>
-              <span className="text-xs font-black text-slate-800">
+              <span className="text-xs font-black text-slate-200">
                 Kapasitas Terisi: ~{crowdSlots[crowdTime].percent}%
               </span>
             </div>
 
             {/* Meter Bar */}
-            <div className="w-full h-3 rounded-full bg-slate-200 overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden">
               <div 
                 className={`h-full ${crowdSlots[crowdTime].barColor} transition-all duration-500 rounded-full`}
                 style={{ width: `${crowdSlots[crowdTime].percent}%` }}
               />
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed pt-1">
-              💡 <strong>Tips Waktu:</strong> {crowdSlots[crowdTime].note}
+            <p className="text-xs text-slate-300 leading-relaxed pt-1">
+              💡 <strong className="text-amber-300">Tips Waktu:</strong> {crowdSlots[crowdTime].note}
             </p>
           </div>
         </div>
@@ -629,29 +632,29 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       {/* 4. INTERACTIVE SAVINGS CALCULATOR (HITUNG PENGHEMATANMU) */}
       {/* ============================================================== */}
-      <section id="kalkulator" className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-amber-50/40 via-[#F8F9FD] to-purple-50/40 border-y border-amber-100/60">
+      <section id="kalkulator" className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-[#121420] via-[#0B0D14] to-[#14121E] border-y border-white/10">
         <div className="max-w-5xl mx-auto space-y-8">
           <div className="text-center space-y-2 max-w-xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30 shadow-xs">
               Kalkulator Cerdas
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               Hitung Penghematan Membership-mu
             </h2>
-            <p className="text-xs md:text-sm text-slate-500">
+            <p className="text-xs md:text-sm text-slate-400">
               Geser frekuensi latihan mingguanmu untuk mengetahui estimasi biaya per sesi dan paket yang paling menguntungkan.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             {/* Left Control Card */}
-            <div className="md:col-span-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_4px_25px_rgba(15,23,42,0.04)] space-y-5">
+            <div className="md:col-span-6 bg-[#131520] p-6 rounded-3xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.4)] space-y-5">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="frequency-slider" className="text-xs font-bold text-slate-700">
+                  <label htmlFor="frequency-slider" className="text-xs font-bold text-slate-300">
                     Frekuensi Latihan per Minggu:
                   </label>
-                  <span className="text-base font-black text-[#6D28D9] bg-purple-50 px-3 py-1 rounded-xl border border-purple-100">
+                  <span className="text-base font-black text-amber-300 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/30">
                     {workoutDaysPerWeek} Hari / Minggu
                   </span>
                 </div>
@@ -663,7 +666,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                   step="1"
                   value={workoutDaysPerWeek}
                   onChange={(e) => setWorkoutDaysPerWeek(Number(e.target.value))}
-                  className="w-full accent-[#6D28D9] h-2 bg-slate-200 rounded-lg cursor-pointer"
+                  className="w-full accent-amber-400 h-2 bg-white/10 rounded-lg cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-slate-400 font-bold px-1">
                   <span>1 Hari (Santai)</span>
@@ -673,20 +676,20 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               </div>
 
               {/* Breakdown Details */}
-              <div className="space-y-2.5 pt-2 border-t border-slate-100 text-xs">
-                <div className="flex justify-between text-slate-600">
+              <div className="space-y-2.5 pt-2 border-t border-white/10 text-xs">
+                <div className="flex justify-between text-slate-400">
                   <span>Estimasi Sesi Latihan per Bulan:</span>
-                  <strong className="text-slate-900">{monthlySessions} Kunjungan</strong>
+                  <strong className="text-white">{monthlySessions} Kunjungan</strong>
                 </div>
-                <div className="flex justify-between text-slate-600">
+                <div className="flex justify-between text-slate-400">
                   <span>Biaya jika Bayar Harian (Rp 25k/sesi):</span>
-                  <strong className="text-slate-900">Rp {costIfPerVisit.toLocaleString('id-ID')}</strong>
+                  <strong className="text-white">Rp {costIfPerVisit.toLocaleString('id-ID')}</strong>
                 </div>
               </div>
             </div>
 
             {/* Right Comparison Recommendation Card */}
-            <div className="md:col-span-6 bg-gradient-to-br from-[#3B0764] via-[#581C87] to-[#1E1B4B] border-2 border-amber-400/50 rounded-3xl p-6 text-white shadow-2xl shadow-purple-950/25 space-y-4 relative overflow-hidden">
+            <div className="md:col-span-6 bg-gradient-to-br from-[#1E192E] via-[#141624] to-[#0D0F18] border-2 border-amber-400/50 rounded-3xl p-6 text-white shadow-2xl shadow-black/60 space-y-4 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500" />
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 backdrop-blur-xs">
@@ -700,13 +703,13 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               <div>
                 <h3 className="text-xl font-black">Paket Mahasiswa / Bulanan</h3>
-                <p className="text-xs text-amber-200/80 mt-0.5">
-                  Dengan {workoutDaysPerWeek}x latihan per minggu, biaya per kunjunganmu menjadi super murah:
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Dengan {workoutDaysPerWeek}x latihan per minggu, biaya per kunjunganmu menjadi super hemat:
                 </p>
               </div>
 
               <div className="space-y-2">
-                <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-amber-400/30 flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-amber-400/30 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-amber-200 block font-semibold">Paket Mahasiswa:</span>
                     <span className="text-xl font-black text-amber-300">
@@ -715,8 +718,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     <span className="text-[10px] text-amber-200 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-amber-200 block">Hemat Bulanan:</span>
-                    <span className="text-sm font-extrabold text-emerald-300">
+                    <span className="text-[10px] text-slate-400 block">Hemat Bulanan:</span>
+                    <span className="text-sm font-extrabold text-emerald-400">
                       +Rp {Math.max(0, studentSavings).toLocaleString('id-ID')}
                     </span>
                   </div>
@@ -731,8 +734,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     <span className="text-[10px] text-purple-200 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-purple-200 block">Hemat Bulanan:</span>
-                    <span className="text-sm font-extrabold text-emerald-300">
+                    <span className="text-[10px] text-slate-400 block">Hemat Bulanan:</span>
+                    <span className="text-sm font-extrabold text-emerald-400">
                       +Rp {Math.max(0, regularSavings).toLocaleString('id-ID')}
                     </span>
                   </div>
@@ -756,26 +759,26 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       <section id="paket" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#6D28D9] bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
             Tawaran Membership
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Pilihan Paket Transparan Tanpa Komitmen Ribet
           </h2>
-          <p className="text-xs md:text-sm text-slate-500">
+          <p className="text-xs md:text-sm text-slate-400">
             Pilih paket yang paling sesuai dengan target dan frekuensi latihanmu.
           </p>
         </div>
 
         {/* Category Tabs & Compare Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-200/70 rounded-2xl text-xs font-bold w-full sm:w-auto">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white/5 rounded-2xl text-xs font-bold w-full sm:w-auto border border-white/5">
             <button
               onClick={() => setSelectedPlanCategory('all')}
               className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 selectedPlanCategory === 'all'
-                  ? 'bg-white text-[#6D28D9] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               Semua Paket
@@ -784,8 +787,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               onClick={() => setSelectedPlanCategory('monthly')}
               className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 selectedPlanCategory === 'monthly'
-                  ? 'bg-white text-[#6D28D9] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               Bulanan & VIP
@@ -794,8 +797,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               onClick={() => setSelectedPlanCategory('student')}
               className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 selectedPlanCategory === 'student'
-                  ? 'bg-white text-[#6D28D9] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               Mahasiswa
@@ -804,8 +807,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               onClick={() => setSelectedPlanCategory('daily')}
               className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 selectedPlanCategory === 'daily'
-                  ? 'bg-white text-[#6D28D9] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               Harian Flex
@@ -814,9 +817,9 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
           <button
             onClick={() => setShowComparisonModal(true)}
-            className="text-xs font-bold text-[#6D28D9] hover:underline flex items-center gap-1.5 cursor-pointer py-1"
+            className="text-xs font-bold text-amber-300 hover:underline flex items-center gap-1.5 cursor-pointer py-1"
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-4 h-4 text-amber-400" />
             <span>Bandingkan Detail Semua Fitur Paket</span>
           </button>
         </div>
@@ -826,10 +829,10 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
           {filteredPlans.map((p) => (
             <div
               key={p.id}
-              className={`bg-white rounded-3xl p-5 border flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+              className={`rounded-3xl p-5 border flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${
                 p.popular
-                  ? 'border-2 border-amber-400 shadow-xl shadow-amber-500/15 ring-2 ring-amber-400/25 relative'
-                  : 'border-slate-100 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
+                  ? 'border-2 border-amber-400/80 bg-[#161826] shadow-xl shadow-amber-500/10 relative'
+                  : 'bg-[#131520] border-white/10 hover:border-purple-400/30 shadow-[0_4px_25px_rgba(0,0,0,0.3)]'
               }`}
             >
               <div>
@@ -847,19 +850,19 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                   )}
                 </div>
 
-                <h3 className="font-extrabold text-base text-slate-900">{p.name}</h3>
-                <p className="text-xs text-slate-500 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
+                <h3 className="font-extrabold text-base text-white">{p.name}</h3>
+                <p className="text-xs text-slate-400 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
 
-                <div className="my-4 pt-4 border-t border-slate-100">
-                  <span className="text-2xl font-black text-slate-900">{p.price}</span>
+                <div className="my-4 pt-4 border-t border-white/10">
+                  <span className="text-2xl font-black text-white">{p.price}</span>
                   <span className="text-xs text-slate-400 font-medium ml-1">{p.period}</span>
                 </div>
 
                 {/* Features list */}
-                <ul className="space-y-2 text-xs text-slate-600 mb-6">
+                <ul className="space-y-2 text-xs text-slate-300 mb-6">
                   {p.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -870,12 +873,12 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                 onClick={() => setSelectedPlanModal(p)}
                 className={`w-full py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   p.popular
-                    ? 'bg-gradient-to-r from-[#6D28D9] via-[#581C87] to-purple-900 hover:from-[#5B21B6] hover:to-[#4C1D95] text-white shadow-lg shadow-purple-900/25 border border-amber-400/40 active:scale-[0.98]'
-                    : 'bg-slate-50 hover:bg-amber-50 text-slate-800 hover:text-amber-800 border border-slate-200'
+                    ? 'bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98]'
+                    : 'bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10'
                 }`}
               >
                 <span>Daftar Paket Ini</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
             </div>
           ))}
@@ -887,13 +890,13 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       <section id="fasilitas" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#6D28D9] bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
             Fasilitas Standar Modern
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Ruang Latihan Nyaman & Peralatan Terawat
           </h2>
-          <p className="text-xs md:text-sm text-slate-500">
+          <p className="text-xs md:text-sm text-slate-400">
             Jelajahi setiap sudut Trisis Gym yang dirancang untuk mendukung berbagai gaya dan target latihanmu.
           </p>
         </div>
@@ -912,8 +915,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               onClick={() => setFacilityFilter(cat.id)}
               className={`text-xs font-bold px-3.5 py-2 rounded-2xl transition-all cursor-pointer border ${
                 facilityFilter === cat.id
-                  ? 'bg-[#6D28D9] text-white border-[#6D28D9] shadow-sm'
-                  : 'bg-white text-slate-600 border-slate-200 hover:bg-purple-50 hover:text-[#6D28D9]'
+                  ? 'bg-[#5D4E75] text-white border-purple-400/40 shadow-sm'
+                  : 'bg-[#131520] text-slate-300 border-white/10 hover:bg-white/10'
               }`}
             >
               {cat.label}
@@ -927,19 +930,19 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
             <div
               key={fac.id}
               onClick={() => setSelectedFacilityModal(fac)}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-[0_4px_25px_rgba(15,23,42,0.04)] hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between"
+              className="bg-[#131520] rounded-3xl overflow-hidden border border-white/10 shadow-[0_4px_25px_rgba(0,0,0,0.3)] hover:border-purple-500/30 hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col justify-between"
             >
               {/* Facility Image Cover */}
-              <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-slate-100">
+              <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-slate-900">
                 <img
                   src={fac.image}
                   alt={fac.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131520] via-black/30 to-transparent" />
                 <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/95 text-slate-900 shadow-sm backdrop-blur-xs">
+                  <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-black/70 text-slate-200 border border-white/10 shadow-sm backdrop-blur-md">
                     {fac.tag}
                   </span>
                 </div>
@@ -950,14 +953,14 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               {/* Facility Description & Highlights */}
               <div className="p-5 space-y-3">
-                <p className="text-xs text-slate-600 leading-relaxed">{fac.desc}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{fac.desc}</p>
 
                 {/* Micro tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {fac.highlights.map((item, hIdx) => (
                     <span 
                       key={hIdx} 
-                      className="text-[10px] font-semibold px-2.5 py-1 rounded-xl bg-slate-100 text-slate-600"
+                      className="text-[10px] font-semibold px-2.5 py-1 rounded-xl bg-white/5 border border-white/5 text-slate-300"
                     >
                       ✓ {item}
                     </span>
@@ -974,13 +977,13 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       <section id="faq" className="py-12 md:py-16 px-4 md:px-8 max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#6D28D9] bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
             Pertanyaan Umum
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Sering Ditanyakan (FAQ)
           </h2>
-          <p className="text-xs md:text-sm text-slate-500">
+          <p className="text-xs md:text-sm text-slate-400">
             Segala hal yang perlu kamu ketahui sebelum memulai latihan di Trisis Gym.
           </p>
         </div>
@@ -991,23 +994,23 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
             return (
               <div
                 key={fIdx}
-                className="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-xs transition-all"
+                className="bg-[#131520] border border-white/10 rounded-2xl overflow-hidden shadow-xs transition-all"
               >
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : fIdx)}
-                  className="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-slate-50/70 transition-colors cursor-pointer gap-3"
+                  className="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors cursor-pointer gap-3"
                 >
-                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-2.5">
-                    <HelpCircle className="w-4 h-4 text-[#6D28D9] shrink-0" />
+                  <span className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2.5">
+                    <HelpCircle className="w-4 h-4 text-purple-400 shrink-0" />
                     {faq.q}
                   </span>
                   <div className="shrink-0 text-slate-400">
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#6D28D9]" /> : <ChevronDown className="w-4 h-4" />}
+                    {isOpen ? <ChevronUp className="w-4 h-4 text-amber-400" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 text-xs text-slate-600 leading-relaxed border-t border-slate-100/60 bg-slate-50/40">
+                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 text-xs text-slate-300 leading-relaxed border-t border-white/10 bg-[#181C2B]/50">
                     <p className="pt-3">{faq.a}</p>
                   </div>
                 )}
@@ -1020,33 +1023,33 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       {/* 8. LOKASI, JAM OPERASIONAL & AJAKAN */}
       {/* ============================================================== */}
-      <section id="lokasi" className="py-12 md:py-16 px-4 md:px-8 bg-white border-t border-slate-100">
+      <section id="lokasi" className="py-12 md:py-16 px-4 md:px-8 bg-[#0E1017] border-t border-white/10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#6D28D9] bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+            <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
               Lokasi & Kunjungan
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               Kunjungi Trisis Gym Hari Ini
             </h2>
-            <p className="text-xs md:text-sm text-slate-500 leading-relaxed">
+            <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
               Mau cek suasana gym atau konsultasi langsung sebelum bergabung? Resepsionis dan trainer kami siap menyambut kedatanganmu di gym.
             </p>
 
             <div className="space-y-3 pt-2 text-xs">
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                <MapPin className="w-4 h-4 text-[#6D28D9] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#131520] border border-white/10">
+                <MapPin className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-slate-800">Alamat Trisis Gym Bogor</strong>
-                  <span className="text-slate-500">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
+                  <strong className="block text-white">Alamat Trisis Gym Bogor</strong>
+                  <span className="text-slate-400">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                <Clock className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#131520] border border-white/10">
+                <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-slate-800">Jam Operasional Lengkap</strong>
-                  <span className="text-slate-500">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
+                  <strong className="block text-white">Jam Operasional Lengkap</strong>
+                  <span className="text-slate-400">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
                 </div>
               </div>
             </div>
@@ -1064,26 +1067,26 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               <button
                 onClick={onQuickDemoLogin}
-                className="px-5 py-3 rounded-2xl bg-purple-50 hover:bg-purple-100 text-[#6D28D9] font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-purple-200 hover:text-white border border-white/10 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Masuk Portal Member</span>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 text-amber-400" />
               </button>
             </div>
           </div>
 
           {/* Location Map Preview Mockup */}
-          <div className="bg-slate-50 rounded-3xl p-6 border border-slate-200/80 space-y-4">
+          <div className="bg-[#131520] rounded-3xl p-6 border border-white/10 space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-700">Peta Akses Gym</span>
-              <span className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              <span className="text-xs font-bold text-slate-300">Peta Akses Gym</span>
+              <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/40">
                 Buka Sekarang
               </span>
             </div>
-            <div className="h-48 rounded-2xl bg-gradient-to-br from-purple-100/60 to-purple-50 border border-purple-100 flex flex-col items-center justify-center text-center p-4">
-              <MapPin className="w-10 h-10 text-[#6D28D9] mb-2 animate-bounce" />
-              <strong className="font-extrabold text-sm text-slate-900">Trisis Gym Bogor</strong>
-              <span className="text-[11px] text-slate-500 mt-0.5">Est. Bogor, Indonesia • Parkir Mobil & Motor Luas</span>
+            <div className="h-48 rounded-2xl bg-gradient-to-br from-[#1E182D] to-[#121520] border border-white/10 flex flex-col items-center justify-center text-center p-4">
+              <MapPin className="w-10 h-10 text-purple-400 mb-2 animate-bounce" />
+              <strong className="font-extrabold text-sm text-white">Trisis Gym Bogor</strong>
+              <span className="text-[11px] text-slate-400 mt-0.5">Est. Bogor, Indonesia • Parkir Mobil & Motor Luas</span>
             </div>
             <p className="text-[11px] text-slate-400 text-center">
               Fasilitas parkir aman gratis dengan pengawasan CCTV 24 jam.
@@ -1095,23 +1098,23 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* ============================================================== */}
       {/* 9. FOOTER */}
       {/* ============================================================== */}
-      <footer className="bg-white border-t border-slate-100 py-8 px-4 md:px-8 text-xs text-slate-400">
+      <footer className="bg-[#0B0D14] border-t border-white/10 py-8 px-4 md:px-8 text-xs text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-xl bg-white border border-amber-300/80 flex items-center justify-center p-0.5 shadow-2xs shrink-0">
+            <div className="w-7 h-7 rounded-xl bg-white/10 border border-amber-400/40 flex items-center justify-center p-0.5 shadow-2xs shrink-0">
               <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-black text-slate-800">
-              TRISIS <span className="text-amber-500 font-black">GYM</span>
+            <span className="font-black text-white">
+              TRISIS <span className="text-amber-400 font-black">GYM</span>
             </span>
             <span>• Est. Bogor, Indonesia</span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-500">
-            <button onClick={onOpenLogin} className="hover:text-[#6D28D9]">Portal Member</button>
-            <a href="#paket" className="hover:text-[#6D28D9]">Tawaran Membership</a>
-            <a href="#fasilitas" className="hover:text-[#6D28D9]">Fasilitas</a>
-            <a href="#faq" className="hover:text-[#6D28D9]">FAQ</a>
+          <div className="flex items-center gap-4 text-slate-400">
+            <button onClick={onOpenLogin} className="hover:text-purple-300 transition-colors">Portal Member</button>
+            <a href="#paket" className="hover:text-purple-300 transition-colors">Tawaran Membership</a>
+            <a href="#fasilitas" className="hover:text-purple-300 transition-colors">Fasilitas</a>
+            <a href="#faq" className="hover:text-purple-300 transition-colors">FAQ</a>
           </div>
 
           <p className="text-[10px]">
@@ -1124,16 +1127,16 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* 10. MODAL SIMULASI DAFTAR MEMBER */}
       {/* ============================================================== */}
       {selectedPlanModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-sm bg-white border border-slate-100 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-sm bg-[#131520] border border-white/10 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-[#6D28D9] font-bold uppercase tracking-wider block">Formulir Pendaftaran</span>
-                <h3 className="text-base font-extrabold text-slate-900">Gabung Jadi Member</h3>
+                <span className="text-[10px] text-purple-300 font-bold uppercase tracking-wider block">Formulir Pendaftaran</span>
+                <h3 className="text-base font-extrabold text-white">Gabung Jadi Member</h3>
               </div>
               <button
                 onClick={() => setSelectedPlanModal(null)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1141,27 +1144,27 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
             {registerSuccess ? (
               <div className="py-6 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
                   <UserCheck className="w-6 h-6" />
                 </div>
-                <h4 className="font-extrabold text-sm text-slate-900">Pendaftaran Berhasil Disimulasikan!</h4>
-                <p className="text-xs text-slate-500">
+                <h4 className="font-extrabold text-sm text-white">Pendaftaran Berhasil Disimulasikan!</h4>
+                <p className="text-xs text-slate-400">
                   Mengarahkan Anda langsung ke portal dashboard member demo...
                 </p>
               </div>
             ) : (
               <form onSubmit={handleRegisterSubmit} className="space-y-3 text-xs">
                 {/* Selected Plan Snapshot */}
-                <div className="p-3 rounded-2xl bg-purple-50/70 border border-purple-100 flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                   <div>
-                    <span className="font-bold text-slate-800 block">{selectedPlanModal.name}</span>
-                    <span className="text-[10px] text-slate-500">{selectedPlanModal.desc}</span>
+                    <span className="font-bold text-white block">{selectedPlanModal.name}</span>
+                    <span className="text-[10px] text-slate-400">{selectedPlanModal.desc}</span>
                   </div>
-                  <span className="font-black text-[#6D28D9]">{selectedPlanModal.price}</span>
+                  <span className="font-black text-amber-300">{selectedPlanModal.price}</span>
                 </div>
 
                 <div>
-                  <label htmlFor="reg-name" className="block text-slate-700 font-bold mb-1">Nama Lengkap</label>
+                  <label htmlFor="reg-name" className="block text-slate-300 font-bold mb-1">Nama Lengkap</label>
                   <input
                     id="reg-name"
                     type="text"
@@ -1169,12 +1172,12 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     placeholder="Contoh: Budi Santoso"
                     value={registerForm.name}
                     onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-phone" className="block text-slate-700 font-bold mb-1">Nomor WhatsApp</label>
+                  <label htmlFor="reg-phone" className="block text-slate-300 font-bold mb-1">Nomor WhatsApp</label>
                   <input
                     id="reg-phone"
                     type="tel"
@@ -1182,12 +1185,12 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     placeholder="081234567890"
                     value={registerForm.phone}
                     onChange={(e) => setRegisterForm({ ...registerForm, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-email" className="block text-slate-700 font-bold mb-1">Alamat Email</label>
+                  <label htmlFor="reg-email" className="block text-slate-300 font-bold mb-1">Alamat Email</label>
                   <input
                     id="reg-email"
                     type="email"
@@ -1195,21 +1198,21 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
                     placeholder="nama@email.com"
                     value={registerForm.email}
                     onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:outline-none focus:border-[#6D28D9] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
                   />
                 </div>
 
                 <div className="pt-2 space-y-2">
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-2xl bg-[#6D28D9] hover:bg-[#5B21B6] active:scale-[0.98] text-white font-bold text-xs shadow-md shadow-purple-600/20 cursor-pointer"
+                    className="w-full py-3 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-bold text-xs shadow-md shadow-purple-950/40 border border-purple-400/40 cursor-pointer"
                   >
                     Kirim & Masuk ke Akun Member
                   </button>
                   <button
                     type="button"
                     onClick={() => setSelectedPlanModal(null)}
-                    className="w-full py-2 text-slate-400 hover:text-slate-600 font-medium cursor-pointer"
+                    className="w-full py-2 text-slate-400 hover:text-white font-medium cursor-pointer"
                   >
                     Batal
                   </button>
@@ -1224,9 +1227,9 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* 11. MODAL DETAIL FASILITAS */}
       {/* ============================================================== */}
       {selectedFacilityModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-white border border-slate-100 rounded-3xl shadow-2xl overflow-hidden space-y-4">
-            <div className="relative h-48 w-full bg-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-[#131520] border border-white/10 rounded-3xl shadow-2xl overflow-hidden space-y-4">
+            <div className="relative h-48 w-full bg-slate-900">
               <img
                 src={selectedFacilityModal.image}
                 alt={selectedFacilityModal.title}
@@ -1234,29 +1237,29 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               />
               <button
                 onClick={() => setSelectedFacilityModal(null)}
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-700 flex items-center justify-center shadow-md cursor-pointer hover:bg-white"
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 text-slate-300 flex items-center justify-center shadow-md cursor-pointer hover:bg-black hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
               <div className="absolute bottom-3 left-3">
-                <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-[#6D28D9] text-white">
+                <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-purple-950/80 border border-purple-800/40 text-purple-200">
                   {selectedFacilityModal.tag}
                 </span>
               </div>
             </div>
 
             <div className="p-5 pt-0 space-y-3">
-              <h3 className="text-base font-extrabold text-slate-900">{selectedFacilityModal.title}</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">{selectedFacilityModal.desc}</p>
+              <h3 className="text-base font-extrabold text-white">{selectedFacilityModal.title}</h3>
+              <p className="text-xs text-slate-300 leading-relaxed">{selectedFacilityModal.desc}</p>
 
-              <div className="space-y-1.5 pt-2 border-t border-slate-100">
+              <div className="space-y-1.5 pt-2 border-t border-white/10">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                   Daftar Alat & Keunggulan:
                 </span>
-                <ul className="space-y-1 text-xs text-slate-700">
+                <ul className="space-y-1 text-xs text-slate-300">
                   {selectedFacilityModal.highlights.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -1265,7 +1268,7 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               <button
                 onClick={() => setSelectedFacilityModal(null)}
-                className="w-full py-2.5 rounded-2xl bg-purple-50 text-[#6D28D9] font-bold text-xs hover:bg-purple-100 transition-colors cursor-pointer mt-2"
+                className="w-full py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-purple-200 hover:text-white font-bold text-xs transition-colors cursor-pointer mt-2"
               >
                 Tutup Pratinjau
               </button>
@@ -1278,16 +1281,16 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
       {/* 12. MODAL TABEL PERBANDINGAN FITUR SEMUA PAKET */}
       {/* ============================================================== */}
       {showComparisonModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl bg-white border border-slate-100 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl bg-[#131520] border border-white/10 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div>
-                <span className="text-[10px] font-bold text-[#6D28D9] uppercase tracking-wider block">Perbandingan Menyeluruh</span>
-                <h3 className="text-base font-extrabold text-slate-900">Tabel Benefit Setiap Paket</h3>
+                <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider block">Perbandingan Menyeluruh</span>
+                <h3 className="text-base font-extrabold text-white">Tabel Benefit Setiap Paket</h3>
               </div>
               <button
                 onClick={() => setShowComparisonModal(false)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1297,59 +1300,59 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
             <div className="overflow-x-auto text-xs">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-400 text-[10px] uppercase font-bold">
+                  <tr className="border-b border-white/10 text-slate-400 text-[10px] uppercase font-bold">
                     <th className="py-2.5">Fasilitas / Benefit</th>
                     <th className="py-2.5">Per-Visit</th>
-                    <th className="py-2.5 text-blue-600">Mahasiswa</th>
-                    <th className="py-2.5 text-[#6D28D9]">Bulanan</th>
-                    <th className="py-2.5 text-amber-600">Annual VIP</th>
+                    <th className="py-2.5 text-blue-400">Mahasiswa</th>
+                    <th className="py-2.5 text-purple-300">Bulanan</th>
+                    <th className="py-2.5 text-amber-400">Annual VIP</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-slate-700">
+                <tbody className="divide-y divide-white/5 text-slate-300">
                   <tr>
-                    <td className="py-2.5 font-bold">Akses Beban & Kardio</td>
+                    <td className="py-2.5 font-bold text-white">Akses Beban & Kardio</td>
                     <td className="py-2.5">1 Hari</td>
                     <td className="py-2.5">30 Hari</td>
                     <td className="py-2.5">30 Hari</td>
                     <td className="py-2.5">365 Hari</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Locker & Shower</td>
+                    <td className="py-2.5 font-bold text-white">Locker & Shower</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Aplikasi Web Pendamping</td>
+                    <td className="py-2.5 font-bold text-white">Aplikasi Web Pendamping</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Rekomendasi Workout & Makro</td>
+                    <td className="py-2.5 font-bold text-white">Rekomendasi Workout & Makro</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Konsultasi Privat Trainer</td>
+                    <td className="py-2.5 font-bold text-white">Konsultasi Privat Trainer</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">Awal</td>
                     <td className="py-2.5">Awal</td>
                     <td className="py-2.5">2x Sesi Privat</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Cuti / Freeze Membership</td>
+                    <td className="py-2.5 font-bold text-white">Cuti / Freeze Membership</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">Hingga 30 Hari</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold">Free Merchandise (Shaker/Baju)</td>
+                    <td className="py-2.5 font-bold text-white">Free Merchandise (Shaker/Baju)</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
@@ -1359,10 +1362,10 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               </table>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex justify-end">
+            <div className="pt-3 border-t border-white/10 flex justify-end">
               <button
                 onClick={() => setShowComparisonModal(false)}
-                className="px-4 py-2 rounded-xl bg-[#6D28D9] text-white text-xs font-bold hover:bg-[#5B21B6] transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white text-xs font-bold transition-colors cursor-pointer"
               >
                 Tutup Tabel
               </button>
