@@ -5,7 +5,8 @@ import {
   Sparkles, 
   UserCog, 
   PlusCircle,
-  Inbox
+  Inbox,
+  QrCode
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 
@@ -22,7 +23,7 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
   const getIcon = (type) => {
     switch (type) {
       case 'CHECK_IN':
-        return <CheckCircle2 className="w-5 h-5 text-emerald-400" />;
+        return <QrCode className="w-5 h-5 text-emerald-400" />;
       case 'RECOMMENDATION':
         return <Sparkles className="w-5 h-5 text-purple-300" />;
       case 'PROFILE_UPDATE':

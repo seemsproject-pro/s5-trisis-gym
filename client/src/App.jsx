@@ -88,6 +88,12 @@ export default function App() {
     return res;
   };
 
+  const handleResetTodayCheckIn = async () => {
+    await mockDataService.resetTodayCheckIn();
+    refreshState();
+    showToast('Presensi hari ini telah direset untuk simulasi scan ulang.');
+  };
+
   // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM
   if (viewMode === 'landing') {
     return (
@@ -186,6 +192,8 @@ export default function App() {
         isOpen={isCheckInModalOpen}
         onClose={() => setIsCheckInModalOpen(false)}
         onCheckInSuccess={handleCheckInSuccess}
+        onResetTodayCheckIn={handleResetTodayCheckIn}
+        user={auth.user}
         onViewActivity={() => {
           setIsCheckInModalOpen(false);
           setActiveTab('activity');

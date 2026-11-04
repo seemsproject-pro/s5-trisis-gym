@@ -11,7 +11,8 @@ import {
   ChevronRight,
   TrendingUp,
   User,
-  ShieldCheck
+  ShieldCheck,
+  QrCode
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import { calculateWorkoutSplit, calculateMacroEstimates } from '../../services/baselineCalculators';
@@ -89,11 +90,11 @@ export default function DashboardView({
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-purple-950/50 border border-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
-                <CalendarCheck className="w-5 h-5" />
+                <QrCode className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-white">Presensi Kehadiran Gym</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Catat kunjungan latihan hari ini</p>
+                <h2 className="text-sm font-bold text-white">Presensi QR Kasir Gym</h2>
+                <p className="text-xs text-slate-400 mt-0.5">Tunjukkan QR ke kasir saat tiba di gym</p>
               </div>
             </div>
             <StatusBadge status="DEMO" size="xs" />
@@ -101,15 +102,15 @@ export default function DashboardView({
 
           <button
             onClick={onOpenCheckIn}
-            className="w-full py-3.5 px-4 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
+            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#5D4E75] to-[#4A3D60] hover:from-[#6D5D88] hover:to-[#55466F] active:scale-[0.98] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
           >
-            <CalendarCheck className="w-4 h-4 text-amber-300" />
-            Check-in Gym Sekarang
+            <QrCode className="w-4 h-4 text-amber-300" />
+            Buka QR Presensi Kasir
           </button>
           
           <div className="flex items-center gap-1.5 justify-center text-[11px] text-slate-400">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Tersimpan otomatis ke riwayat aktivitas lokal</span>
+            <span>Tinggal di-scan petugas kasir / turnstile gym</span>
           </div>
         </section>
 

@@ -158,7 +158,7 @@ export const mockDataService = {
     return getStoredItem(STORAGE_KEYS.CHECKINS, INITIAL_CHECKINS);
   },
 
-  performCheckIn(notes = '') {
+  performCheckIn(notes = '', method = 'QR_SCAN_KASIR') {
     const checkIns = this.getCheckIns();
     const now = new Date();
     const todayStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -170,7 +170,7 @@ export const mockDataService = {
     if (alreadyToday) {
       return Promise.reject({
         code: 'DUPLICATE_CHECKIN',
-        message: `Anda sudah melakukan check-in hari ini pada pukul ${alreadyToday.time}. Dalam mode demo, 1 check-in per hari disimulasikan.`
+        message: `Anda sudah melakukan check-in hari ini pada pukul ${alreadyToday.time}. Silakan reset presensi hari ini jika ingin menguji scan QR kembali.`
       });
     }
 
@@ -178,9 +178,9 @@ export const mockDataService = {
       id: `chk_${Date.now()}`,
       date: todayStr,
       time: timeStr,
-      location: 'Trisis Gym — Area Utama',
-      notes: notes || 'Simulasi kehadiran member demo',
-      method: 'SIMULASI_APP'
+      location: 'Trisis Gym — Kasir & Turnstile Utama',
+      notes: notes || 'Presensi Scan QR Kasir',
+      method: method
     };
 
     const updatedCheckIns = [newCheckIn, ...checkIns];
@@ -189,12 +189,21 @@ export const mockDataService = {
     // Tambah ke riwayat aktivitas
     this.addActivity({
       type: 'CHECK_IN',
-      title: 'Check-in Demo Berhasil',
-      description: `Kehadiran dicatat di Area Utama pada ${timeStr}. (Status: DEMO)`,
+      title: 'Presensi Scan QR Kasir Berhasil',
+      description: `Presensi terverifikasi via QR Code di Kasir & Turnstile Utama pada ${timeStr}.`,
       methodBadge: 'DEMO'
     });
 
     return Promise.resolve({ success: true, checkIn: newCheckIn });
+  },
+
+  resetTodayCheckIn() {
+    const checkIns = this.getCheckIns();
+    const now = new Date();
+    const todayStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    const filtered = checkIns.filter(c => c.date !== todayStr);
+    setStoredItem(STORAGE_KEYS.CHECKINS, filtered);
+    return Promise.resolve({ success: true });
   },
 
   // Riwayat Aktivitas
