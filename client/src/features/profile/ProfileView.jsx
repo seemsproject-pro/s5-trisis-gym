@@ -5,11 +5,12 @@ import {
   CheckCircle2, 
   Target, 
   Activity, 
-  Loader2
+  Loader2,
+  LogOut
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 
-export default function ProfileView({ user, profile, onUpdateProfile }) {
+export default function ProfileView({ user, profile, onUpdateProfile, onLogout }) {
   const [formData, setFormData] = useState({
     age: profile.age || 23,
     gender: profile.gender || 'male',
@@ -365,6 +366,48 @@ export default function ProfileView({ user, profile, onUpdateProfile }) {
           )}
         </div>
       </form>
+
+      {/* Account & Session Management Card */}
+      <div className="bg-[#131520] rounded-3xl p-5 md:p-6 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300">
+              <User className="w-5 h-5 text-purple-300" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-white">Akun & Sesi Masuk</h3>
+              <p className="text-xs text-slate-400">Status akun aktif saat ini di perangkat ini</p>
+            </div>
+          </div>
+          <StatusBadge status="AKTIF" size="xs" />
+        </div>
+
+        <div className="bg-white/5 rounded-2xl p-3.5 border border-white/5 space-y-2.5 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400">Nama Member</span>
+            <span className="font-bold text-white">{user?.name || 'Budi Santoso'}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400">Email Akun</span>
+            <span className="font-mono text-slate-300">{user?.email || 'budi.member@trisisgym.demo'}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400">ID Anggota</span>
+            <span className="font-mono font-bold text-amber-400">{user?.memberId || 'TRISIS-DEMO-2026-089'}</span>
+          </div>
+        </div>
+
+        {onLogout && (
+          <button
+            type="button"
+            onClick={onLogout}
+            className="w-full min-h-[46px] rounded-2xl bg-rose-500/15 hover:bg-rose-500/25 active:scale-[0.98] text-rose-300 border border-rose-500/30 text-xs font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+          >
+            <LogOut className="w-4 h-4 text-rose-400" />
+            <span>Keluar dari Akun Member (Logout)</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }

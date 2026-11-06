@@ -108,12 +108,28 @@ export default function App() {
     showToast('Presensi hari ini telah direset untuk simulasi scan ulang.');
   };
 
+  const handleQuickAdminLoginFromLanding = () => {
+    const adminUser = {
+      id: 'usr_admin_001',
+      name: 'Admin Trisis Gym',
+      email: 'admin@trisisgym.demo',
+      memberId: 'TRISIS-STAFF-001',
+      planName: 'Staff & Receptionist',
+      role: 'admin'
+    };
+    handleLogin(adminUser);
+  };
+
   // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM
   if (viewMode === 'landing') {
     return (
       <GymLandingView
+        auth={auth}
         onOpenLogin={() => setViewMode('member')}
         onQuickDemoLogin={handleQuickLoginFromLanding}
+        onQuickAdminLogin={handleQuickAdminLoginFromLanding}
+        onGoToDashboard={() => setViewMode('member')}
+        onLogout={handleLogout}
       />
     );
   }
@@ -144,6 +160,7 @@ export default function App() {
         onSelectTab={setActiveTab} 
         currentRole={currentRole}
         onToggleRole={handleToggleRole}
+        onLogout={handleLogout}
       />
 
       <div className="flex-1 min-w-0 flex flex-col">
@@ -164,6 +181,7 @@ export default function App() {
             <AdminDashboardView
               onSwitchToMemberView={handleToggleRole}
               showToast={showToast}
+              onLogout={handleLogout}
             />
           ) : (
             <>
@@ -197,6 +215,7 @@ export default function App() {
                   user={auth.user}
                   profile={profile}
                   onUpdateProfile={handleUpdateProfile}
+                  onLogout={handleLogout}
                 />
               )}
             </>

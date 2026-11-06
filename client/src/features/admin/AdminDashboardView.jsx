@@ -20,12 +20,13 @@ import {
   Sparkles,
   ChevronRight,
   TrendingUp,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import { mockDataService } from '../../services/mockData';
 
-export default function AdminDashboardView({ onSwitchToMemberView, showToast }) {
+export default function AdminDashboardView({ onSwitchToMemberView, showToast, onLogout }) {
   const [activeAdminTab, setActiveAdminTab] = useState('settings'); // 'settings' | 'members' | 'attendance'
   
   // Data State dari MockService
@@ -207,14 +208,27 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast }) 
             </div>
           </div>
 
-          {/* Quick Switch to Member View */}
-          <button
-            onClick={onSwitchToMemberView}
-            className="self-start sm:self-auto py-2 px-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 text-xs font-bold flex items-center gap-2 transition-all cursor-pointer"
-          >
-            <span>Pratinjau Layar Member</span>
-            <ChevronRight className="w-4 h-4 text-amber-400" />
-          </button>
+          {/* Actions: Switch to Member View & Logout */}
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+            <button
+              onClick={onSwitchToMemberView}
+              className="py-2 px-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 text-xs font-bold flex items-center gap-2 transition-all cursor-pointer"
+            >
+              <span>Pratinjau Layar Member</span>
+              <ChevronRight className="w-4 h-4 text-amber-400" />
+            </button>
+
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                title="Keluar dari Akun Admin"
+                className="py-2 px-3.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 hover:text-rose-200 border border-rose-500/40 text-xs font-extrabold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+              >
+                <LogOut className="w-4 h-4 text-rose-400" />
+                <span>Keluar Admin</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* 4 Quick Stat Cards */}

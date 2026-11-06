@@ -19,11 +19,20 @@ import {
   Layers,
   HelpCircle,
   ShieldCheck,
-  CheckCircle2
+  CheckCircle2,
+  LogOut,
+  User
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 
-export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
+export default function GymLandingView({ 
+  onOpenLogin, 
+  onQuickDemoLogin, 
+  onQuickAdminLogin,
+  auth, 
+  onLogout, 
+  onGoToDashboard 
+}) {
   // Modal State
   const [selectedPlanModal, setSelectedPlanModal] = useState(null);
   const [registerSuccess, setRegisterSuccess] = useState(false);
@@ -299,21 +308,65 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
             <a href="#faq" className="hover:text-amber-400 transition-colors">FAQ</a>
           </nav>
 
-          {/* Action Buttons */}
+          {/* Action Buttons: Login / Dashboard / Logout */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenLogin}
-              className="text-xs font-bold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10 transition-all cursor-pointer"
-            >
-              Masuk Akun
-            </button>
-            <button
-              onClick={() => setSelectedPlanModal(plans[2])}
-              className="text-xs font-extrabold px-4 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98] transition-all cursor-pointer flex items-center gap-1.5"
-            >
-              <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
-              <span>Gabung Member</span>
-            </button>
+            {auth?.isAuthenticated ? (
+              <>
+                <div className="hidden lg:flex items-center gap-1.5 text-xs bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+                  <User className="w-3.5 h-3.5 text-purple-300" />
+                  <span className="font-bold text-white">{auth.user?.name?.split(' ')[0]}</span>
+                  <span className="text-[10px] text-amber-400 font-extrabold uppercase">({auth.user?.role || 'Member'})</span>
+                </div>
+
+                <button
+                  onClick={onGoToDashboard}
+                  className="text-xs font-extrabold px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <span>Buka Dashboard</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                {onLogout && (
+                  <button
+                    onClick={onLogout}
+                    title="Keluar dari Akun"
+                    className="text-xs font-extrabold px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <LogOut className="w-3.5 h-3.5 text-rose-400" />
+                    <span className="hidden sm:inline">Keluar</span>
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={onOpenLogin}
+                  className="text-xs font-bold px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <User className="w-3.5 h-3.5 text-purple-300" />
+                  <span>Masuk Member</span>
+                </button>
+
+                {onQuickAdminLogin && (
+                  <button
+                    onClick={onQuickAdminLogin}
+                    className="text-xs font-bold px-3 py-2 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border border-amber-400/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="hidden sm:inline">Masuk Admin</span>
+                    <span className="sm:hidden">Admin</span>
+                  </button>
+                )}
+
+                <button
+                  onClick={() => setSelectedPlanModal(plans[2])}
+                  className="hidden md:flex text-xs font-extrabold px-3.5 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98] transition-all cursor-pointer items-center gap-1.5"
+                >
+                  <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                  <span>Daftar</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -358,8 +411,8 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
               </span>
             </div>
 
-            {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-3">
+            {/* Dual / Triple CTAs */}
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
               <a
                 href="#paket"
                 className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-extrabold text-sm shadow-lg shadow-purple-950/40 border border-purple-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer group"
@@ -370,11 +423,21 @@ export default function GymLandingView({ onOpenLogin, onQuickDemoLogin }) {
 
               <button
                 onClick={onQuickDemoLogin}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 hover:text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 hover:text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>Coba Portal Member Demo (1-Klik)</span>
+                <span>Masuk Portal Member</span>
               </button>
+
+              {onQuickAdminLogin && (
+                <button
+                  onClick={onQuickAdminLogin}
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 text-amber-300 font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <ShieldCheck className="w-4 h-4 text-amber-400" />
+                  <span>Masuk Panel Admin</span>
+                </button>
+              )}
             </div>
 
             {/* Quick Metrics */}

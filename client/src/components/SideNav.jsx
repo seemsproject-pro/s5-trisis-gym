@@ -1,10 +1,10 @@
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, LogOut } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 import { NAV_ITEMS } from './navItems';
 
 // Navigasi untuk layar >= 768 px.
-export default function SideNav({ activeTab, onSelectTab, currentRole = 'member', onToggleRole }) {
+export default function SideNav({ activeTab, onSelectTab, currentRole = 'member', onToggleRole, onLogout }) {
   return (
     <aside className="hidden md:flex sticky top-0 h-screen shrink-0 flex-col w-20 lg:w-64 bg-[#0E1017] border-r border-white/10 shadow-[2px_0_12px_rgba(0,0,0,0.5)]">
       {/* Brand */}
@@ -80,6 +80,22 @@ export default function SideNav({ activeTab, onSelectTab, currentRole = 'member'
           </ul>
         )}
       </nav>
+
+      {/* Tombol Logout di SideNav */}
+      {onLogout && (
+        <div className="px-2 lg:px-4 pb-2">
+          <button
+            type="button"
+            id="sidenav-logout"
+            onClick={onLogout}
+            title="Keluar dari Akun"
+            className="w-full flex items-center justify-center lg:justify-start gap-2.5 px-3 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold transition-all cursor-pointer"
+          >
+            <LogOut className="w-4 h-4 shrink-0 text-rose-400" />
+            <span className="hidden lg:inline">Keluar dari Akun</span>
+          </button>
+        </div>
+      )}
 
       {/* Catatan prototipe (desktop saja) */}
       <div className="hidden lg:flex items-start gap-2.5 m-4 p-3.5 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-slate-400 leading-relaxed">

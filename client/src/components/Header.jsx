@@ -113,11 +113,12 @@ export default function Header({
           <button
             id="header-logout"
             onClick={onLogout}
-            title="Keluar dari Akun Demo"
-            aria-label="Keluar dari Akun Demo"
-            className="p-1.5 rounded-full bg-white/5 hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 border border-white/10 transition-colors cursor-pointer"
+            title="Keluar / Logout dari Akun"
+            aria-label="Keluar / Logout dari Akun"
+            className="flex items-center gap-1.5 text-xs font-extrabold px-3 py-1.5 rounded-full bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/40 shadow-xs transition-all cursor-pointer"
           >
-            <LogOut className="w-3.5 h-3.5" />
+            <LogOut className="w-3.5 h-3.5 text-rose-400" />
+            <span>Keluar</span>
           </button>
         </div>
       </div>
