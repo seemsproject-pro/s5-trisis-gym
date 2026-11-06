@@ -55,8 +55,8 @@
    Penelitian berfokus pada proses penentuan *workout split* dan perhitungan target makronutrisi berdasarkan profil kebugaran anggota Trisis Gym, tanpa membahas pengelolaan operasional gym secara keseluruhan.
 2. **Aksesibilitas Multiplatform & Algoritma:**  
    Aplikasi dikembangkan secara *multiplatform* sehingga dapat diakses secara fleksibel melalui **Website responsif** (desktop, laptop, tablet) serta dapat dijalankan sebagai **Aplikasi Android** (menggunakan arsitektur Capacitor / WebView). Algoritma **Random Forest** digunakan untuk klasifikasi rekomendasi *workout split*, sedangkan perhitungan target makronutrisi meliputi kebutuhan protein, karbohidrat, dan lemak berdasarkan metode perhitungan ilmiah (TDEE & BMR).
-3. **Batas Pengujian & Disclaimer Medis:**  
-   Pengujian dibatasi pada evaluasi kinerja algoritma Random Forest menggunakan metrik yang sesuai (Akurasi, Presisi, Recall, F1-Score) serta pengujian fungsi utama aplikasi. Hasil rekomendasi dan perhitungan merupakan estimasi berbasis data profil kebugaran dan **bukan pengganti konsultasi medis tenaga kesehatan profesional**.
+3. **Batasan Layanan Sistem & Disclaimer Medis:**  
+   Rekomendasi program latihan dan estimasi target makronutrisi yang dihasilkan sistem merupakan panduan kebugaran berbasis data profil pengguna dan **bukan merupakan diagnosis medis, resep diet klinis, maupun terapi pengganti tenaga medis/ahli gizi profesional**. Selain itu, sistem **tidak mencakup integrasi gerbang transaksi pembayaran perbankan (*payment gateway*) dan perangkat keras fisik (*turnstile gate IoT*)**.
 
 ---
 
@@ -75,18 +75,24 @@
 
 ---
 
-### 🖥️ SLIDE 6: PROGRESS KELAYAKAN PROYEK UTS (>50% TERCAPAI)
-* **Ketentuan Tugas UTS:** Menyelesaikan minimal **50%** dari keseluruhan sistem.
-* **Realisasi Kelompok Kami Saat Ini:** **~65% Total Sistem** *(Melampaui syarat minimal 50% UTS)*.
-* **Kesiapan Demo Localhost:** **100% Siap Demo** untuk sisi antarmuka, interaktivitas, dan alur operasional.
+### 🖥️ SLIDE 6: PROGRESS PENYELESAIAN PROYEK PER MODUL (>50% TERCAPAI)
+* **Status Perkembangan Proyek Saat Ini:** **~79.5% (Sisi Antarmuka & Logika Sistem)** / **~65% (Arsitektur Keseluruhan)**.
+* **Kesiapan Demo Localhost:** **100% Siap Didemonstrasikan** secara langsung di browser localhost.
 
-| Aspek / Komponen Sistem | Target Total | Realisasi UTS | Keterangan Status |
-| :--- | :---: | :---: | :--- |
-| **Antarmuka Pengguna (UI/UX Web & Android)** | 100% | **100% (Selesai)** | Dark luxury, responsif PC/Tablet/Smartphone, WCAG AA |
-| **Arsitektur 10 Modul Fungsional** | 100% | **90% (Selesai)** | Seluruh alur modul aktif dan interaktif di frontend |
-| **Engine Rekomendasi & Nutrisi** | 100% | **85% (Selesai)** | Baseline kalkulator ilmiah aktif, katalog latihan siap |
-| **Database Relasional (schema.sql)** | 100% | **50% (Selesai)** | DDL MySQL 8 relasional (6 tabel) telah siap di server |
-| **Pipeline Model Random Forest** | 100% | **30% (Fase Lanjut)** | Fitur input biometrik telah dipetakan siap training |
+#### 📋 Tabel Rincian Perkembangan 10 Modul Sistem:
+| Modul | Nama Modul Sistem | Persentase | Status & Capaian Pengerjaan |
+| :-: | :--- | :-: | :--- |
+| **1** | **Autentikasi & Hak Akses** | **85%** | Login/logout Member & Admin, proteksi sesi, tombol keluar di semua halaman |
+| **2** | **Dashboard Member** | **90%** | Streak latihan, status keanggotaan aktif, live crowd okupansi, live announcement |
+| **3** | **Profil & Asesmen Kebugaran** | **85%** | Formulir biometrik (usia, TB, BB, target kebugaran, pengalaman, frekuensi) |
+| **4** | **Kartu Anggota Digital** | **90%** | Kartu flip 3D gold obsidian, ID anggota format `TRISIS-2026-XXX`, barcode ID |
+| **5** | **Check-in, Kehadiran & Riwayat** | **85%** | Presensi QR dinamis countdown 60 detik, simulasi kasir dengan audio bip 880Hz |
+| **6** | **Rekomendasi Workout Split** | **75%** | Klasifikasi split (Full Body, Upper/Lower, PPL) aktif; arsitektur model siap |
+| **7** | **Perhitungan Target Makronutrisi** | **80%** | Kalkulasi ilmiah TDEE & BMR, gramatur protein, karbohidrat, dan lemak |
+| **8** | **Detail Rencana Latihan** | **80%** | Katalog gerakan per kelompok otot, rekomendasi set & reps, modal panduan form |
+| **9** | **Manajemen Member & Kasir** | **85%** | Tabel kelola member (CRUD), meja presensi kasir, pengendali dashboard utama |
+| **10** | **Pengelolaan Dataset & Sistem** | **40%** | Kontrol operasional buka/tutup gym aktif; pemetaan fitur dataset siap training |
+| **RATA-RATA TOTAL** | | **~79.5%** | **MELEBIHI AMBANG BATAS MINIMAL 50% (SIAP DEMO)** |
 
 ---
 
