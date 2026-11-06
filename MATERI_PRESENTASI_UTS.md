@@ -75,7 +75,23 @@
 
 ---
 
-### 🖥️ SLIDE 6: PROGRESS PENYELESAIAN PROYEK PER MODUL (>50% TERCAPAI)
+### 🖥️ SLIDE 6: SUMBER DATASET & SKEMA FITUR MACHINE LEARNING (RANDOM FOREST)
+* **Sumber Data Penelitian:**
+  1. **Dataset Sekunder (Kaggle / Open Dataset):** *Gym Members Exercise Dataset & Fitness Tracking* (berisi ribuan data praktisi gym dengan atribut usia, tinggi, berat badan, durasi, dan pola sesi).
+  2. **Data Empiris Mitra:** Sampel asesmen profil member dan kurikulum latihan Trisis Gym Centre Bogor.
+* **Skema Fitur Masukan (*Input Features - X*):**
+  * **Data Biometrik:** Usia (*Age*), Jenis Kelamin (*Gender*), Tinggi Badan (*Height*), Berat Badan (*Weight*), Indeks Massa Tubuh (*BMI*).
+  * **Preferensi & Kapasitas:** Frekuensi Latihan Mingguan (*Workout Days*), Tingkat Pengalaman Gym (*Experience Level*), dan Tujuan Kebugaran (*Fitness Goal*).
+* **Target Klasifikasi (*Output Label - y*):**
+  * **Kategori Program Latihan (*Workout Split*):**
+    * `Full Body Split` (Cocok untuk 2–3 hari latihan/minggu).
+    * `Upper / Lower Split` (Cocok untuk 4 hari latihan/minggu).
+    * `Push / Pull / Legs (PPL) Split` (Cocok untuk 5–6 hari latihan/minggu).
+* **Rencana Pengujian Model:** Evaluasi metrik klasifikasi menggunakan *Confusion Matrix*, **Akurasi**, **Presisi**, **Recall**, dan **F1-Score**.
+
+---
+
+### 🖥️ SLIDE 7: PROGRESS PENYELESAIAN PROYEK PER MODUL (>50% TERCAPAI)
 * **Status Perkembangan Proyek Saat Ini:** **~79.5% (Sisi Antarmuka & Logika Sistem)** / **~65% (Arsitektur Keseluruhan)**.
 * **Kesiapan Demo Localhost:** **100% Siap Didemonstrasikan** secara langsung di browser localhost.
 
@@ -96,7 +112,7 @@
 
 ---
 
-### 🖥️ SLIDE 7: PENJELASAN PERAN DAN FUNGSI 10 MODUL SISTEM
+### 🖥️ SLIDE 8: PENJELASAN PERAN DAN FUNGSI 10 MODUL SISTEM
 
 Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstruktur**:
 
@@ -133,7 +149,7 @@ Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstr
 
 ---
 
-### 🖥️ SLIDE 8: RINCIAN MODUL YANG TELAH SELESAI DIKERJAKAN
+### 🖥️ SLIDE 9: RINCIAN MODUL YANG TELAH SELESAI DIKERJAKAN
 * **Yang Sudah Selesai Dikerjakan & Siap Didemonstrasikan:**
   1. **Alur Member Lengkap:** Login cepat, Dashboard dengan pantauan streak, kartu keanggotaan digital, presensi scan QR dinamis bersuara bip kasir, rekomendasi workout split, dan kalkulasi makronutrisi.
   2. **Alur Admin Terpusat:** Panel kontrol operasional (buka/tutup gym, meteran kepadatan pengunjung, pelatih bertugas), siaran pengumuman langsung yang **tersinkronisasi realtime ke dashboard member**, tabel kelola member (CRUD), dan meja presensi kasir.
@@ -142,7 +158,7 @@ Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstr
 
 ---
 
-### 🖥️ SLIDE 9: TANTANGAN TEKNIS & SOLUSI (AGILE ITERATION)
+### 🖥️ SLIDE 10: TANTANGAN TEKNIS & SOLUSI (AGILE ITERATION)
 * **Tantangan 1: Kebutuhan Sinkronisasi Dua Arah (Member vs Admin)**
   * *Masalah:* Bagaimana agar perubahan jadwal/pengumuman dari admin langsung dirasakan oleh member tanpa perlu refresh manual yang rumit.
   * *Solusi:* Menerapkan *centralized state service* pada client yang memetakan pengaturan gym langsung ke antarmuka member secara realtime.
@@ -152,11 +168,11 @@ Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstr
 
 ---
 
-### 🖥️ SLIDE 10: RENCANA TAHAP LANJUT (ROADMAP PASKA-UTS MENUJU UAS)
+### 🖥️ SLIDE 11: RENCANA TAHAP LANJUT (ROADMAP PASKA-UTS MENUJU UAS)
 * **Fase 6B: Integrasi Database Relasional MySQL 8 & Express.js**  
   Menyambungkan antarmuka Web/Android dengan REST API backend Node.js dan database MySQL 8 berdasarkan skema relasional `schema.sql` yang telah dirancang.
-* **Fase 6C: Pengumpulan Dataset & Pelatihan Model Random Forest**  
-  Mengumpulkan data asesmen kebugaran gym, melatih model Random Forest Classifier dengan Scikit-Learn, serta mengukur metrik Akurasi, Presisi, Recall, dan F1-Score.
+* **Fase 6C: Pelatihan & Evaluasi Model Random Forest**  
+  Melatih model Random Forest Classifier dengan Scikit-Learn menggunakan dataset Kaggle & data Trisis Gym, serta mengukur metrik Akurasi, Presisi, Recall, dan F1-Score.
 * **Fase 6D: Build APK Android & Pengujian Akhir**  
   Mengkompilasi aplikasi ke format file APK Android menggunakan Capacitor untuk pengujian instalasi langsung pada perangkat smartphone.
 
