@@ -10,6 +10,7 @@ import ProfileView from './features/profile/ProfileView';
 import RecommendationsView from './features/recommendations/RecommendationsView';
 import ActivityView from './features/activity/ActivityView';
 import GymLandingView from './features/landing/GymLandingView';
+import AdminDashboardView from './features/admin/AdminDashboardView';
 import { mockDataService } from './services/mockData';
 
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
 
   // 'landing' (Profil & Tawaran Gym) | 'member' (Portal Pendamping Member)
   const [viewMode, setViewMode] = useState('landing');
+  // 'member' | 'admin'
+  const [currentRole, setCurrentRole] = useState(() => mockDataService.getActiveRole() || 'member');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
@@ -37,12 +40,23 @@ export default function App() {
     setStats(mockDataService.getStats());
   };
 
+  const handleToggleRole = () => {
+    const nextRole = currentRole === 'admin' ? 'member' : 'admin';
+    mockDataService.setActiveRole(nextRole);
+    setCurrentRole(nextRole);
+    refreshState();
+    showToast(nextRole === 'admin' ? 'Beralih ke Panel Kontrol Admin Gym.' : 'Beralih ke Dashboard Member.');
+  };
+
   const handleLogin = (user) => {
     mockDataService.login(user.email, 'demo1234');
+    const role = user.role || (user.email?.includes('admin') ? 'admin' : 'member');
+    mockDataService.setActiveRole(role);
+    setCurrentRole(role);
     setAuth({ isAuthenticated: true, user });
     refreshState();
     setViewMode('member');
-    showToast('Selamat datang di Portal Member Trisis Gym!');
+    showToast(role === 'admin' ? 'Selamat datang di Panel Admin Trisis Gym!' : 'Selamat datang di Portal Member Trisis Gym!');
   };
 
   const handleQuickLoginFromLanding = () => {
@@ -125,12 +139,19 @@ export default function App() {
       )}
 
       {/* Sidebar / Rail Navigation (>= 768 px) */}
-      <SideNav activeTab={activeTab} onSelectTab={setActiveTab} />
+      <SideNav 
+        activeTab={activeTab} 
+        onSelectTab={setActiveTab} 
+        currentRole={currentRole}
+        onToggleRole={handleToggleRole}
+      />
 
       <div className="flex-1 min-w-0 flex flex-col">
         {/* Top Header */}
         <Header
           user={auth.user}
+          currentRole={currentRole}
+          onToggleRole={handleToggleRole}
           onOpenCard={() => setIsCardModalOpen(true)}
           onLogout={handleLogout}
           onResetDemo={handleResetDemo}
@@ -139,46 +160,57 @@ export default function App() {
 
         {/* Main Content Area: mobile 1 kolom, melebar di tablet/desktop */}
         <main className="flex-1 w-full max-w-md md:max-w-3xl lg:max-w-6xl mx-auto px-4 md:px-8 pt-4 md:pt-6 pb-24 md:pb-10">
-          {activeTab === 'dashboard' && (
-            <DashboardView
-              user={auth.user}
-              profile={profile}
-              stats={stats}
-              onOpenCheckIn={() => setIsCheckInModalOpen(true)}
-              onOpenCard={() => setIsCardModalOpen(true)}
-              onNavigateTab={setActiveTab}
+          {currentRole === 'admin' ? (
+            <AdminDashboardView
+              onSwitchToMemberView={handleToggleRole}
+              showToast={showToast}
             />
-          )}
+          ) : (
+            <>
+              {activeTab === 'dashboard' && (
+                <DashboardView
+                  user={auth.user}
+                  profile={profile}
+                  stats={stats}
+                  onOpenCheckIn={() => setIsCheckInModalOpen(true)}
+                  onOpenCard={() => setIsCardModalOpen(true)}
+                  onNavigateTab={setActiveTab}
+                />
+              )}
 
-          {activeTab === 'activity' && (
-            <ActivityView
-              activities={activities}
-              onOpenCheckIn={() => setIsCheckInModalOpen(true)}
-            />
-          )}
+              {activeTab === 'activity' && (
+                <ActivityView
+                  activities={activities}
+                  onOpenCheckIn={() => setIsCheckInModalOpen(true)}
+                />
+              )}
 
-          {activeTab === 'recommendations' && (
-            <RecommendationsView
-              profile={profile}
-              onNavigateTab={setActiveTab}
-            />
-          )}
+              {activeTab === 'recommendations' && (
+                <RecommendationsView
+                  profile={profile}
+                  onNavigateTab={setActiveTab}
+                />
+              )}
 
-          {activeTab === 'profile' && (
-            <ProfileView
-              user={auth.user}
-              profile={profile}
-              onUpdateProfile={handleUpdateProfile}
-            />
+              {activeTab === 'profile' && (
+                <ProfileView
+                  user={auth.user}
+                  profile={profile}
+                  onUpdateProfile={handleUpdateProfile}
+                />
+              )}
+            </>
           )}
         </main>
       </div>
 
-      {/* Fixed Bottom Navigation (4 Destinations, < 768 px) */}
-      <BottomNav
-        activeTab={activeTab}
-        onSelectTab={setActiveTab}
-      />
+      {/* Fixed Bottom Navigation (4 Destinations, < 768 px, khusus member) */}
+      {currentRole === 'member' && (
+        <BottomNav
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+        />
+      )}
 
       {/* Digital Member Card Modal */}
       <MemberCardModal

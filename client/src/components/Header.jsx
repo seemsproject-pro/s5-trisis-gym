@@ -1,8 +1,16 @@
 import React from 'react';
-import { CreditCard, LogOut, RotateCcw, Building2 } from 'lucide-react';
+import { CreditCard, LogOut, RotateCcw, Building2, ShieldCheck, User } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 
-export default function Header({ user, onOpenCard, onLogout, onResetDemo, onGoToLanding }) {
+export default function Header({ 
+  user, 
+  currentRole = 'member',
+  onToggleRole,
+  onOpenCard, 
+  onLogout, 
+  onResetDemo, 
+  onGoToLanding 
+}) {
   return (
     <header className="sticky top-0 z-30 bg-[#0B0D14]/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
       <div className="max-w-md md:max-w-3xl lg:max-w-6xl mx-auto flex items-center justify-between">
@@ -16,22 +24,60 @@ export default function Header({ user, onOpenCard, onLogout, onResetDemo, onGoTo
               <span className="font-extrabold text-base tracking-tight text-white">
                 TRISIS<span className="text-amber-400 font-black">GYM</span>
               </span>
-              <StatusBadge status="DEMO" size="xs" />
+              <StatusBadge status={currentRole === 'admin' ? 'ADMIN' : 'DEMO'} size="xs" />
             </div>
             <p className="text-[9px] text-slate-400 font-semibold tracking-wider uppercase leading-none">Est. Bogor, Indonesia</p>
           </div>
         </div>
 
-        {/* Member Greeting on Desktop/Tablet header */}
+        {/* Member/Admin Greeting on Desktop/Tablet header */}
         <div className="hidden md:flex items-center gap-2">
           <span className="text-xs text-slate-400 font-medium">Masuk sebagai</span>
-          <span className="text-xs font-bold text-slate-200 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
-            {user?.name || 'Budi Santoso'}
+          <span className="text-xs font-bold text-slate-200 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+            {currentRole === 'admin' ? (
+              <>
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                <span>Admin Gym / Kasir</span>
+              </>
+            ) : (
+              <>
+                <User className="w-3.5 h-3.5 text-purple-300" />
+                <span>{user?.name || 'Budi Santoso'}</span>
+              </>
+            )}
           </span>
         </div>
 
         {/* Quick Actions */}
         <div className="flex items-center gap-2 ml-auto">
+          {/* Role Switcher Button */}
+          {onToggleRole && (
+            <button
+              id="header-toggle-role"
+              onClick={onToggleRole}
+              title={`Beralih ke mode ${currentRole === 'admin' ? 'Member' : 'Admin'}`}
+              aria-label="Ganti Peran Antara Member dan Admin"
+              className={`flex items-center gap-1.5 text-xs font-black px-3 py-1.5 rounded-full border transition-all cursor-pointer ${
+                currentRole === 'admin'
+                  ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-950/40 hover:bg-amber-300'
+                  : 'bg-purple-950/80 text-purple-200 border-purple-500/40 hover:bg-purple-900 shadow-xs'
+              }`}
+            >
+              {currentRole === 'admin' ? (
+                <>
+                  <ShieldCheck className="w-3.5 h-3.5 text-slate-950" />
+                  <span>Mode Admin</span>
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="hidden sm:inline">Mode Admin</span>
+                  <span className="sm:hidden">Admin</span>
+                </>
+              )}
+            </button>
+          )}
+
           {onGoToLanding && (
             <button
               onClick={onGoToLanding}

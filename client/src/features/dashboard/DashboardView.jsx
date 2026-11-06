@@ -12,7 +12,9 @@ import {
   TrendingUp,
   User,
   ShieldCheck,
-  QrCode
+  QrCode,
+  Megaphone,
+  Users
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import { calculateWorkoutSplit, calculateMacroEstimates } from '../../services/baselineCalculators';
@@ -35,6 +37,82 @@ export default function DashboardView({
 
   return (
     <div className="space-y-4 md:space-y-5 pb-8 animate-in fade-in duration-200">
+      {/* 0. Live Announcement Banner (Diatur oleh Admin) */}
+      {stats?.gymSettings?.announcementActive && stats?.gymSettings?.announcementText && (
+        <section className="bg-gradient-to-r from-amber-500/15 via-[#231A36] to-purple-950/40 border border-amber-400/40 rounded-3xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex items-start gap-3.5">
+          <div className="w-9 h-9 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 flex items-center justify-center shrink-0 mt-0.5">
+            <Megaphone className="w-4 h-4 text-amber-400" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                PENGUMUMAN PENGELOLA
+              </span>
+              <span className="text-[10px] text-slate-400 hidden sm:inline">Siaran Langsung Admin</span>
+            </div>
+            <p className="text-xs text-slate-100 font-medium mt-1 leading-relaxed">
+              {stats.gymSettings.announcementText}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* 0.1 Live Gym Status & Okupansi (Diatur oleh Admin) */}
+      {stats?.gymSettings && (
+        <section className="bg-[#131520] rounded-3xl p-4 md:p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <span className={`w-3 h-3 rounded-full shrink-0 ${stats.gymSettings.isOpen ? 'bg-emerald-400 shadow-[0_0_12px_#34d399]' : 'bg-rose-500'}`} />
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xs md:text-sm font-extrabold text-white">
+                    {stats.gymSettings.isOpen ? 'Trisis Gym Buka Operasional' : 'Trisis Gym Tutup Sementara'}
+                  </h3>
+                  <span className={`text-[9px] font-black px-2 py-0.5 rounded-md ${
+                    stats.gymSettings.isOpen ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                  }`}>
+                    {stats.gymSettings.isOpen ? 'BUKA' : 'TUTUP'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 mt-0.5 flex flex-wrap items-center gap-2">
+                  <span><Clock className="w-3 h-3 inline mr-1 text-amber-400" />{stats.gymSettings.openingHours || '06:00 – 22:00 WIB'}</span>
+                  <span>•</span>
+                  <span className="text-purple-300 font-medium">{stats.gymSettings.trainerOnDuty || 'Staff & Trainer Siaga'}</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Okupansi Gym Realtime */}
+            <div className="flex items-center gap-3 sm:text-right">
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Kepadatan Saat Ini</span>
+                <div className="flex items-center sm:justify-end gap-1.5 mt-0.5">
+                  <Users className="w-3.5 h-3.5 text-purple-400" />
+                  <span className="text-xs font-black text-white">
+                    {stats.gymSettings.currentOccupancy || 0} / {stats.gymSettings.maxCapacity || 75} Orang
+                  </span>
+                  <span className="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded">
+                    {stats.gymSettings.currentCrowdStatus === 'pagi' ? 'Lengang' : stats.gymSettings.currentCrowdStatus === 'siang' ? 'Sedang' : stats.gymSettings.currentCrowdStatus === 'sore' ? 'Peak Hour' : 'Normal'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Progress Bar Okupansi */}
+          <div className="mt-3 flex items-center gap-3">
+            <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 rounded-full transition-all duration-500"
+                style={{ width: `${Math.min(100, Math.round(((stats.gymSettings.currentOccupancy || 0) / (stats.gymSettings.maxCapacity || 75)) * 100))}%` }}
+              />
+            </div>
+            <span className="text-[10px] text-slate-400 font-medium shrink-0 tabular-nums">
+              {Math.min(100, Math.round(((stats.gymSettings.currentOccupancy || 0) / (stats.gymSettings.maxCapacity || 75)) * 100))}% Terisi
+            </span>
+          </div>
+        </section>
+      )}
       {/* 1. Header & Sapaan Pengguna + Streak Card */}
       <section className="bg-[#131520] rounded-3xl p-5 md:p-6 border border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
         <div className="flex items-center justify-between gap-4">

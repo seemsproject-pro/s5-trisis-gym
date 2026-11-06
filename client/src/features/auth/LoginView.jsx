@@ -20,12 +20,23 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
         return;
       }
 
-      onLoginSuccess({
-        id: 'usr_demo_089',
-        name: 'Budi Santoso',
-        email: email,
-        memberId: 'TRISIS-DEMO-2026-089'
-      });
+      if (email.trim().toLowerCase().includes('admin')) {
+        onLoginSuccess({
+          id: 'usr_admin_001',
+          name: 'Admin Trisis Gym',
+          email: 'admin@trisisgym.demo',
+          memberId: 'TRISIS-STAFF-001',
+          role: 'admin'
+        });
+      } else {
+        onLoginSuccess({
+          id: 'usr_demo_089',
+          name: 'Budi Santoso',
+          email: email,
+          memberId: 'TRISIS-DEMO-2026-089',
+          role: 'member'
+        });
+      }
       setLoading(false);
     }, 400);
   };
@@ -37,7 +48,20 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
       id: 'usr_demo_089',
       name: 'Budi Santoso',
       email: 'budi.member@trisisgym.demo',
-      memberId: 'TRISIS-DEMO-2026-089'
+      memberId: 'TRISIS-DEMO-2026-089',
+      role: 'member'
+    });
+  };
+
+  const handleQuickAdminLogin = () => {
+    setEmail('admin@trisisgym.demo');
+    setPassword('admin1234');
+    onLoginSuccess({
+      id: 'usr_admin_001',
+      name: 'Admin Trisis Gym',
+      email: 'admin@trisisgym.demo',
+      memberId: 'TRISIS-STAFF-001',
+      role: 'admin'
     });
   };
 
@@ -130,18 +154,28 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
           </form>
 
           {/* Quick Demo 1-Click Access */}
-          <div className="pt-2 border-t border-white/10">
+          <div className="pt-2 border-t border-white/10 space-y-2">
             <button
               type="button"
               onClick={handleQuickDemoLogin}
-              className="w-full min-h-[48px] rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
+              className="w-full min-h-[44px] rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
-              Masuk Cepat Demo (Budi Santoso)
+              Masuk Cepat Member (Budi Santoso)
               <ArrowRight className="w-4 h-4" />
             </button>
-            <p className="text-[11px] text-center text-slate-500 mt-2 font-medium">
-              Langsung masuk tanpa perlu mengetik manual.
+
+            <button
+              type="button"
+              onClick={handleQuickAdminLogin}
+              className="w-full min-h-[44px] rounded-2xl bg-amber-400/15 hover:bg-amber-400/25 active:scale-[0.98] text-amber-300 font-bold text-xs flex items-center justify-center gap-2 border border-amber-400/30 transition-all cursor-pointer"
+            >
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              Masuk Cepat Admin (Staff / Kasir Gym)
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <p className="text-[11px] text-center text-slate-500 mt-1 font-medium">
+              Pilih peran akun demo yang ingin Anda uji coba.
             </p>
           </div>
         </div>
