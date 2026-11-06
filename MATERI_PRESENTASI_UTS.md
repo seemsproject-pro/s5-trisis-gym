@@ -2,7 +2,7 @@
 
 **Mata Kuliah / Tugas:** Proyek Semester 5 — Ujian Tengah Semester (UTS)  
 **Tema:** Artificial Intelligence (AI) · Semester 5  
-**Dosen Pengampu:** Pak Hendro  
+**Dosen Pengampu:** Bapak Suhendra Anjar Dinata, S.Kom., M.Kom.  
 **Objek Penelitian / Proyek:** Trisis Gym Centre  
 **Metodologi Pengembangan:** Agile / Extreme Programming (XP)  
 **Tech Stack & Tools:** Node.js, React + Vite, MySQL, Tailwind CSS, Android (Capacitor / Mobile-First PWA)
@@ -20,12 +20,10 @@
   **"Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Web dan Aplikasi Android (Studi Kasus: Trisis Gym)"**
 * **Objek Proyek:** Trisis Gym Centre
 * **Platform:** Multiplatform (Website Responsif & Aplikasi Android)
-* **Identitas Tim Pengembang:**
-  * [Nama Mahasiswa 1] - [NPM] *(Project Lead / ML & Backend)*
-  * [Nama Mahasiswa 2] - [NPM] *(Frontend & Android UI/UX)*
-  * [Nama Mahasiswa 3] - [NPM] *(Database & System Integration)*
-  * [Nama Mahasiswa 4] - [NPM] *(Data Analyst & QA)*
-* **Dosen Pengampu:** Pak Hendro
+* **Disusun Oleh (Proyek Mandiri):**
+  * **Nama Mahasiswa:** Muhammad Syams Dzulqarnain
+  * **NIM:** 2411070084
+* **Dosen Pengampu:** Bapak Suhendra Anjar Dinata, S.Kom., M.Kom.
 
 ---
 
@@ -191,16 +189,16 @@ Saat presentasi di kelas / video:
 
 ---
 
-## 🎙️ NASKAH PRESENTASI VIDEO YOUTUBE (TAG PAK HENDRO)
+## 🎙️ NASKAH PRESENTASI VIDEO YOUTUBE (TAG BAPAK SUHENDRA ANJAR DINATA)
 
-> *"Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat pagi/siang kepada Bapak Hendro selaku dosen pengampu kami, dan rekan-rekan semuanya.*  
+> *"Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat pagi/siang kepada Bapak Suhendra Anjar Dinata, S.Kom., M.Kom. selaku dosen pengampu kami, dan rekan-rekan semuanya.*  
 >  
-> *Kami dari kelompok Proyek Semester 5, pada kesempatan Ujian Tengah Semester ini mempresentasikan perkembangan proyek kami yang berjudul: **'Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Web dan Aplikasi Android (Studi Kasus: Trisis Gym)'**.*  
+> *Perkenalkan saya Muhammad Syams Dzulqarnain dengan NIM 2411070084, pada kesempatan Ujian Tengah Semester (UTS) Proyek Semester 5 ini mempresentasikan tugas proyek mandiri saya yang berjudul: **'Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Web dan Aplikasi Android (Studi Kasus: Trisis Gym)'**.*  
 >  
 > *Latar belakang proyek ini berangkat dari permasalahan praktisi kebugaran pemula di Trisis Gym yang sering mengalami kebingungan dalam menyelaraskan jadwal latihan fisik dengan kebutuhan nutrisi harian mereka, yang jika salah dapat memicu overtraining dan kehilangan massa otot.*  
 >  
-> *Hingga tahapan UTS ini, proyek kami telah menyelesaikan **lebih dari 65% total sistem**, di mana seluruh antarmuka multiplatform (Web & Android) dan alur dari 10 modul utama telah siap didemonstrasikan secara langsung di localhost menggunakan stack React, Node.js, MySQL, dan Tailwind CSS.*  
+> *Hingga tahapan UTS ini, proyek saya telah menyelesaikan **lebih dari 65% total sistem**, di mana seluruh antarmuka multiplatform (Web & Android) dan alur dari 10 modul utama telah siap didemonstrasikan secara langsung di localhost menggunakan stack React, Node.js, MySQL, dan Tailwind CSS.*  
 >  
 > *(Lanjutkan dengan rekaman layar Live Demo sesuai skenario di atas)*  
 >  
-> *Setelah tahapan UTS ini, kami akan melanjutkan pengerjaan ke fase integrasi database relasional MySQL 8 dan pelatihan model Random Forest. Sekian presentasi perkembangan proyek UTS dari kelompok kami. Terima kasih banyak kepada Pak Hendro atas bimbingannya. Wassalamu'alaikum Warahmatullahi Wabarakatuh."*
+> *Setelah tahapan UTS ini, saya akan melanjutkan pengerjaan ke fase integrasi database relasional MySQL 8 dan pelatihan model Random Forest. Sekian presentasi perkembangan proyek UTS dari saya. Terima kasih banyak kepada Bapak Suhendra Anjar Dinata atas bimbingan dan arahannya. Wassalamu'alaikum Warahmatullahi Wabarakatuh."*
