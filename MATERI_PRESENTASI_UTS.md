@@ -17,8 +17,9 @@
 * **Header:** Ujian Tengah Semester (UTS) — Proyek Semester 5
 * **Tema:** AI · Semester 5
 * **Judul Proyek:**  
-  **"Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Aplikasi Android (Studi Kasus: Trisis Gym)"**
+  **"Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Web dan Aplikasi Android (Studi Kasus: Trisis Gym)"**
 * **Objek Proyek:** Trisis Gym Centre
+* **Platform:** Multiplatform (Website Responsif & Aplikasi Android)
 * **Identitas Tim Pengembang:**
   * [Nama Mahasiswa 1] - [NPM] *(Project Lead / ML & Backend)*
   * [Nama Mahasiswa 2] - [NPM] *(Frontend & Android UI/UX)*
@@ -37,23 +38,23 @@
      * Kelelahan otot berlebih (*overtraining*).
      * Stagnansi hasil latihan (*plateau*).
      * Risiko kehilangan massa otot (*muscle loss*) akibat ketidakseimbangan asupan protein dan energi.
-  3. **Kebutuhan Sistem Pendamping Otomatis:**  
-     Tidak semua anggota gym mampu menyewa jasa *Personal Trainer* (PT) dan ahli gizi pribadi. Diperlukan aplikasi cerdas berbasis algoritma *Machine Learning* yang mampu merekomendasikan program latihan dan menghitung kebutuhan makronutrisi secara terpersonalisasi, objektif, dan terjangkau langsung dari *smartphone* Android.
+  3. **Kebutuhan Sistem Pendamping Otomatis Multiplatform:**  
+     Tidak semua anggota gym mampu menyewa jasa *Personal Trainer* (PT) dan ahli gizi pribadi. Diperlukan sistem pendamping cerdas berbasis *Machine Learning* yang fleksibel, dapat diakses kapan saja dan di mana saja baik melalui **Web Browser** maupun di-install langsung sebagai **Aplikasi Android**.
 
 ---
 
 ### 🖥️ SLIDE 3: RUMUSAN MASALAH
 1. **Bagaimana proses penentuan program latihan (*workout split*) dan perhitungan target makronutrisi berdasarkan profil kebugaran anggota di Trisis Gym saat ini?**
-2. **Bagaimana merancang dan membangun aplikasi Android menggunakan algoritma Random Forest untuk rekomendasi program latihan (*workout split*) serta perhitungan target makronutrisi berdasarkan profil kebugaran?**
-3. **Apakah aplikasi Android yang dikembangkan dapat memberikan rekomendasi program latihan dan estimasi target makronutrisi serta berfungsi sesuai kebutuhan pengguna?**
+2. **Bagaimana merancang dan membangun aplikasi berbasis Web dan Android menggunakan algoritma Random Forest untuk rekomendasi program latihan (*workout split*) serta perhitungan target makronutrisi berdasarkan profil kebugaran?**
+3. **Apakah aplikasi Web dan Android yang dikembangkan dapat memberikan rekomendasi program latihan dan estimasi target makronutrisi serta berfungsi sesuai kebutuhan pengguna?**
 
 ---
 
 ### 🖥️ SLIDE 4: BATASAN MASALAH
 1. **Fokus Penelitian:**  
    Penelitian berfokus pada proses penentuan *workout split* dan perhitungan target makronutrisi berdasarkan profil kebugaran anggota Trisis Gym, tanpa membahas pengelolaan operasional gym secara keseluruhan.
-2. **Platform & Algoritma:**  
-   Aplikasi dikembangkan khusus untuk platform Android. Algoritma **Random Forest** digunakan untuk klasifikasi rekomendasi *workout split*, sedangkan perhitungan target makronutrisi meliputi kebutuhan protein, karbohidrat, dan lemak berdasarkan metode perhitungan ilmiah (TDEE & BMR).
+2. **Aksesibilitas Multiplatform & Algoritma:**  
+   Aplikasi dikembangkan secara *multiplatform* sehingga dapat diakses secara fleksibel melalui **Website responsif** (desktop, laptop, tablet) serta dapat dijalankan sebagai **Aplikasi Android** (menggunakan arsitektur Capacitor / WebView). Algoritma **Random Forest** digunakan untuk klasifikasi rekomendasi *workout split*, sedangkan perhitungan target makronutrisi meliputi kebutuhan protein, karbohidrat, dan lemak berdasarkan metode perhitungan ilmiah (TDEE & BMR).
 3. **Batas Pengujian & Disclaimer Medis:**  
    Pengujian dibatasi pada evaluasi kinerja algoritma Random Forest menggunakan metrik yang sesuai (Akurasi, Presisi, Recall, F1-Score) serta pengujian fungsi utama aplikasi. Hasil rekomendasi dan perhitungan merupakan estimasi berbasis data profil kebugaran dan **bukan pengganti konsultasi medis tenaga kesehatan profesional**.
 
@@ -66,8 +67,8 @@
   * *Coding:* Pembangunan modular secara iteratif (React + Node.js + MySQL).
   * *Testing:* Pengujian unit, integrasi, dan UAT ISO/IEC 25010 secara berkelanjutan.
 * **Tech Stack & Tools:**
-  * **Front-end / Client:** React 19, Vite, Tailwind CSS v4, Lucide React (Desain mobile-first responsif).
-  * **Mobile Wrapper:** Android Capacitor / WebView Architecture.
+  * **Front-end / Client Web:** React 19, Vite, Tailwind CSS v4, Lucide React (Desain responsif Web Desktop, Tablet, & Smartphone).
+  * **Mobile App Engine:** Android Capacitor / WebView Architecture (Menghasilkan APK Android siap install di smartphone).
   * **Back-end Server:** Node.js, Express.js.
   * **Database Relasional:** MySQL 8.
   * **Machine Learning Environment:** Python, Scikit-Learn (Random Forest Classifier & Regressor).
@@ -80,7 +81,7 @@
 
 | Aspek / Komponen Sistem | Target Total | Realisasi UTS | Keterangan Status |
 | :--- | :---: | :---: | :--- |
-| **Antarmuka Pengguna (UI/UX Android)** | 100% | **100% (Selesai)** | Dark luxury, responsif smartphone, WCAG AA |
+| **Antarmuka Pengguna (UI/UX Web & Android)** | 100% | **100% (Selesai)** | Dark luxury, responsif PC/Tablet/Smartphone, WCAG AA |
 | **Arsitektur 10 Modul Fungsional** | 100% | **90% (Selesai)** | Seluruh alur modul 1-9 aktif dan interaktif |
 | **Engine Rekomendasi & Nutrisi** | 100% | **85% (Selesai)** | Baseline teruji, visualisasi split & makro aktif |
 | **Database Relasional (schema.sql)** | 100% | **50% (Selesai)** | DDL MySQL 8 relasional 6 tabel telah siap |
