@@ -24,7 +24,7 @@
   * [Nama Mahasiswa 1] - [NPM] *(Project Lead / ML & Backend)*
   * [Nama Mahasiswa 2] - [NPM] *(Frontend & Android UI/UX)*
   * [Nama Mahasiswa 3] - [NPM] *(Database & System Integration)*
-  * [Nama Mahasiswa 4] - [NPM] *(QA Tester & Data Processing)*
+  * [Nama Mahasiswa 4] - [NPM] *(Data Analyst & QA)*
 * **Dosen Pengampu:** Pak Hendro
 
 ---
@@ -39,7 +39,7 @@
      * Stagnansi hasil latihan (*plateau*).
      * Risiko kehilangan massa otot (*muscle loss*) akibat ketidakseimbangan asupan protein dan energi.
   3. **Kebutuhan Sistem Pendamping Otomatis Multiplatform:**  
-     Tidak semua anggota gym mampu menyewa jasa *Personal Trainer* (PT) dan ahli gizi pribadi. Diperlukan sistem pendamping cerdas berbasis *Machine Learning* yang fleksibel, dapat diakses kapan saja dan di mana saja baik melalui **Web Browser** maupun di-install langsung sebagai **Aplikasi Android**.
+     Tidak semua anggota gym mampu menyewa jasa *Personal Trainer* (PT) dan ahli gizi pribadi. Diperlukan sistem pendamping cerdas berbasis *Machine Learning* yang fleksibel, dapat diakses kapan saja dan di mana saja baik melalui **Web Browser** di laptop/PC maupun di-install langsung sebagai **Aplikasi Android** di smartphone.
 
 ---
 
@@ -62,31 +62,31 @@
 
 ### 🖥️ SLIDE 5: METODOLOGI & ALAT PENGEMBANGAN (TOOLS)
 * **Metodologi Pengembangan:** **Agile / Extreme Programming (XP)**
-  * *Planning:* Eksplorasi user stories member & admin gym.
+  * *Planning:* Eksplorasi kebutuhan member pemula dan admin kasir gym.
   * *Designing:* Perancangan antarmuka mobile-first (Tailwind CSS Dark Obsidian).
-  * *Coding:* Pembangunan modular secara iteratif (React + Node.js + MySQL).
-  * *Testing:* Pengujian unit, integrasi, dan UAT ISO/IEC 25010 secara berkelanjutan.
+  * *Coding:* Pembangunan arsitektur modular (React + Vite, Node.js, MySQL).
+  * *Testing:* Pengujian fungsi bertahap per modul di lingkungan localhost.
 * **Tech Stack & Tools:**
   * **Front-end / Client Web:** React 19, Vite, Tailwind CSS v4, Lucide React (Desain responsif Web Desktop, Tablet, & Smartphone).
-  * **Mobile App Engine:** Android Capacitor / WebView Architecture (Menghasilkan APK Android siap install di smartphone).
+  * **Mobile App Engine:** Android Capacitor / WebView Architecture (Menghasilkan APK Android siap install).
   * **Back-end Server:** Node.js, Express.js.
   * **Database Relasional:** MySQL 8.
-  * **Machine Learning Environment:** Python, Scikit-Learn (Random Forest Classifier & Regressor).
+  * **Machine Learning Environment:** Python, Scikit-Learn (Random Forest Classifier).
 
 ---
 
 ### 🖥️ SLIDE 6: PROGRESS KELAYAKAN PROYEK UTS (>50% TERCAPAI)
 * **Ketentuan Tugas UTS:** Menyelesaikan minimal **50%** dari keseluruhan sistem.
-* **Realisasi Kelompok Kami Saat Ini:** **~65% Total Sistem** *(100% Siap Demo untuk Sisi Antarmuka & Logika Interaktif Client)*.
+* **Realisasi Kelompok Kami Saat Ini:** **~65% Total Sistem** *(Melampaui syarat minimal 50% UTS)*.
+* **Kesiapan Demo Localhost:** **100% Siap Demo** untuk sisi antarmuka, interaktivitas, dan alur operasional.
 
 | Aspek / Komponen Sistem | Target Total | Realisasi UTS | Keterangan Status |
 | :--- | :---: | :---: | :--- |
 | **Antarmuka Pengguna (UI/UX Web & Android)** | 100% | **100% (Selesai)** | Dark luxury, responsif PC/Tablet/Smartphone, WCAG AA |
-| **Arsitektur 10 Modul Fungsional** | 100% | **90% (Selesai)** | Seluruh alur modul 1-9 aktif dan interaktif |
-| **Engine Rekomendasi & Nutrisi** | 100% | **85% (Selesai)** | Baseline teruji, visualisasi split & makro aktif |
-| **Database Relasional (schema.sql)** | 100% | **50% (Selesai)** | DDL MySQL 8 relasional 6 tabel telah siap |
-| **Pipeline Model Random Forest** | 100% | **30% (Fase Lanjut)** | Pipeline fitur disiapkan untuk dataset training |
-| **PENGUJIAN KELAYAKAN SISTEM (UAT)** | 100% | **100% (Selesai)** | UAT ISO/IEC 25010 menghasilkan skor **95.2%** |
+| **Arsitektur 10 Modul Fungsional** | 100% | **90% (Selesai)** | Seluruh alur modul aktif dan interaktif di frontend |
+| **Engine Rekomendasi & Nutrisi** | 100% | **85% (Selesai)** | Baseline kalkulator ilmiah aktif, katalog latihan siap |
+| **Database Relasional (schema.sql)** | 100% | **50% (Selesai)** | DDL MySQL 8 relasional (6 tabel) telah siap di server |
+| **Pipeline Model Random Forest** | 100% | **30% (Fase Lanjut)** | Fitur input biometrik telah dipetakan siap training |
 
 ---
 
@@ -111,7 +111,7 @@ Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstr
    * *Fitur:* Generator QR Code dinamis dengan masa aktif 60 detik, simulasi scan kasir dengan audio beep 880Hz, proteksi scan ganda, dan log kunjungan kronologis.
 6. **Modul 6: Modul Rekomendasi Program Latihan (Workout Split)**  
    * *Tujuan:* Memberikan rekomendasi program latihan berbasis algoritma Machine Learning (Random Forest).  
-   * *Fitur:* Klasifikasi profil member ke dalam kategori split terbaik (Full Body 3 hari, Upper/Lower 4 hari, Push/Pull/Legs 5-6 hari), transparansi status *BASELINE/DEMO*, dan penyimpanan rekomendasi.
+   * *Fitur:* Klasifikasi profil member ke dalam kategori split terbaik (Full Body 3 hari, Upper/Lower 4 hari, Push/Pull/Legs 5-6 hari), transparansi status *BASELINE/DEMO*, dan penyimpanan riwayat rekomendasi.
 7. **Modul 7: Modul Perhitungan Target Makronutrisi**  
    * *Tujuan:* Menghitung estimasi energi dan target gramatur gizi harian.  
    * *Fitur:* Kalkulasi TDEE & BMR Mifflin-St Jeor, distribusi gramatur protein, karbohidrat, dan lemak sesuai *body goals*.
@@ -127,55 +127,32 @@ Sistem dirancang secara modular dengan membagi fungsi ke dalam **10 Modul Terstr
 
 ---
 
-### 🖥️ SLIDE 8: DEMONSTRASI FITUR YANG TELAH SELESAI DIKERJAKAN
-* **Demo Sisi Member:**
-  * Alur registrasi/login member (Budi Santoso).
-  * Dashboard cerdas: pantauan streak latihan, siaran langsung pengelola gym, dan meteran kapasitas gym realtime.
-  * Presensi QR Code Dinamis: QR berubah tiap 60 detik untuk mencegah kecurangan *screenshot*, pemindai kasir otomatis bersuara beep.
-  * Kartu Member Digital 3D flip dengan barcode ID.
-  * Rekomendasi Workout Split dan kartu kalkulasi makronutrisi (kkal, gram protein, karbo, lemak).
-  * Tombol Logout yang jelas di header bar, sidebar, dan halaman profil.
-* **Demo Sisi Admin / Kasir:**
-  * Switch instan ke **Mode Admin**.
-  * Pengendali Dashboard Utama: Ubah jam buka, okupansi orang (38/75), dan siaran pengumuman.
-  * Pembuktian Sinkronisasi Realtime: Pengumuman yang diubah admin **langsung muncul di layar member**.
-  * Manajemen Data Anggota: Pencarian member, penambahan member baru, dan verifikasi presensi manual kasir.
+### 🖥️ SLIDE 8: RINCIAN MODUL YANG TELAH SELESAI DIKERJAKAN
+* **Yang Sudah Selesai Dikerjakan & Siap Didemonstrasikan:**
+  1. **Alur Member Lengkap:** Login cepat, Dashboard dengan pantauan streak, kartu keanggotaan digital, presensi scan QR dinamis bersuara bip kasir, rekomendasi workout split, dan kalkulasi makronutrisi.
+  2. **Alur Admin Terpusat:** Panel kontrol operasional (buka/tutup gym, meteran kepadatan pengunjung, pelatih bertugas), siaran pengumuman langsung yang **tersinkronisasi realtime ke dashboard member**, tabel kelola member (CRUD), dan meja presensi kasir.
+  3. **Navigasi Akun & Aksesibilitas:** Tombol Logout yang jelas di header atas, sidebar, dashboard admin, dan halaman profil.
+  4. **Fondasi Database Relasional:** Skema tabel MySQL 8 (`users`, `memberships`, `profiles`, `checkins`, `gym_settings`) telah dirancang di file `server/schema.sql`.
 
 ---
 
-### 🖥️ SLIDE 9: PENGUJIAN SISTEM DENGAN METODE UAT (STANDAR ISO/IEC 25010)
-
-Sesuai ketentuan **Poin 4 Tugas UTS**, pengujian kelayakan sistem dilakukan menggunakan **User Acceptance Testing (UAT)** yang mengadopsi 3 karakteristik standar kualitas perangkat lunak internasional **ISO/IEC 25010**:
-
-1. **Indikator 1: Functional Suitability (Kesesuaian Fungsional)**
-   * Memastikan seluruh fitur (login, navigasi, input biometrik, kalkulasi split, presensi QR, sinkronisasi admin) berfungsi 100% tanpa galat logika.
-   * *Hasil:* **96.5% (Sangat Layak)**.
-2. **Indikator 2: Usability (Kemudahan & Estetika Pengoperasian)**
-   * Memastikan kejelasan teks antarmuka dalam Bahasa Indonesia, kontras warna dark obsidian berstandar aksesibilitas WCAG AA, dan kemudahan bagi pengguna pemula.
-   * *Hasil:* **94.2% (Sangat Layak)**.
-3. **Indikator 3: Performance Efficiency & Reliability (Keandalan & Performa)**
-   * Memastikan responsivitas klik, waktu muat halaman (< 350 ms), dan keandalan penyimpanan data.
-   * *Hasil:* **95.0% (Sangat Layak)**.
-
-#### 📋 Tabel Rekapitulasi UAT:
-| No | Karakteristik Mutu ISO/IEC 25010 | Jumlah Butir Uji | Skor Persentase | Kategori Kelayakan |
-| :-: | :--- | :-: | :-: | :---: |
-| 1 | Functional Suitability | 6 Uji | 96.5% | Sangat Layak |
-| 2 | Usability & Operability | 6 Uji | 94.2% | Sangat Layak |
-| 3 | Performance Efficiency & Reliability | 4 Uji | 95.0% | Sangat Layak |
-| **RATA-RATA TOTAL (UAT)** | | **16 Butir** | **95.2%** | **SANGAT LAYAK (ACCEPTED)** |
+### 🖥️ SLIDE 9: TANTANGAN TEKNIS & SOLUSI (AGILE ITERATION)
+* **Tantangan 1: Kebutuhan Sinkronisasi Dua Arah (Member vs Admin)**
+  * *Masalah:* Bagaimana agar perubahan jadwal/pengumuman dari admin langsung dirasakan oleh member tanpa perlu refresh manual yang rumit.
+  * *Solusi:* Menerapkan *centralized state service* pada client yang memetakan pengaturan gym langsung ke antarmuka member secara realtime.
+* **Tantangan 2: Keamanan Presensi QR Kasir**
+  * *Masalah:* Member rentan melakukan manipulasi presensi dengan mengambil *screenshot* QR code untuk dititipkan ke teman.
+  * *Solusi:* Membangun QR Code dinamis dengan masa kedaluwarsa 60 detik (*auto-refresh countdown timer*).
 
 ---
 
-### 🖥️ SLIDE 10: KESIMPULAN & TAHAPAN LANJUTAN (PASKA UTS MENUJU UAS)
-* **Kesimpulan:**
-  1. Perkembangan proyek pada tahap UTS telah mencapai **~65%**, melampaui ambang batas minimal 50%.
-  2. Seluruh modul sisi Member dan Admin telah terintegrasi secara interaktif di lingkungan Android/Web localhost.
-  3. Pengujian UAT standar ISO 25010 membuktikan sistem telah memenuhi kebutuhan fungsional dan memperoleh skor kepuasan **95.2%**.
-* **Rencana Kerja Paska-UTS (Menuju UAS):**
-  * **Integrasi MySQL 8 & Express.js (Fase 6B):** Menghubungkan client dengan REST API server MySQL berdasarkan skema `server/schema.sql`.
-  * **Pelatihan Model Random Forest (Fase 6C):** Finalisasi dataset kebugaran dan validasi metrik klasifikasi (Akurasi, Presisi, Recall).
-  * **Build APK Android (Fase 6D):** Ekspor final ke format `.apk` Android menggunakan Capacitor.
+### 🖥️ SLIDE 10: RENCANA TAHAP LANJUT (ROADMAP PASKA-UTS MENUJU UAS)
+* **Fase 6B: Integrasi Database Relasional MySQL 8 & Express.js**  
+  Menyambungkan antarmuka Web/Android dengan REST API backend Node.js dan database MySQL 8 berdasarkan skema relasional `schema.sql` yang telah dirancang.
+* **Fase 6C: Pengumpulan Dataset & Pelatihan Model Random Forest**  
+  Mengumpulkan data asesmen kebugaran gym, melatih model Random Forest Classifier dengan Scikit-Learn, serta mengukur metrik Akurasi, Presisi, Recall, dan F1-Score.
+* **Fase 6D: Build APK Android & Pengujian Akhir**  
+  Mengkompilasi aplikasi ke format file APK Android menggunakan Capacitor untuk pengujian instalasi langsung pada perangkat smartphone.
 
 ---
 
@@ -196,14 +173,12 @@ Saat presentasi di kelas / video:
 
 > *"Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat pagi/siang kepada Bapak Hendro selaku dosen pengampu kami, dan rekan-rekan semuanya.*  
 >  
-> *Kami dari kelompok Proyek Semester 5, pada kesempatan Ujian Tengah Semester ini mempresentasikan proyek kami yang berjudul: **'Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Aplikasi Android (Studi Kasus: Trisis Gym)'**.*  
+> *Kami dari kelompok Proyek Semester 5, pada kesempatan Ujian Tengah Semester ini mempresentasikan perkembangan proyek kami yang berjudul: **'Penerapan Algoritma Random Forest untuk Rekomendasi Program Latihan (Workout Split) dan Perhitungan Target Makronutrisi Berdasarkan Profil Kebugaran Berbasis Web dan Aplikasi Android (Studi Kasus: Trisis Gym)'**.*  
 >  
 > *Latar belakang proyek ini berangkat dari permasalahan praktisi kebugaran pemula di Trisis Gym yang sering mengalami kebingungan dalam menyelaraskan jadwal latihan fisik dengan kebutuhan nutrisi harian mereka, yang jika salah dapat memicu overtraining dan kehilangan massa otot.*  
 >  
-> *Hingga tahapan UTS ini, proyek kami telah menyelesaikan **lebih dari 65% sistem**, di mana seluruh antarmuka Android dan 10 modul fungsional telah siap didemonstrasikan secara langsung di localhost menggunakan stack React, Node.js, MySQL, dan Tailwind CSS.*  
+> *Hingga tahapan UTS ini, proyek kami telah menyelesaikan **lebih dari 65% total sistem**, di mana seluruh antarmuka multiplatform (Web & Android) dan alur dari 10 modul utama telah siap didemonstrasikan secara langsung di localhost menggunakan stack React, Node.js, MySQL, dan Tailwind CSS.*  
 >  
 > *(Lanjutkan dengan rekaman layar Live Demo sesuai skenario di atas)*  
 >  
-> *Berdasarkan pengujian kelayakan User Acceptance Testing (UAT) dengan 3 indikator standar ISO/IEC 25010, sistem kami memperoleh nilai rata-rata kelayakan sebesar 95.2% dengan kategori Sangat Layak.*  
->  
-> *Setelah UTS ini, kami akan melanjutkan ke fase integrasi database relasional MySQL dan training model Random Forest. Terima kasih banyak kepada Pak Hendro atas bimbingannya. Wassalamu'alaikum Warahmatullahi Wabarakatuh."*
+> *Setelah tahapan UTS ini, kami akan melanjutkan pengerjaan ke fase integrasi database relasional MySQL 8 dan pelatihan model Random Forest. Sekian presentasi perkembangan proyek UTS dari kelompok kami. Terima kasih banyak kepada Pak Hendro atas bimbingannya. Wassalamu'alaikum Warahmatullahi Wabarakatuh."*
