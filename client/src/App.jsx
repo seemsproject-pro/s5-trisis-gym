@@ -11,18 +11,18 @@ import RecommendationsView from './features/recommendations/RecommendationsView'
 import ActivityView from './features/activity/ActivityView';
 import GymLandingView from './features/landing/GymLandingView';
 import AdminDashboardView from './features/admin/AdminDashboardView';
-import { mockDataService } from './services/mockData';
+import { apiService } from './services/apiService';
 
 export default function App() {
-  const [auth, setAuth] = useState(() => mockDataService.getAuthStatus());
-  const [profile, setProfile] = useState(() => mockDataService.getProfile());
-  const [activities, setActivities] = useState(() => mockDataService.getActivities());
-  const [stats, setStats] = useState(() => mockDataService.getStats());
+  const [auth, setAuth] = useState(() => apiService.getAuthStatus());
+  const [profile, setProfile] = useState(() => apiService.getProfile());
+  const [activities, setActivities] = useState(() => apiService.getActivities());
+  const [stats, setStats] = useState(() => apiService.getStats());
 
   // 'landing' (Profil & Tawaran Gym) | 'member' (Portal Pendamping Member)
   const [viewMode, setViewMode] = useState('landing');
   // 'member' | 'admin'
-  const [currentRole, setCurrentRole] = useState(() => mockDataService.getActiveRole() || 'member');
+  const [currentRole, setCurrentRole] = useState(() => apiService.getActiveRole() || 'member');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
@@ -34,27 +34,33 @@ export default function App() {
   };
 
   // Sinkronisasi data saat aksi terjadi
-  const refreshState = () => {
-    setProfile(mockDataService.getProfile());
-    setActivities(mockDataService.getActivities());
-    setStats(mockDataService.getStats());
+  const refreshState = async () => {
+    try {
+      const p = await apiService.getProfile();
+      setProfile(p);
+    } catch {
+      // fallback handled in service
+    }
+    setActivities(apiService.getActivities());
+    setStats(apiService.getStats());
   };
 
   const handleToggleRole = () => {
     const nextRole = currentRole === 'admin' ? 'member' : 'admin';
-    mockDataService.setActiveRole(nextRole);
+    apiService.setActiveRole(nextRole);
     setCurrentRole(nextRole);
     refreshState();
     showToast(nextRole === 'admin' ? 'Beralih ke Panel Kontrol Admin Gym.' : 'Beralih ke Dashboard Member.');
   };
 
-  const handleLogin = (user) => {
-    mockDataService.login(user.email, 'demo1234');
+  const handleLogin = async (user) => {
+    const password = user.role === 'admin' ? 'admin1234' : 'password123';
+    await apiService.login(user.email, password);
     const role = user.role || (user.email?.includes('admin') ? 'admin' : 'member');
-    mockDataService.setActiveRole(role);
+    apiService.setActiveRole(role);
     setCurrentRole(role);
     setAuth({ isAuthenticated: true, user });
-    refreshState();
+    await refreshState();
     setViewMode('member');
     showToast(role === 'admin' ? 'Selamat datang di Panel Admin Trisis Gym!' : 'Selamat datang di Portal Member Trisis Gym!');
   };
@@ -66,21 +72,22 @@ export default function App() {
       email: 'budi.santoso@trisisgym.com',
       memberId: 'TRISIS-2026-089',
       planName: 'Annual Regular Pass',
-      validUntil: '31 Des 2026'
+      validUntil: '31 Des 2026',
+      role: 'member'
     };
     handleLogin(demoUser);
   };
 
   const handleLogout = () => {
-    mockDataService.logout();
+    apiService.logout();
     setAuth({ isAuthenticated: false, user: null });
     showToast('Berhasil keluar dari akun.');
   };
 
   const handleResetDemo = () => {
     if (window.confirm('Reset semua data aplikasi dan riwayat kembali ke kondisi awal?')) {
-      mockDataService.resetToDemoDefaults();
-      setAuth(mockDataService.getAuthStatus());
+      apiService.resetToDemoDefaults();
+      setAuth(apiService.getAuthStatus());
       refreshState();
       setActiveTab('dashboard');
       showToast('Data aplikasi berhasil direset ke setelan awal.');
@@ -88,22 +95,22 @@ export default function App() {
   };
 
   const handleUpdateProfile = async (newProfileData) => {
-    const res = await mockDataService.updateProfile(newProfileData);
-    setProfile(res.data);
+    const res = await apiService.updateProfile(newProfileData);
+    setProfile(res.data || newProfileData);
     refreshState();
     showToast('Profil kebugaran berhasil diperbarui!');
     return res;
   };
 
   const handleCheckInSuccess = async (notes) => {
-    const res = await mockDataService.performCheckIn(notes);
+    const res = await apiService.performCheckIn(notes);
     refreshState();
     showToast('Presensi check-in gym berhasil dicatat!');
     return res;
   };
 
   const handleResetTodayCheckIn = async () => {
-    await mockDataService.resetTodayCheckIn();
+    await apiService.resetTodayCheckIn();
     refreshState();
     showToast('Presensi hari ini telah direset.');
   };

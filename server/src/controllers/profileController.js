@@ -1,15 +1,22 @@
-import { pool } from '../config/db.js';
+import { pool, isDbConnected } from '../config/db.js';
+import { localStore } from '../config/localStore.js';
 
 export async function getProfile(req, res) {
   try {
     const userId = req.user.id;
-    const [rows] = await pool.query(
-      'SELECT age, gender, height_cm, weight_kg, target_weight_kg, fitness_goal, experience_level, days_per_week, medical_notes, updated_at FROM profiles WHERE user_id = ?',
-      [userId]
-    );
+    let p = null;
 
-    if (rows.length === 0) {
-      // Default profile jika belum ada
+    if (isDbConnected) {
+      const [rows] = await pool.query(
+        'SELECT age, gender, height_cm, weight_kg, target_weight_kg, fitness_goal, experience_level, days_per_week, medical_notes, updated_at FROM profiles WHERE user_id = ?',
+        [userId]
+      );
+      if (rows.length > 0) p = rows[0];
+    } else {
+      p = localStore.getProfileByUserId(userId);
+    }
+
+    if (!p) {
       return res.json({
         success: true,
         data: {
@@ -27,7 +34,6 @@ export async function getProfile(req, res) {
       });
     }
 
-    const p = rows[0];
     return res.json({
       success: true,
       data: {
@@ -40,7 +46,7 @@ export async function getProfile(req, res) {
         experienceLevel: p.experience_level,
         daysPerWeek: p.days_per_week,
         medicalNotes: p.medical_notes || '',
-        lastUpdated: new Date(p.updated_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+        lastUpdated: p.updated_at ? new Date(p.updated_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Hari ini'
       }
     });
   } catch (error) {
@@ -54,33 +60,47 @@ export async function updateProfile(req, res) {
     const userId = req.user.id;
     const { age, gender, height, weight, targetWeight, fitnessGoal, experienceLevel, daysPerWeek, medicalNotes } = req.body;
 
-    await pool.query(
-      `INSERT INTO profiles (user_id, age, gender, height_cm, weight_kg, target_weight_kg, fitness_goal, experience_level, days_per_week, medical_notes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-       ON DUPLICATE KEY UPDATE
-         age = VALUES(age),
-         gender = VALUES(gender),
-         height_cm = VALUES(height_cm),
-         weight_kg = VALUES(weight_kg),
-         target_weight_kg = VALUES(target_weight_kg),
-         fitness_goal = VALUES(fitness_goal),
-         experience_level = VALUES(experience_level),
-         days_per_week = VALUES(days_per_week),
-         medical_notes = VALUES(medical_notes),
-         updated_at = CURRENT_TIMESTAMP`,
-      [
-        userId,
-        age || 23,
-        gender || 'male',
-        height || 172,
-        weight || 68,
-        targetWeight || 72,
-        fitnessGoal || 'muscle_building',
-        experienceLevel || 'intermediate',
-        daysPerWeek || 4,
-        medicalNotes || null
-      ]
-    );
+    if (isDbConnected) {
+      await pool.query(
+        `INSERT INTO profiles (user_id, age, gender, height_cm, weight_kg, target_weight_kg, fitness_goal, experience_level, days_per_week, medical_notes)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE
+           age = VALUES(age),
+           gender = VALUES(gender),
+           height_cm = VALUES(height_cm),
+           weight_kg = VALUES(weight_kg),
+           target_weight_kg = VALUES(target_weight_kg),
+           fitness_goal = VALUES(fitness_goal),
+           experience_level = VALUES(experience_level),
+           days_per_week = VALUES(days_per_week),
+           medical_notes = VALUES(medical_notes),
+           updated_at = CURRENT_TIMESTAMP`,
+        [
+          userId,
+          age || 23,
+          gender || 'male',
+          height || 172,
+          weight || 68,
+          targetWeight || 72,
+          fitnessGoal || 'muscle_building',
+          experienceLevel || 'intermediate',
+          daysPerWeek || 4,
+          medicalNotes || null
+        ]
+      );
+    } else {
+      localStore.setProfile(userId, {
+        age: age || 23,
+        gender: gender || 'male',
+        height_cm: height || 172,
+        weight_kg: weight || 68,
+        target_weight_kg: targetWeight || 72,
+        fitness_goal: fitnessGoal || 'muscle_building',
+        experience_level: experienceLevel || 'intermediate',
+        days_per_week: daysPerWeek || 4,
+        medical_notes: medicalNotes || null
+      });
+    }
 
     return res.json({
       success: true,
