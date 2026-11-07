@@ -1,0 +1,20 @@
+{
+  "name": "trisis-gym-server",
+  "version": "1.0.0",
+  "description": "Backend API Server for Trisis Gym Member & Admin Application",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:init": "node src/scripts/initDb.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.18.2"
+  }
+}

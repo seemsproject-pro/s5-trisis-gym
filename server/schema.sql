@@ -129,27 +129,27 @@ CREATE TABLE IF NOT EXISTS `recommendation_logs` (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- SEED DATA AWAL (DEMO DATA AKADEMIK)
+-- SEED DATA AWAL
 -- =============================================================================
 
 -- Seed Admin
 INSERT INTO `users` (`id`, `email`, `password_hash`, `full_name`, `phone`, `role`, `member_id`) 
-VALUES ('usr_admin_001', 'admin@trisisgym.demo', '$2a$10$wTz6yE5eE...dummyhash', 'Admin Trisis Gym', '0811-2233-4455', 'admin', 'TRISIS-STAFF-001')
+VALUES ('usr_admin_001', 'admin@trisisgym.com', '$2a$10$wTz6yE5eE...dummyhash', 'Admin Trisis Gym', '0811-2233-4455', 'admin', 'TRISIS-STAFF-001')
 ON DUPLICATE KEY UPDATE `email`=`email`;
 
 -- Seed Member Budi Santoso
 INSERT INTO `users` (`id`, `email`, `password_hash`, `full_name`, `phone`, `role`, `member_id`) 
-VALUES ('usr_demo_089', 'budi.member@trisisgym.demo', '$2a$10$wTz6yE5eE...dummyhash', 'Budi Santoso', '0812-3456-7890', 'member', 'TRISIS-DEMO-2026-089')
+VALUES ('usr_m_089', 'budi.santoso@trisisgym.com', '$2a$10$wTz6yE5eE...dummyhash', 'Budi Santoso', '0812-3456-7890', 'member', 'TRISIS-2026-089')
 ON DUPLICATE KEY UPDATE `email`=`email`;
 
 -- Seed Membership Budi
 INSERT INTO `memberships` (`id`, `user_id`, `plan_id`, `plan_name`, `status`, `start_date`, `end_date`, `price_paid`) 
-VALUES ('mem_001', 'usr_demo_089', 'annual', 'Annual Regular Pass', 'active', '2026-01-10', '2027-01-10', 1950000.00)
+VALUES ('mem_001', 'usr_m_089', 'annual', 'Annual Regular Pass', 'active', '2026-01-10', '2027-01-10', 1950000.00)
 ON DUPLICATE KEY UPDATE `status`=`status`;
 
 -- Seed Profil Budi
 INSERT INTO `profiles` (`id`, `user_id`, `age`, `gender`, `height_cm`, `weight_kg`, `target_weight_kg`, `fitness_goal`, `experience_level`, `days_per_week`) 
-VALUES ('prof_001', 'usr_demo_089', 23, 'male', 172.00, 68.00, 72.00, 'muscle_building', 'intermediate', 4)
+VALUES ('prof_001', 'usr_m_089', 23, 'male', 172.00, 68.00, 72.00, 'muscle_building', 'intermediate', 4)
 ON DUPLICATE KEY UPDATE `age`=`age`;
 
 -- Seed Pengaturan Gym
