@@ -61,10 +61,10 @@ export default function App() {
 
   const handleQuickLoginFromLanding = () => {
     const demoUser = {
-      id: 'usr_demo_089',
+      id: 'usr_m_089',
       name: 'Budi Santoso',
-      email: 'budi.member@trisisgym.demo',
-      memberId: 'TRISIS-DEMO-2026-089',
+      email: 'budi.santoso@trisisgym.com',
+      memberId: 'TRISIS-2026-089',
       planName: 'Annual Regular Pass',
       validUntil: '31 Des 2026'
     };
@@ -74,16 +74,16 @@ export default function App() {
   const handleLogout = () => {
     mockDataService.logout();
     setAuth({ isAuthenticated: false, user: null });
-    showToast('Berhasil keluar dari akun demo.');
+    showToast('Berhasil keluar dari akun.');
   };
 
   const handleResetDemo = () => {
-    if (window.confirm('Reset semua data demo dan riwayat kembali ke kondisi awal?')) {
+    if (window.confirm('Reset semua data aplikasi dan riwayat kembali ke kondisi awal?')) {
       mockDataService.resetToDemoDefaults();
       setAuth(mockDataService.getAuthStatus());
       refreshState();
       setActiveTab('dashboard');
-      showToast('Data demo berhasil direset ke setelan awal.');
+      showToast('Data aplikasi berhasil direset ke setelan awal.');
     }
   };
 
@@ -105,14 +105,14 @@ export default function App() {
   const handleResetTodayCheckIn = async () => {
     await mockDataService.resetTodayCheckIn();
     refreshState();
-    showToast('Presensi hari ini telah direset untuk simulasi scan ulang.');
+    showToast('Presensi hari ini telah direset.');
   };
 
   const handleQuickAdminLoginFromLanding = () => {
     const adminUser = {
       id: 'usr_admin_001',
       name: 'Admin Trisis Gym',
-      email: 'admin@trisisgym.demo',
+      email: 'admin@trisisgym.com',
       memberId: 'TRISIS-STAFF-001',
       planName: 'Staff & Receptionist',
       role: 'admin'

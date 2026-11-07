@@ -57,7 +57,7 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
             </div>
             <h1 className="text-xl font-extrabold text-white tracking-tight">Riwayat Aktivitas</h1>
           </div>
-          <StatusBadge status="DEMO" size="sm" />
+          <StatusBadge status="AKTIF" size="sm" />
         </div>
         <p className="text-xs text-slate-400">
           Catatan kronologis presensi kunjungan gym dan riwayat rekomendasi kebugaran Anda.

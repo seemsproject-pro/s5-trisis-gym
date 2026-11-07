@@ -24,7 +24,7 @@ export default function Header({
               <span className="font-extrabold text-base tracking-tight text-white">
                 TRISIS<span className="text-amber-400 font-black">GYM</span>
               </span>
-              <StatusBadge status={currentRole === 'admin' ? 'ADMIN' : 'DEMO'} size="xs" />
+              <StatusBadge status={currentRole === 'admin' ? 'ADMIN' : 'MEMBER'} size="xs" />
             </div>
             <p className="text-[9px] text-slate-400 font-semibold tracking-wider uppercase leading-none">Est. Bogor, Indonesia</p>
           </div>
@@ -92,8 +92,8 @@ export default function Header({
           <button
             id="header-open-card"
             onClick={onOpenCard}
-            title="Lihat Kartu Member Demo"
-            aria-label="Lihat Kartu Member Demo"
+            title="Lihat Kartu Member Digital"
+            aria-label="Lihat Kartu Member Digital"
             className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border border-amber-400/30 transition-all shadow-2xs focus:outline-none focus:ring-2 focus:ring-amber-400"
           >
             <CreditCard className="w-3.5 h-3.5 text-amber-400" />
@@ -103,8 +103,8 @@ export default function Header({
           <button
             id="header-reset-demo"
             onClick={onResetDemo}
-            title="Reset Data Demo ke Awal"
-            aria-label="Reset Data Demo ke Awal"
+            title="Reset Data ke Default"
+            aria-label="Reset Data ke Default"
             className="p-1.5 rounded-full bg-white/5 hover:bg-amber-500/15 text-slate-400 hover:text-amber-300 border border-white/10 transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />

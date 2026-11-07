@@ -292,7 +292,6 @@ export default function GymLandingView({
                 <span className="font-black text-lg tracking-tight text-white">
                   TRISIS<span className="text-amber-400 font-black">GYM</span>
                 </span>
-                <StatusBadge status="DEMO" size="xs" />
               </div>
               <p className="text-[10px] text-slate-400 font-semibold leading-none">Fitness Club • Est. Bogor, Indonesia</p>
             </div>
@@ -523,14 +522,14 @@ export default function GymLandingView({
                         <span className="font-black text-xs tracking-wider text-amber-300 uppercase">TRISIS MEMBER PASS</span>
                       </div>
                       <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 backdrop-blur-xs">
-                        AKTIF (SIMULASI)
+                        MEMBER AKTIF
                       </span>
                     </div>
 
                     <div className="space-y-0.5">
                       <span className="text-[10px] text-slate-400 block">Nama Anggota:</span>
                       <strong className="text-sm font-extrabold block text-white">Budi Santoso</strong>
-                      <span className="text-[10px] text-purple-300 font-mono">TRISIS-DEMO-2026-089</span>
+                      <span className="text-[10px] text-purple-300 font-mono">TRISIS-2026-089</span>
                     </div>
 
                     <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[10px] text-slate-300">
@@ -606,7 +605,7 @@ export default function GymLandingView({
                 onClick={onQuickDemoLogin}
                 className="w-full py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
               >
-                <span>Buka Demo Interaktif Penuh</span>
+                <span>Buka Aplikasi Member</span>
                 <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
             </div>
@@ -1181,7 +1180,7 @@ export default function GymLandingView({
           </div>
 
           <p className="text-[10px]">
-            Fase 6A: Prototipe Frontend dengan Data Sintetis & Baseline Rekomendasi.
+            Aplikasi Web & Android Member Trisis Gym Centre Bogor • Sistem AI Rekomendasi Kebugaran.
           </p>
         </div>
       </footer>
@@ -1210,9 +1209,9 @@ export default function GymLandingView({
                 <div className="w-12 h-12 mx-auto rounded-full bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
                   <UserCheck className="w-6 h-6" />
                 </div>
-                <h4 className="font-extrabold text-sm text-white">Pendaftaran Berhasil Disimulasikan!</h4>
+                <h4 className="font-extrabold text-sm text-white">Pendaftaran Member Berhasil!</h4>
                 <p className="text-xs text-slate-400">
-                  Mengarahkan Anda langsung ke portal dashboard member demo...
+                  Mengarahkan Anda langsung ke portal dashboard member...
                 </p>
               </div>
             ) : (

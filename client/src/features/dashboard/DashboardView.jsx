@@ -126,7 +126,7 @@ export default function DashboardView({
                 <h1 className="text-lg md:text-xl font-extrabold text-white tracking-tight">
                   Halo, {user?.name?.split(' ')[0] || 'Budi'}!
                 </h1>
-                <StatusBadge status="DEMO" size="xs" />
+                <StatusBadge status="MEMBER" size="xs" />
               </div>
               <p className="text-xs text-slate-400 font-medium mt-0.5">
                 Level 1 • Member Reguler ({user?.memberId || 'TRISIS-089'})
@@ -175,7 +175,7 @@ export default function DashboardView({
                 <p className="text-xs text-slate-400 mt-0.5">Tunjukkan QR ke kasir saat tiba di gym</p>
               </div>
             </div>
-            <StatusBadge status="DEMO" size="xs" />
+            <StatusBadge status="ONLINE" size="xs" />
           </div>
 
           <button
@@ -222,7 +222,7 @@ export default function DashboardView({
             onClick={onOpenCard}
             className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-amber-300 font-extrabold text-xs flex items-center justify-center gap-1.5 border border-amber-400/30 transition-all cursor-pointer"
           >
-            <span>Tampilkan Kartu Digital Demo</span>
+            <span>Tampilkan Kartu Member Digital</span>
             <ChevronRight className="w-4 h-4 text-amber-400" />
           </button>
         </section>

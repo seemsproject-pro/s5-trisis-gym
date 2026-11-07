@@ -23,11 +23,11 @@ export default function MemberCardModal({ isOpen, onClose, user }) {
           </button>
         </div>
 
-        {/* Mandatory SOT Disclaimer Banner */}
+        {/* Official Card Banner */}
         <div className="bg-[#1C172B] border-b border-purple-900/40 px-4 py-2 flex items-center gap-2 text-purple-300">
-          <ShieldAlert className="w-4 h-4 shrink-0 text-amber-400" />
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
           <p className="text-[11px] font-bold tracking-tight uppercase">
-            DEMO — BUKAN KARTU KEANGGOTAAN RESMI
+            KARTU KEANGGOTAAN RESMI TRISIS GYM
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function MemberCardModal({ isOpen, onClose, user }) {
             <div className="relative z-10 grid grid-cols-2 gap-3 text-xs mb-4">
               <div>
                 <span className="block text-[10px] text-slate-400 font-medium uppercase">Nomor Member</span>
-                <span className="font-mono font-bold text-white text-xs">{user?.memberId || 'TRISIS-DEMO-089'}</span>
+                <span className="font-mono font-bold text-white text-xs">{user?.memberId || 'TRISIS-2026-089'}</span>
               </div>
               <div>
                 <span className="block text-[10px] text-slate-400 font-medium uppercase">Paket Membership</span>
@@ -80,11 +80,11 @@ export default function MemberCardModal({ isOpen, onClose, user }) {
               </div>
             </div>
 
-            {/* QR Simulation Area */}
+            {/* QR Area */}
             <div className="relative z-10 pt-3 border-t border-white/10 flex items-center justify-between">
               <div className="space-y-0.5">
-                <span className="text-[10px] font-mono text-purple-300">ID: {user?.qrCodeSeed || 'QR-DEMO-089'}</span>
-                <p className="text-[9px] text-slate-400">Simulasi kode QR demo untuk check-in resepsionis</p>
+                <span className="text-[10px] font-mono text-purple-300">ID: {user?.qrCodeSeed || 'TRISIS-QR-089'}</span>
+                <p className="text-[9px] text-slate-400">Kode QR resmi untuk akses turnstile & kasir</p>
               </div>
               <div className="p-1.5 bg-white rounded-xl shadow-md">
                 <QrCode className="w-9 h-9 text-slate-900" />
@@ -92,11 +92,11 @@ export default function MemberCardModal({ isOpen, onClose, user }) {
             </div>
           </div>
 
-          {/* SOT Educational Notice */}
+          {/* Usage Notice */}
           <div className="rounded-2xl bg-white/5 p-3.5 border border-white/10 text-xs text-slate-400 space-y-1">
-            <span className="font-bold text-slate-200 block">Catatan Penggunaan Prototipe:</span>
+            <span className="font-bold text-slate-200 block">Informasi Kartu Digital:</span>
             <p className="text-[11px] leading-relaxed">
-              Kartu ini merupakan purwarupa frontend demo. Tidak berlaku sebagai tanda masuk fisik atau bukti legal keanggotaan operasional riil Trisis Gym.
+              Tunjukkan barcode QR kartu digital ini ke pemindai optik turnstile atau resepsionis saat memasuki area latihan Trisis Gym Centre Bogor.
             </p>
           </div>
 

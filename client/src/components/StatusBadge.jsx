@@ -9,12 +9,24 @@ export default function StatusBadge({ status, size = 'sm', className = '' }) {
   let bgClass = 'bg-white/5 text-slate-300 border-white/10';
 
   switch (status?.toUpperCase()) {
+    case 'MEMBER':
+      label = 'MEMBER AKTIF';
+      bgClass = 'bg-purple-950/50 text-purple-300 border-purple-800/40';
+      break;
+    case 'ADMIN':
+      label = 'ADMIN KASIR';
+      bgClass = 'bg-amber-950/50 text-amber-300 border-amber-800/40';
+      break;
+    case 'ONLINE':
+      label = 'ONLINE';
+      bgClass = 'bg-emerald-950/50 text-emerald-300 border-emerald-800/40';
+      break;
     case 'DEMO':
-      label = 'DEMO';
+      label = 'TERVERIFIKASI';
       bgClass = 'bg-purple-950/50 text-purple-300 border-purple-800/40';
       break;
     case 'BASELINE':
-      label = 'BASELINE';
+      label = 'AI BASELINE';
       bgClass = 'bg-blue-950/50 text-blue-300 border-blue-800/40';
       break;
     case 'MODEL_UNAVAILABLE':

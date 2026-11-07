@@ -3,8 +3,8 @@ import { KeyRound, Mail, ArrowRight, ShieldCheck, Sparkles, ArrowLeft } from 'lu
 import StatusBadge from '../../components/StatusBadge';
 
 export default function LoginView({ onLoginSuccess, onBackToLanding }) {
-  const [email, setEmail] = useState('budi.member@trisisgym.demo');
-  const [password, setPassword] = useState('demo1234');
+  const [email, setEmail] = useState('budi.santoso@trisisgym.com');
+  const [password, setPassword] = useState('password123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -15,7 +15,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
 
     setTimeout(() => {
       if (!email.trim() || !password.trim()) {
-        setError('Harap masukkan email dan kata sandi demo.');
+        setError('Harap masukkan email dan kata sandi.');
         setLoading(false);
         return;
       }
@@ -24,16 +24,16 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
         onLoginSuccess({
           id: 'usr_admin_001',
           name: 'Admin Trisis Gym',
-          email: 'admin@trisisgym.demo',
+          email: 'admin@trisisgym.com',
           memberId: 'TRISIS-STAFF-001',
           role: 'admin'
         });
       } else {
         onLoginSuccess({
-          id: 'usr_demo_089',
+          id: 'usr_m_089',
           name: 'Budi Santoso',
           email: email,
-          memberId: 'TRISIS-DEMO-2026-089',
+          memberId: 'TRISIS-2026-089',
           role: 'member'
         });
       }
@@ -42,24 +42,24 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
   };
 
   const handleQuickDemoLogin = () => {
-    setEmail('budi.member@trisisgym.demo');
-    setPassword('demo1234');
+    setEmail('budi.santoso@trisisgym.com');
+    setPassword('password123');
     onLoginSuccess({
-      id: 'usr_demo_089',
+      id: 'usr_m_089',
       name: 'Budi Santoso',
-      email: 'budi.member@trisisgym.demo',
-      memberId: 'TRISIS-DEMO-2026-089',
+      email: 'budi.santoso@trisisgym.com',
+      memberId: 'TRISIS-2026-089',
       role: 'member'
     });
   };
 
   const handleQuickAdminLogin = () => {
-    setEmail('admin@trisisgym.demo');
+    setEmail('admin@trisisgym.com');
     setPassword('admin1234');
     onLoginSuccess({
       id: 'usr_admin_001',
       name: 'Admin Trisis Gym',
-      email: 'admin@trisisgym.demo',
+      email: 'admin@trisisgym.com',
       memberId: 'TRISIS-STAFF-001',
       role: 'admin'
     });
@@ -91,7 +91,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
             <p className="text-xs text-slate-400 font-semibold tracking-wide">Est. Bogor, Indonesia • Member Portal</p>
           </div>
           <div className="inline-block pt-0.5">
-            <StatusBadge status="DEMO" size="sm" />
+            <StatusBadge status="AKTIF" size="sm" />
           </div>
         </div>
 
@@ -99,7 +99,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
         <div className="bg-[#131520] border border-white/10 rounded-3xl p-6 md:p-7 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-5">
           <div>
             <h2 className="text-base font-extrabold text-white">Masuk ke Akun</h2>
-            <p className="text-xs text-slate-400 mt-0.5">Akses portal dashboard akun demo member.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Akses portal dashboard resmi Trisis Gym.</p>
           </div>
 
           {error && (
@@ -111,7 +111,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                Alamat Email Demo
+                Alamat Email Member / Staff
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -119,7 +119,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="budi.member@trisisgym.demo"
+                  placeholder="budi.santoso@trisisgym.com"
                   className="w-full pl-10 pr-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors"
                   required
                 />
@@ -128,7 +128,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
 
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                Kata Sandi Demo
+                Kata Sandi
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -149,11 +149,11 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
               disabled={loading}
               className="w-full min-h-[46px] rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-2 border border-white/10 transition-colors cursor-pointer"
             >
-              {loading ? 'Memverifikasi...' : 'Masuk dengan Kredensial'}
+              {loading ? 'Memverifikasi...' : 'Masuk ke Akun'}
             </button>
           </form>
 
-          {/* Quick Demo 1-Click Access */}
+          {/* Quick 1-Click Access */}
           <div className="pt-2 border-t border-white/10 space-y-2">
             <button
               type="button"
@@ -175,15 +175,15 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
               <ArrowRight className="w-4 h-4" />
             </button>
             <p className="text-[11px] text-center text-slate-500 mt-1 font-medium">
-              Pilih peran akun demo yang ingin Anda uji coba.
+              Pilih akses peran untuk masuk langsung ke sistem portal.
             </p>
           </div>
         </div>
 
-        {/* Security & Prototype Notice */}
+        {/* Security Notice */}
         <div className="flex items-center gap-2 justify-center text-xs text-slate-500 font-medium">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Fase 6A: Frontend Demo dengan Data Sintetis</span>
+          <span>Portal Member Resmi • Trisis Gym Centre Bogor</span>
         </div>
       </div>
     </div>

@@ -85,7 +85,7 @@ export default function ProfileView({ user, profile, onUpdateProfile, onLogout }
             </div>
             <h1 className="text-xl font-extrabold text-white tracking-tight">Profil Kebugaran</h1>
           </div>
-          <StatusBadge status="DEMO" size="sm" />
+          <StatusBadge status="AKTIF" size="sm" />
         </div>
         <p className="text-xs text-slate-400">
           Kelola data biometrik dan preferensi latihan Anda untuk menyesuaikan rekomendasi.
@@ -389,11 +389,11 @@ export default function ProfileView({ user, profile, onUpdateProfile, onLogout }
           </div>
           <div className="flex items-center justify-between">
             <span className="text-slate-400">Email Akun</span>
-            <span className="font-mono text-slate-300">{user?.email || 'budi.member@trisisgym.demo'}</span>
+            <span className="font-mono text-slate-300">{user?.email || 'budi.santoso@trisisgym.com'}</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-slate-400">ID Anggota</span>
-            <span className="font-mono font-bold text-amber-400">{user?.memberId || 'TRISIS-DEMO-2026-089'}</span>
+            <span className="font-mono font-bold text-amber-400">{user?.memberId || 'TRISIS-2026-089'}</span>
           </div>
         </div>
 

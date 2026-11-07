@@ -5,28 +5,28 @@
  */
 
 const STORAGE_KEYS = {
-  AUTH: 'trisis_demo_auth',
-  PROFILE: 'trisis_demo_profile',
-  CHECKINS: 'trisis_demo_checkins',
-  ACTIVITIES: 'trisis_demo_activities',
-  MEMBERS: 'trisis_demo_members',
-  GYM_SETTINGS: 'trisis_demo_gym_settings',
-  ACTIVE_ROLE: 'trisis_demo_active_role' // 'member' | 'admin'
+  AUTH: 'trisis_app_auth',
+  PROFILE: 'trisis_app_profile',
+  CHECKINS: 'trisis_app_checkins',
+  ACTIVITIES: 'trisis_app_activities',
+  MEMBERS: 'trisis_app_members',
+  GYM_SETTINGS: 'trisis_app_gym_settings',
+  ACTIVE_ROLE: 'trisis_app_active_role' // 'member' | 'admin'
 };
 
-// Seed Akun & Kartu Member Demo Awal
+// Seed Akun & Kartu Member Awal
 const INITIAL_ACCOUNT = {
-  id: 'usr_demo_089',
+  id: 'usr_m_089',
   name: 'Budi Santoso',
-  email: 'budi.member@trisisgym.demo',
+  email: 'budi.santoso@trisisgym.com',
   phone: '0812-3456-7890',
-  memberId: 'TRISIS-DEMO-2026-089',
+  memberId: 'TRISIS-2026-089',
   planName: 'Annual Regular Pass',
   status: 'Aktif',
   joinedDate: '10 Januari 2026',
   validUntil: '10 Januari 2027',
   emergencyContact: 'Siti Rahma (Istri) - 0813-9876-5432',
-  qrCodeSeed: 'TRISIS-QR-DEMO-089-VERIFIED',
+  qrCodeSeed: 'TRISIS-QR-089-VERIFIED',
   role: 'member'
 };
 
@@ -34,7 +34,7 @@ const INITIAL_ACCOUNT = {
 const INITIAL_ADMIN_ACCOUNT = {
   id: 'usr_admin_001',
   name: 'Admin Trisis Gym',
-  email: 'admin@trisisgym.demo',
+  email: 'admin@trisisgym.com',
   phone: '0811-2233-4455',
   memberId: 'TRISIS-STAFF-001',
   planName: 'Staff & Receptionist',
@@ -45,11 +45,11 @@ const INITIAL_ADMIN_ACCOUNT = {
 // Seed Daftar Member untuk Pengelolaan Admin (Modul 9)
 const INITIAL_MEMBERS = [
   {
-    id: 'usr_demo_089',
+    id: 'usr_m_089',
     name: 'Budi Santoso',
-    email: 'budi.member@trisisgym.demo',
+    email: 'budi.santoso@trisisgym.com',
     phone: '0812-3456-7890',
-    memberId: 'TRISIS-DEMO-2026-089',
+    memberId: 'TRISIS-2026-089',
     planName: 'Annual Regular Pass',
     planId: 'annual',
     status: 'Aktif',
@@ -145,11 +145,11 @@ const INITIAL_PROFILE = {
 
 // Seed Riwayat Check-in Awal
 const INITIAL_CHECKINS = [
-  { id: 'chk_101', memberId: 'TRISIS-DEMO-2026-089', memberName: 'Budi Santoso', date: '11 Okt 2026', time: '17:45 WIB', location: 'Trisis Gym — Kasir & Turnstile Utama', method: 'SCAN_QR_KASIR' },
+  { id: 'chk_101', memberId: 'TRISIS-2026-089', memberName: 'Budi Santoso', date: '11 Okt 2026', time: '17:45 WIB', location: 'Trisis Gym — Kasir & Turnstile Utama', method: 'SCAN_QR_KASIR' },
   { id: 'chk_102', memberId: 'TRISIS-M-2026-012', memberName: 'Siti Nurhaliza', date: '11 Okt 2026', time: '16:20 WIB', location: 'Trisis Gym — Kasir & Turnstile Utama', method: 'SCAN_QR_KASIR' },
-  { id: 'chk_103', memberId: 'TRISIS-DEMO-2026-089', memberName: 'Budi Santoso', date: '09 Okt 2026', time: '18:30 WIB', location: 'Trisis Gym — Free Weight', method: 'SCAN_QR_KASIR' },
+  { id: 'chk_103', memberId: 'TRISIS-2026-089', memberName: 'Budi Santoso', date: '09 Okt 2026', time: '18:30 WIB', location: 'Trisis Gym — Free Weight', method: 'SCAN_QR_KASIR' },
   { id: 'chk_104', memberId: 'TRISIS-R-2026-045', memberName: 'Ahmad Fauzi', date: '08 Okt 2026', time: '19:10 WIB', location: 'Trisis Gym — Kasir & Turnstile Utama', method: 'MANUAL_KASIR' },
-  { id: 'chk_105', memberId: 'TRISIS-DEMO-2026-089', memberName: 'Budi Santoso', date: '07 Okt 2026', time: '07:15 WIB', location: 'Trisis Gym — Area Utama', method: 'SCAN_QR_KASIR' },
+  { id: 'chk_105', memberId: 'TRISIS-2026-089', memberName: 'Budi Santoso', date: '07 Okt 2026', time: '07:15 WIB', location: 'Trisis Gym — Area Utama', method: 'SCAN_QR_KASIR' },
   { id: 'chk_106', memberId: 'TRISIS-M-2026-077', memberName: 'Dinda Permata', date: '06 Okt 2026', time: '17:05 WIB', location: 'Trisis Gym — Kasir & Turnstile Utama', method: 'SCAN_QR_KASIR' },
 ];
 
@@ -161,7 +161,7 @@ const INITIAL_ACTIVITIES = [
     title: 'Presensi Scan QR Kasir Berhasil',
     description: 'Sesi latihan beban di Kasir & Turnstile Utama Trisis Gym.',
     timestamp: 'Kemarin, 17:45 WIB',
-    methodBadge: 'DEMO'
+    methodBadge: 'AKTIF'
   },
   {
     id: 'act_02',
@@ -300,7 +300,7 @@ export const mockDataService = {
       type: 'CHECK_IN',
       title: 'Presensi Scan QR Kasir Berhasil',
       description: `Presensi terverifikasi via QR Code di Kasir & Turnstile Utama pada ${timeStr}.`,
-      methodBadge: 'DEMO'
+      methodBadge: 'AKTIF'
     });
 
     return Promise.resolve({ success: true, checkIn: newCheckIn });
@@ -382,7 +382,7 @@ export const mockDataService = {
       id: newId,
       memberId: newMemberId,
       name: memberData.name || 'Member Baru',
-      email: memberData.email || 'member@trisisgym.demo',
+      email: memberData.email || 'member@trisisgym.com',
       phone: memberData.phone || '0812-0000-0000',
       planName: memberData.planName || 'Paket Bulanan Reguler',
       planId: memberData.planId || 'reguler',

@@ -159,7 +159,7 @@ export default function CheckInModal({
                 </div>
                 <div className="flex justify-between items-center text-slate-400">
                   <span>ID Member:</span>
-                  <span className="font-mono text-purple-300 font-bold">{user?.memberId || 'TRISIS-DEMO-2026-089'}</span>
+                  <span className="font-mono text-purple-300 font-bold">{user?.memberId || 'TRISIS-2026-089'}</span>
                 </div>
                 <div className="flex justify-between items-center text-slate-400">
                   <span>Lokasi Scan:</span>
@@ -322,7 +322,7 @@ export default function CheckInModal({
                     {/* Member Barcode String & Dynamic Countdown */}
                     <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
                       <span className="font-bold text-slate-900 tracking-wider">
-                        {user?.memberId || 'TRISIS-DEMO-2026-089'}
+                        {user?.memberId || 'TRISIS-2026-089'}
                       </span>
                       <span className="flex items-center gap-1 text-[10px] text-[#5D4E75] font-sans font-bold">
                         <RefreshCw className="w-3 h-3 animate-spin" />
@@ -368,7 +368,7 @@ export default function CheckInModal({
                   </div>
 
                   <p className="text-[11px] text-slate-400 text-center">
-                    Simulasi scanner membaca kode QR meja resepsionis otomatis.
+                    Pemindai optik aktif membaca kode QR meja resepsionis gym secara otomatis.
                   </p>
                 </div>
               )}
@@ -419,7 +419,7 @@ export default function CheckInModal({
                   ) : (
                     <>
                       <Scan className="w-4 h-4 text-slate-950" />
-                      <span>{scanMode === 'SHOW_QR' ? 'Simulasikan Kasir Scan QR Ini (Bip!)' : 'Pindai QR Meja Kasir Sekarang'}</span>
+                      <span>{scanMode === 'SHOW_QR' ? 'Verifikasi Presensi Kasir (Bip!)' : 'Pindai QR Meja Kasir Sekarang'}</span>
                     </>
                   )}
                 </button>

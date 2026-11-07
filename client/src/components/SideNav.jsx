@@ -17,7 +17,7 @@ export default function SideNav({ activeTab, onSelectTab, currentRole = 'member'
             <span className="font-black text-base tracking-tight text-white">
               TRISIS<span className="text-amber-400 font-black">GYM</span>
             </span>
-            <StatusBadge status={currentRole === 'admin' ? 'ADMIN' : 'DEMO'} size="xs" />
+            <StatusBadge status={currentRole === 'admin' ? 'ADMIN' : 'MEMBER'} size="xs" />
           </div>
           <p className="text-[9px] text-slate-400 font-semibold tracking-wider uppercase leading-none">Est. Bogor, Indonesia</p>
         </div>
@@ -100,7 +100,7 @@ export default function SideNav({ activeTab, onSelectTab, currentRole = 'member'
       {/* Catatan prototipe (desktop saja) */}
       <div className="hidden lg:flex items-start gap-2.5 m-4 p-3.5 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-slate-400 leading-relaxed">
         <ShieldCheck className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" aria-hidden="true" />
-        <span>{currentRole === 'admin' ? 'Mode Admin: Mengontrol operasional, pengumuman, dan data presensi.' : 'Fase 6A: Frontend Demo dengan data sintetis & baseline transparan.'}</span>
+        <span>{currentRole === 'admin' ? 'Mode Admin: Mengontrol operasional, pengumuman, dan data presensi.' : 'Sistem Portal Member Terverifikasi • Trisis Gym Centre Bogor.'}</span>
       </div>
     </aside>
   );
