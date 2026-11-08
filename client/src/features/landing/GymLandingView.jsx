@@ -270,35 +270,30 @@ export default function GymLandingView({
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0D14] text-slate-100 font-sans selection:bg-[#4E3F66] selection:text-white">
-      {/* Ambient background glow effects */}
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-900/15 blur-[120px] rounded-full" />
-        <div className="absolute top-[40%] right-[-100px] w-[500px] h-[500px] bg-amber-500/10 blur-[140px] rounded-full" />
-      </div>
+    <div className="min-h-screen bg-[#090A0E] text-zinc-100 font-sans selection:bg-amber-400 selection:text-neutral-950">
 
       {/* ============================================================== */}
       {/* 1. TOP NAVBAR */}
       {/* ============================================================== */}
-      <header className="sticky top-0 z-40 bg-[#0B0D14]/90 backdrop-blur-md border-b border-white/10 shadow-[0_2px_15px_rgba(0,0,0,0.5)] px-4 md:px-8 py-3.5 transition-all">
+      <header className="sticky top-0 z-40 bg-[#090A0E]/90 backdrop-blur-md border-b border-white/[0.08] px-4 md:px-8 py-3.5 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-white/10 border border-amber-400/40 flex items-center justify-center shadow-xs overflow-hidden p-0.5 shrink-0 ring-2 ring-amber-400/10">
+            <div className="w-10 h-10 rounded-xl bg-zinc-800/80 border border-white/[0.08] flex items-center justify-center overflow-hidden p-0.5 shrink-0">
               <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-black text-lg tracking-tight text-white">
-                  TRISIS<span className="text-amber-400 font-black">GYM</span>
+                <span className="font-extrabold text-lg tracking-tight text-white">
+                  TRISIS<span className="text-amber-400 font-extrabold">GYM</span>
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-semibold leading-none">Fitness Club • Est. Bogor, Indonesia</p>
+              <p className="text-[10px] text-zinc-400 font-medium leading-none">Fitness Club • Est. Bogor, Indonesia</p>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-slate-300">
+          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-400">
             <a href="#hero" className="hover:text-amber-400 transition-colors">Beranda</a>
             <a href="#kepadatan" className="hover:text-amber-400 transition-colors">Live Crowd</a>
             <a href="#fasilitas" className="hover:text-amber-400 transition-colors">Fasilitas</a>
@@ -311,15 +306,15 @@ export default function GymLandingView({
           <div className="flex items-center gap-2">
             {auth?.isAuthenticated ? (
               <>
-                <div className="hidden lg:flex items-center gap-1.5 text-xs bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                  <User className="w-3.5 h-3.5 text-purple-300" />
+                <div className="hidden lg:flex items-center gap-1.5 text-xs bg-zinc-800/60 border border-white/[0.08] px-3 py-1.5 rounded-xl">
+                  <User className="w-3.5 h-3.5 text-zinc-300" />
                   <span className="font-bold text-white">{auth.user?.name?.split(' ')[0]}</span>
-                  <span className="text-[10px] text-amber-400 font-extrabold uppercase">({auth.user?.role || 'Member'})</span>
+                  <span className="text-[10px] text-amber-400 font-bold uppercase">({auth.user?.role || 'Member'})</span>
                 </div>
 
                 <button
                   onClick={onGoToDashboard}
-                  className="text-xs font-extrabold px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                  className="text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <span>Buka Dashboard</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -329,7 +324,7 @@ export default function GymLandingView({
                   <button
                     onClick={onLogout}
                     title="Keluar dari Akun"
-                    className="text-xs font-extrabold px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="text-xs font-bold px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-rose-400 border border-zinc-700 transition-all cursor-pointer flex items-center gap-1.5"
                   >
                     <LogOut className="w-3.5 h-3.5 text-rose-400" />
                     <span className="hidden sm:inline">Keluar</span>
@@ -340,16 +335,16 @@ export default function GymLandingView({
               <>
                 <button
                   onClick={onOpenLogin}
-                  className="text-xs font-bold px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-all cursor-pointer flex items-center gap-1.5"
+                  className="text-xs font-semibold px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/[0.08] transition-all cursor-pointer flex items-center gap-1.5"
                 >
-                  <User className="w-3.5 h-3.5 text-purple-300" />
+                  <User className="w-3.5 h-3.5 text-zinc-400" />
                   <span>Masuk Member</span>
                 </button>
 
                 {onQuickAdminLogin && (
                   <button
                     onClick={onQuickAdminLogin}
-                    className="text-xs font-bold px-3 py-2 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border border-amber-400/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="text-xs font-semibold px-3 py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-amber-400 border border-zinc-700/60 transition-all cursor-pointer flex items-center gap-1.5"
                   >
                     <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
                     <span className="hidden sm:inline">Masuk Admin</span>
@@ -359,9 +354,9 @@ export default function GymLandingView({
 
                 <button
                   onClick={() => setSelectedPlanModal(plans[2])}
-                  className="hidden md:flex text-xs font-extrabold px-3.5 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98] transition-all cursor-pointer items-center gap-1.5"
+                  className="hidden md:flex text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer items-center gap-1.5"
                 >
-                  <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                  <Zap className="w-3.5 h-3.5 fill-neutral-950 text-neutral-950" />
                   <span>Daftar</span>
                 </button>
               </>
@@ -373,38 +368,38 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 2. DYNAMIC HERO SECTION WITH INTERACTIVE LIVE APP PREVIEW */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20 px-4 md:px-8 border-b border-white/10 bg-gradient-to-b from-[#10131F] via-[#0B0D14] to-[#0B0D14]">
+      <section id="hero" className="relative overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Headline, Value Props & CTAs */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
             {/* Top Interactive Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-xs font-bold text-amber-300 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Est. Bogor, Indonesia</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Bogor</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
               Latihan Lebih Terarah, <br />
-              Bangun Fisik Impian di <span className="bg-gradient-to-r from-purple-300 via-purple-200 to-amber-400 bg-clip-text text-transparent">Trisis Gym</span>.
+              Bangun Fisik Impian di <span className="text-amber-400">Trisis Gym</span>.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm md:text-base text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Gym modern ramah pemula dengan alat beban lengkap, suasana bebas intimidasi, serta portal pintar untuk memantau presensi, workout split, dan nutrisi harian.
+            <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Gym modern ramah pemula dengan alat beban lengkap, suasana fokus & nyaman, serta portal pintar untuk memantau presensi, program latihan, dan nutrisi harian.
             </p>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-[11px] font-semibold text-slate-300">
-              <span className="px-3 py-1 rounded-full bg-[#131520] border border-white/10 shadow-xs flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-[11px] font-medium text-zinc-300">
+              <span className="px-3 py-1 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5 text-amber-400" />
                 Rating 4.9/5 dari 500+ Member
               </span>
-              <span className="px-3 py-1 rounded-full bg-[#131520] border border-white/10 shadow-xs flex items-center gap-1.5">
+              <span className="px-3 py-1 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 Tanpa Biaya Admin Tersembunyi
               </span>
-              <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 shadow-xs flex items-center gap-1.5 text-amber-300">
+              <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center gap-1.5 text-amber-400 font-semibold">
                 <Users className="w-3.5 h-3.5 text-amber-400" />
                 Diskon Khusus Mahasiswa Bogor (IPB, Pakuan, UIKA)
               </span>
@@ -414,15 +409,15 @@ export default function GymLandingView({
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
               <a
                 href="#paket"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-extrabold text-sm shadow-lg shadow-purple-950/40 border border-purple-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer group"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group"
               >
                 <span>Pilih Paket Membership</span>
-                <ArrowRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />
               </a>
 
               <button
                 onClick={onQuickDemoLogin}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 hover:text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-zinc-200 hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-amber-400" />
                 <span>Masuk Portal Member</span>
@@ -431,7 +426,7 @@ export default function GymLandingView({
               {onQuickAdminLogin && (
                 <button
                   onClick={onQuickAdminLogin}
-                  className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 text-amber-300 font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-700/40 text-amber-400 font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4 text-amber-400" />
                   <span>Masuk Panel Admin</span>
@@ -441,68 +436,68 @@ export default function GymLandingView({
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-3 gap-2.5 pt-4 max-w-md mx-auto lg:mx-0">
-              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
-                <span className="text-lg font-black text-white block">50+</span>
-                <span className="text-[10px] text-slate-400 font-medium">Unit Alat Lengkap</span>
+              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-white block">50+</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Unit Alat Lengkap</span>
               </div>
-              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
-                <span className="text-lg font-black text-amber-400 block">Rp 25k</span>
-                <span className="text-[10px] text-slate-400 font-medium">Mulai Per-Visit</span>
+              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-amber-400 block">Rp 25k</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Mulai Per-Visit</span>
               </div>
-              <div className="bg-[#131520] p-3 rounded-2xl border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.3)] text-center">
-                <span className="text-lg font-black text-emerald-400 block">16 Jam</span>
-                <span className="text-[10px] text-slate-400 font-medium">Operasional Harian</span>
+              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-emerald-400 block">16 Jam</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Operasional Harian</span>
               </div>
             </div>
           </div>
 
           {/* Right Column: INTERACTIVE LIVE APP PREVIEW CARD */}
           <div className="lg:col-span-5">
-            <div className="bg-[#131520] rounded-3xl p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/10 space-y-4 relative">
+            <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] space-y-4 relative">
               {/* Floating Top Badge */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-300 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Fitur Aplikasi Pendamping</span>
-                    <strong className="text-xs font-black text-white">Trisis Member Companion</strong>
+                    <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider block">Fitur Pendamping</span>
+                    <strong className="text-xs font-bold text-white">Trisis Member Companion</strong>
                   </div>
                 </div>
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-950/50 text-emerald-300 border border-emerald-800/40">
-                  Interactive Preview
+                <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
+                  Pratinjau Interaktif
                 </span>
               </div>
 
               {/* Interactive Tabs */}
-              <div className="grid grid-cols-3 p-1 bg-white/5 rounded-2xl text-[11px] font-bold border border-white/5">
+              <div className="grid grid-cols-3 p-1 bg-zinc-900/80 rounded-xl text-[11px] font-semibold border border-white/[0.04]">
                 <button
                   onClick={() => setHeroInteractiveTab('card')}
-                  className={`py-2 rounded-xl transition-all cursor-pointer ${
+                  className={`py-2 rounded-lg transition-all cursor-pointer ${
                     heroInteractiveTab === 'card'
-                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                      : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   Digital Pass
                 </button>
                 <button
                   onClick={() => setHeroInteractiveTab('streak')}
-                  className={`py-2 rounded-xl transition-all cursor-pointer ${
+                  className={`py-2 rounded-lg transition-all cursor-pointer ${
                     heroInteractiveTab === 'streak'
-                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                      : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   Streak Presensi
                 </button>
                 <button
                   onClick={() => setHeroInteractiveTab('coach')}
-                  className={`py-2 rounded-xl transition-all cursor-pointer ${
+                  className={`py-2 rounded-lg transition-all cursor-pointer ${
                     heroInteractiveTab === 'coach'
-                      ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                      : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   AI Coach
@@ -510,29 +505,28 @@ export default function GymLandingView({
               </div>
 
               {/* Dynamic Interactive Tab Content */}
-              <div className="min-h-[220px] flex flex-col justify-center">
+              <div className="min-h-[200px] flex flex-col justify-center">
                 {heroInteractiveTab === 'card' && (
-                  <div className="rounded-2xl p-4 bg-gradient-to-br from-[#1E192E] via-[#141624] to-[#0D0F18] text-white shadow-xl shadow-black/50 border-2 border-amber-400/50 space-y-3 animate-in fade-in duration-200 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500" />
+                  <div className="rounded-xl p-4 bg-zinc-900/90 text-white border border-white/[0.08] space-y-3 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-white/10 border border-amber-400/50 p-0.5 flex items-center justify-center shrink-0">
+                        <div className="w-6 h-6 rounded-md bg-zinc-800 border border-white/[0.08] p-0.5 flex items-center justify-center shrink-0">
                           <img src="/logo.png" alt="Trisis Logo" className="w-full h-full object-contain" />
                         </div>
-                        <span className="font-black text-xs tracking-wider text-amber-300 uppercase">TRISIS MEMBER PASS</span>
+                        <span className="font-bold text-xs tracking-wider text-white uppercase">TRISIS MEMBER PASS</span>
                       </div>
-                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 backdrop-blur-xs">
-                        MEMBER AKTIF
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        AKTIF
                       </span>
                     </div>
 
                     <div className="space-y-0.5">
-                      <span className="text-[10px] text-slate-400 block">Nama Anggota:</span>
-                      <strong className="text-sm font-extrabold block text-white">Budi Santoso</strong>
-                      <span className="text-[10px] text-purple-300 font-mono">TRISIS-2026-089</span>
+                      <span className="text-[10px] text-zinc-400 block">Nama Anggota:</span>
+                      <strong className="text-sm font-bold block text-white">Budi Santoso</strong>
+                      <span className="text-[10px] text-zinc-400 font-mono">TRISIS-2026-089</span>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[10px] text-slate-300">
+                    <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] text-zinc-400">
                       <span>Berlaku s/d: 31 Des 2026</span>
                       <span className="font-semibold text-emerald-400">QR Check-in Siap</span>
                     </div>
@@ -540,19 +534,19 @@ export default function GymLandingView({
                 )}
 
                 {heroInteractiveTab === 'streak' && (
-                  <div className="rounded-2xl p-4 bg-[#181C2B] border border-white/10 space-y-3 animate-in fade-in duration-200">
+                  <div className="rounded-xl p-4 bg-zinc-900/90 border border-white/[0.08] space-y-3 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 flex items-center justify-center font-black">
-                          <Flame className="w-4 h-4 fill-slate-950" />
+                        <div className="w-8 h-8 rounded-lg bg-amber-400 text-neutral-950 flex items-center justify-center font-bold">
+                          <Flame className="w-4 h-4 fill-neutral-950" />
                         </div>
                         <div>
-                          <strong className="text-xs font-black text-white block">12 Hari Beruntun</strong>
-                          <span className="text-[10px] text-slate-400">Streak Latihan Konsisten</span>
+                          <strong className="text-xs font-bold text-white block">12 Hari Beruntun</strong>
+                          <span className="text-[10px] text-zinc-400">Streak Latihan Konsisten</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold text-amber-300 bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full">
-                        Level: Rajin
+                      <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded">
+                        Rajin
                       </span>
                     </div>
 
@@ -560,9 +554,9 @@ export default function GymLandingView({
                     <div className="grid grid-cols-7 gap-1.5 text-center text-[10px] pt-1">
                       {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map((day, idx) => (
                         <div key={idx} className="space-y-1">
-                          <span className="text-slate-400 block text-[9px]">{day}</span>
-                          <div className={`w-full py-1.5 rounded-lg font-bold ${
-                            idx < 5 ? 'bg-emerald-500 text-slate-950' : 'bg-white/5 text-slate-500'
+                          <span className="text-zinc-500 block text-[9px]">{day}</span>
+                          <div className={`w-full py-1 rounded font-bold ${
+                            idx < 5 ? 'bg-amber-400 text-neutral-950' : 'bg-zinc-800 text-zinc-500'
                           }`}>
                             {idx < 5 ? '✓' : '-'}
                           </div>
@@ -570,31 +564,34 @@ export default function GymLandingView({
                       ))}
                     </div>
 
-                    <p className="text-[10px] text-slate-400 leading-tight pt-1">
+                    <p className="text-[10px] text-zinc-400 leading-tight pt-1">
                       Check-in mandiri di gym untuk otomatis memperbarui streak dan riwayat aktivitas Anda.
                     </p>
                   </div>
                 )}
 
                 {heroInteractiveTab === 'coach' && (
-                  <div className="rounded-2xl p-4 bg-[#181C2B] border border-purple-500/30 space-y-2.5 animate-in fade-in duration-200">
+                  <div className="rounded-xl p-4 bg-zinc-900/90 border border-white/[0.08] space-y-2.5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-purple-200 uppercase tracking-wider bg-purple-950/60 px-2 py-0.5 rounded-full border border-purple-800/40">
-                        ✨ Coach Trisis AI (Gemini)
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-lg bg-zinc-800 text-amber-400 flex items-center justify-center">
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </div>
+                        <div>
+                          <strong className="text-xs font-bold text-white block">AI Fitness Advisor</strong>
+                          <span className="text-[10px] text-zinc-400">Rekomendasi Workout Split</span>
+                        </div>
+                      </div>
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                        BASELINE
                       </span>
-                      <span className="text-[10px] font-semibold text-slate-400">PPL Split</span>
                     </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-black text-white">Push Day (Chest, Shoulders & Triceps)</h4>
-                      <p className="text-[11px] text-slate-300 leading-relaxed">
-                        Hari ini 4 gerakan terfokus: Bench Press, Incline DB Press, Lateral Raise, dan Dips.
-                      </p>
-                    </div>
-
-                    <div className="p-2 bg-white/5 rounded-xl border border-white/5 flex items-center justify-between text-[10px]">
-                      <span className="text-slate-400">Target Nutrisi:</span>
-                      <strong className="text-amber-300">2.200 kkal • 135g Protein</strong>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      "Berdasarkan frekuensi 4 hari/minggu dan target hipertrofi, pola latihan ideal Anda adalah Upper/Lower Split."
+                    </p>
+                    <div className="text-[10px] text-zinc-400 pt-1 border-t border-white/[0.06] flex items-center justify-between">
+                      <span>Upper / Lower Body Split</span>
+                      <span className="font-semibold text-zinc-200">4 Sesi / Minggu</span>
                     </div>
                   </div>
                 )}
@@ -603,10 +600,10 @@ export default function GymLandingView({
               {/* Bottom Test Button */}
               <button
                 onClick={onQuickDemoLogin}
-                className="w-full py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
+                className="w-full py-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5"
               >
                 <span>Buka Aplikasi Member</span>
-                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
             </div>
           </div>
@@ -618,19 +615,19 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="kepadatan" className="py-12 md:py-16 px-4 md:px-8 max-w-5xl mx-auto space-y-6">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30 shadow-2xs">
-            Smart Gym Experience
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+            Live Kepadatan
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Status Kepadatan & Waktu Latihan Terbaik
           </h2>
-          <p className="text-xs md:text-sm text-slate-400">
-            Ketahui estimasi kepadatan pengunjung Trisis Gym Bogor agar sesi latihanmu lebih efisien dan bebas antre alat.
+          <p className="text-xs md:text-sm text-zinc-400">
+            Pantau estimasi kepadatan pengunjung Trisis Gym Bogor agar sesi latihanmu lebih efisien dan bebas antre alat.
           </p>
         </div>
 
         {/* Interactive Crowd Meter Box */}
-        <div className="bg-[#131520] border border-white/10 rounded-3xl p-5 md:p-6 shadow-[0_4px_30px_rgba(0,0,0,0.4)] space-y-5">
+        <div className="bg-[#111319] border border-white/[0.08] rounded-2xl p-5 md:p-6 space-y-5">
           {/* Slot Tabs */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
@@ -644,48 +641,48 @@ export default function GymLandingView({
                 <button
                   key={slot.id}
                   onClick={() => setCrowdTime(slot.id)}
-                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                     isActive 
-                      ? 'border-purple-400/60 bg-[#221B30] shadow-xs ring-1 ring-purple-400/40' 
-                      : 'border-white/10 hover:bg-white/5 text-slate-400 hover:text-white'
+                      ? 'border-zinc-700 bg-zinc-800 text-white font-bold' 
+                      : 'border-white/[0.06] hover:bg-zinc-800/50 text-zinc-400 hover:text-white'
                   }`}
                 >
-                  <strong className={`block text-xs font-extrabold ${isActive ? 'text-purple-200' : 'text-slate-200'}`}>
+                  <strong className={`block text-xs font-bold ${isActive ? 'text-white' : 'text-zinc-200'}`}>
                     {slot.title}
                   </strong>
-                  <span className="text-[10px] text-slate-400 font-medium">{slot.time} WIB</span>
+                  <span className="text-[10px] text-zinc-400 font-medium">{slot.time} WIB</span>
                 </button>
               );
             })}
           </div>
 
           {/* Active Slot Status Display */}
-          <div className="p-4 rounded-2xl bg-[#181C2B] border border-white/10 space-y-3">
+          <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-purple-300" />
+                <Activity className="w-4 h-4 text-amber-400" />
                 <span className="text-xs font-bold text-white">
                   Waktu: {crowdSlots[crowdTime].time}
                 </span>
-                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${crowdSlots[crowdTime].color}`}>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
                   {crowdSlots[crowdTime].label}
                 </span>
               </div>
-              <span className="text-xs font-black text-slate-200">
+              <span className="text-xs font-bold text-zinc-300">
                 Kapasitas Terisi: ~{crowdSlots[crowdTime].percent}%
               </span>
             </div>
 
             {/* Meter Bar */}
-            <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
               <div 
-                className={`h-full ${crowdSlots[crowdTime].barColor} transition-all duration-500 rounded-full`}
+                className="h-full bg-amber-400 transition-all duration-500 rounded-full"
                 style={{ width: `${crowdSlots[crowdTime].percent}%` }}
               />
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed pt-1">
-              💡 <strong className="text-amber-300">Tips Waktu:</strong> {crowdSlots[crowdTime].note}
+            <p className="text-xs text-zinc-300 leading-relaxed pt-1">
+              💡 <strong className="text-amber-400">Tips Waktu:</strong> {crowdSlots[crowdTime].note}
             </p>
           </div>
         </div>
@@ -694,29 +691,29 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 4. INTERACTIVE SAVINGS CALCULATOR (HITUNG PENGHEMATANMU) */}
       {/* ============================================================== */}
-      <section id="kalkulator" className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-[#121420] via-[#0B0D14] to-[#14121E] border-y border-white/10">
+      <section id="kalkulator" className="py-12 md:py-16 px-4 md:px-8 bg-[#090A0E] border-y border-white/[0.08]">
         <div className="max-w-5xl mx-auto space-y-8">
           <div className="text-center space-y-2 max-w-xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30 shadow-xs">
-              Kalkulator Cerdas
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+              Kalkulator Hemat
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               Hitung Penghematan Membership-mu
             </h2>
-            <p className="text-xs md:text-sm text-slate-400">
+            <p className="text-xs md:text-sm text-zinc-400">
               Geser frekuensi latihan mingguanmu untuk mengetahui estimasi biaya per sesi dan paket yang paling menguntungkan.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             {/* Left Control Card */}
-            <div className="md:col-span-6 bg-[#131520] p-6 rounded-3xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.4)] space-y-5">
+            <div className="md:col-span-6 bg-[#111319] p-6 rounded-2xl border border-white/[0.08] space-y-5">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="frequency-slider" className="text-xs font-bold text-slate-300">
+                  <label htmlFor="frequency-slider" className="text-xs font-bold text-zinc-300">
                     Frekuensi Latihan per Minggu:
                   </label>
-                  <span className="text-base font-black text-amber-300 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/30">
+                  <span className="text-base font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20">
                     {workoutDaysPerWeek} Hari / Minggu
                   </span>
                 </div>
@@ -728,9 +725,9 @@ export default function GymLandingView({
                   step="1"
                   value={workoutDaysPerWeek}
                   onChange={(e) => setWorkoutDaysPerWeek(Number(e.target.value))}
-                  className="w-full accent-amber-400 h-2 bg-white/10 rounded-lg cursor-pointer"
+                  className="w-full accent-amber-400 h-2 bg-zinc-800 rounded-lg cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-slate-400 font-bold px-1">
+                <div className="flex justify-between text-[10px] text-zinc-400 font-bold px-1">
                   <span>1 Hari (Santai)</span>
                   <span>3 Hari (Ideal)</span>
                   <span>6 Hari (Intensif)</span>
@@ -738,12 +735,12 @@ export default function GymLandingView({
               </div>
 
               {/* Breakdown Details */}
-              <div className="space-y-2.5 pt-2 border-t border-white/10 text-xs">
-                <div className="flex justify-between text-slate-400">
+              <div className="space-y-2.5 pt-2 border-t border-white/[0.06] text-xs">
+                <div className="flex justify-between text-zinc-400">
                   <span>Estimasi Sesi Latihan per Bulan:</span>
                   <strong className="text-white">{monthlySessions} Kunjungan</strong>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-zinc-400">
                   <span>Biaya jika Bayar Harian (Rp 25k/sesi):</span>
                   <strong className="text-white">Rp {costIfPerVisit.toLocaleString('id-ID')}</strong>
                 </div>
@@ -751,53 +748,52 @@ export default function GymLandingView({
             </div>
 
             {/* Right Comparison Recommendation Card */}
-            <div className="md:col-span-6 bg-gradient-to-br from-[#1E192E] via-[#141624] to-[#0D0F18] border-2 border-amber-400/50 rounded-3xl p-6 text-white shadow-2xl shadow-black/60 space-y-4 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500" />
+            <div className="md:col-span-6 bg-[#111319] border border-amber-500/30 rounded-2xl p-6 text-white space-y-4 relative">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 backdrop-blur-xs">
-                  Rekomendasi Paket Paling Hemat
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                  Rekomendasi Paket Hemat
                 </span>
-                <span className="text-xs font-black text-amber-300 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                   Hemat Maksimal
                 </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-black">Paket Mahasiswa / Bulanan</h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <h3 className="text-lg font-bold">Paket Mahasiswa / Bulanan</h3>
+                <p className="text-xs text-zinc-400 mt-0.5">
                   Dengan {workoutDaysPerWeek}x latihan per minggu, biaya per kunjunganmu menjadi super hemat:
                 </p>
               </div>
 
               <div className="space-y-2">
-                <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-amber-400/30 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-zinc-900/80 border border-amber-400/20 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-amber-200 block font-semibold">Paket Mahasiswa:</span>
-                    <span className="text-xl font-black text-amber-300">
+                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Mahasiswa:</span>
+                    <span className="text-lg font-bold text-amber-400">
                       Rp {costPerSessionStudent.toLocaleString('id-ID')}
                     </span>
-                    <span className="text-[10px] text-amber-200 ml-1">/ sesi</span>
+                    <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-slate-400 block">Hemat Bulanan:</span>
-                    <span className="text-sm font-extrabold text-emerald-400">
+                    <span className="text-[10px] text-zinc-400 block">Hemat Bulanan:</span>
+                    <span className="text-sm font-bold text-emerald-400">
                       +Rp {Math.max(0, studentSavings).toLocaleString('id-ID')}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-zinc-900/80 border border-white/[0.04] flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-purple-200 block font-semibold">Paket Reguler:</span>
-                    <span className="text-lg font-black text-white">
+                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Reguler:</span>
+                    <span className="text-lg font-bold text-white">
                       Rp {costPerSessionRegular.toLocaleString('id-ID')}
                     </span>
-                    <span className="text-[10px] text-purple-200 ml-1">/ sesi</span>
+                    <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-slate-400 block">Hemat Bulanan:</span>
-                    <span className="text-sm font-extrabold text-emerald-400">
+                    <span className="text-[10px] text-zinc-400 block">Hemat Bulanan:</span>
+                    <span className="text-sm font-bold text-emerald-400">
                       +Rp {Math.max(0, regularSavings).toLocaleString('id-ID')}
                     </span>
                   </div>
@@ -806,10 +802,10 @@ export default function GymLandingView({
 
               <button
                 onClick={() => setSelectedPlanModal(plans[1])}
-                className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>Daftar Paket Rekomendasi Ini</span>
-                <ArrowRight className="w-4 h-4 text-slate-950" />
+                <ArrowRight className="w-4 h-4 text-neutral-950" />
               </button>
             </div>
           </div>
@@ -821,56 +817,56 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="paket" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
             Tawaran Membership
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Pilihan Paket Transparan Tanpa Komitmen Ribet
           </h2>
-          <p className="text-xs md:text-sm text-slate-400">
+          <p className="text-xs md:text-sm text-zinc-400">
             Pilih paket yang paling sesuai dengan target dan frekuensi latihanmu.
           </p>
         </div>
 
         {/* Category Tabs & Compare Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white/5 rounded-2xl text-xs font-bold w-full sm:w-auto border border-white/5">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-zinc-900/80 rounded-xl text-xs font-semibold w-full sm:w-auto border border-white/[0.04]">
             <button
               onClick={() => setSelectedPlanCategory('all')}
-              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'all'
-                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               Semua Paket
             </button>
             <button
               onClick={() => setSelectedPlanCategory('monthly')}
-              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'monthly'
-                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               Bulanan & VIP
             </button>
             <button
               onClick={() => setSelectedPlanCategory('student')}
-              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'student'
-                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               Mahasiswa
             </button>
             <button
               onClick={() => setSelectedPlanCategory('daily')}
-              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'daily'
-                  ? 'bg-[#221B30] text-purple-200 border border-purple-500/30 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               Harian Flex
@@ -879,7 +875,7 @@ export default function GymLandingView({
 
           <button
             onClick={() => setShowComparisonModal(true)}
-            className="text-xs font-bold text-amber-300 hover:underline flex items-center gap-1.5 cursor-pointer py-1"
+            className="text-xs font-semibold text-amber-400 hover:underline flex items-center gap-1.5 cursor-pointer py-1"
           >
             <Layers className="w-4 h-4 text-amber-400" />
             <span>Bandingkan Detail Semua Fitur Paket</span>
@@ -891,37 +887,37 @@ export default function GymLandingView({
           {filteredPlans.map((p) => (
             <div
               key={p.id}
-              className={`rounded-3xl p-5 border flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${
+              className={`rounded-2xl p-5 border flex flex-col justify-between transition-all duration-200 ${
                 p.popular
-                  ? 'border-2 border-amber-400/80 bg-[#161826] shadow-xl shadow-amber-500/10 relative'
-                  : 'bg-[#131520] border-white/10 hover:border-purple-400/30 shadow-[0_4px_25px_rgba(0,0,0,0.3)]'
+                  ? 'border-amber-400/50 bg-[#141620] relative'
+                  : 'bg-[#111319] border-white/[0.08] hover:border-zinc-700'
               }`}
             >
               <div>
                 {/* Top Badge */}
                 <div className="flex items-center justify-between mb-3 min-h-[24px]">
                   {p.badge ? (
-                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${p.badgeColor}`}>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
                       {p.badge}
                     </span>
                   ) : <span />}
                   {p.popular && (
-                    <span className="text-[10px] font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1">
+                    <span className="text-[10px] font-bold text-neutral-950 bg-amber-400 px-2 py-0.5 rounded flex items-center gap-1">
                       ⭐ Rekomendasi
                     </span>
                   )}
                 </div>
 
-                <h3 className="font-extrabold text-base text-white">{p.name}</h3>
-                <p className="text-xs text-slate-400 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
+                <h3 className="font-bold text-base text-white">{p.name}</h3>
+                <p className="text-xs text-zinc-400 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
 
-                <div className="my-4 pt-4 border-t border-white/10">
-                  <span className="text-2xl font-black text-white">{p.price}</span>
-                  <span className="text-xs text-slate-400 font-medium ml-1">{p.period}</span>
+                <div className="my-4 pt-4 border-t border-white/[0.06]">
+                  <span className="text-2xl font-bold text-white">{p.price}</span>
+                  <span className="text-xs text-zinc-400 font-medium ml-1">{p.period}</span>
                 </div>
 
                 {/* Features list */}
-                <ul className="space-y-2 text-xs text-slate-300 mb-6">
+                <ul className="space-y-2 text-xs text-zinc-300 mb-6">
                   {p.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -933,14 +929,14 @@ export default function GymLandingView({
 
               <button
                 onClick={() => setSelectedPlanModal(p)}
-                className={`w-full py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                className={`w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   p.popular
-                    ? 'bg-[#5D4E75] hover:bg-[#6D5D88] text-white shadow-lg shadow-purple-950/40 border border-purple-400/40 active:scale-[0.98]'
-                    : 'bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10'
+                    ? 'bg-amber-400 hover:bg-amber-300 text-neutral-950'
+                    : 'bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60'
                 }`}
               >
                 <span>Daftar Paket Ini</span>
-                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
           ))}
@@ -952,13 +948,13 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="fasilitas" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
             Fasilitas Standar Modern
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Ruang Latihan Nyaman & Peralatan Terawat
           </h2>
-          <p className="text-xs md:text-sm text-slate-400">
+          <p className="text-xs md:text-sm text-zinc-400">
             Jelajahi setiap sudut Trisis Gym yang dirancang untuk mendukung berbagai gaya dan target latihanmu.
           </p>
         </div>
@@ -975,10 +971,10 @@ export default function GymLandingView({
             <button
               key={cat.id}
               onClick={() => setFacilityFilter(cat.id)}
-              className={`text-xs font-bold px-3.5 py-2 rounded-2xl transition-all cursor-pointer border ${
+              className={`text-xs font-semibold px-3.5 py-2 rounded-xl transition-all cursor-pointer border ${
                 facilityFilter === cat.id
-                  ? 'bg-[#5D4E75] text-white border-purple-400/40 shadow-sm'
-                  : 'bg-[#131520] text-slate-300 border-white/10 hover:bg-white/10'
+                  ? 'bg-zinc-800 text-white border-zinc-700/80 font-bold'
+                  : 'bg-[#111319] text-zinc-400 border-white/[0.08] hover:bg-zinc-800'
               }`}
             >
               {cat.label}
@@ -992,37 +988,37 @@ export default function GymLandingView({
             <div
               key={fac.id}
               onClick={() => setSelectedFacilityModal(fac)}
-              className="bg-[#131520] rounded-3xl overflow-hidden border border-white/10 shadow-[0_4px_25px_rgba(0,0,0,0.3)] hover:border-purple-500/30 hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col justify-between"
+              className="bg-[#111319] rounded-2xl overflow-hidden border border-white/[0.08] hover:border-zinc-700 transition-all duration-200 group cursor-pointer flex flex-col justify-between"
             >
               {/* Facility Image Cover */}
-              <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-slate-900">
+              <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-zinc-900">
                 <img
                   src={fac.image}
                   alt={fac.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131520] via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111319] via-black/20 to-transparent" />
                 <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-black/70 text-slate-200 border border-white/10 shadow-sm backdrop-blur-md">
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded bg-black/80 text-zinc-200 border border-white/10 backdrop-blur-md">
                     {fac.tag}
                   </span>
                 </div>
                 <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <h3 className="text-base font-extrabold drop-shadow">{fac.title}</h3>
+                  <h3 className="text-base font-bold">{fac.title}</h3>
                 </div>
               </div>
 
               {/* Facility Description & Highlights */}
               <div className="p-5 space-y-3">
-                <p className="text-xs text-slate-300 leading-relaxed">{fac.desc}</p>
+                <p className="text-xs text-zinc-400 leading-relaxed">{fac.desc}</p>
 
                 {/* Micro tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {fac.highlights.map((item, hIdx) => (
                     <span 
                       key={hIdx} 
-                      className="text-[10px] font-semibold px-2.5 py-1 rounded-xl bg-white/5 border border-white/5 text-slate-300"
+                      className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-white/[0.04] text-zinc-300"
                     >
                       ✓ {item}
                     </span>
@@ -1039,13 +1035,13 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="faq" className="py-12 md:py-16 px-4 md:px-8 max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
             Pertanyaan Umum
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Sering Ditanyakan (FAQ)
           </h2>
-          <p className="text-xs md:text-sm text-slate-400">
+          <p className="text-xs md:text-sm text-zinc-400">
             Segala hal yang perlu kamu ketahui sebelum memulai latihan di Trisis Gym.
           </p>
         </div>
@@ -1056,23 +1052,23 @@ export default function GymLandingView({
             return (
               <div
                 key={fIdx}
-                className="bg-[#131520] border border-white/10 rounded-2xl overflow-hidden shadow-xs transition-all"
+                className="bg-[#111319] border border-white/[0.08] rounded-xl overflow-hidden transition-all"
               >
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : fIdx)}
-                  className="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors cursor-pointer gap-3"
+                  className="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-zinc-800/40 transition-colors cursor-pointer gap-3"
                 >
-                  <span className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2.5">
-                    <HelpCircle className="w-4 h-4 text-purple-400 shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-2.5">
+                    <HelpCircle className="w-4 h-4 text-amber-400 shrink-0" />
                     {faq.q}
                   </span>
-                  <div className="shrink-0 text-slate-400">
+                  <div className="shrink-0 text-zinc-400">
                     {isOpen ? <ChevronUp className="w-4 h-4 text-amber-400" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 text-xs text-slate-300 leading-relaxed border-t border-white/10 bg-[#181C2B]/50">
+                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 text-xs text-zinc-300 leading-relaxed border-t border-white/[0.06] bg-zinc-900/40">
                     <p className="pt-3">{faq.a}</p>
                   </div>
                 )}
@@ -1085,33 +1081,33 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 8. LOKASI, JAM OPERASIONAL & AJAKAN */}
       {/* ============================================================== */}
-      <section id="lokasi" className="py-12 md:py-16 px-4 md:px-8 bg-[#0E1017] border-t border-white/10">
+      <section id="lokasi" className="py-12 md:py-16 px-4 md:px-8 bg-[#090A0E] border-t border-white/[0.08]">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-800/40">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
               Lokasi & Kunjungan
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               Kunjungi Trisis Gym Hari Ini
             </h2>
-            <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
               Mau cek suasana gym atau konsultasi langsung sebelum bergabung? Resepsionis dan trainer kami siap menyambut kedatanganmu di gym.
             </p>
 
             <div className="space-y-3 pt-2 text-xs">
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#131520] border border-white/10">
-                <MapPin className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#111319] border border-white/[0.08]">
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-white">Alamat Trisis Gym Bogor</strong>
-                  <span className="text-slate-400">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
+                  <span className="text-zinc-400">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#131520] border border-white/10">
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#111319] border border-white/[0.08]">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-white">Jam Operasional Lengkap</strong>
-                  <span className="text-slate-400">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
+                  <span className="text-zinc-400">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
                 </div>
               </div>
             </div>
@@ -1121,36 +1117,36 @@ export default function GymLandingView({
                 href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20mau%20tanya%20info%20membership"
                 target="_blank"
                 rel="noreferrer"
-                className="px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>Chat Admin WhatsApp</span>
+                <span>Chat WhatsApp Kasir</span>
               </a>
 
               <button
                 onClick={onQuickDemoLogin}
-                className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-purple-200 hover:text-white border border-white/10 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className="px-5 py-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Masuk Portal Member</span>
-                <ChevronRight className="w-4 h-4 text-amber-400" />
+                <ChevronRight className="w-4 h-4 text-zinc-400" />
               </button>
             </div>
           </div>
 
           {/* Location Map Preview Mockup */}
-          <div className="bg-[#131520] rounded-3xl p-6 border border-white/10 space-y-4">
+          <div className="bg-[#111319] rounded-2xl p-6 border border-white/[0.08] space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-300">Peta Akses Gym</span>
-              <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/40">
+              <span className="text-xs font-bold text-zinc-300">Peta Akses Gym</span>
+              <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
                 Buka Sekarang
               </span>
             </div>
-            <div className="h-48 rounded-2xl bg-gradient-to-br from-[#1E182D] to-[#121520] border border-white/10 flex flex-col items-center justify-center text-center p-4">
-              <MapPin className="w-10 h-10 text-purple-400 mb-2 animate-bounce" />
-              <strong className="font-extrabold text-sm text-white">Trisis Gym Bogor</strong>
-              <span className="text-[11px] text-slate-400 mt-0.5">Est. Bogor, Indonesia • Parkir Mobil & Motor Luas</span>
+            <div className="h-48 rounded-xl bg-zinc-900 border border-white/[0.06] flex flex-col items-center justify-center text-center p-4">
+              <MapPin className="w-8 h-8 text-amber-400 mb-2" />
+              <strong className="font-bold text-sm text-white">Trisis Gym Bogor</strong>
+              <span className="text-[11px] text-zinc-400 mt-0.5">Bogor, Jawa Barat • Parkir Mobil & Motor Luas</span>
             </div>
-            <p className="text-[11px] text-slate-400 text-center">
+            <p className="text-[11px] text-zinc-400 text-center">
               Fasilitas parkir aman gratis dengan pengawasan CCTV 24 jam.
             </p>
           </div>
@@ -1160,27 +1156,27 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 9. FOOTER */}
       {/* ============================================================== */}
-      <footer className="bg-[#0B0D14] border-t border-white/10 py-8 px-4 md:px-8 text-xs text-slate-400">
+      <footer className="bg-[#090A0E] border-t border-white/[0.08] py-8 px-4 md:px-8 text-xs text-zinc-400">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-xl bg-white/10 border border-amber-400/40 flex items-center justify-center p-0.5 shadow-2xs shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-zinc-800 border border-white/[0.08] flex items-center justify-center p-0.5 shrink-0">
               <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-black text-white">
-              TRISIS <span className="text-amber-400 font-black">GYM</span>
+            <span className="font-extrabold text-white">
+              TRISIS <span className="text-amber-400 font-extrabold">GYM</span>
             </span>
             <span>• Est. Bogor, Indonesia</span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400">
-            <button onClick={onOpenLogin} className="hover:text-purple-300 transition-colors">Portal Member</button>
-            <a href="#paket" className="hover:text-purple-300 transition-colors">Tawaran Membership</a>
-            <a href="#fasilitas" className="hover:text-purple-300 transition-colors">Fasilitas</a>
-            <a href="#faq" className="hover:text-purple-300 transition-colors">FAQ</a>
+          <div className="flex items-center gap-4 text-zinc-400">
+            <button onClick={onOpenLogin} className="hover:text-white transition-colors">Portal Member</button>
+            <a href="#paket" className="hover:text-white transition-colors">Tawaran Membership</a>
+            <a href="#fasilitas" className="hover:text-white transition-colors">Fasilitas</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           </div>
 
-          <p className="text-[10px]">
-            Aplikasi Web & Android Member Trisis Gym Centre Bogor • Sistem AI Rekomendasi Kebugaran.
+          <p className="text-[10px] text-zinc-500">
+            Aplikasi Web & Android Member Trisis Gym Centre Bogor.
           </p>
         </div>
       </footer>
@@ -1190,15 +1186,15 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {selectedPlanModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-sm bg-[#131520] border border-white/10 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4">
+          <div className="relative w-full max-w-sm bg-[#111319] border border-white/[0.08] rounded-2xl shadow-2xl p-5 md:p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-purple-300 font-bold uppercase tracking-wider block">Formulir Pendaftaran</span>
-                <h3 className="text-base font-extrabold text-white">Gabung Jadi Member</h3>
+                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">Formulir Pendaftaran</span>
+                <h3 className="text-base font-bold text-white">Gabung Jadi Member</h3>
               </div>
               <button
                 onClick={() => setSelectedPlanModal(null)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
+                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1206,27 +1202,27 @@ export default function GymLandingView({
 
             {registerSuccess ? (
               <div className="py-6 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                   <UserCheck className="w-6 h-6" />
                 </div>
-                <h4 className="font-extrabold text-sm text-white">Pendaftaran Member Berhasil!</h4>
-                <p className="text-xs text-slate-400">
+                <h4 className="font-bold text-sm text-white">Pendaftaran Member Berhasil!</h4>
+                <p className="text-xs text-zinc-400">
                   Mengarahkan Anda langsung ke portal dashboard member...
                 </p>
               </div>
             ) : (
               <form onSubmit={handleRegisterSubmit} className="space-y-3 text-xs">
                 {/* Selected Plan Snapshot */}
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-zinc-900 border border-white/[0.06] flex items-center justify-between">
                   <div>
                     <span className="font-bold text-white block">{selectedPlanModal.name}</span>
-                    <span className="text-[10px] text-slate-400">{selectedPlanModal.desc}</span>
+                    <span className="text-[10px] text-zinc-400">{selectedPlanModal.desc}</span>
                   </div>
-                  <span className="font-black text-amber-300">{selectedPlanModal.price}</span>
+                  <span className="font-bold text-amber-400">{selectedPlanModal.price}</span>
                 </div>
 
                 <div>
-                  <label htmlFor="reg-name" className="block text-slate-300 font-bold mb-1">Nama Lengkap</label>
+                  <label htmlFor="reg-name" className="block text-zinc-300 font-semibold mb-1">Nama Lengkap</label>
                   <input
                     id="reg-name"
                     type="text"
@@ -1234,12 +1230,12 @@ export default function GymLandingView({
                     placeholder="Contoh: Budi Santoso"
                     value={registerForm.name}
                     onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-phone" className="block text-slate-300 font-bold mb-1">Nomor WhatsApp</label>
+                  <label htmlFor="reg-phone" className="block text-zinc-300 font-semibold mb-1">Nomor WhatsApp</label>
                   <input
                     id="reg-phone"
                     type="tel"
@@ -1247,12 +1243,12 @@ export default function GymLandingView({
                     placeholder="081234567890"
                     value={registerForm.phone}
                     onChange={(e) => setRegisterForm({ ...registerForm, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-email" className="block text-slate-300 font-bold mb-1">Alamat Email</label>
+                  <label htmlFor="reg-email" className="block text-zinc-300 font-semibold mb-1">Alamat Email</label>
                   <input
                     id="reg-email"
                     type="email"
@@ -1260,21 +1256,21 @@ export default function GymLandingView({
                     placeholder="nama@email.com"
                     value={registerForm.email}
                     onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
                 <div className="pt-2 space-y-2">
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-bold text-xs shadow-md shadow-purple-950/40 border border-purple-400/40 cursor-pointer"
+                    className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs cursor-pointer transition-colors"
                   >
                     Kirim & Masuk ke Akun Member
                   </button>
                   <button
                     type="button"
                     onClick={() => setSelectedPlanModal(null)}
-                    className="w-full py-2 text-slate-400 hover:text-white font-medium cursor-pointer"
+                    className="w-full py-2 text-zinc-400 hover:text-white font-medium cursor-pointer"
                   >
                     Batal
                   </button>
@@ -1290,8 +1286,8 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {selectedFacilityModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-[#131520] border border-white/10 rounded-3xl shadow-2xl overflow-hidden space-y-4">
-            <div className="relative h-48 w-full bg-slate-900">
+          <div className="relative w-full max-w-md bg-[#111319] border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden space-y-4">
+            <div className="relative h-48 w-full bg-zinc-900">
               <img
                 src={selectedFacilityModal.image}
                 alt={selectedFacilityModal.title}
@@ -1299,26 +1295,26 @@ export default function GymLandingView({
               />
               <button
                 onClick={() => setSelectedFacilityModal(null)}
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 text-slate-300 flex items-center justify-center shadow-md cursor-pointer hover:bg-black hover:text-white"
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 text-zinc-300 flex items-center justify-center shadow-md cursor-pointer hover:bg-black hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
               <div className="absolute bottom-3 left-3">
-                <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-purple-950/80 border border-purple-800/40 text-purple-200">
+                <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.08] text-zinc-200">
                   {selectedFacilityModal.tag}
                 </span>
               </div>
             </div>
 
             <div className="p-5 pt-0 space-y-3">
-              <h3 className="text-base font-extrabold text-white">{selectedFacilityModal.title}</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">{selectedFacilityModal.desc}</p>
+              <h3 className="text-base font-bold text-white">{selectedFacilityModal.title}</h3>
+              <p className="text-xs text-zinc-300 leading-relaxed">{selectedFacilityModal.desc}</p>
 
-              <div className="space-y-1.5 pt-2 border-t border-white/10">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+              <div className="space-y-1.5 pt-2 border-t border-white/[0.06]">
+                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">
                   Daftar Alat & Keunggulan:
                 </span>
-                <ul className="space-y-1 text-xs text-slate-300">
+                <ul className="space-y-1 text-xs text-zinc-300">
                   {selectedFacilityModal.highlights.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -1330,7 +1326,7 @@ export default function GymLandingView({
 
               <button
                 onClick={() => setSelectedFacilityModal(null)}
-                className="w-full py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-purple-200 hover:text-white font-bold text-xs transition-colors cursor-pointer mt-2"
+                className="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white font-semibold text-xs transition-colors cursor-pointer mt-2"
               >
                 Tutup Pratinjau
               </button>
@@ -1344,15 +1340,15 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {showComparisonModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl bg-[#131520] border border-white/10 rounded-3xl shadow-2xl p-5 md:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div className="relative w-full max-w-2xl bg-[#111319] border border-white/[0.08] rounded-2xl shadow-2xl p-5 md:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div>
-                <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider block">Perbandingan Menyeluruh</span>
-                <h3 className="text-base font-extrabold text-white">Tabel Benefit Setiap Paket</h3>
+                <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">Perbandingan Menyeluruh</span>
+                <h3 className="text-base font-bold text-white">Tabel Benefit Setiap Paket</h3>
               </div>
               <button
                 onClick={() => setShowComparisonModal(false)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
+                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1362,15 +1358,15 @@ export default function GymLandingView({
             <div className="overflow-x-auto text-xs">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 text-slate-400 text-[10px] uppercase font-bold">
+                  <tr className="border-b border-white/[0.08] text-zinc-400 text-[10px] uppercase font-bold">
                     <th className="py-2.5">Fasilitas / Benefit</th>
                     <th className="py-2.5">Per-Visit</th>
-                    <th className="py-2.5 text-blue-400">Mahasiswa</th>
-                    <th className="py-2.5 text-purple-300">Bulanan</th>
+                    <th className="py-2.5 text-amber-400">Mahasiswa</th>
+                    <th className="py-2.5 text-zinc-200">Bulanan</th>
                     <th className="py-2.5 text-amber-400">Annual VIP</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5 text-slate-300">
+                <tbody className="divide-y divide-white/[0.04] text-zinc-300">
                   <tr>
                     <td className="py-2.5 font-bold text-white">Akses Beban & Kardio</td>
                     <td className="py-2.5">1 Hari</td>
@@ -1424,10 +1420,10 @@ export default function GymLandingView({
               </table>
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex justify-end">
+            <div className="pt-3 border-t border-white/[0.06] flex justify-end">
               <button
                 onClick={() => setShowComparisonModal(false)}
-                className="px-4 py-2 rounded-xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white text-xs font-bold transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 text-xs font-bold transition-colors cursor-pointer"
               >
                 Tutup Tabel
               </button>

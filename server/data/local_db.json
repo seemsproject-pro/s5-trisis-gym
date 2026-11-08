@@ -53,6 +53,16 @@
   ],
   "checkins": [
     {
+      "id": "chk_4188d295-3bce-448f-b564-3be1e40a2d69",
+      "user_id": "usr_m_089",
+      "member_id": "TRISIS-2026-089",
+      "checkin_date": "2026-11-07",
+      "checkin_time": "15:14:47",
+      "location": "Trisis Gym — Kasir & Turnstile Utama",
+      "method": "QR_SCAN_KASIR",
+      "notes": "Presensi Scan QR Kasir"
+    },
+    {
       "id": "chk_101",
       "user_id": "usr_m_089",
       "member_id": "TRISIS-2026-089",

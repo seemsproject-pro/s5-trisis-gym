@@ -23,26 +23,26 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
   const getIcon = (type) => {
     switch (type) {
       case 'CHECK_IN':
-        return <QrCode className="w-5 h-5 text-emerald-400" />;
+        return <QrCode className="w-4 h-4 text-emerald-400" />;
       case 'RECOMMENDATION':
-        return <Sparkles className="w-5 h-5 text-purple-300" />;
+        return <Sparkles className="w-4 h-4 text-amber-400" />;
       case 'PROFILE_UPDATE':
-        return <UserCog className="w-5 h-5 text-amber-400" />;
+        return <UserCog className="w-4 h-4 text-zinc-300" />;
       default:
-        return <CalendarClock className="w-5 h-5 text-blue-400" />;
+        return <CalendarClock className="w-4 h-4 text-zinc-400" />;
     }
   };
 
   const getIconBg = (type) => {
     switch (type) {
       case 'CHECK_IN':
-        return 'bg-emerald-950/50 border border-emerald-500/20';
+        return 'bg-emerald-500/10 border border-emerald-500/20';
       case 'RECOMMENDATION':
-        return 'bg-purple-950/50 border border-purple-500/20';
+        return 'bg-amber-400/10 border border-amber-400/20';
       case 'PROFILE_UPDATE':
-        return 'bg-amber-950/50 border border-amber-500/20';
+        return 'bg-zinc-800 border border-white/[0.08]';
       default:
-        return 'bg-blue-950/50 border border-blue-500/20';
+        return 'bg-zinc-800 border border-white/[0.08]';
     }
   };
 
@@ -52,14 +52,14 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
       <section className="space-y-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-purple-950/50 border border-purple-500/20 text-purple-300 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-white/[0.08] text-amber-400 flex items-center justify-center">
               <CalendarClock className="w-4 h-4" />
             </div>
-            <h1 className="text-xl font-extrabold text-white tracking-tight">Riwayat Aktivitas</h1>
+            <h1 className="text-xl font-bold text-white tracking-tight">Riwayat Aktivitas</h1>
           </div>
           <StatusBadge status="AKTIF" size="sm" />
         </div>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-zinc-400">
           Catatan kronologis presensi kunjungan gym dan riwayat rekomendasi kebugaran Anda.
         </p>
       </section>
@@ -74,10 +74,10 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
           <button
             key={f.id}
             onClick={() => setActiveFilter(f.id)}
-            className={`px-3.5 py-1.5 rounded-full font-bold whitespace-nowrap transition-all cursor-pointer border ${
+            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-all cursor-pointer border ${
               activeFilter === f.id
-                ? 'bg-[#5D4E75] text-white border-purple-400/40 shadow-xs'
-                : 'bg-[#131520] text-slate-300 border-white/10 hover:bg-[#1A1D2B]'
+                ? 'bg-zinc-800 text-amber-400 border-zinc-700/80 font-bold'
+                : 'bg-zinc-900/60 text-zinc-400 border-white/[0.08] hover:text-white'
             }`}
           >
             {f.label}
@@ -87,22 +87,22 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
 
       {/* List / Empty State */}
       {filteredActivities.length === 0 ? (
-        <div className="bg-[#131520] border border-white/10 rounded-3xl p-8 text-center space-y-3 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-          <div className="w-12 h-12 mx-auto rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-slate-400">
+        <div className="bg-[#111319] border border-white/[0.08] rounded-2xl p-8 text-center space-y-3">
+          <div className="w-12 h-12 mx-auto rounded-xl bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-zinc-400">
             <Inbox className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-sm font-extrabold text-white">Belum Ada Aktivitas Terkait</h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <h3 className="text-sm font-bold text-white">Belum Ada Aktivitas Terkait</h3>
+            <p className="text-xs text-zinc-400 mt-1">
               Belum ada data riwayat untuk kategori filter ini.
             </p>
           </div>
           <button
             onClick={onOpenCheckIn}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] text-white font-bold text-xs shadow-md shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer"
           >
-            <PlusCircle className="w-4 h-4 text-amber-300" />
-            Coba Check-in Sekarang
+            <PlusCircle className="w-4 h-4" />
+            <span>Check-In Sekarang</span>
           </button>
         </div>
       ) : (
@@ -110,9 +110,9 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
           {filteredActivities.map((act) => (
             <div
               key={act.id}
-              className="bg-[#131520] border border-white/10 rounded-3xl p-4.5 flex items-start gap-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all"
+              className="bg-[#111319] border border-white/[0.08] rounded-2xl p-4 flex items-start gap-3.5 transition-all"
             >
-              <div className={`p-2.5 rounded-2xl ${getIconBg(act.type)} shrink-0 mt-0.5`}>
+              <div className={`p-2.5 rounded-xl ${getIconBg(act.type)} shrink-0 mt-0.5`}>
                 {getIcon(act.type)}
               </div>
 
@@ -121,10 +121,10 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
                   <h4 className="text-xs font-bold text-white truncate">{act.title}</h4>
                   <StatusBadge status={act.methodBadge || 'DEMO'} size="xs" />
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-zinc-400 leading-relaxed">
                   {act.description}
                 </p>
-                <div className="pt-1 text-[10px] text-slate-500 font-medium">
+                <div className="pt-1 text-[10px] text-zinc-500 font-medium">
                   {act.timestamp}
                 </div>
               </div>
@@ -134,8 +134,8 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
       )}
 
       {/* SOT Footnote */}
-      <div className="p-3.5 bg-purple-950/30 rounded-2xl border border-purple-500/20 text-[11px] text-purple-200 leading-relaxed">
-        Catatan: Riwayat aktivitas dicatat secara persisten di penyimpanan browser lokal (Phase 6A: Frontend-First dengan Data Sintetis).
+      <div className="p-3.5 bg-zinc-900/60 rounded-xl border border-white/[0.06] text-[11px] text-zinc-400 leading-relaxed">
+        Catatan: Riwayat aktivitas dicatat secara persisten di penyimpanan browser lokal dan database Trisis Gym.
       </div>
     </div>
   );

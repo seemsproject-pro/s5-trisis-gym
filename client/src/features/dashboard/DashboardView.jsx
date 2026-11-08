@@ -39,18 +39,18 @@ export default function DashboardView({
     <div className="space-y-4 md:space-y-5 pb-8 animate-in fade-in duration-200">
       {/* 0. Live Announcement Banner (Diatur oleh Admin) */}
       {stats?.gymSettings?.announcementActive && stats?.gymSettings?.announcementText && (
-        <section className="bg-gradient-to-r from-amber-500/15 via-[#231A36] to-purple-950/40 border border-amber-400/40 rounded-3xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex items-start gap-3.5">
-          <div className="w-9 h-9 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 flex items-center justify-center shrink-0 mt-0.5">
+        <section className="bg-[#111319] border border-amber-500/30 rounded-2xl p-4 md:p-5 flex items-start gap-3.5">
+          <div className="w-8 h-8 rounded-xl bg-amber-400/10 text-amber-400 border border-amber-400/20 flex items-center justify-center shrink-0 mt-0.5">
             <Megaphone className="w-4 h-4 text-amber-400" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-400/30">
-                PENGUMUMAN PENGELOLA
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+                PENGUMUMAN
               </span>
-              <span className="text-[10px] text-slate-400 hidden sm:inline">Siaran Langsung Admin</span>
+              <span className="text-[10px] text-zinc-400 hidden sm:inline">Siaran Langsung Admin</span>
             </div>
-            <p className="text-xs text-slate-100 font-medium mt-1 leading-relaxed">
+            <p className="text-xs text-zinc-200 font-medium mt-1 leading-relaxed">
               {stats.gymSettings.announcementText}
             </p>
           </div>
@@ -59,25 +59,25 @@ export default function DashboardView({
 
       {/* 0.1 Live Gym Status & Okupansi (Diatur oleh Admin) */}
       {stats?.gymSettings && (
-        <section className="bg-[#131520] rounded-3xl p-4 md:p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+        <section className="bg-[#111319] rounded-2xl p-4 md:p-5 border border-white/[0.08]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.06]">
             <div className="flex items-center gap-3">
-              <span className={`w-3 h-3 rounded-full shrink-0 ${stats.gymSettings.isOpen ? 'bg-emerald-400 shadow-[0_0_12px_#34d399]' : 'bg-rose-500'}`} />
+              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${stats.gymSettings.isOpen ? 'bg-emerald-400' : 'bg-rose-500'}`} />
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-xs md:text-sm font-extrabold text-white">
-                    {stats.gymSettings.isOpen ? 'Trisis Gym Buka Operasional' : 'Trisis Gym Tutup Sementara'}
+                  <h3 className="text-xs md:text-sm font-bold text-white">
+                    {stats.gymSettings.isOpen ? 'Trisis Gym Buka' : 'Trisis Gym Tutup Sementara'}
                   </h3>
-                  <span className={`text-[9px] font-black px-2 py-0.5 rounded-md ${
-                    stats.gymSettings.isOpen ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                  <span className={`text-[9px] font-bold px-2 py-0.5 rounded ${
+                    stats.gymSettings.isOpen ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                   }`}>
                     {stats.gymSettings.isOpen ? 'BUKA' : 'TUTUP'}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 mt-0.5 flex flex-wrap items-center gap-2">
+                <p className="text-[11px] text-zinc-400 mt-0.5 flex flex-wrap items-center gap-2">
                   <span><Clock className="w-3 h-3 inline mr-1 text-amber-400" />{stats.gymSettings.openingHours || '06:00 – 22:00 WIB'}</span>
                   <span>•</span>
-                  <span className="text-purple-300 font-medium">{stats.gymSettings.trainerOnDuty || 'Staff & Trainer Siaga'}</span>
+                  <span className="text-zinc-300 font-medium">{stats.gymSettings.trainerOnDuty || 'Staff & Trainer Siaga'}</span>
                 </p>
               </div>
             </div>
@@ -85,13 +85,13 @@ export default function DashboardView({
             {/* Okupansi Gym Realtime */}
             <div className="flex items-center gap-3 sm:text-right">
               <div>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Kepadatan Saat Ini</span>
+                <span className="text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">Kepadatan Saat Ini</span>
                 <div className="flex items-center sm:justify-end gap-1.5 mt-0.5">
-                  <Users className="w-3.5 h-3.5 text-purple-400" />
-                  <span className="text-xs font-black text-white">
+                  <Users className="w-3.5 h-3.5 text-zinc-400" />
+                  <span className="text-xs font-bold text-white">
                     {stats.gymSettings.currentOccupancy || 0} / {stats.gymSettings.maxCapacity || 75} Orang
                   </span>
-                  <span className="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded">
                     {stats.gymSettings.currentCrowdStatus === 'pagi' ? 'Lengang' : stats.gymSettings.currentCrowdStatus === 'siang' ? 'Sedang' : stats.gymSettings.currentCrowdStatus === 'sore' ? 'Peak Hour' : 'Normal'}
                   </span>
                 </div>
@@ -101,60 +101,61 @@ export default function DashboardView({
           
           {/* Progress Bar Okupansi */}
           <div className="mt-3 flex items-center gap-3">
-            <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+            <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 rounded-full transition-all duration-500"
+                className="h-full bg-amber-400 rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(100, Math.round(((stats.gymSettings.currentOccupancy || 0) / (stats.gymSettings.maxCapacity || 75)) * 100))}%` }}
               />
             </div>
-            <span className="text-[10px] text-slate-400 font-medium shrink-0 tabular-nums">
+            <span className="text-[10px] text-zinc-400 font-medium shrink-0 tabular-nums">
               {Math.min(100, Math.round(((stats.gymSettings.currentOccupancy || 0) / (stats.gymSettings.maxCapacity || 75)) * 100))}% Terisi
             </span>
           </div>
         </section>
       )}
+
       {/* 1. Header & Sapaan Pengguna + Streak Card */}
-      <section className="bg-[#131520] rounded-3xl p-5 md:p-6 border border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+      <section className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08]">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            {/* Avatar Lingkaran Ramah */}
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2D2342] to-[#1C172A] border border-purple-400/30 text-purple-200 flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
-              <User className="w-6 h-6 text-purple-300" />
+            {/* Minimal Avatar Circle */}
+            <div className="w-11 h-11 rounded-full bg-zinc-800 border border-zinc-700/80 text-zinc-200 flex items-center justify-center font-bold text-base shrink-0">
+              <User className="w-5 h-5 text-zinc-300" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg md:text-xl font-extrabold text-white tracking-tight">
-                  Halo, {user?.name?.split(' ')[0] || 'Budi'}!
+                <h1 className="text-base md:text-lg font-bold text-white tracking-tight">
+                  Halo, {user?.name?.split(' ')[0] || 'Budi'}
                 </h1>
                 <StatusBadge status="MEMBER" size="xs" />
               </div>
-              <p className="text-xs text-slate-400 font-medium mt-0.5">
-                Level 1 • Member Reguler ({user?.memberId || 'TRISIS-089'})
+              <p className="text-xs text-zinc-400 font-medium mt-0.5">
+                Member Reguler • <span className="font-mono text-zinc-300">{user?.memberId || 'TRISIS-089'}</span>
               </p>
             </div>
           </div>
 
-          {/* Streak Counter Pill Khas FitQuest (Kuning/Emas Hangat) */}
+          {/* Clean Minimal Streak Pill */}
           <div className="shrink-0 flex flex-col items-end">
-            <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-2xl shadow-xs border border-amber-300/80 flex items-center gap-1.5">
-              <Flame className="w-4 h-4 fill-slate-950 text-slate-950" />
+            <div className="bg-amber-400 text-neutral-950 font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-none">
+              <Flame className="w-3.5 h-3.5 fill-neutral-950 text-neutral-950" />
               <span>{currentStreak} HARI STREAK</span>
             </div>
-            <span className="text-[10px] text-slate-400 font-medium mt-1">
+            <span className="text-[10px] text-zinc-400 font-medium mt-1">
               Target {targetDays} sesi/minggu
             </span>
           </div>
         </div>
 
         {/* Progress Bar Konsistensi Sesi */}
-        <div className="mt-4 pt-4 border-t border-white/10">
+        <div className="mt-4 pt-4 border-t border-white/[0.06]">
           <div className="flex items-center justify-between text-xs mb-1.5">
-            <span className="text-slate-400 font-medium">Konsistensi Minggu Ini</span>
-            <span className="font-black text-[#B8A7D6]">{currentStreak}/{targetDays} Sesi</span>
+            <span className="text-zinc-400 font-medium">Konsistensi Minggu Ini</span>
+            <span className="font-bold text-white">{currentStreak}/{targetDays} Sesi</span>
           </div>
-          <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-[#5D4E75] via-[#8B78A5] to-amber-400 rounded-full transition-all duration-500"
+              className="h-full bg-amber-400 rounded-full transition-all duration-500"
               style={{ width: `${streakProgress}%` }}
             />
           </div>
@@ -163,16 +164,16 @@ export default function DashboardView({
 
       {/* 2. Kartu Membership & Presensi Gym Utama */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Presensi Check-In Card (Aksi Utama Berwarna Soft Purple & Aksen Emas) */}
-        <section className="bg-[#131520] rounded-3xl p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col justify-between space-y-4">
+        {/* Presensi Check-In Card */}
+        <section className="bg-[#111319] rounded-2xl p-5 border border-white/[0.08] flex flex-col justify-between space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-purple-950/50 border border-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-zinc-800/80 border border-zinc-700/60 text-amber-400 flex items-center justify-center shrink-0">
                 <QrCode className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-white">Presensi QR Kasir Gym</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Tunjukkan QR ke kasir saat tiba di gym</p>
+                <h2 className="text-sm font-bold text-white">Presensi QR Kasir</h2>
+                <p className="text-xs text-zinc-400 mt-0.5">Tunjukkan QR ke kasir saat tiba di gym</p>
               </div>
             </div>
             <StatusBadge status="ONLINE" size="xs" />
@@ -180,50 +181,50 @@ export default function DashboardView({
 
           <button
             onClick={onOpenCheckIn}
-            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#5D4E75] to-[#4A3D60] hover:from-[#6D5D88] hover:to-[#55466F] active:scale-[0.98] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
+            className="w-full py-3 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
-            <QrCode className="w-4 h-4 text-amber-300" />
-            Buka QR Presensi Kasir
+            <QrCode className="w-4 h-4 text-neutral-950" />
+            Buka QR Presensi
           </button>
           
-          <div className="flex items-center gap-1.5 justify-center text-[11px] text-slate-400">
+          <div className="flex items-center gap-1.5 justify-center text-[11px] text-zinc-400">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
             <span>Tinggal di-scan petugas kasir / turnstile gym</span>
           </div>
         </section>
 
         {/* Digital Membership Pass Card */}
-        <section className="bg-[#131520] rounded-3xl p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex flex-col justify-between space-y-4">
+        <section className="bg-[#111319] rounded-2xl p-5 border border-white/[0.08] flex flex-col justify-between space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
-                <CreditCard className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-zinc-800/80 border border-zinc-700/60 text-amber-400 flex items-center justify-center shrink-0">
+                <CreditCard className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Membership</span>
+                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Membership</span>
                 <h3 className="text-sm font-bold text-white">{user?.planName || 'Annual Regular Pass'}</h3>
               </div>
             </div>
             <StatusBadge status="AKTIF" size="xs" />
           </div>
 
-          <div className="bg-white/5 rounded-2xl p-3 border border-white/5 flex items-center justify-between text-xs">
+          <div className="bg-zinc-900/60 rounded-xl p-3 border border-white/[0.04] flex items-center justify-between text-xs">
             <div>
-              <span className="text-[10px] text-slate-400 block font-medium">Masa Berlaku</span>
-              <span className="font-semibold text-slate-200">s/d 31 Desember 2026</span>
+              <span className="text-[10px] text-zinc-400 block font-medium">Masa Berlaku</span>
+              <span className="font-semibold text-zinc-200">s/d 31 Desember 2026</span>
             </div>
             <div className="text-right">
-              <span className="text-[10px] text-slate-400 block font-medium">Status Akses</span>
+              <span className="text-[10px] text-zinc-400 block font-medium">Status Akses</span>
               <span className="font-semibold text-emerald-400">Akses Penuh Cabang</span>
             </div>
           </div>
 
           <button
             onClick={onOpenCard}
-            className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-amber-300 font-extrabold text-xs flex items-center justify-center gap-1.5 border border-amber-400/30 transition-all cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-zinc-700/60 transition-all cursor-pointer"
           >
             <span>Tampilkan Kartu Member Digital</span>
-            <ChevronRight className="w-4 h-4 text-amber-400" />
+            <ChevronRight className="w-4 h-4 text-zinc-400" />
           </button>
         </section>
       </div>
@@ -231,39 +232,39 @@ export default function DashboardView({
       {/* 3. Ringkasan Metrik Kehadiran (2 Kolom) */}
       <section className="grid grid-cols-2 gap-3 md:gap-4">
         {/* Total Check-ins */}
-        <div className="bg-[#131520] rounded-3xl p-4.5 md:p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+        <div className="bg-[#111319] rounded-2xl p-4.5 md:p-5 border border-white/[0.08]">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold text-slate-400">Total Hadir</span>
-            <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
-              <CalendarCheck className="w-4 h-4" />
+            <span className="text-xs font-medium text-zinc-400">Total Hadir</span>
+            <div className="w-7 h-7 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center">
+              <CalendarCheck className="w-3.5 h-3.5" />
             </div>
           </div>
           <div className="flex items-baseline gap-1.5">
-            <span className="text-2xl md:text-3xl font-black text-white tabular-nums">
+            <span className="text-2xl md:text-3xl font-bold text-white tabular-nums">
               {stats?.totalCheckIns || 0}
             </span>
-            <span className="text-xs text-slate-400 font-medium">kali kunjungan</span>
+            <span className="text-xs text-zinc-400 font-medium">kali kunjungan</span>
           </div>
           <p className="text-[11px] text-emerald-400 font-medium mt-1.5 flex items-center gap-1">
-            <TrendingUp className="w-3.5 h-3.5" /> Absensi tercatat aktif
+            <TrendingUp className="w-3.5 h-3.5" /> Presensi aktif tercatat
           </p>
         </div>
 
         {/* Konsistensi Streak */}
-        <div className="bg-[#131520] rounded-3xl p-4.5 md:p-5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+        <div className="bg-[#111319] rounded-2xl p-4.5 md:p-5 border border-white/[0.08]">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold text-slate-400">Streak Latihan</span>
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
-              <Flame className="w-4 h-4" />
+            <span className="text-xs font-medium text-zinc-400">Streak Latihan</span>
+            <div className="w-7 h-7 rounded-lg bg-amber-400/10 text-amber-400 flex items-center justify-center">
+              <Flame className="w-3.5 h-3.5" />
             </div>
           </div>
           <div className="flex items-baseline gap-1.5">
-            <span className="text-2xl md:text-3xl font-black text-white tabular-nums">
+            <span className="text-2xl md:text-3xl font-bold text-white tabular-nums">
               {currentStreak}
             </span>
-            <span className="text-xs text-slate-400 font-medium">hari beruntun</span>
+            <span className="text-xs text-zinc-400 font-medium">hari beruntun</span>
           </div>
-          <p className="text-[11px] text-slate-400 font-medium mt-1.5">
+          <p className="text-[11px] text-zinc-400 font-medium mt-1.5">
             Target rutin {targetDays} hari / minggu
           </p>
         </div>
@@ -273,14 +274,14 @@ export default function DashboardView({
       <section className="space-y-3">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-purple-950/50 border border-purple-500/20 text-purple-300 flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="w-6 h-6 rounded-md bg-zinc-800 text-zinc-300 flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             </div>
             <h2 className="text-sm font-bold text-white">Program & Nutrisi Anda</h2>
           </div>
           <button
             onClick={() => onNavigateTab('recommendations')}
-            className="text-xs font-bold text-[#B8A7D6] hover:text-purple-200 flex items-center gap-0.5 transition-colors cursor-pointer"
+            className="text-xs font-semibold text-zinc-400 hover:text-white flex items-center gap-0.5 transition-colors cursor-pointer"
           >
             Lihat Lengkap
             <ChevronRight className="w-3.5 h-3.5" />
@@ -291,43 +292,43 @@ export default function DashboardView({
           {/* Card Split Latihan */}
           <div 
             onClick={() => onNavigateTab('recommendations')}
-            className="bg-[#131520] hover:bg-[#181B2A] border border-white/10 rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all cursor-pointer space-y-3"
+            className="bg-[#111319] hover:bg-[#151821] border border-white/[0.08] rounded-2xl p-5 transition-all cursor-pointer space-y-3"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-purple-950/50 border border-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center shrink-0">
                   <Dumbbell className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Program Latihan</span>
-                  <h3 className="text-sm font-extrabold text-white">{workoutSplit.splitName}</h3>
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">Program Latihan</span>
+                  <h3 className="text-sm font-bold text-white">{workoutSplit.splitName}</h3>
                 </div>
               </div>
               <StatusBadge status="BASELINE" size="xs" />
             </div>
-            <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
               {workoutSplit.description}
             </p>
-            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-400">Frekuensi: {profile?.daysPerWeek || 4} hari / minggu</span>
-              <span className="font-bold text-[#B8A7D6] flex items-center gap-0.5">Detail <ChevronRight className="w-3 h-3" /></span>
+            <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-xs">
+              <span className="text-zinc-400">Frekuensi: {profile?.daysPerWeek || 4} hari / minggu</span>
+              <span className="font-semibold text-zinc-200 flex items-center gap-0.5">Detail <ChevronRight className="w-3 h-3 text-zinc-400" /></span>
             </div>
           </div>
 
           {/* Card Target Nutrisi */}
           <div 
             onClick={() => onNavigateTab('recommendations')}
-            className="bg-[#131520] hover:bg-[#181B2A] border border-white/10 rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all cursor-pointer space-y-3"
+            className="bg-[#111319] hover:bg-[#151821] border border-white/[0.08] rounded-2xl p-5 transition-all cursor-pointer space-y-3"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-950/50 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-zinc-800 text-emerald-400 flex items-center justify-center shrink-0">
                   <Utensils className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Target Energi & Makro</span>
-                  <h3 className="text-sm font-extrabold text-white">
-                    {macroEstimates.targetCalories} <span className="text-xs font-normal text-slate-400">kkal / hari</span>
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">Target Energi & Makro</span>
+                  <h3 className="text-sm font-bold text-white">
+                    {macroEstimates.targetCalories} <span className="text-xs font-normal text-zinc-400">kkal / hari</span>
                   </h3>
                 </div>
               </div>
@@ -336,16 +337,16 @@ export default function DashboardView({
 
             {/* 3 Mini Boxes untuk Makro */}
             <div className="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-              <div className="bg-white/5 rounded-2xl py-2 px-1 border border-white/5">
-                <span className="block text-[10px] text-slate-400 font-medium">Protein</span>
+              <div className="bg-zinc-900/60 rounded-xl py-2 px-1 border border-white/[0.04]">
+                <span className="block text-[10px] text-zinc-400 font-medium">Protein</span>
                 <span className="font-bold text-white">{macroEstimates.macros.protein.grams}g</span>
               </div>
-              <div className="bg-white/5 rounded-2xl py-2 px-1 border border-white/5">
-                <span className="block text-[10px] text-slate-400 font-medium">Karbo</span>
+              <div className="bg-zinc-900/60 rounded-xl py-2 px-1 border border-white/[0.04]">
+                <span className="block text-[10px] text-zinc-400 font-medium">Karbo</span>
                 <span className="font-bold text-white">{macroEstimates.macros.carbs.grams}g</span>
               </div>
-              <div className="bg-white/5 rounded-2xl py-2 px-1 border border-white/5">
-                <span className="block text-[10px] text-slate-400 font-medium">Lemak</span>
+              <div className="bg-zinc-900/60 rounded-xl py-2 px-1 border border-white/[0.04]">
+                <span className="block text-[10px] text-zinc-400 font-medium">Lemak</span>
                 <span className="font-bold text-white">{macroEstimates.macros.fat.grams}g</span>
               </div>
             </div>
@@ -357,15 +358,15 @@ export default function DashboardView({
       <section className="pt-1">
         <button
           onClick={() => onNavigateTab('activity')}
-          className="w-full py-4 px-5 rounded-3xl bg-[#131520] hover:bg-[#181B2A] border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] text-slate-200 text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+          className="w-full py-3.5 px-5 rounded-2xl bg-[#111319] hover:bg-[#151821] border border-white/[0.08] text-zinc-300 text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
         >
           <span className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
-              <Clock className="w-4 h-4" />
+            <div className="w-7 h-7 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center">
+              <Clock className="w-3.5 h-3.5" />
             </div>
-            <span>Lihat Riwayat Presensi & Aktivitas Rekomendasi</span>
+            <span>Lihat Riwayat Presensi & Aktivitas</span>
           </span>
-          <ArrowRight className="w-4 h-4 text-slate-400" />
+          <ArrowRight className="w-4 h-4 text-zinc-500" />
         </button>
       </section>
     </div>

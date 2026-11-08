@@ -66,29 +66,29 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0D14] text-slate-100 flex flex-col justify-center px-4 py-8">
+    <div className="min-h-screen bg-[#090A0E] text-zinc-100 flex flex-col justify-center px-4 py-8">
       <div className="w-full max-w-sm mx-auto space-y-5">
         {/* Back to Gym Profile button if callback provided */}
         {onBackToLanding && (
           <button
             onClick={onBackToLanding}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Kembali ke Profil Gym</span>
+            <span>Kembali ke Beranda</span>
           </button>
         )}
 
         {/* Brand Header */}
         <div className="text-center space-y-2.5">
-          <div className="w-20 h-20 mx-auto rounded-3xl bg-white/10 border-2 border-amber-400/50 flex items-center justify-center shadow-md overflow-hidden p-1.5 ring-4 ring-amber-400/10">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-[#111319] border border-white/[0.08] flex items-center justify-center overflow-hidden p-2">
             <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <h1 className="text-2xl font-black tracking-tight text-white">
               TRISIS <span className="text-amber-400 font-black">GYM</span>
             </h1>
-            <p className="text-xs text-slate-400 font-semibold tracking-wide">Est. Bogor, Indonesia • Member Portal</p>
+            <p className="text-xs text-zinc-400 font-medium">Est. Bogor, Indonesia • Member Portal</p>
           </div>
           <div className="inline-block pt-0.5">
             <StatusBadge status="AKTIF" size="sm" />
@@ -96,48 +96,48 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
         </div>
 
         {/* Login Card */}
-        <div className="bg-[#131520] border border-white/10 rounded-3xl p-6 md:p-7 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-5">
+        <div className="bg-[#111319] border border-white/[0.08] rounded-2xl p-6 md:p-7 space-y-5">
           <div>
-            <h2 className="text-base font-extrabold text-white">Masuk ke Akun</h2>
-            <p className="text-xs text-slate-400 mt-0.5">Akses portal dashboard resmi Trisis Gym.</p>
+            <h2 className="text-base font-bold text-white">Masuk ke Akun</h2>
+            <p className="text-xs text-zinc-400 mt-0.5">Akses portal dashboard resmi Trisis Gym.</p>
           </div>
 
           {error && (
-            <div className="p-3 rounded-2xl bg-rose-950/40 border border-rose-800/40 text-rose-300 text-xs font-medium">
+            <div className="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20 text-rose-300 text-xs font-medium">
               {error}
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                Alamat Email Member / Staff
+              <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                Alamat Email
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="budi.santoso@trisisgym.com"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-900/80 border border-white/[0.08] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400/80 transition-colors"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
                 Kata Sandi
               </label>
               <div className="relative">
-                <KeyRound className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <KeyRound className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-white/5 border border-white/10 rounded-2xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-400/60 focus:bg-white/10 transition-colors"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-900/80 border border-white/[0.08] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400/80 transition-colors"
                   required
                 />
               </div>
@@ -147,41 +147,41 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full min-h-[46px] rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-2 border border-white/10 transition-colors cursor-pointer"
+              className="w-full min-h-[44px] rounded-xl bg-zinc-800 hover:bg-zinc-700/80 text-white font-semibold text-xs flex items-center justify-center gap-2 border border-white/[0.08] transition-colors cursor-pointer"
             >
               {loading ? 'Memverifikasi...' : 'Masuk ke Akun'}
             </button>
           </form>
 
           {/* Quick 1-Click Access */}
-          <div className="pt-2 border-t border-white/10 space-y-2">
+          <div className="pt-3 border-t border-white/[0.08] space-y-2">
             <button
               type="button"
               onClick={handleQuickDemoLogin}
-              className="w-full min-h-[44px] rounded-2xl bg-[#5D4E75] hover:bg-[#6D5D88] active:scale-[0.98] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-950/40 border border-purple-400/30 transition-all cursor-pointer"
+              className="w-full min-h-[44px] rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              Masuk Cepat Member (Budi Santoso)
+              <Sparkles className="w-4 h-4 text-neutral-950" />
+              <span>Masuk Cepat Member (Budi Santoso)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               type="button"
               onClick={handleQuickAdminLogin}
-              className="w-full min-h-[44px] rounded-2xl bg-amber-400/15 hover:bg-amber-400/25 active:scale-[0.98] text-amber-300 font-bold text-xs flex items-center justify-center gap-2 border border-amber-400/30 transition-all cursor-pointer"
+              className="w-full min-h-[44px] rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 font-semibold text-xs flex items-center justify-center gap-2 border border-white/[0.08] transition-all cursor-pointer"
             >
               <ShieldCheck className="w-4 h-4 text-amber-400" />
-              Masuk Cepat Admin (Staff / Kasir Gym)
+              <span>Masuk Cepat Admin (Staff / Kasir Gym)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
-            <p className="text-[11px] text-center text-slate-500 mt-1 font-medium">
-              Pilih akses peran untuk masuk langsung ke sistem portal.
+            <p className="text-[11px] text-center text-zinc-500 pt-1 font-medium">
+              Pilih akses instan untuk pengujian portal.
             </p>
           </div>
         </div>
 
         {/* Security Notice */}
-        <div className="flex items-center gap-2 justify-center text-xs text-slate-500 font-medium">
+        <div className="flex items-center gap-2 justify-center text-xs text-zinc-500 font-medium">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span>Portal Member Resmi • Trisis Gym Centre Bogor</span>
         </div>
