@@ -326,50 +326,50 @@ export default function GymLandingView({
       </header>
 
       {/* ============================================================== */}
-      {/* 2. DYNAMIC HERO SECTION WITH INTERACTIVE LIVE APP PREVIEW */}
+      {/* 2. DYNAMIC HERO SECTION — FULL-WIDTH HEADLINE & COMPANION CARD */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Headline, Value Props & CTAs */}
-          <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+      <section id="hero" className="relative overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Main Visual Centerpiece: Headline, Value Props & CTAs (Spans Full Width) */}
+          <div className="space-y-6 text-center">
             {/* Top Interactive Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Bogor</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+            {/* Main Headline (Full Width & Heroic) */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.14]">
               Latihan Lebih Terarah, <br />
               Bangun Fisik Impian di <span className="text-amber-400">Trisis Gym</span>.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
               Gym modern ramah pemula dengan alat beban lengkap, suasana fokus & nyaman, serta portal pintar untuk memantau presensi, program latihan, dan nutrisi harian.
             </p>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-[11px] font-medium text-zinc-300">
-              <span className="px-3 py-1 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-[11px] font-medium text-zinc-300">
+              <span className="px-3.5 py-1.5 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5 text-amber-400" />
                 Rating 4.9/5 dari 500+ Member
               </span>
-              <span className="px-3 py-1 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
+              <span className="px-3.5 py-1.5 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 Tanpa Biaya Admin Tersembunyi
               </span>
-              <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center gap-1.5 text-amber-400 font-semibold">
+              <span className="px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center gap-1.5 text-amber-400 font-semibold">
                 <Users className="w-3.5 h-3.5 text-amber-400" />
                 Paket Bulanan Hanya Rp 100.000 / Bulan
               </span>
             </div>
 
             {/* Dual CTAs: Daftar Member & Login Member */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => openRegister('bulanan')}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group shadow-lg shadow-amber-400/20"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group shadow-lg shadow-amber-400/20"
               >
                 <Zap className="w-4 h-4 fill-neutral-950 text-neutral-950" />
                 <span>Daftar Member Baru</span>
@@ -378,7 +378,7 @@ export default function GymLandingView({
 
               <button
                 onClick={onOpenLogin}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-zinc-200 hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-zinc-200 hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <User className="w-4 h-4 text-amber-400" />
                 <span>Login Member</span>
@@ -386,25 +386,25 @@ export default function GymLandingView({
             </div>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 pt-4 max-w-md mx-auto lg:mx-0">
-              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-white block">50+</span>
+            <div className="grid grid-cols-3 gap-3 pt-3 max-w-lg mx-auto">
+              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-xl font-bold text-white block">50+</span>
                 <span className="text-[10px] text-zinc-400 font-medium">Unit Alat Lengkap</span>
               </div>
-              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-amber-400 block">Rp 25k</span>
+              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-xl font-bold text-amber-400 block">Rp 25k</span>
                 <span className="text-[10px] text-zinc-400 font-medium">Mulai Per-Visit</span>
               </div>
-              <div className="bg-[#111319] p-3 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-emerald-400 block">16 Jam</span>
+              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-xl font-bold text-emerald-400 block">16 Jam</span>
                 <span className="text-[10px] text-zinc-400 font-medium">Operasional Harian</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: INTERACTIVE LIVE APP PREVIEW CARD */}
-          <div className="lg:col-span-5">
-            <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] space-y-4 relative">
+          {/* Underneath: INTERACTIVE LIVE APP PREVIEW CARD */}
+          <div className="max-w-xl mx-auto w-full pt-2">
+            <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] space-y-4 shadow-2xl relative">
               {/* Floating Top Badge */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -456,7 +456,7 @@ export default function GymLandingView({
               </div>
 
               {/* Dynamic Interactive Tab Content */}
-              <div className="min-h-[200px] flex flex-col justify-center">
+              <div className="min-h-[190px] flex flex-col justify-center">
                 {heroInteractiveTab === 'card' && (
                   <div className="rounded-xl p-4 bg-zinc-900/90 text-white border border-white/[0.08] space-y-3 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
@@ -473,12 +473,12 @@ export default function GymLandingView({
 
                     <div className="space-y-0.5">
                       <span className="text-[10px] text-zinc-400 block">Nama Anggota:</span>
-                      <strong className="text-sm font-bold block text-white">Budi Santoso</strong>
-                      <span className="text-[10px] text-zinc-400 font-mono">TRISIS-2026-089</span>
+                      <strong className="text-sm font-bold block text-white">{auth?.user?.name || 'Member Resmi Trisis Gym'}</strong>
+                      <span className="text-[10px] text-zinc-400 font-mono">{auth?.user?.memberId || 'TRISIS-2026-REG'}</span>
                     </div>
 
                     <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] text-zinc-400">
-                      <span>Berlaku s/d: 31 Des 2026</span>
+                      <span>Berlaku s/d: {auth?.user?.validUntil || '31 Des 2026'}</span>
                       <span className="font-semibold text-emerald-400">QR Check-in Siap</span>
                     </div>
                   </div>
