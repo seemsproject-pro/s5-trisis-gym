@@ -249,8 +249,8 @@ export default function GymLandingView({
       <header className="sticky top-0 z-40 bg-[#090A0E]/90 backdrop-blur-md border-b border-white/[0.08] px-4 md:px-8 py-3.5 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-zinc-800/80 border border-white/[0.08] flex items-center justify-center overflow-hidden p-0.5 shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-zinc-900 border border-amber-400/30 flex items-center justify-center overflow-hidden p-0.5 shrink-0 shadow-lg shadow-amber-400/15">
               <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
             </div>
             <div>
@@ -325,23 +325,75 @@ export default function GymLandingView({
         </div>
       </header>
 
+      {/* Dynamic Infinite Marquee Bar (Fitness First / Premium Athletic Style) */}
+      <div className="bg-[#0B0D12] border-b border-white/[0.06] overflow-hidden py-2.5 relative select-none">
+        <div className="animate-marquee whitespace-nowrap flex items-center gap-8 text-[11px] font-semibold text-zinc-400">
+          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> BUKA SETIAP HARI 06:00 - 22:00 WIB</span>
+          <span className="text-zinc-600">•</span>
+          <span className="flex items-center gap-1.5 text-amber-300"><Sparkles className="w-3.5 h-3.5 text-amber-400" /> 50+ UNIT ALAT BEBAN & KARDIO LENGKAP</span>
+          <span className="text-zinc-600">•</span>
+          <span>TANPA BIAYA ADMIN TERSEMBUNYI</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-emerald-400 font-bold">PAKET BULANAN RP 100.000 / BULAN</span>
+          <span className="text-zinc-600">•</span>
+          <span>PER-VISIT RP 25.000 / KUNJUNGAN</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-zinc-300">SHOWER AIR BERSIH & LOCKER HIGIENIS</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-amber-400 font-bold">KONSULTASI WORKOUT & TARGET MAKRO NUTRISI</span>
+          <span className="text-zinc-600">•</span>
+          <span>RATING 4.9/5 DARI 500+ MEMBER BOGOR</span>
+          <span className="text-zinc-600">•</span>
+          {/* Seamless loop repeat */}
+          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> BUKA SETIAP HARI 06:00 - 22:00 WIB</span>
+          <span className="text-zinc-600">•</span>
+          <span className="flex items-center gap-1.5 text-amber-300"><Sparkles className="w-3.5 h-3.5 text-amber-400" /> 50+ UNIT ALAT BEBAN & KARDIO LENGKAP</span>
+          <span className="text-zinc-600">•</span>
+          <span>TANPA BIAYA ADMIN TERSEMBUNYI</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-emerald-400 font-bold">PAKET BULANAN RP 100.000 / BULAN</span>
+          <span className="text-zinc-600">•</span>
+          <span>PER-VISIT RP 25.000 / KUNJUNGAN</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-zinc-300">SHOWER AIR BERSIH & LOCKER HIGIENIS</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-amber-400 font-bold">KONSULTASI WORKOUT & TARGET MAKRO NUTRISI</span>
+          <span className="text-zinc-600">•</span>
+          <span>RATING 4.9/5 DARI 500+ MEMBER BOGOR</span>
+          <span className="text-zinc-600">•</span>
+        </div>
+      </div>
+
       {/* ============================================================== */}
       {/* 2. DYNAMIC HERO SECTION — FULL-WIDTH HEADLINE & COMPANION CARD */}
       {/* ============================================================== */}
       <section id="hero" className="relative overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
-        <div className="max-w-4xl mx-auto space-y-12">
+        {/* Subtle Ambient Radial Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto space-y-10 relative">
           {/* Main Visual Centerpiece: Headline, Value Props & CTAs (Spans Full Width) */}
           <div className="space-y-6 text-center">
-            {/* Top Interactive Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Bogor</span>
+            {/* Prominent Official Emblem with Ambient Glow & Gentle Float Motion */}
+            <div className="relative inline-block mx-auto mb-2">
+              <div className="absolute inset-0 bg-amber-500/25 rounded-full blur-2xl transform scale-125 animate-pulse-glow" />
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto drop-shadow-[0_12px_28px_rgba(245,158,11,0.35)] animate-float-slow">
+                <img src="/logo.png" alt="Trisis Gym Official Crest" className="w-full h-full object-contain" />
+              </div>
             </div>
 
-            {/* Main Headline (Full Width & Heroic) */}
+            {/* Top Interactive Status Pill */}
+            <div className="flex justify-center">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Bogor</span>
+              </div>
+            </div>
+
+            {/* Main Headline (Full Width & Heroic with Gold Gradient) */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.14]">
               Latihan Lebih Terarah, <br />
-              Bangun Fisik Impian di <span className="text-amber-400">Trisis Gym</span>.
+              Bangun Fisik Impian di <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">Trisis Gym</span>.
             </h1>
 
             {/* Subtitle */}

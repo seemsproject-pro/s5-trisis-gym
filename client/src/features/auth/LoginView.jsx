@@ -127,7 +127,7 @@ export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegis
 
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-[#111319] border border-white/[0.08] flex items-center justify-center overflow-hidden p-2">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-zinc-900 border border-amber-400/30 flex items-center justify-center overflow-hidden p-1 shadow-lg shadow-amber-400/15 animate-float-slow">
             <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
           </div>
           <div>
