@@ -452,285 +452,128 @@ export default function GymLandingView({
             </div>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-3 gap-3 pt-3 max-w-lg mx-auto">
-              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-xl font-bold text-white block">50+</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Unit Alat Lengkap</span>
+            <div className="grid grid-cols-3 gap-2.5 pt-2 max-w-md mx-auto">
+              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-white block">50+</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Unit Alat</span>
               </div>
-              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-xl font-bold text-amber-400 block">Rp 25k</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Mulai Per-Visit</span>
+              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-amber-400 block">Rp 25k</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Per-Visit</span>
               </div>
-              <div className="bg-[#111319] p-3.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-xl font-bold text-emerald-400 block">16 Jam</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Operasional Harian</span>
+              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
+                <span className="text-lg font-bold text-emerald-400 block">16 Jam</span>
+                <span className="text-[10px] text-zinc-400 font-medium">Operasional</span>
               </div>
-            </div>
-          </div>
-
-          {/* Underneath: INTERACTIVE LIVE APP PREVIEW CARD */}
-          <div className="max-w-xl mx-auto w-full pt-2">
-            <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] space-y-4 shadow-2xl relative">
-              {/* Floating Top Badge */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider block">Fitur Pendamping</span>
-                    <strong className="text-xs font-bold text-white">Trisis Member Companion</strong>
-                  </div>
-                </div>
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
-                  Pratinjau Interaktif
-                </span>
-              </div>
-
-              {/* Interactive Tabs */}
-              <div className="grid grid-cols-3 p-1 bg-zinc-900/80 rounded-xl text-[11px] font-semibold border border-white/[0.04]">
-                <button
-                  onClick={() => setHeroInteractiveTab('card')}
-                  className={`py-2 rounded-lg transition-all cursor-pointer ${
-                    heroInteractiveTab === 'card'
-                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Digital Pass
-                </button>
-                <button
-                  onClick={() => setHeroInteractiveTab('streak')}
-                  className={`py-2 rounded-lg transition-all cursor-pointer ${
-                    heroInteractiveTab === 'streak'
-                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Streak Presensi
-                </button>
-                <button
-                  onClick={() => setHeroInteractiveTab('coach')}
-                  className={`py-2 rounded-lg transition-all cursor-pointer ${
-                    heroInteractiveTab === 'coach'
-                      ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  AI Coach
-                </button>
-              </div>
-
-              {/* Dynamic Interactive Tab Content */}
-              <div className="min-h-[190px] flex flex-col justify-center">
-                {heroInteractiveTab === 'card' && (
-                  <div className="rounded-xl p-4 bg-zinc-900/90 text-white border border-white/[0.08] space-y-3 animate-in fade-in duration-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-zinc-800 border border-white/[0.08] p-0.5 flex items-center justify-center shrink-0">
-                          <img src="/logo.png" alt="Trisis Logo" className="w-full h-full object-contain" />
-                        </div>
-                        <span className="font-bold text-xs tracking-wider text-white uppercase">TRISIS MEMBER PASS</span>
-                      </div>
-                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        AKTIF
-                      </span>
-                    </div>
-
-                    <div className="space-y-0.5">
-                      <span className="text-[10px] text-zinc-400 block">Nama Anggota:</span>
-                      <strong className="text-sm font-bold block text-white">{auth?.user?.name || 'Member Resmi Trisis Gym'}</strong>
-                      <span className="text-[10px] text-zinc-400 font-mono">{auth?.user?.memberId || 'TRISIS-2026-REG'}</span>
-                    </div>
-
-                    <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] text-zinc-400">
-                      <span>Berlaku s/d: {auth?.user?.validUntil || '31 Des 2026'}</span>
-                      <span className="font-semibold text-emerald-400">QR Check-in Siap</span>
-                    </div>
-                  </div>
-                )}
-
-                {heroInteractiveTab === 'streak' && (
-                  <div className="rounded-xl p-4 bg-zinc-900/90 border border-white/[0.08] space-y-3 animate-in fade-in duration-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-amber-400 text-neutral-950 flex items-center justify-center font-bold">
-                          <Flame className="w-4 h-4 fill-neutral-950" />
-                        </div>
-                        <div>
-                          <strong className="text-xs font-bold text-white block">12 Hari Beruntun</strong>
-                          <span className="text-[10px] text-zinc-400">Streak Latihan Konsisten</span>
-                        </div>
-                      </div>
-                      <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded">
-                        Rajin
-                      </span>
-                    </div>
-
-                    {/* Weekly Dots */}
-                    <div className="grid grid-cols-7 gap-1.5 text-center text-[10px] pt-1">
-                      {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map((day, idx) => (
-                        <div key={idx} className="space-y-1">
-                          <span className="text-zinc-500 block text-[9px]">{day}</span>
-                          <div className={`w-full py-1 rounded font-bold ${
-                            idx < 5 ? 'bg-amber-400 text-neutral-950' : 'bg-zinc-800 text-zinc-500'
-                          }`}>
-                            {idx < 5 ? '✓' : '-'}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <p className="text-[10px] text-zinc-400 leading-tight pt-1">
-                      Check-in mandiri di gym untuk otomatis memperbarui streak dan riwayat aktivitas Anda.
-                    </p>
-                  </div>
-                )}
-
-                {heroInteractiveTab === 'coach' && (
-                  <div className="rounded-xl p-4 bg-zinc-900/90 border border-white/[0.08] space-y-2.5 animate-in fade-in duration-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-zinc-800 text-amber-400 flex items-center justify-center">
-                          <Sparkles className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <strong className="text-xs font-bold text-white block">AI Fitness Advisor</strong>
-                          <span className="text-[10px] text-zinc-400">Rekomendasi Workout Split</span>
-                        </div>
-                      </div>
-                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
-                        BASELINE
-                      </span>
-                    </div>
-                    <p className="text-xs text-zinc-300 leading-relaxed">
-                      "Berdasarkan frekuensi 4 hari/minggu dan target hipertrofi, pola latihan ideal Anda adalah Upper/Lower Split."
-                    </p>
-                    <div className="text-[10px] text-zinc-400 pt-1 border-t border-white/[0.06] flex items-center justify-between">
-                      <span>Upper / Lower Body Split</span>
-                      <span className="font-semibold text-zinc-200">4 Sesi / Minggu</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Test Button */}
-              <button
-                onClick={onOpenLogin}
-                className="w-full py-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5"
-              >
-                <span>Buka Aplikasi Member</span>
-                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
-              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* ============================================================== */}
-      {/* 3. LIVE GYM CROWD METER & JAM KUNJUNGAN TERBAIK */}
+      {/* 3. FITUR INTERAKTIF: LIVE CROWD & KALKULATOR (2-KOLOM COMPACT) */}
       {/* ============================================================== */}
-      <section id="kepadatan" className="py-12 md:py-16 px-4 md:px-8 max-w-5xl mx-auto space-y-6">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-            Live Kepadatan
+      <section id="kepadatan" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-5">
+        <div className="text-center space-y-1 max-w-xl mx-auto">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+            Fitur Cerdas Member
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            Status Kepadatan & Waktu Latihan Terbaik
+          <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+            Live Kepadatan & Kalkulator Penghematan
           </h2>
-          <p className="text-xs md:text-sm text-zinc-400">
-            Pantau estimasi kepadatan pengunjung Trisis Gym Bogor agar sesi latihanmu lebih efisien dan bebas antre alat.
+          <p className="text-xs text-zinc-400">
+            Pantau jam latihan terbaik bebas antre dan kalkulasikan efisiensi biaya membership Anda.
           </p>
         </div>
 
-        {/* Interactive Crowd Meter Box */}
-        <div className="bg-[#111319] border border-white/[0.08] rounded-2xl p-5 md:p-6 space-y-5">
-          {/* Slot Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              { id: 'pagi', title: 'Pagi Hari', time: '06.00 - 10.00' },
-              { id: 'siang', title: 'Siang Hari', time: '11.00 - 15.00' },
-              { id: 'sore', title: 'Sore Hari', time: '16.00 - 19.30' },
-              { id: 'malam', title: 'Malam Hari', time: '20.00 - 22.00' }
-            ].map((slot) => {
-              const isActive = crowdTime === slot.id;
-              return (
-                <button
-                  key={slot.id}
-                  onClick={() => setCrowdTime(slot.id)}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                    isActive 
-                      ? 'border-zinc-700 bg-zinc-800 text-white font-bold' 
-                      : 'border-white/[0.06] hover:bg-zinc-800/50 text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  <strong className={`block text-xs font-bold ${isActive ? 'text-white' : 'text-zinc-200'}`}>
-                    {slot.title}
-                  </strong>
-                  <span className="text-[10px] text-zinc-400 font-medium">{slot.time} WIB</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Slot Status Display */}
-          <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.06] space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-amber-400" />
-                <span className="text-xs font-bold text-white">
-                  Waktu: {crowdSlots[crowdTime].time}
-                </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
-                  {crowdSlots[crowdTime].label}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
+          {/* KOLOM 1: LIVE GYM CROWD METER */}
+          <div className="bg-[#111319] border border-white/[0.08] rounded-2xl p-5 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+                <div className="flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-bold text-white">Status Kepadatan Alat</h3>
+                </div>
+                <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded font-bold">
+                  Live Update
                 </span>
               </div>
-              <span className="text-xs font-bold text-zinc-300">
-                Kapasitas Terisi: ~{crowdSlots[crowdTime].percent}%
-              </span>
+
+              {/* Slot Tabs */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                {[
+                  { id: 'pagi', title: 'Pagi', time: '06-10' },
+                  { id: 'siang', title: 'Siang', time: '11-15' },
+                  { id: 'sore', title: 'Sore', time: '16-19' },
+                  { id: 'malam', title: 'Malam', time: '20-22' }
+                ].map((slot) => {
+                  const isActive = crowdTime === slot.id;
+                  return (
+                    <button
+                      key={slot.id}
+                      onClick={() => setCrowdTime(slot.id)}
+                      className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                        isActive 
+                          ? 'border-zinc-700 bg-zinc-800 text-white font-bold' 
+                          : 'border-white/[0.06] hover:bg-zinc-800/50 text-zinc-400'
+                      }`}
+                    >
+                      <strong className="block text-xs">{slot.title}</strong>
+                      <span className="text-[9px] text-zinc-400">{slot.time} WIB</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Status Display Card */}
+              <div className="p-3.5 rounded-xl bg-zinc-900/70 border border-white/[0.06] space-y-2.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-300 font-medium">Jam: {crowdSlots[crowdTime].time} WIB</span>
+                  <span className="font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded text-[10px]">
+                    {crowdSlots[crowdTime].label} ({crowdSlots[crowdTime].percent}%)
+                  </span>
+                </div>
+
+                <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+                  <div 
+                    className="h-full bg-amber-400 transition-all duration-500 rounded-full"
+                    style={{ width: `${crowdSlots[crowdTime].percent}%` }}
+                  />
+                </div>
+
+                <p className="text-[11px] text-zinc-300 leading-relaxed">
+                  💡 <strong className="text-amber-400">Tips:</strong> {crowdSlots[crowdTime].note}
+                </p>
+              </div>
             </div>
 
-            {/* Meter Bar */}
-            <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
-              <div 
-                className="h-full bg-amber-400 transition-all duration-500 rounded-full"
-                style={{ width: `${crowdSlots[crowdTime].percent}%` }}
-              />
+            <div className="pt-2 border-t border-white/[0.04] text-[10px] text-zinc-500 flex items-center justify-between">
+              <span>Sensor Kapasitas Trisis Gym</span>
+              <span>Kapasitas Maksimal: 75 Orang</span>
             </div>
-
-            <p className="text-xs text-zinc-300 leading-relaxed pt-1">
-              💡 <strong className="text-amber-400">Tips Waktu:</strong> {crowdSlots[crowdTime].note}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* 4. INTERACTIVE SAVINGS CALCULATOR (HITUNG PENGHEMATANMU) */}
-      {/* ============================================================== */}
-      <section id="kalkulator" className="py-12 md:py-16 px-4 md:px-8 bg-[#090A0E] border-y border-white/[0.08]">
-        <div className="max-w-5xl mx-auto space-y-8">
-          <div className="text-center space-y-2 max-w-xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-              Kalkulator Hemat
-            </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-              Hitung Penghematan Membership-mu
-            </h2>
-            <p className="text-xs md:text-sm text-zinc-400">
-              Geser frekuensi latihan mingguanmu untuk mengetahui estimasi biaya per sesi dan paket yang paling menguntungkan.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            {/* Left Control Card */}
-            <div className="md:col-span-6 bg-[#111319] p-6 rounded-2xl border border-white/[0.08] space-y-5">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label htmlFor="frequency-slider" className="text-xs font-bold text-zinc-300">
-                    Frekuensi Latihan per Minggu:
+          {/* KOLOM 2: KALKULATOR PENGHEMATAN BIAYA */}
+          <div id="kalkulator" className="bg-[#111319] border border-amber-500/25 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-bold text-white">Simulasi Biaya Membership</h3>
+                </div>
+                <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded">
+                  Hemat s/d 70%
+                </span>
+              </div>
+
+              {/* Frequency Range Slider */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs">
+                  <label htmlFor="frequency-slider" className="font-semibold text-zinc-300">
+                    Target Sesi per Minggu:
                   </label>
-                  <span className="text-base font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20">
+                  <span className="font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-lg border border-amber-400/20 text-xs">
                     {workoutDaysPerWeek} Hari / Minggu
                   </span>
                 </div>
@@ -742,105 +585,58 @@ export default function GymLandingView({
                   step="1"
                   value={workoutDaysPerWeek}
                   onChange={(e) => setWorkoutDaysPerWeek(Number(e.target.value))}
-                  className="w-full accent-amber-400 h-2 bg-zinc-800 rounded-lg cursor-pointer"
+                  className="w-full accent-amber-400 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-zinc-400 font-bold px-1">
-                  <span>1 Hari (Santai)</span>
-                  <span>3 Hari (Ideal)</span>
-                  <span>6 Hari (Intensif)</span>
-                </div>
               </div>
 
-              {/* Breakdown Details */}
-              <div className="space-y-2.5 pt-2 border-t border-white/[0.06] text-xs">
-                <div className="flex justify-between text-zinc-400">
-                  <span>Estimasi Sesi Latihan per Bulan:</span>
-                  <strong className="text-white">{monthlySessions} Kunjungan</strong>
+              {/* Price Comparison Row */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="p-3 rounded-xl bg-zinc-900/80 border border-amber-400/20 space-y-0.5">
+                  <span className="text-[10px] text-zinc-400 block">Paket Bulanan:</span>
+                  <span className="text-base font-extrabold text-amber-400">
+                    Rp {costPerSessionMonthly.toLocaleString('id-ID')}
+                  </span>
+                  <span className="text-[9px] text-zinc-500 block">/ sesi ({monthlySessions}x latihan)</span>
+                  <span className="text-[10px] font-bold text-emerald-400 block pt-0.5">
+                    Hemat Rp {Math.max(0, monthlySavings).toLocaleString('id-ID')}/bln
+                  </span>
                 </div>
-                <div className="flex justify-between text-zinc-400">
-                  <span>Biaya jika Bayar Harian (Rp 25k/sesi):</span>
-                  <strong className="text-white">Rp {costIfPerVisit.toLocaleString('id-ID')}</strong>
+
+                <div className="p-3 rounded-xl bg-zinc-900/80 border border-white/[0.04] space-y-0.5">
+                  <span className="text-[10px] text-zinc-400 block">Bayar Harian:</span>
+                  <span className="text-base font-bold text-zinc-300">
+                    Rp {costIfPerVisit.toLocaleString('id-ID')}
+                  </span>
+                  <span className="text-[9px] text-zinc-500 block">total / bulan (Rp 25k/sesi)</span>
+                  <span className="text-[10px] text-zinc-500 block pt-0.5">Tanpa diskon paket</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Comparison Recommendation Card */}
-            <div className="md:col-span-6 bg-[#111319] border border-amber-500/30 rounded-2xl p-6 text-white space-y-4 relative">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
-                  Rekomendasi Paket Hemat
-                </span>
-                <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  Hemat Maksimal
-                </span>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold">Paket Mahasiswa / Bulanan</h3>
-                <p className="text-xs text-zinc-400 mt-0.5">
-                  Dengan {workoutDaysPerWeek}x latihan per minggu, biaya per kunjunganmu menjadi super hemat:
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="p-3 rounded-xl bg-zinc-900/80 border border-amber-400/20 flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Bulanan (Rp 100k):</span>
-                    <span className="text-lg font-bold text-amber-400">
-                      Rp {costPerSessionMonthly.toLocaleString('id-ID')}
-                    </span>
-                    <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] text-zinc-400 block">Hemat per Bulan:</span>
-                    <span className="text-sm font-bold text-emerald-400">
-                      +Rp {Math.max(0, monthlySavings).toLocaleString('id-ID')}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-zinc-900/80 border border-white/[0.04] flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Tahunan (Rp 1.2jt):</span>
-                    <span className="text-lg font-bold text-white">
-                      Rp {costPerSessionAnnual.toLocaleString('id-ID')}
-                    </span>
-                    <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] text-zinc-400 block">Hemat per Tahun:</span>
-                    <span className="text-sm font-bold text-emerald-400">
-                      +Rp {Math.max(0, annualSavings).toLocaleString('id-ID')}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={() => openRegister('bulanan')}
-                className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-400/15"
-              >
-                <span>Daftar Paket Bulanan Ini</span>
-                <ArrowRight className="w-4 h-4 text-neutral-950" />
-              </button>
-            </div>
+            <button
+              onClick={() => openRegister('bulanan')}
+              className="w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shadow-amber-400/15"
+            >
+              <span>Daftar Paket Bulanan (Rp 100k)</span>
+              <ArrowRight className="w-3.5 h-3.5 text-neutral-950" />
+            </button>
           </div>
         </div>
       </section>
 
       {/* ============================================================== */}
-      {/* 5. PILIHAN PAKET MEMBERSHIP (PRICING & TAWARAN) */}
       {/* ============================================================== */}
-      <section id="paket" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+      {/* 4. PILIHAN PAKET MEMBERSHIP (PRICING & TAWARAN) */}
+      {/* ============================================================== */}
+      <section id="paket" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-6">
+        <div className="text-center space-y-1 max-w-xl mx-auto">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
             Tawaran Membership
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
             Pilihan Paket Transparan Tanpa Komitmen Ribet
           </h2>
-          <p className="text-xs md:text-sm text-zinc-400">
+          <p className="text-xs text-zinc-400">
             Pilih paket yang paling sesuai dengan target dan frekuensi latihanmu.
           </p>
         </div>
@@ -850,7 +646,7 @@ export default function GymLandingView({
           <div className="flex flex-wrap items-center gap-1.5 p-1 bg-zinc-900/80 rounded-xl text-xs font-semibold w-full sm:w-auto border border-white/[0.04]">
             <button
               onClick={() => setSelectedPlanCategory('all')}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'all'
                   ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
                   : 'text-zinc-400 hover:text-white'
@@ -860,7 +656,7 @@ export default function GymLandingView({
             </button>
             <button
               onClick={() => setSelectedPlanCategory('monthly')}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'monthly'
                   ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
                   : 'text-zinc-400 hover:text-white'
@@ -870,7 +666,7 @@ export default function GymLandingView({
             </button>
             <button
               onClick={() => setSelectedPlanCategory('daily')}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 selectedPlanCategory === 'daily'
                   ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
                   : 'text-zinc-400 hover:text-white'
@@ -884,17 +680,17 @@ export default function GymLandingView({
             onClick={() => setShowComparisonModal(true)}
             className="text-xs font-semibold text-amber-400 hover:underline flex items-center gap-1.5 cursor-pointer py-1"
           >
-            <Layers className="w-4 h-4 text-amber-400" />
+            <Layers className="w-3.5 h-3.5 text-amber-400" />
             <span>Bandingkan Detail Semua Fitur Paket</span>
           </button>
         </div>
 
         {/* Pricing Cards Grid — 3 Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
           {filteredPlans.map((p) => (
             <div
               key={p.id}
-              className={`rounded-2xl p-6 border flex flex-col justify-between transition-all duration-200 ${
+              className={`rounded-2xl p-5 border flex flex-col justify-between transition-all duration-200 ${
                 p.popular
                   ? 'border-amber-400/50 bg-[#141620] relative ring-1 ring-amber-400/30 shadow-xl shadow-amber-400/5'
                   : 'bg-[#111319] border-white/[0.08] hover:border-zinc-700'
@@ -902,7 +698,7 @@ export default function GymLandingView({
             >
               <div>
                 {/* Top Badge */}
-                <div className="flex items-center justify-between mb-3 min-h-[24px]">
+                <div className="flex items-center justify-between mb-2.5 min-h-[22px]">
                   {p.badge ? (
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${p.badgeColor}`}>
                       {p.badge}
@@ -915,19 +711,19 @@ export default function GymLandingView({
                   )}
                 </div>
 
-                <h3 className="font-bold text-base text-white">{p.name}</h3>
-                <p className="text-xs text-zinc-400 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
+                <h3 className="font-bold text-sm sm:text-base text-white">{p.name}</h3>
+                <p className="text-xs text-zinc-400 mt-0.5 min-h-[30px] leading-relaxed">{p.desc}</p>
 
-                <div className="my-4 pt-4 border-t border-white/[0.06]">
-                  <span className="text-3xl font-extrabold text-white">{p.price}</span>
+                <div className="my-3 pt-3 border-t border-white/[0.06]">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white">{p.price}</span>
                   <span className="text-xs text-zinc-400 font-medium ml-1">{p.period}</span>
                 </div>
 
                 {/* Features list */}
-                <ul className="space-y-2.5 text-xs text-zinc-300 mb-6">
-                  {p.features.map((feat, idx) => (
+                <ul className="space-y-2 text-xs text-zinc-300 mb-5">
+                  {p.features.slice(0, 4).map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -936,7 +732,7 @@ export default function GymLandingView({
 
               <button
                 onClick={() => openRegister(p.id)}
-                className={`w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                className={`w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   p.popular
                     ? 'bg-amber-400 hover:bg-amber-300 text-neutral-950 shadow-md shadow-amber-400/20'
                     : 'bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60'
@@ -951,34 +747,34 @@ export default function GymLandingView({
       </section>
 
       {/* ============================================================== */}
-      {/* 6. FASILITAS GYM DENGAN FOTO ASLI & FILTER KATEGORI */}
+      {/* 5. FASILITAS GYM (COMPACT MODERN GRID) */}
       {/* ============================================================== */}
-      <section id="fasilitas" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+      <section id="fasilitas" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-6">
+        <div className="text-center space-y-1 max-w-xl mx-auto">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
             Fasilitas Standar Modern
           </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
             Ruang Latihan Nyaman & Peralatan Terawat
           </h2>
-          <p className="text-xs md:text-sm text-zinc-400">
-            Jelajahi setiap sudut Trisis Gym yang dirancang untuk mendukung berbagai gaya dan target latihanmu.
+          <p className="text-xs text-zinc-400">
+            Jelajahi setiap sudut Trisis Gym yang dirancang untuk mendukung target latihanmu.
           </p>
         </div>
 
         {/* Facility Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-1.5">
           {[
             { id: 'all', label: 'Semua Fasilitas' },
-            { id: 'strength', label: '🏋️ Area Beban (Strength)' },
-            { id: 'cardio', label: '🏃 Area Kardio' },
-            { id: 'functional', label: '🧘 Fungsional & Senam' },
-            { id: 'amenity', label: '🚿 Locker & Shower' }
+            { id: 'strength', label: '🏋️ Area Beban' },
+            { id: 'cardio', label: '🏃 Kardio' },
+            { id: 'functional', label: '🧘 Fungsional' },
+            { id: 'amenity', label: '🚿 Shower & Locker' }
           ].map((cat) => (
             <button
               key={cat.id}
               onClick={() => setFacilityFilter(cat.id)}
-              className={`text-xs font-semibold px-3.5 py-2 rounded-xl transition-all cursor-pointer border ${
+              className={`text-xs font-semibold px-3 py-1.5 rounded-xl transition-all cursor-pointer border ${
                 facilityFilter === cat.id
                   ? 'bg-zinc-800 text-white border-zinc-700/80 font-bold'
                   : 'bg-[#111319] text-zinc-400 border-white/[0.08] hover:bg-zinc-800'
@@ -989,16 +785,16 @@ export default function GymLandingView({
           ))}
         </div>
 
-        {/* Facility Cards Grid with Real Generated Images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Facility Cards Grid with Compact Height */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredFacilities.map((fac) => (
             <div
               key={fac.id}
               onClick={() => setSelectedFacilityModal(fac)}
               className="bg-[#111319] rounded-2xl overflow-hidden border border-white/[0.08] hover:border-zinc-700 transition-all duration-200 group cursor-pointer flex flex-col justify-between"
             >
-              {/* Facility Image Cover */}
-              <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-zinc-900">
+              {/* Facility Image Cover with compact height */}
+              <div className="relative w-full h-40 sm:h-44 overflow-hidden bg-zinc-900">
                 <img
                   src={fac.image}
                   alt={fac.title}
@@ -1006,26 +802,25 @@ export default function GymLandingView({
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111319] via-black/20 to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded bg-black/80 text-zinc-200 border border-white/10 backdrop-blur-md">
+                <div className="absolute top-2.5 left-2.5">
+                  <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-black/80 text-zinc-200 border border-white/10 backdrop-blur-md">
                     {fac.tag}
                   </span>
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <h3 className="text-base font-bold">{fac.title}</h3>
+                <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                  <h3 className="text-sm font-bold">{fac.title}</h3>
                 </div>
               </div>
 
               {/* Facility Description & Highlights */}
-              <div className="p-5 space-y-3">
-                <p className="text-xs text-zinc-400 leading-relaxed">{fac.desc}</p>
+              <div className="p-3.5 space-y-2">
+                <p className="text-[11px] text-zinc-400 leading-relaxed line-clamp-2">{fac.desc}</p>
 
-                {/* Micro tags */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {fac.highlights.map((item, hIdx) => (
+                <div className="flex flex-wrap gap-1 pt-0.5">
+                  {fac.highlights.slice(0, 3).map((item, hIdx) => (
                     <span 
                       key={hIdx} 
-                      className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-white/[0.04] text-zinc-300"
+                      className="text-[9px] font-medium px-2 py-0.5 rounded-lg bg-zinc-800/80 border border-white/[0.04] text-zinc-300"
                     >
                       ✓ {item}
                     </span>
@@ -1038,124 +833,107 @@ export default function GymLandingView({
       </section>
 
       {/* ============================================================== */}
-      {/* 7. INTERACTIVE FAQ ACCORDION */}
+      {/* 5. FAQ & LOKASI GYM (2-KOLOM COMPACT) */}
       {/* ============================================================== */}
-      <section id="faq" className="py-12 md:py-16 px-4 md:px-8 max-w-4xl mx-auto space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-            Pertanyaan Umum
-          </span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            Sering Ditanyakan (FAQ)
-          </h2>
-          <p className="text-xs md:text-sm text-zinc-400">
-            Segala hal yang perlu kamu ketahui sebelum memulai latihan di Trisis Gym.
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          {faqs.map((faq, fIdx) => {
-            const isOpen = openFaq === fIdx;
-            return (
-              <div
-                key={fIdx}
-                className="bg-[#111319] border border-white/[0.08] rounded-xl overflow-hidden transition-all"
-              >
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : fIdx)}
-                  className="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-zinc-800/40 transition-colors cursor-pointer gap-3"
-                >
-                  <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-2.5">
-                    <HelpCircle className="w-4 h-4 text-amber-400 shrink-0" />
-                    {faq.q}
-                  </span>
-                  <div className="shrink-0 text-zinc-400">
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-amber-400" /> : <ChevronDown className="w-4 h-4" />}
-                  </div>
-                </button>
-
-                {isOpen && (
-                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 text-xs text-zinc-300 leading-relaxed border-t border-white/[0.06] bg-zinc-900/40">
-                    <p className="pt-3">{faq.a}</p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* 8. LOKASI, JAM OPERASIONAL & AJAKAN */}
-      {/* ============================================================== */}
-      <section id="lokasi" className="py-12 md:py-16 px-4 md:px-8 bg-[#090A0E] border-t border-white/[0.08]">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <section id="faq" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-6 border-t border-white/[0.08]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* KOLOM KIRI: PERTANYAAN UMUM (FAQ) */}
           <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-              Lokasi & Kunjungan
-            </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-              Kunjungi Trisis Gym Hari Ini
-            </h2>
-            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
-              Mau cek suasana gym atau konsultasi langsung sebelum bergabung? Resepsionis dan trainer kami siap menyambut kedatanganmu di gym.
-            </p>
-
-            <div className="space-y-3 pt-2 text-xs">
-              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#111319] border border-white/[0.08]">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-white">Alamat Trisis Gym Bogor</strong>
-                  <span className="text-zinc-400">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#111319] border border-white/[0.08]">
-                <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-white">Jam Operasional Lengkap</strong>
-                  <span className="text-zinc-400">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
-                </div>
-              </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+                FAQ
+              </span>
+              <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight mt-1">
+                Pertanyaan yang Sering Diajukan
+              </h2>
+              <p className="text-xs text-zinc-400 mt-0.5">
+                Hal penting seputar latihan, fasilitas, dan membership di Trisis Gym.
+              </p>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
-              <a
-                href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20mau%20tanya%20info%20membership"
-                target="_blank"
-                rel="noreferrer"
-                className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Chat WhatsApp Kasir</span>
-              </a>
+            <div className="space-y-2">
+              {faqs.map((faq, fIdx) => {
+                const isOpen = openFaq === fIdx;
+                return (
+                  <div
+                    key={fIdx}
+                    className="bg-[#111319] border border-white/[0.08] rounded-xl overflow-hidden transition-all"
+                  >
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : fIdx)}
+                      className="w-full p-3.5 flex items-center justify-between text-left hover:bg-zinc-800/40 transition-colors cursor-pointer gap-2.5"
+                    >
+                      <span className="text-xs font-bold text-white flex items-center gap-2">
+                        <HelpCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                        {faq.q}
+                      </span>
+                      <div className="shrink-0 text-zinc-400">
+                        {isOpen ? <ChevronUp className="w-3.5 h-3.5 text-amber-400" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </div>
+                    </button>
 
-              <button
-                onClick={onOpenLogin}
-                className="px-5 py-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <span>Masuk Portal Member</span>
-                <ChevronRight className="w-4 h-4 text-zinc-400" />
-              </button>
+                    {isOpen && (
+                      <div className="px-3.5 pb-3.5 pt-0 text-xs text-zinc-300 leading-relaxed border-t border-white/[0.06] bg-zinc-900/40">
+                        <p className="pt-2 text-[11.5px]">{faq.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Location Map Preview Mockup */}
-          <div className="bg-[#111319] rounded-2xl p-6 border border-white/[0.08] space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-zinc-300">Peta Akses Gym</span>
+          {/* KOLOM KANAN: LOKASI & JAM OPERASIONAL */}
+          <div id="lokasi" className="space-y-4 bg-[#111319] p-5 md:p-6 rounded-2xl border border-white/[0.08]">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+                  Lokasi & Akses
+                </span>
+                <h3 className="text-base font-bold text-white mt-1">Kunjungi Trisis Gym Bogor</h3>
+              </div>
               <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
                 Buka Sekarang
               </span>
             </div>
-            <div className="h-48 rounded-xl bg-zinc-900 border border-white/[0.06] flex flex-col items-center justify-center text-center p-4">
-              <MapPin className="w-8 h-8 text-amber-400 mb-2" />
-              <strong className="font-bold text-sm text-white">Trisis Gym Bogor</strong>
-              <span className="text-[11px] text-zinc-400 mt-0.5">Bogor, Jawa Barat • Parkir Mobil & Motor Luas</span>
+
+            <div className="space-y-2.5 text-xs">
+              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-white text-xs">Alamat Gym</strong>
+                  <span className="text-zinc-400 text-[11px]">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
+                <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-white text-xs">Jam Operasional</strong>
+                  <span className="text-zinc-400 text-[11px]">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
+                </div>
+              </div>
             </div>
-            <p className="text-[11px] text-zinc-400 text-center">
-              Fasilitas parkir aman gratis dengan pengawasan CCTV 24 jam.
-            </p>
+
+            <div className="flex flex-col sm:flex-row gap-2 pt-1">
+              <a
+                href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20mau%20tanya%20info%20membership"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>WhatsApp Kasir</span>
+              </a>
+
+              <button
+                onClick={onOpenLogin}
+                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white border border-zinc-700/60 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <span>Masuk Member</span>
+                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
