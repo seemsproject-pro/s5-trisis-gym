@@ -326,30 +326,31 @@ export default function GymLandingView({
       {/* 2. HERO SECTION — CLEAN, MINIMALIST & ELEGAN */}
       {/* ============================================================== */}
       <section id="hero" className="relative overflow-hidden pt-16 pb-20 md:pt-28 md:pb-32 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E] flex items-center justify-center min-h-[580px]">
-        {/* Real Gym Community Background Banner */}
+        {/* Real Gym Community Background Banner — Bright, Clear & Vibrant */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
           <img
             src="/gym-hero-banner.jpg"
             alt="Suasana Komunitas Trisis Gym Bogor"
-            className="w-full h-full object-cover object-[center_32%] filter brightness-[0.32] contrast-[1.1] saturate-[0.9] scale-105"
+            className="w-full h-full object-cover object-[center_32%] filter brightness-[0.70] contrast-[1.08] saturate-[1.05] scale-105"
           />
-          {/* Subtle Dark Vignette & Gradient Overlays for Calm Elegance */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#090A0E]/85 via-[#090A0E]/55 to-[#090A0E]" />
-          <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#090A0E]/40 to-[#090A0E]" />
+          {/* Soft Gradient Overlay: Keeps top & bottom seamless while letting center gym photo shine bright */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#090A0E]/80 via-black/35 to-[#090A0E]" />
+          {/* Soft Focused Shadow behind text for razor-sharp legibility */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[440px] bg-black/40 rounded-full blur-[75px]" />
 
           {/* Ambient Warm Golden Glow */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/10 rounded-full blur-[140px]" />
         </div>
 
         <div className="max-w-3xl mx-auto space-y-6 text-center relative z-10">
-          {/* Main Headline (Clean, Strong, Confident) */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.12]">
+          {/* Main Headline (Clean, Strong, Confident with shadow for high contrast) */}
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             Latihan Lebih Terarah, <br />
             Bangun Fisik Impian di <span className="text-amber-400">Trisis Gym</span>.
           </h1>
 
-          {/* Subtitle (1 Concise & Meaningful Sentence) */}
-          <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal max-w-xl mx-auto leading-relaxed">
+          {/* Subtitle (1 Concise & Meaningful Sentence with crisp shadow) */}
+          <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-medium max-w-xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             Fasilitas fitness modern di Bogor dengan alat beban lengkap, suasana fokus, dan portal pintar untuk perkembangan latihan Anda.
           </p>
 
