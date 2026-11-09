@@ -9,7 +9,9 @@ const STORAGE_KEY = 'trisis_google_client_id';
 export function getGoogleClientId() {
   const envId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   if (envId && envId.trim()) return envId.trim();
-  return localStorage.getItem(STORAGE_KEY) || '';
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored && stored.trim()) return stored.trim();
+  return '248186594719-50j0kdl1p3838eumsmsv4md4fj2tc668.apps.googleusercontent.com';
 }
 
 export function setGoogleClientId(clientId) {
