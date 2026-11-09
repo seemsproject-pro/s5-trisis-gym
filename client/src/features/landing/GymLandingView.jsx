@@ -42,9 +42,6 @@ export default function GymLandingView({
     setIsRegisterModalOpen(true);
   };
 
-  // Interactive Hero Preview Tab: 'card' | 'streak' | 'coach'
-  const [heroInteractiveTab, setHeroInteractiveTab] = useState('card');
-
   // Interactive Crowd Meter Tab: 'pagi' | 'siang' | 'sore' | 'malam'
   const [crowdTime, setCrowdTime] = useState('sore');
 
@@ -325,147 +322,63 @@ export default function GymLandingView({
         </div>
       </header>
 
-      {/* Dynamic Infinite Marquee Bar (Fitness First / Premium Athletic Style) */}
-      <div className="bg-[#0B0D12] border-b border-white/[0.06] overflow-hidden py-2.5 relative select-none">
-        <div className="animate-marquee whitespace-nowrap flex items-center gap-8 text-[11px] font-semibold text-zinc-400">
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> BUKA SETIAP HARI 06:00 - 22:00 WIB</span>
-          <span className="text-zinc-600">•</span>
-          <span className="flex items-center gap-1.5 text-amber-300"><Sparkles className="w-3.5 h-3.5 text-amber-400" /> 50+ UNIT ALAT BEBAN & KARDIO LENGKAP</span>
-          <span className="text-zinc-600">•</span>
-          <span>TANPA BIAYA ADMIN TERSEMBUNYI</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-emerald-400 font-bold">PAKET BULANAN RP 100.000 / BULAN</span>
-          <span className="text-zinc-600">•</span>
-          <span>PER-VISIT RP 25.000 / KUNJUNGAN</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-zinc-300">SHOWER AIR BERSIH & LOCKER HIGIENIS</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-amber-400 font-bold">KONSULTASI WORKOUT & TARGET MAKRO NUTRISI</span>
-          <span className="text-zinc-600">•</span>
-          <span>RATING 4.9/5 DARI 500+ MEMBER BOGOR</span>
-          <span className="text-zinc-600">•</span>
-          {/* Seamless loop repeat */}
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> BUKA SETIAP HARI 06:00 - 22:00 WIB</span>
-          <span className="text-zinc-600">•</span>
-          <span className="flex items-center gap-1.5 text-amber-300"><Sparkles className="w-3.5 h-3.5 text-amber-400" /> 50+ UNIT ALAT BEBAN & KARDIO LENGKAP</span>
-          <span className="text-zinc-600">•</span>
-          <span>TANPA BIAYA ADMIN TERSEMBUNYI</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-emerald-400 font-bold">PAKET BULANAN RP 100.000 / BULAN</span>
-          <span className="text-zinc-600">•</span>
-          <span>PER-VISIT RP 25.000 / KUNJUNGAN</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-zinc-300">SHOWER AIR BERSIH & LOCKER HIGIENIS</span>
-          <span className="text-zinc-600">•</span>
-          <span className="text-amber-400 font-bold">KONSULTASI WORKOUT & TARGET MAKRO NUTRISI</span>
-          <span className="text-zinc-600">•</span>
-          <span>RATING 4.9/5 DARI 500+ MEMBER BOGOR</span>
-          <span className="text-zinc-600">•</span>
-        </div>
-      </div>
-
       {/* ============================================================== */}
-      {/* 2. DYNAMIC HERO SECTION — FULL-WIDTH HEADLINE & COMPANION CARD */}
+      {/* 2. HERO SECTION — CLEAN, MINIMALIST & ELEGAN */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
+      <section id="hero" className="relative overflow-hidden pt-16 pb-20 md:pt-28 md:pb-32 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E] flex items-center justify-center min-h-[580px]">
         {/* Real Gym Community Background Banner */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
           <img
             src="/gym-hero-banner.jpg"
             alt="Suasana Komunitas Trisis Gym Bogor"
-            className="w-full h-full object-cover object-[center_30%] filter brightness-[0.38] contrast-[1.12] saturate-[0.95] scale-105"
+            className="w-full h-full object-cover object-[center_32%] filter brightness-[0.32] contrast-[1.1] saturate-[0.9] scale-105"
           />
-          {/* Gradient Overlay for Sleek Dark Athletic Aesthetic & High Contrast Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#090A0E]/90 via-[#090A0E]/65 to-[#090A0E]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#090A0E]/75 via-transparent to-[#090A0E]/75" />
-          <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#090A0E]/50 to-[#090A0E]" />
+          {/* Subtle Dark Vignette & Gradient Overlays for Calm Elegance */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#090A0E]/85 via-[#090A0E]/55 to-[#090A0E]" />
+          <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#090A0E]/40 to-[#090A0E]" />
 
-          {/* Ambient Radial Glow */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[360px] bg-amber-500/12 rounded-full blur-[130px]" />
-          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-blue-600/10 rounded-full blur-[100px]" />
+          {/* Ambient Warm Golden Glow */}
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/10 rounded-full blur-[140px]" />
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-10 relative z-10">
-          {/* Main Visual Centerpiece: Headline, Value Props & CTAs (Spans Full Width) */}
-          <div className="space-y-6 text-center">
-            {/* Prominent Official Emblem with Ambient Glow & Gentle Float Motion */}
-            <div className="relative inline-block mx-auto mb-2">
-              <div className="absolute inset-0 bg-amber-500/25 rounded-full blur-2xl transform scale-125 animate-pulse-glow" />
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto drop-shadow-[0_12px_28px_rgba(245,158,11,0.35)] animate-float-slow">
-                <img src="/logo.png" alt="Trisis Gym Official Crest" className="w-full h-full object-contain" />
-              </div>
-            </div>
+        <div className="max-w-3xl mx-auto space-y-6 text-center relative z-10">
+          {/* Main Headline (Clean, Strong, Confident) */}
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.12]">
+            Latihan Lebih Terarah, <br />
+            Bangun Fisik Impian di <span className="text-amber-400">Trisis Gym</span>.
+          </h1>
 
-            {/* Top Interactive Status Pill */}
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-white/[0.08] text-xs font-semibold text-zinc-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Buka Setiap Hari (06:00 - 22:00 WIB) • Bogor</span>
-              </div>
-            </div>
+          {/* Subtitle (1 Concise & Meaningful Sentence) */}
+          <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal max-w-xl mx-auto leading-relaxed">
+            Fasilitas fitness modern di Bogor dengan alat beban lengkap, suasana fokus, dan portal pintar untuk perkembangan latihan Anda.
+          </p>
 
-            {/* Main Headline (Full Width & Heroic with Gold Gradient) */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.14]">
-              Latihan Lebih Terarah, <br />
-              Bangun Fisik Impian di <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">Trisis Gym</span>.
-            </h1>
+          {/* Dual CTAs (Sleek, High-End Athletic Pill Buttons) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-3">
+            <button
+              onClick={() => openRegister('bulanan')}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-xl shadow-amber-400/20 hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>Daftar Member Sekarang</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
-            {/* Subtitle */}
-            <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-              Gym modern ramah pemula dengan alat beban lengkap, suasana fokus & nyaman, serta portal pintar untuk memantau presensi, program latihan, dan nutrisi harian.
-            </p>
+            <button
+              onClick={onOpenLogin}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white/[0.05] hover:bg-white/[0.10] border border-white/15 hover:border-white/30 text-white font-medium text-xs tracking-wider uppercase transition-all duration-200 backdrop-blur-md hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <User className="w-4 h-4 text-zinc-300" />
+              <span>Login Member</span>
+            </button>
+          </div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-[11px] font-medium text-zinc-300">
-              <span className="px-3.5 py-1.5 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-amber-400" />
-                Rating 4.9/5 dari 500+ Member
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-[#111319] border border-white/[0.08] flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                Tanpa Biaya Admin Tersembunyi
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center gap-1.5 text-amber-400 font-semibold">
-                <Users className="w-3.5 h-3.5 text-amber-400" />
-                Paket Bulanan Hanya Rp 100.000 / Bulan
-              </span>
-            </div>
-
-            {/* Dual CTAs: Daftar Member & Login Member */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 pt-2">
-              <button
-                onClick={() => openRegister('bulanan')}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group shadow-lg shadow-amber-400/20"
-              >
-                <Zap className="w-4 h-4 fill-neutral-950 text-neutral-950" />
-                <span>Daftar Member Baru</span>
-                <ArrowRight className="w-4 h-4 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-
-              <button
-                onClick={onOpenLogin}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-zinc-200 hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <User className="w-4 h-4 text-amber-400" />
-                <span>Login Member</span>
-              </button>
-            </div>
-
-            {/* Quick Metrics */}
-            <div className="grid grid-cols-3 gap-2.5 pt-2 max-w-md mx-auto">
-              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-white block">50+</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Unit Alat</span>
-              </div>
-              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-amber-400 block">Rp 25k</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Per-Visit</span>
-              </div>
-              <div className="bg-[#111319]/90 backdrop-blur-md p-2.5 rounded-xl border border-white/[0.08] text-center">
-                <span className="text-lg font-bold text-emerald-400 block">16 Jam</span>
-                <span className="text-[10px] text-zinc-400 font-medium">Operasional</span>
-              </div>
-            </div>
+          {/* Minimalist Footnote Line (Clean & Unobtrusive) */}
+          <div className="pt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-zinc-400 font-normal">
+            <span>50+ Unit Alat Lengkap</span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
+            <span>Mulai Rp 25.000 / Sesi</span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
+            <span>Buka Setiap Hari (06:00 – 22:00 WIB)</span>
           </div>
         </div>
       </section>
