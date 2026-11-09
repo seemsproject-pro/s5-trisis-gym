@@ -115,8 +115,18 @@ export default function DashboardView({
       )}
 
       {/* 1. Header & Sapaan Pengguna + Streak Card */}
-      <section className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08]">
-        <div className="flex items-center justify-between gap-4">
+      <section className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] relative overflow-hidden">
+        {/* Subtle Gym Community Banner Background */}
+        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none select-none">
+          <img
+            src="/gym-hero-banner.jpg"
+            alt="Trisis Gym Banner"
+            className="w-full h-full object-cover object-[center_28%] filter contrast-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111319] via-[#111319]/70 to-[#111319]" />
+        </div>
+
+        <div className="relative z-10 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
             {/* Minimal Avatar Circle */}
             <div className="w-11 h-11 rounded-full bg-zinc-800 border border-zinc-700/80 text-zinc-200 flex items-center justify-center font-bold text-base shrink-0">

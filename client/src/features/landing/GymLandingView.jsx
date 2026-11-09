@@ -367,11 +367,25 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 2. DYNAMIC HERO SECTION — FULL-WIDTH HEADLINE & COMPANION CARD */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
-        {/* Subtle Ambient Radial Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <section id="hero" className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E]">
+        {/* Real Gym Community Background Banner */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+          <img
+            src="/gym-hero-banner.jpg"
+            alt="Suasana Komunitas Trisis Gym Bogor"
+            className="w-full h-full object-cover object-[center_30%] filter brightness-[0.38] contrast-[1.12] saturate-[0.95] scale-105"
+          />
+          {/* Gradient Overlay for Sleek Dark Athletic Aesthetic & High Contrast Readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#090A0E]/90 via-[#090A0E]/65 to-[#090A0E]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#090A0E]/75 via-transparent to-[#090A0E]/75" />
+          <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#090A0E]/50 to-[#090A0E]" />
 
-        <div className="max-w-4xl mx-auto space-y-10 relative">
+          {/* Ambient Radial Glow */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[360px] bg-amber-500/12 rounded-full blur-[130px]" />
+          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-blue-600/10 rounded-full blur-[100px]" />
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-10 relative z-10">
           {/* Main Visual Centerpiece: Headline, Value Props & CTAs (Spans Full Width) */}
           <div className="space-y-6 text-center">
             {/* Prominent Official Emblem with Ambient Glow & Gentle Float Motion */}
