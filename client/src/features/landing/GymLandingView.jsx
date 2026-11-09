@@ -28,8 +28,6 @@ import RegisterMemberModal from '../../components/RegisterMemberModal';
 
 export default function GymLandingView({ 
   onOpenLogin, 
-  onQuickDemoLogin, 
-  onQuickAdminLogin,
   onRegisterComplete,
   auth, 
   onLogout, 
@@ -314,17 +312,6 @@ export default function GymLandingView({
                   <span>Login Member</span>
                 </button>
 
-                {onQuickAdminLogin && (
-                  <button
-                    onClick={onQuickAdminLogin}
-                    className="text-xs font-semibold px-2.5 py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-amber-400 border border-zinc-700/60 transition-all cursor-pointer flex items-center gap-1.5"
-                    title="Masuk Panel Admin & Kasir Gym"
-                  >
-                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                    <span className="hidden sm:inline">Staff / Admin</span>
-                  </button>
-                )}
-
                 <button
                   onClick={() => openRegister('bulanan')}
                   className="text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
@@ -396,17 +383,6 @@ export default function GymLandingView({
                 <User className="w-4 h-4 text-amber-400" />
                 <span>Login Member</span>
               </button>
-
-              {onQuickAdminLogin && (
-                <button
-                  onClick={onQuickAdminLogin}
-                  className="w-full sm:w-auto px-4 py-3.5 rounded-xl bg-zinc-800/30 hover:bg-zinc-800/70 border border-zinc-700/40 text-amber-400 font-semibold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                  title="Panel Admin Kasir & Pengelola Gym"
-                >
-                  <ShieldCheck className="w-4 h-4 text-amber-400" />
-                  <span>Staff / Resepsionis</span>
-                </button>
-              )}
             </div>
 
             {/* Quick Metrics */}
@@ -574,7 +550,7 @@ export default function GymLandingView({
 
               {/* Bottom Test Button */}
               <button
-                onClick={onQuickDemoLogin}
+                onClick={onOpenLogin}
                 className="w-full py-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5"
               >
                 <span>Buka Aplikasi Member</span>
@@ -1089,7 +1065,7 @@ export default function GymLandingView({
               </a>
 
               <button
-                onClick={onQuickDemoLogin}
+                onClick={onOpenLogin}
                 className="px-5 py-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Masuk Portal Member</span>

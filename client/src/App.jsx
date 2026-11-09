@@ -81,8 +81,6 @@ export default function App() {
   };
 
   const handleLogin = async (user) => {
-    const password = user.role === 'admin' ? 'admin1234' : 'password123';
-    await apiService.login(user.email, password);
     const role = user.role || (user.email?.includes('admin') ? 'admin' : 'member');
     apiService.setActiveRole(role);
     setCurrentRole(role);
@@ -92,34 +90,11 @@ export default function App() {
     showToast(role === 'admin' ? 'Selamat datang di Panel Admin Trisis Gym!' : 'Selamat datang di Portal Member Trisis Gym!');
   };
 
-  const handleQuickLoginFromLanding = () => {
-    const demoUser = {
-      id: 'usr_m_089',
-      name: 'Budi Santoso',
-      email: 'budi.santoso@trisisgym.com',
-      memberId: 'TRISIS-2026-089',
-      planName: 'Paket Bulanan (Monthly Pass)',
-      validUntil: '10 Feb 2027',
-      role: 'member'
-    };
-    handleLogin(demoUser);
-  };
-
   const handleLogout = () => {
     apiService.logout();
     setAuth({ isAuthenticated: false, user: null });
     setViewMode('landing');
     showToast('Berhasil keluar dari akun.');
-  };
-
-  const handleResetDemo = () => {
-    if (window.confirm('Reset semua data aplikasi dan riwayat kembali ke kondisi awal?')) {
-      apiService.resetToDemoDefaults();
-      setAuth(apiService.getAuthStatus());
-      refreshState();
-      setActiveTab('dashboard');
-      showToast('Data aplikasi berhasil direset ke setelan awal.');
-    }
   };
 
   const handleUpdateProfile = async (newProfileData) => {
@@ -143,18 +118,12 @@ export default function App() {
     showToast('Presensi hari ini telah direset.');
   };
 
-  const handleQuickAdminLoginFromLanding = () => {
-    setViewMode('login');
-  };
-
   // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM (PUBLIK)
   if (viewMode === 'landing') {
     return (
       <GymLandingView
         auth={auth}
         onOpenLogin={() => setViewMode('login')}
-        onQuickDemoLogin={() => setViewMode('login')}
-        onQuickAdminLogin={() => setViewMode('login')}
         onRegisterComplete={handleRegisterComplete}
         onGoToDashboard={() => {
           if (auth.isAuthenticated) {
@@ -218,7 +187,6 @@ export default function App() {
           onToggleRole={handleToggleRole}
           onOpenCard={() => setIsCardModalOpen(true)}
           onLogout={handleLogout}
-          onResetDemo={handleResetDemo}
           onGoToLanding={() => setViewMode('landing')}
         />
 

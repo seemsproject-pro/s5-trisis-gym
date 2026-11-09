@@ -52,12 +52,31 @@ export const apiService = {
         body: JSON.stringify({ email, password })
       });
       if (data.token) setToken(data.token);
-      // Sinkronkan ke local mock agar sinkron
-      mockDataService.login(email, password);
       return { success: true, user: data.user, token: data.token };
     } catch (err) {
-      console.warn('[API Fallback] Backend offline atau gagal, beralih ke local service:', err.message);
+      // Jika server memberikan response error (misal 401 kata sandi salah / akun belum ada), lempar pesan langsung
+      if (err.message && !err.message.includes('Failed to fetch') && !err.message.includes('NetworkError')) {
+        throw err;
+      }
+      console.warn('[API Fallback] Backend offline, beralih ke local mock service:', err.message);
       return mockDataService.login(email, password);
+    }
+  },
+
+  async googleLogin(googleData) {
+    try {
+      const data = await request('/auth/google', {
+        method: 'POST',
+        body: JSON.stringify(googleData)
+      });
+      if (data.token) setToken(data.token);
+      return { success: true, user: data.user, token: data.token };
+    } catch (err) {
+      if (err.message && !err.message.includes('Failed to fetch') && !err.message.includes('NetworkError')) {
+        throw err;
+      }
+      console.warn('[API Fallback] Backend offline, beralih ke mock google login:', err.message);
+      return mockDataService.googleLogin(googleData);
     }
   },
 
@@ -221,8 +240,8 @@ export const apiService = {
     return mockDataService.getAdminStats();
   },
 
-  resetToDemoDefaults() {
-    return mockDataService.resetToDemoDefaults();
+  resetToDefaults() {
+    return mockDataService.resetToDefaults();
   }
 };
 

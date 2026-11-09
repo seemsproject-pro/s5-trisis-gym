@@ -40,7 +40,7 @@ export async function login(req, res) {
     }
 
     if (!user) {
-      return res.status(401).json({ success: false, message: 'Email atau kata sandi tidak sesuai.' });
+      return res.status(401).json({ success: false, message: 'Email atau akun belum terdaftar. Silakan daftar member terlebih dahulu.' });
     }
 
     if (user.is_active === 0 || user.is_active === false) {
@@ -49,7 +49,7 @@ export async function login(req, res) {
 
     const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
-      return res.status(401).json({ success: false, message: 'Email atau kata sandi tidak sesuai.' });
+      return res.status(401).json({ success: false, message: 'Kata sandi salah. Silakan periksa kembali kata sandi Anda.' });
     }
 
     const planName = membership?.plan_name || 'Annual Regular Pass';
@@ -234,3 +234,151 @@ export async function getMe(req, res) {
     return res.status(500).json({ success: false, message: 'Gagal mengambil data profil pengguna.' });
   }
 }
+
+export async function googleLogin(req, res) {
+  try {
+    const { email, name, googleId } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Email Google wajib disertakan.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    let user = null;
+    let membership = null;
+
+    if (isDbConnected) {
+      const [rows] = await pool.query(
+        'SELECT id, email, full_name, phone, role, member_id, is_active FROM users WHERE email = ?',
+        [cleanEmail]
+      );
+      if (rows.length > 0) user = rows[0];
+
+      if (user) {
+        const [mRows] = await pool.query(
+          'SELECT plan_name, status, end_date FROM memberships WHERE user_id = ? ORDER BY created_at DESC LIMIT 1',
+          [user.id]
+        );
+        membership = mRows[0];
+      } else {
+        const userId = `usr_${crypto.randomUUID()}`;
+        const randomNum = Math.floor(100 + Math.random() * 900);
+        const memberId = `TRISIS-G-2026-${randomNum}`;
+        const dummyHash = await bcrypt.hash(`google_oauth_${googleId || Date.now()}`, 10);
+
+        await pool.query(
+          'INSERT INTO users (id, email, password_hash, full_name, phone, role, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [userId, cleanEmail, dummyHash, name?.trim() || cleanEmail.split('@')[0], null, 'member', memberId]
+        );
+
+        const membershipId = `mem_${crypto.randomUUID()}`;
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setMonth(endDate.getMonth() + 1);
+
+        await pool.query(
+          'INSERT INTO memberships (id, user_id, plan_id, plan_name, status, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [membershipId, userId, 'bulanan', 'Paket Bulanan (Monthly Pass)', 'active', startDate, endDate]
+        );
+
+        const profileId = `prof_${crypto.randomUUID()}`;
+        await pool.query(
+          'INSERT INTO profiles (id, user_id, fitness_goal) VALUES (?, ?, ?)',
+          [profileId, userId, 'general_fitness']
+        );
+
+        user = {
+          id: userId,
+          email: cleanEmail,
+          full_name: name?.trim() || cleanEmail.split('@')[0],
+          role: 'member',
+          member_id: memberId,
+          is_active: 1
+        };
+        membership = {
+          plan_name: 'Paket Bulanan (Monthly Pass)',
+          end_date: endDate
+        };
+      }
+    } else {
+      user = localStore.findUserByEmail(cleanEmail);
+      if (user) {
+        membership = localStore.getMembershipByUserId(user.id);
+      } else {
+        const userId = `usr_${crypto.randomUUID()}`;
+        const randomNum = Math.floor(100 + Math.random() * 900);
+        const memberId = `TRISIS-G-2026-${randomNum}`;
+        const dummyHash = await bcrypt.hash(`google_oauth_${googleId || Date.now()}`, 10);
+
+        const newUser = {
+          id: userId,
+          email: cleanEmail,
+          password_hash: dummyHash,
+          full_name: name?.trim() || cleanEmail.split('@')[0],
+          phone: null,
+          role: 'member',
+          member_id: memberId,
+          is_active: 1,
+          created_at: new Date().toISOString()
+        };
+        localStore.addUser(newUser);
+
+        const newMem = {
+          id: `mem_${Date.now()}`,
+          user_id: userId,
+          plan_id: 'bulanan',
+          plan_name: 'Paket Bulanan (Monthly Pass)',
+          status: 'active',
+          start_date: new Date().toISOString().split('T')[0],
+          end_date: new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString().split('T')[0],
+          price_paid: 100000.00
+        };
+        localStore.addMembership(newMem);
+        localStore.setProfile(userId, { fitness_goal: 'general_fitness' });
+
+        user = newUser;
+        membership = newMem;
+      }
+    }
+
+    if (user.is_active === 0 || user.is_active === false) {
+      return res.status(403).json({ success: false, message: 'Akun Anda dinonaktifkan. Hubungi admin gym.' });
+    }
+
+    const planName = membership?.plan_name || 'Paket Bulanan (Monthly Pass)';
+    const validUntil = membership?.end_date
+      ? new Date(membership.end_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+      : '1 Bulan Mendatang';
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        memberId: user.member_id
+      },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    return res.json({
+      success: true,
+      message: 'Login Google berhasil.',
+      token,
+      user: {
+        id: user.id,
+        name: user.full_name,
+        email: user.email,
+        phone: user.phone || null,
+        role: user.role,
+        memberId: user.member_id,
+        planName,
+        validUntil
+      }
+    });
+  } catch (error) {
+    console.error('Google login error:', error);
+    return res.status(500).json({ success: false, message: 'Terjadi kesalahan saat memproses login Google.' });
+  }
+}
+

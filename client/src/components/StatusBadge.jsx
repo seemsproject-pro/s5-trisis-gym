@@ -25,7 +25,7 @@ export default function StatusBadge({ status, size = 'sm', className = '' }) {
       bgClass = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
       dotClass = 'bg-emerald-400';
       break;
-    case 'DEMO':
+    case 'RESMI':
     case 'TERVERIFIKASI':
       label = 'TERVERIFIKASI';
       bgClass = 'bg-zinc-800/80 text-zinc-300 border-zinc-700/60';

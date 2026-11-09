@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { KeyRound, Mail, ArrowRight, ShieldCheck, Sparkles, ArrowLeft, Zap, X, Check, User, AlertCircle } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
+import { apiService } from '../../services/apiService';
 import { mockDataService } from '../../services/mockData';
 
 export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegister }) {
@@ -45,110 +46,54 @@ export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegis
   ];
 
   // Handler Login Email & Sandi Standar
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e?.preventDefault();
     setLoading(true);
     setError('');
 
-    setTimeout(() => {
-      const cleanEmail = email.trim().toLowerCase();
-      if (!cleanEmail || !password.trim()) {
-        setError('Harap masukkan alamat email dan kata sandi.');
-        setLoading(false);
-        return;
-      }
-
-      if (cleanEmail.includes('admin')) {
-        onLoginSuccess({
-          id: 'usr_admin_001',
-          name: 'Admin Trisis Gym',
-          email: 'admin@trisisgym.com',
-          memberId: 'TRISIS-STAFF-001',
-          role: 'admin'
-        });
-      } else {
-        const members = mockDataService.getMembers();
-        const found = members.find(
-          (m) => m.email?.toLowerCase() === cleanEmail || m.memberId?.toLowerCase() === cleanEmail
-        );
-
-        if (found) {
-          onLoginSuccess({
-            id: found.id,
-            name: found.name,
-            email: found.email,
-            phone: found.phone,
-            memberId: found.memberId,
-            planName: found.planName,
-            validUntil: found.validUntil,
-            role: 'member'
-          });
-        } else {
-          onLoginSuccess({
-            id: 'usr_m_089',
-            name: cleanEmail.includes('budi') ? 'Budi Santoso' : cleanEmail.split('@')[0],
-            email: cleanEmail,
-            memberId: `TRISIS-B-2026-${Math.floor(100 + Math.random() * 900)}`,
-            planName: 'Paket Bulanan (Monthly Pass)',
-            validUntil: '10 Feb 2027',
-            role: 'member'
-          });
-        }
-      }
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !password.trim()) {
+      setError('Harap masukkan alamat email dan kata sandi.');
       setLoading(false);
-    }, 350);
+      return;
+    }
+
+    try {
+      const result = await apiService.login(cleanEmail, password.trim());
+      if (result.success && result.user) {
+        onLoginSuccess(result.user);
+      } else {
+        setError(result.message || 'Login gagal. Silakan periksa kredensial Anda.');
+      }
+    } catch (err) {
+      setError(err.message || 'Login gagal. Silakan periksa kembali email dan kata sandi.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Handler Login dengan Akun Google
-  const handleSelectGoogleAccount = (acc) => {
+  const handleSelectGoogleAccount = async (acc) => {
     setGoogleLoadingAccount(acc.email);
+    setError('');
 
-    setTimeout(async () => {
-      const members = mockDataService.getMembers();
-      const existing = members.find((m) => m.email?.toLowerCase() === acc.email.toLowerCase());
-
-      let memberUser;
-      if (existing) {
-        memberUser = {
-          id: existing.id,
-          name: existing.name,
-          email: existing.email,
-          phone: existing.phone,
-          memberId: existing.memberId,
-          planName: existing.planName,
-          validUntil: existing.validUntil,
-          role: 'member'
-        };
+    try {
+      const result = await apiService.googleLogin({
+        email: acc.email,
+        name: acc.name,
+        googleId: acc.id || 'google_' + Date.now()
+      });
+      if (result.success && result.user) {
+        setIsGoogleModalOpen(false);
+        onLoginSuccess(result.user);
       } else {
-        // Otomatis registrasikan akun member tersinkron Google
-        const randomNum = Math.floor(100 + Math.random() * 900);
-        const newMemberId = `TRISIS-G-2026-${randomNum}`;
-        const newRecord = {
-          name: acc.name,
-          email: acc.email,
-          phone: '0812-Google-Auth',
-          planId: 'bulanan',
-          planName: 'Paket Bulanan (Monthly Pass)',
-          validUntil: '1 Bulan Mendatang',
-          goal: 'general_fitness'
-        };
-        await mockDataService.addMember(newRecord);
-
-        memberUser = {
-          id: `usr_g_${Date.now()}`,
-          name: acc.name,
-          email: acc.email,
-          memberId: newMemberId,
-          planName: 'Paket Bulanan (Monthly Pass)',
-          validUntil: '1 Bulan Mendatang',
-          role: 'member'
-        };
+        setError(result.message || 'Gagal login dengan akun Google.');
       }
-
+    } catch (err) {
+      setError(err.message || 'Terjadi kesalahan saat otentikasi Google.');
+    } finally {
       setGoogleLoadingAccount(null);
-      setIsGoogleModalOpen(false);
-      onLoginSuccess(memberUser);
-    }, 900);
+    }
   };
 
   const handleCustomGoogleSubmit = (e) => {
@@ -164,33 +109,6 @@ export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegis
       initials: (customGoogleName.trim() || customGoogleEmail)[0].toUpperCase()
     };
     handleSelectGoogleAccount(acc);
-  };
-
-  const handleQuickDemoLogin = () => {
-    setEmail('budi.santoso@trisisgym.com');
-    setPassword('password123');
-    onLoginSuccess({
-      id: 'usr_m_089',
-      name: 'Budi Santoso',
-      email: 'budi.santoso@trisisgym.com',
-      memberId: 'TRISIS-2026-089',
-      planName: 'Paket Bulanan (Monthly Pass)',
-      validUntil: '10 Feb 2027',
-      role: 'member'
-    });
-  };
-
-  const handleQuickAdminLogin = () => {
-    setEmail('admin@trisisgym.com');
-    setPassword('admin1234');
-    onLoginSuccess({
-      id: 'usr_admin_001',
-      name: 'Admin Trisis Gym',
-      email: 'admin@trisisgym.com',
-      memberId: 'TRISIS-STAFF-001',
-      planName: 'Staff & Receptionist',
-      role: 'admin'
-    });
   };
 
   return (
@@ -329,27 +247,6 @@ export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegis
               </button>
             </div>
           )}
-
-          {/* Quick Demo Shortcuts (Tetap Ada untuk Keperluan Pengujian Cepat) */}
-          <div className="pt-2 border-t border-white/[0.08] space-y-2">
-            <button
-              type="button"
-              onClick={handleQuickDemoLogin}
-              className="w-full py-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-white/[0.06] text-zinc-300 hover:text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Isi Otomatis Akun Demo (Budi Santoso)</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleQuickAdminLogin}
-              className="w-full py-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800 text-amber-400 font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-700/40 transition-all cursor-pointer"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              <span>Masuk Panel Admin (Staff & Kasir Gym)</span>
-            </button>
-          </div>
         </div>
 
         {/* Security Notice */}

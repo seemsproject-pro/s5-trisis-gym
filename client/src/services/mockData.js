@@ -14,7 +14,7 @@ const STORAGE_KEYS = {
   ACTIVE_ROLE: 'trisis_app_active_role' // 'member' | 'admin'
 };
 
-// Seed Akun & Kartu Member Awal (Demo Member Budi Santoso)
+// Seed Akun & Kartu Member Awal (Member Resmi Budi Santoso)
 const INITIAL_ACCOUNT = {
   id: 'usr_m_089',
   name: 'Budi Santoso',
@@ -219,11 +219,14 @@ export const mockDataService = {
     });
   },
 
-  login(email, _password) {
+  login(email, password) {
     const cleanEmail = (email || '').trim().toLowerCase();
-    const isAdmin = cleanEmail.includes('admin');
+    const isAdmin = cleanEmail === 'admin@trisisgym.com' || cleanEmail.includes('admin');
 
     if (isAdmin) {
+      if (password && password !== 'admin1234') {
+        throw new Error('Kata sandi salah. Silakan periksa kembali kata sandi Anda.');
+      }
       const user = { ...INITIAL_ADMIN_ACCOUNT, email: cleanEmail || INITIAL_ADMIN_ACCOUNT.email };
       const authState = { isAuthenticated: true, user };
       setStoredItem(STORAGE_KEYS.AUTH, authState);
@@ -237,28 +240,68 @@ export const mockDataService = {
       (m) => m.email?.toLowerCase() === cleanEmail || m.memberId?.toLowerCase() === cleanEmail
     );
 
-    let user;
-    if (foundMember) {
-      user = {
-        id: foundMember.id,
-        name: foundMember.name,
-        email: foundMember.email,
-        phone: foundMember.phone,
-        memberId: foundMember.memberId,
-        planName: foundMember.planName,
-        planId: foundMember.planId,
-        validUntil: foundMember.validUntil,
-        status: foundMember.status || 'Aktif',
-        role: 'member'
-      };
-    } else {
-      // Default demo member (Budi Santoso) jika login demo
-      user = { 
-        ...INITIAL_ACCOUNT, 
-        email: cleanEmail || INITIAL_ACCOUNT.email,
-        name: cleanEmail && !cleanEmail.includes('budi') ? cleanEmail.split('@')[0] : INITIAL_ACCOUNT.name
-      };
+    if (!foundMember) {
+      throw new Error('Email atau akun belum terdaftar. Silakan daftar member terlebih dahulu.');
     }
+
+    const expectedPassword = foundMember.password || 'password123';
+    if (password && password !== expectedPassword) {
+      throw new Error('Kata sandi salah. Silakan periksa kembali kata sandi Anda.');
+    }
+
+    const user = {
+      id: foundMember.id,
+      name: foundMember.name,
+      email: foundMember.email,
+      phone: foundMember.phone,
+      memberId: foundMember.memberId,
+      planName: foundMember.planName,
+      planId: foundMember.planId,
+      validUntil: foundMember.validUntil,
+      status: foundMember.status || 'Aktif',
+      role: 'member'
+    };
+
+    const authState = { isAuthenticated: true, user };
+    setStoredItem(STORAGE_KEYS.AUTH, authState);
+    this.setActiveRole('member');
+    return Promise.resolve({ success: true, user });
+  },
+
+  googleLogin({ email, name }) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const members = this.getMembers();
+    let foundMember = members.find((m) => m.email?.toLowerCase() === cleanEmail);
+
+    if (!foundMember) {
+      const randomNum = Math.floor(100 + Math.random() * 900);
+      foundMember = {
+        id: `usr_g_${Date.now()}`,
+        name: name?.trim() || cleanEmail.split('@')[0],
+        email: cleanEmail,
+        phone: '0812-Google-Auth',
+        memberId: `TRISIS-G-2026-${randomNum}`,
+        planId: 'bulanan',
+        planName: 'Paket Bulanan (Monthly Pass)',
+        validUntil: '1 Bulan Mendatang',
+        status: 'Aktif',
+        pricePaid: 'Rp 100.000',
+        joinedAt: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+      };
+      members.push(foundMember);
+      setStoredItem(STORAGE_KEYS.MEMBERS, members);
+    }
+
+    const user = {
+      id: foundMember.id,
+      name: foundMember.name,
+      email: foundMember.email,
+      phone: foundMember.phone,
+      memberId: foundMember.memberId,
+      planName: foundMember.planName,
+      validUntil: foundMember.validUntil,
+      role: 'member'
+    };
 
     const authState = { isAuthenticated: true, user };
     setStoredItem(STORAGE_KEYS.AUTH, authState);
@@ -517,7 +560,7 @@ export const mockDataService = {
   },
 
   // Reset semua ke default
-  resetToDemoDefaults() {
+  resetToDefaults() {
     setStoredItem(STORAGE_KEYS.AUTH, { isAuthenticated: true, user: INITIAL_ACCOUNT });
     setStoredItem(STORAGE_KEYS.PROFILE, INITIAL_PROFILE);
     setStoredItem(STORAGE_KEYS.CHECKINS, INITIAL_CHECKINS);

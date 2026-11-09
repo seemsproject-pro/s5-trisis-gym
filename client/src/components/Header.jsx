@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, LogOut, RotateCcw, Building2, ShieldCheck, User } from 'lucide-react';
+import { CreditCard, LogOut, Building2, ShieldCheck, User } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 
 export default function Header({ 
@@ -8,7 +8,6 @@ export default function Header({
   onToggleRole,
   onOpenCard, 
   onLogout, 
-  onResetDemo, 
   onGoToLanding 
 }) {
   return (
@@ -89,16 +88,6 @@ export default function Header({
           >
             <CreditCard className="w-3.5 h-3.5 text-amber-400" />
             <span>Kartu</span>
-          </button>
-
-          <button
-            id="header-reset-demo"
-            onClick={onResetDemo}
-            title="Reset Data ke Default"
-            aria-label="Reset Data ke Default"
-            className="p-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-800 transition-colors cursor-pointer"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
           </button>
 
           <button

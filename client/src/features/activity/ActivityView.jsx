@@ -119,7 +119,7 @@ export default function ActivityView({ activities, onOpenCheckIn }) {
               <div className="flex-1 min-w-0 space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <h4 className="text-xs font-bold text-white truncate">{act.title}</h4>
-                  <StatusBadge status={act.methodBadge || 'DEMO'} size="xs" />
+                  <StatusBadge status={act.methodBadge || 'RESMI'} size="xs" />
                 </div>
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   {act.description}

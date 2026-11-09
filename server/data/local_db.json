@@ -43,6 +43,28 @@
       "member_id": "TRISIS-R-2026-328",
       "is_active": 1,
       "created_at": "2026-11-09T01:24:22.721Z"
+    },
+    {
+      "id": "usr_9ca043d5-7ff5-4a20-91a1-3c5ed63db199",
+      "email": "googleuser@gmail.com",
+      "password_hash": "$2b$10$R2lMAj4aNHVjAJjZAsvYheixwo1YuALC8kdpxkyUH1QcljwDppHNq",
+      "full_name": "Google User Trisis",
+      "phone": null,
+      "role": "member",
+      "member_id": "TRISIS-G-2026-747",
+      "is_active": 1,
+      "created_at": "2026-11-09T01:43:34.821Z"
+    },
+    {
+      "id": "usr_a4565071-750c-4930-9f66-e5263253cfc7",
+      "email": "syams.dzul@gmail.com",
+      "password_hash": "$2b$10$xnAVwFee6SbtQZ0hHjG73OnKR6blvStX8ARSpHwS5oz8d4s1xs6va",
+      "full_name": "Muhammad Syams",
+      "phone": null,
+      "role": "member",
+      "member_id": "TRISIS-G-2026-910",
+      "is_active": 1,
+      "created_at": "2026-11-09T02:08:46.993Z"
     }
   ],
   "memberships": [
@@ -75,6 +97,26 @@
       "start_date": "2026-11-09",
       "end_date": "2026-12-09",
       "price_paid": 185000
+    },
+    {
+      "id": "mem_1794188614823",
+      "user_id": "usr_9ca043d5-7ff5-4a20-91a1-3c5ed63db199",
+      "plan_id": "bulanan",
+      "plan_name": "Paket Bulanan (Monthly Pass)",
+      "status": "active",
+      "start_date": "2026-11-09",
+      "end_date": "2026-12-09",
+      "price_paid": 100000
+    },
+    {
+      "id": "mem_1794190126996",
+      "user_id": "usr_a4565071-750c-4930-9f66-e5263253cfc7",
+      "plan_id": "bulanan",
+      "plan_name": "Paket Bulanan (Monthly Pass)",
+      "status": "active",
+      "start_date": "2026-11-09",
+      "end_date": "2026-12-09",
+      "price_paid": 100000
     }
   ],
   "profiles": [
@@ -103,6 +145,18 @@
       "user_id": "usr_3ec3f28e-3342-470b-afc3-c13161fc340d",
       "fitness_goal": "fat_loss",
       "updated_at": "2026-11-09T01:24:22.731Z"
+    },
+    {
+      "id": "prof_1794188614825",
+      "user_id": "usr_9ca043d5-7ff5-4a20-91a1-3c5ed63db199",
+      "fitness_goal": "general_fitness",
+      "updated_at": "2026-11-09T01:43:34.825Z"
+    },
+    {
+      "id": "prof_1794190126997",
+      "user_id": "usr_a4565071-750c-4930-9f66-e5263253cfc7",
+      "fitness_goal": "general_fitness",
+      "updated_at": "2026-11-09T02:08:46.997Z"
     }
   ],
   "checkins": [

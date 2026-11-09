@@ -35,7 +35,7 @@ export default function ExerciseDetailModal({ isOpen, onClose, exercise }) {
 
         {/* Scrollable Content */}
         <div className="p-5 md:p-6 overflow-y-auto space-y-5">
-          {/* Video Player / Demonstration Container */}
+          {/* Video Player / Video Tutorial Container */}
           <div className="rounded-xl overflow-hidden bg-black aspect-video relative border border-white/[0.08]">
             {exercise.videoUrl ? (
               <iframe
@@ -48,7 +48,7 @@ export default function ExerciseDetailModal({ isOpen, onClose, exercise }) {
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-white p-4">
                 <Play className="w-8 h-8 text-amber-400 mb-2" />
-                <span className="font-semibold text-xs text-zinc-300">Demonstrasi Gerakan Gym</span>
+                <span className="font-semibold text-xs text-zinc-300">Panduan Video Gerakan Gym</span>
               </div>
             )}
           </div>
