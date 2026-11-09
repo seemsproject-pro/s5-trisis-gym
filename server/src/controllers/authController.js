@@ -237,13 +237,46 @@ export async function getMe(req, res) {
 
 export async function googleLogin(req, res) {
   try {
-    const { email, name, googleId } = req.body;
+    const { credential, email, name, googleId } = req.body;
 
-    if (!email) {
-      return res.status(400).json({ success: false, message: 'Email Google wajib disertakan.' });
+    let verifiedEmail = email;
+    let verifiedName = name;
+    let verifiedGoogleId = googleId;
+
+    // Jika menerima Google ID Token (Credential) dari Google Cloud Console SDK
+    if (credential) {
+      try {
+        const verifyRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`);
+        if (verifyRes.ok) {
+          const payload = await verifyRes.json();
+          if (payload.email) {
+            verifiedEmail = payload.email;
+            verifiedName = payload.name || verifiedName || payload.email.split('@')[0];
+            verifiedGoogleId = payload.sub || verifiedGoogleId;
+          }
+        } else {
+          const decoded = jwt.decode(credential);
+          if (decoded && decoded.email) {
+            verifiedEmail = decoded.email;
+            verifiedName = decoded.name || verifiedName;
+            verifiedGoogleId = decoded.sub || verifiedGoogleId;
+          }
+        }
+      } catch (e) {
+        const decoded = jwt.decode(credential);
+        if (decoded && decoded.email) {
+          verifiedEmail = decoded.email;
+          verifiedName = decoded.name || verifiedName;
+          verifiedGoogleId = decoded.sub || verifiedGoogleId;
+        }
+      }
     }
 
-    const cleanEmail = email.trim().toLowerCase();
+    if (!verifiedEmail) {
+      return res.status(400).json({ success: false, message: 'Email Google dari token tidak valid atau tidak ditemukan.' });
+    }
+
+    const cleanEmail = verifiedEmail.trim().toLowerCase();
     let user = null;
     let membership = null;
 
