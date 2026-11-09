@@ -12,6 +12,7 @@ import ActivityView from './features/activity/ActivityView';
 import GymLandingView from './features/landing/GymLandingView';
 import AdminDashboardView from './features/admin/AdminDashboardView';
 import RegisterMemberModal from './components/RegisterMemberModal';
+import MidtransPaymentModal from './components/MidtransPaymentModal';
 import { apiService } from './services/apiService';
 
 export default function App() {
@@ -28,6 +29,8 @@ export default function App() {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
   const [isGlobalRegisterOpen, setIsGlobalRegisterOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentPlan, setPaymentPlan] = useState({ id: 'bulanan', name: 'Paket Bulanan (Monthly Pass)', numericPrice: 100000 });
   const [toastMessage, setToastMessage] = useState(null);
 
   const showToast = (msg) => {
@@ -116,6 +119,21 @@ export default function App() {
     await apiService.resetTodayCheckIn();
     refreshState();
     showToast('Presensi hari ini telah direset.');
+  };
+
+  const handleOpenPayment = (plan) => {
+    if (plan) setPaymentPlan(plan);
+    setIsPaymentModalOpen(true);
+  };
+
+  const handleActivateMembership = async (planId) => {
+    const res = await apiService.activateMembership(planId);
+    if (res.user) {
+      setAuth(prev => ({ ...prev, user: res.user }));
+    }
+    refreshState();
+    showToast('Pembayaran Midtrans berhasil! Paket membership Anda telah aktif.');
+    return res;
   };
 
   // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM (PUBLIK)
@@ -208,6 +226,7 @@ export default function App() {
                   onOpenCheckIn={() => setIsCheckInModalOpen(true)}
                   onOpenCard={() => setIsCardModalOpen(true)}
                   onNavigateTab={setActiveTab}
+                  onOpenPayment={handleOpenPayment}
                 />
               )}
 
@@ -251,6 +270,7 @@ export default function App() {
         isOpen={isCardModalOpen}
         onClose={() => setIsCardModalOpen(false)}
         user={auth.user}
+        onOpenPayment={handleOpenPayment}
       />
 
       {/* Gym Presensi Check-In Modal */}
@@ -260,10 +280,20 @@ export default function App() {
         onCheckInSuccess={handleCheckInSuccess}
         onResetTodayCheckIn={handleResetTodayCheckIn}
         user={auth.user}
+        onOpenPayment={handleOpenPayment}
         onViewActivity={() => {
           setIsCheckInModalOpen(false);
           setActiveTab('activity');
         }}
+      />
+
+      {/* Midtrans & QRIS Payment Gateway Modal */}
+      <MidtransPaymentModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+        selectedPlan={paymentPlan}
+        onPaymentSuccess={handleActivateMembership}
+        user={auth.user}
       />
     </div>
   );

@@ -13,7 +13,9 @@ import {
   ShieldCheck, 
   Camera,
   Smartphone,
-  CheckCircle2
+  CheckCircle2,
+  Zap,
+  Lock
 } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 
@@ -47,8 +49,10 @@ export default function CheckInModal({
   onCheckInSuccess, 
   onResetTodayCheckIn,
   onViewActivity,
-  user 
+  user,
+  onOpenPayment
 }) {
+  const isPaid = Boolean(user?.hasPaid || (user?.status === 'Aktif' && user?.planId));
   const [scanMode, setScanMode] = useState('SHOW_QR'); // 'SHOW_QR' (Tunjukkan ke kasir) | 'SCAN_CAMERA' (Scan QR meja kasir)
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
@@ -76,6 +80,11 @@ export default function CheckInModal({
   if (!isOpen) return null;
 
   const handleScanConfirm = async (customNotes) => {
+    if (!isPaid) {
+      setErrorMessage('Akses Ditolak: Akun Anda belum memiliki paket membership aktif atau belum membayar. Silakan pilih dan selesaikan pembayaran paket via QRIS Midtrans terlebih dahulu.');
+      return;
+    }
+
     setLoading(true);
     setErrorMessage('');
     playBeepSound();
@@ -241,8 +250,12 @@ export default function CheckInModal({
                         <span className="text-[10px] font-bold tracking-wider text-amber-600 uppercase block">TRISIS GYM PASS</span>
                         <strong className="text-xs font-bold text-neutral-900 block truncate">{user?.name || 'Budi Santoso'}</strong>
                       </div>
-                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0">
-                        SIAP SCAN
+                      <span className={`text-[9px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${
+                        isPaid 
+                          ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
+                          : 'bg-amber-100 text-amber-900 border border-amber-300'
+                      }`}>
+                        {isPaid ? 'SIAP SCAN' : 'BELUM AKTIF'}
                       </span>
                     </div>
 
@@ -406,23 +419,44 @@ export default function CheckInModal({
 
               {/* Action Buttons */}
               <div className="pt-1 space-y-2">
-                <button
-                  onClick={() => handleScanConfirm(notes)}
-                  disabled={loading}
-                  className="w-full min-h-[44px] rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.98] disabled:opacity-50 text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin text-neutral-950" />
-                      <span>Kasir Sedang Memindai...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Scan className="w-4 h-4 text-neutral-950" />
-                      <span>{scanMode === 'SHOW_QR' ? 'Verifikasi Presensi Kasir (Bip!)' : 'Pindai QR Meja Kasir Sekarang'}</span>
-                    </>
-                  )}
-                </button>
+                {!isPaid ? (
+                  <button
+                    onClick={() => {
+                      onClose();
+                      if (onOpenPayment) {
+                        onOpenPayment({
+                          id: 'bulanan',
+                          name: 'Paket Bulanan (Monthly Pass)',
+                          price: 100000,
+                          priceStr: 'Rp 100.000',
+                          durationStr: '30 Hari Penuh'
+                        });
+                      }
+                    }}
+                    className="w-full min-h-[44px] rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.98] text-neutral-950 font-extrabold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-amber-950/20"
+                  >
+                    <Zap className="w-4 h-4 text-neutral-950" />
+                    <span>Aktifkan Paket via QRIS Midtrans</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleScanConfirm(notes)}
+                    disabled={loading}
+                    className="w-full min-h-[44px] rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.98] disabled:opacity-50 text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-neutral-950" />
+                        <span>Kasir Sedang Memindai...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Scan className="w-4 h-4 text-neutral-950" />
+                        <span>{scanMode === 'SHOW_QR' ? 'Verifikasi Presensi Kasir (Bip!)' : 'Pindai QR Meja Kasir Sekarang'}</span>
+                      </>
+                    )}
+                  </button>
+                )}
 
                 <button
                   onClick={onClose}

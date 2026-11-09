@@ -15,6 +15,34 @@ export async function performCheckIn(req, res) {
     const loc = location || 'Trisis Gym — Kasir & Turnstile Utama';
     const checkInId = `chk_${crypto.randomUUID()}`;
 
+    // Validasi Keanggotaan: Wajib Aktif & Sudah Membayar
+    let membership = null;
+    if (isDbConnected) {
+      const [mRows] = await pool.query(
+        'SELECT plan_id, plan_name, status, end_date FROM memberships WHERE user_id = ? ORDER BY created_at DESC LIMIT 1',
+        [userId]
+      );
+      if (mRows.length > 0) membership = mRows[0];
+    } else {
+      membership = localStore.getMembershipByUserId(userId);
+    }
+
+    if (!membership || membership.status !== 'active') {
+      return res.status(403).json({
+        success: false,
+        code: 'MEMBERSHIP_INACTIVE',
+        message: 'Akses Ditolak: Anda belum memiliki paket membership aktif atau belum membayar. Silakan pilih paket dan selesaikan pembayaran terlebih dahulu.'
+      });
+    }
+
+    if (membership.end_date && new Date(membership.end_date) < new Date(todayDate)) {
+      return res.status(403).json({
+        success: false,
+        code: 'MEMBERSHIP_EXPIRED',
+        message: 'Akses Ditolak: Masa aktif paket membership Anda telah habis. Silakan perpanjang paket terlebih dahulu.'
+      });
+    }
+
     if (isDbConnected) {
       const [existing] = await pool.query(
         'SELECT id, checkin_time, location FROM checkins WHERE user_id = ? AND checkin_date = ?',

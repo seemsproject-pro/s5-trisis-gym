@@ -15,16 +15,56 @@ import {
   UserCheck, 
   Flame, 
   AlertCircle,
+  AlertTriangle,
   Save,
   RotateCcw,
   Sparkles,
   ChevronRight,
   TrendingUp,
   X,
-  LogOut
+  LogOut,
+  QrCode,
+  Scan,
+  Lock,
+  Unlock,
+  Zap,
+  CreditCard
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import { mockDataService } from '../../services/mockData';
+
+function playTerminalBeep(type = 'success') {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    if (type === 'success') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.setValueAtTime(1174.66, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    } else {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      gain.gain.setValueAtTime(0.25, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.35);
+    }
+  } catch {
+    // Ignore audio autoplay restrictions
+  }
+}
 
 export default function AdminDashboardView({ onSwitchToMemberView, showToast, onLogout }) {
   const [activeAdminTab, setActiveAdminTab] = useState('settings'); // 'settings' | 'members' | 'attendance'
@@ -61,6 +101,11 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
   const [selectedMemberForCheckIn, setSelectedMemberForCheckIn] = useState('');
   const [cashierNotes, setCashierNotes] = useState('Presensi Kasir Pintu Masuk');
   const [checkInFilterDate, setCheckInFilterDate] = useState('ALL'); // 'ALL' | 'TODAY'
+
+  // State Terminal Scanner QR Kasir (Komputer Admin)
+  const [scannerQuery, setScannerQuery] = useState('');
+  const [scanResult, setScanResult] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
 
   // Sinkronisasi data saat ada perubahan
   const refreshAll = () => {
@@ -141,6 +186,104 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
       await mockDataService.deleteMember(id);
       refreshAll();
       showToast?.(`Member "${name}" telah dihapus.`);
+    }
+  };
+
+  // Handler Terminal Scanner QR Kasir (Komputer Resepsionis / Turnstile)
+  const handleTerminalScan = async (queryInput) => {
+    const q = (queryInput || scannerQuery || '').trim();
+    if (!q) {
+      alert('Masukkan atau scan ID Member / QR Code terlebih dahulu.');
+      return;
+    }
+
+    setIsScanning(true);
+    // Micro delay simulasi pembacaan laser scanner optik kasir
+    await new Promise(r => setTimeout(r, 350));
+
+    const currentMembers = mockDataService.getMembers();
+    const target = currentMembers.find(m => 
+      m.id?.toLowerCase() === q.toLowerCase() ||
+      m.memberId?.toLowerCase() === q.toLowerCase() ||
+      m.name?.toLowerCase().includes(q.toLowerCase()) ||
+      m.email?.toLowerCase() === q.toLowerCase()
+    );
+
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} WIB`;
+
+    if (!target) {
+      playTerminalBeep('error');
+      setScanResult({
+        status: 'NOT_FOUND',
+        title: 'KODE QR TIDAK DITEMUKAN',
+        message: `Tidak ada data member yang cocok dengan query barcode "${q}".`,
+        turnstile: 'LOCKED',
+        time: timeStr
+      });
+      setIsScanning(false);
+      return;
+    }
+
+    const isPaid = Boolean(target.hasPaid || (target.status === 'Aktif' && target.planId));
+
+    if (!isPaid) {
+      playTerminalBeep('error');
+      setScanResult({
+        status: 'UNPAID',
+        title: 'AKSES DITOLAK! MEMBER BELUM BAYAR',
+        message: `Member "${target.name}" (${target.memberId}) berstatus Menunggu Pembayaran dan belum memiliki paket aktif.`,
+        tip: 'Arahkan member untuk memilih paket (Per-Visit / Bulanan / Tahunan) dan bayar melalui QRIS Midtrans di aplikasi atau bayar tunai di meja kasir.',
+        member: target,
+        turnstile: 'LOCKED',
+        time: timeStr
+      });
+      setIsScanning(false);
+      return;
+    }
+
+    if (target.status === 'Kadaluarsa') {
+      playTerminalBeep('error');
+      setScanResult({
+        status: 'EXPIRED',
+        title: 'AKSES DITOLAK! PAKET KADALUWARSA',
+        message: `Paket ${target.planName} untuk member "${target.name}" telah habis masa berlakunya pada ${target.validUntil}.`,
+        tip: 'Silakan lakukan perpanjangan paket membership untuk mengaktifkan kembali akses gym.',
+        member: target,
+        turnstile: 'LOCKED',
+        time: timeStr
+      });
+      setIsScanning(false);
+      return;
+    }
+
+    // SUCCESS - Member Aktif & Sudah Bayar
+    try {
+      await mockDataService.adminCheckInMember(target.id, 'Presensi Scanner QR Kasir Pintu Masuk');
+      playTerminalBeep('success');
+      setScanResult({
+        status: 'SUCCESS',
+        title: 'SILAKAN MASUK! MEMBER AKTIF',
+        message: `Akses Diizinkan! Selamat datang, ${target.name}. Pintu Turnstile Terbuka.`,
+        member: target,
+        turnstile: 'OPEN',
+        time: timeStr
+      });
+      refreshAll();
+      showToast?.(`✅ ${target.name} terverifikasi masuk gym!`);
+    } catch (err) {
+      playTerminalBeep('error');
+      setScanResult({
+        status: 'DUPLICATE',
+        title: 'SUDAH CHECK-IN HARI INI',
+        message: err.message || 'Member ini sudah tercatat check-in hari ini.',
+        member: target,
+        turnstile: 'OPEN_INFO',
+        time: timeStr
+      });
+    } finally {
+      setIsScanning(false);
+      setScannerQuery('');
     }
   };
 
@@ -634,7 +777,306 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
       {/* 5. TAB 3: PRESENSI KASIR & LAPORAN KEHADIRAN (MODUL 9) */}
       {activeAdminTab === 'attendance' && (
         <div className="space-y-4">
-          {/* Quick Check-in Kasir Manual Widget */}
+          {/* A. TERMINAL SCANNER KOMPUTER KASIR / TURNSTILE GATE (SESUAI AUDIO INSTRUKSI) */}
+          <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-amber-500/30 relative overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
+                  <Scan className="w-5 h-5 text-amber-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm md:text-base font-bold text-white">
+                      Terminal Scanner QR Kasir & Turnstile
+                    </h3>
+                    <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      LIVE MONITOR
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-0.5">
+                    Scan QR code member dari smartphone untuk verifikasi otomatis status bayar dan hak akses masuk gym.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Input Form Scanner Kasir */}
+            <form onSubmit={(e) => { e.preventDefault(); handleTerminalScan(); }} className="mt-4 flex flex-col sm:flex-row gap-2.5">
+              <div className="relative flex-1">
+                <QrCode className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+                <input
+                  type="text"
+                  value={scannerQuery}
+                  onChange={(e) => setScannerQuery(e.target.value)}
+                  placeholder="Ketik atau scan ID Member (contoh: TRISIS-2026-089) / QR Payload..."
+                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/80 border border-white/[0.08] rounded-xl text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-400/80 font-mono"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isScanning}
+                className="py-2.5 px-5 rounded-xl bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shrink-0 shadow-md"
+              >
+                <Scan className="w-4 h-4 text-neutral-950" />
+                <span>{isScanning ? 'Memindai...' : 'Pindai QR Member'}</span>
+              </button>
+            </form>
+
+            {/* Quick-Test Buttons untuk Demo Kasir */}
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span className="text-[11px] text-zinc-500 font-semibold uppercase tracking-wider">Uji Cepat Simulasi:</span>
+              <button
+                type="button"
+                onClick={() => handleTerminalScan('TRISIS-2026-089')}
+                className="py-1 px-2.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 text-[11px] font-medium transition-colors cursor-pointer border border-white/[0.04] flex items-center gap-1"
+              >
+                <Zap className="w-3 h-3 text-emerald-400" />
+                <span>Budi Santoso (Bulanan Aktif)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const unpaid = members.find(m => !m.hasPaid && m.status !== 'Aktif') || { memberId: 'TRISIS-G-BARU' };
+                  handleTerminalScan(unpaid.memberId);
+                }}
+                className="py-1 px-2.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-amber-300 text-[11px] font-medium transition-colors cursor-pointer border border-white/[0.04] flex items-center gap-1"
+              >
+                <AlertCircle className="w-3 h-3 text-amber-400" />
+                <span>Member Baru (Belum Bayar)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTerminalScan('TRISIS-V-2026-003')}
+                className="py-1 px-2.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-rose-300 text-[11px] font-medium transition-colors cursor-pointer border border-white/[0.04] flex items-center gap-1"
+              >
+                <XCircle className="w-3 h-3 text-rose-400" />
+                <span>Rizky Pratama (Kadaluarsa)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTerminalScan('TRISIS-T-2026-077')}
+                className="py-1 px-2.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-emerald-300 text-[11px] font-medium transition-colors cursor-pointer border border-white/[0.04] flex items-center gap-1"
+              >
+                <Zap className="w-3 h-3 text-emerald-400" />
+                <span>Dinda Permata (Tahunan Aktif)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTerminalScan('UNKNOWN-BARCODE-999')}
+                className="py-1 px-2.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 text-[11px] font-medium transition-colors cursor-pointer border border-white/[0.04]"
+              >
+                <span>Barcode Palsu</span>
+              </button>
+            </div>
+
+            {/* Layar Terminal Kasir / Monitor Turnstile */}
+            <div className="mt-4 pt-4 border-t border-white/[0.08]">
+              {!scanResult ? (
+                <div className="rounded-xl bg-zinc-900/40 border border-white/[0.04] p-6 text-center text-zinc-500 space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-zinc-800 border border-white/[0.06] mx-auto flex items-center justify-center text-zinc-400">
+                    <QrCode className="w-5 h-5 opacity-60" />
+                  </div>
+                  <p className="text-xs font-medium text-zinc-400">
+                    Layar Kasir Siaga — Arahkan barcode QR member ke sensor scanner.
+                  </p>
+                  <p className="text-[11px] text-zinc-500">
+                    Sistem akan memverifikasi apakah akun berstatus aktif, masa berlaku paket, dan hak akses turnstile.
+                  </p>
+                </div>
+              ) : scanResult.status === 'SUCCESS' ? (
+                /* SCREEN 1: ✅ SILAKAN MASUK! MEMBER AKTIF */
+                <div className="rounded-xl bg-emerald-950/30 border-2 border-emerald-500/50 p-5 space-y-4 animate-in zoom-in-95 duration-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-emerald-500/20">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                        <CheckCircle2 className="w-7 h-7 text-emerald-400" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
+                          AKSES DIIZINKAN • TURNSTILE TERBUKA
+                        </span>
+                        <h4 className="text-base md:text-lg font-black text-white mt-1">
+                          SILAKAN MASUK! MEMBER RESMI AKTIF
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="sm:text-right">
+                      <span className="text-[10px] text-zinc-400 block">Waktu Verifikasi</span>
+                      <span className="font-mono text-xs font-bold text-emerald-400">{scanResult.time}</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs bg-zinc-900/60 p-3.5 rounded-xl border border-white/[0.04]">
+                    <div>
+                      <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">Nama Member</span>
+                      <span className="font-bold text-white text-sm">{scanResult.member?.name}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">ID Keanggotaan</span>
+                      <span className="font-mono font-bold text-amber-400">{scanResult.member?.memberId}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">Paket Membership</span>
+                      <span className="font-semibold text-zinc-200">{scanResult.member?.planName}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">Masa Berlaku</span>
+                      <span className="font-semibold text-emerald-400">s/d {scanResult.member?.validUntil}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-emerald-300">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <Unlock className="w-4 h-4 text-emerald-400" />
+                      Pintu turnstile otomatis terbuka untuk 1 orang
+                    </span>
+                    <button
+                      onClick={() => setScanResult(null)}
+                      className="text-[11px] text-zinc-400 hover:text-white underline cursor-pointer"
+                    >
+                      Reset Monitor
+                    </button>
+                  </div>
+                </div>
+              ) : scanResult.status === 'UNPAID' ? (
+                /* SCREEN 2: ❌ AKSES DITOLAK! MEMBER BELUM BAYAR */
+                <div className="rounded-xl bg-rose-950/40 border-2 border-rose-500/50 p-5 space-y-4 animate-in zoom-in-95 duration-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-rose-500/20">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
+                        <XCircle className="w-7 h-7 text-rose-400" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-rose-400 bg-rose-500/20 px-2 py-0.5 rounded border border-rose-500/30">
+                          AKSES DITOLAK • TURNSTILE TERKUNCI
+                        </span>
+                        <h4 className="text-base md:text-lg font-black text-rose-100 mt-1">
+                          AKSES DITOLAK! MEMBER BELUM BAYAR
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="sm:text-right">
+                      <span className="text-[10px] text-zinc-400 block">Waktu Percobaan</span>
+                      <span className="font-mono text-xs font-bold text-rose-400">{scanResult.time}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-zinc-900/80 p-3.5 rounded-xl border border-white/[0.04] space-y-2 text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">Nama Member:</span>
+                      <strong className="text-white">{scanResult.member?.name}</strong>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">ID Member:</span>
+                      <span className="font-mono font-bold text-amber-400">{scanResult.member?.memberId}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">Status Pembayaran:</span>
+                      <span className="font-bold text-rose-400">Belum Bayar (Menunggu Pembayaran)</span>
+                    </div>
+                    <div className="pt-2 border-t border-white/[0.06] text-amber-300/90 text-[11px] leading-relaxed">
+                      💡 <strong>Petunjuk Kasir:</strong> {scanResult.tip}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-rose-300">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <Lock className="w-4 h-4 text-rose-400" />
+                      Palang turnstile tetap terkunci
+                    </span>
+                    <button
+                      onClick={() => setScanResult(null)}
+                      className="text-[11px] text-zinc-400 hover:text-white underline cursor-pointer"
+                    >
+                      Reset Monitor
+                    </button>
+                  </div>
+                </div>
+              ) : scanResult.status === 'EXPIRED' ? (
+                /* SCREEN 3: ❌ AKSES DITOLAK! PAKET KADALUWARSA */
+                <div className="rounded-xl bg-amber-950/40 border-2 border-amber-500/50 p-5 space-y-4 animate-in zoom-in-95 duration-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-amber-500/20">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                        <AlertTriangle className="w-7 h-7 text-amber-400" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
+                          AKSES DITOLAK • PAKET KADALUWARSA
+                        </span>
+                        <h4 className="text-base md:text-lg font-black text-amber-100 mt-1">
+                          MASA AKTIF PAKET TELAH HABIS
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="sm:text-right">
+                      <span className="text-[10px] text-zinc-400 block">Waktu Percobaan</span>
+                      <span className="font-mono text-xs font-bold text-amber-400">{scanResult.time}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-zinc-900/80 p-3.5 rounded-xl border border-white/[0.04] space-y-2 text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">Nama Member:</span>
+                      <strong className="text-white">{scanResult.member?.name}</strong>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">ID Member:</span>
+                      <span className="font-mono font-bold text-amber-400">{scanResult.member?.memberId}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">Paket Terakhir:</span>
+                      <span className="text-zinc-200">{scanResult.member?.planName}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-zinc-400">Kadaluarsa Pada:</span>
+                      <span className="font-bold text-rose-400">{scanResult.member?.validUntil}</span>
+                    </div>
+                    <div className="pt-2 border-t border-white/[0.06] text-amber-300/90 text-[11px] leading-relaxed">
+                      💡 <strong>Petunjuk Kasir:</strong> {scanResult.tip}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-amber-300">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <Lock className="w-4 h-4 text-amber-400" />
+                      Palang turnstile tetap terkunci
+                    </span>
+                    <button
+                      onClick={() => setScanResult(null)}
+                      className="text-[11px] text-zinc-400 hover:text-white underline cursor-pointer"
+                    >
+                      Reset Monitor
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* SCREEN 4: ❌ KODE QR TIDAK DIKENALI */
+                <div className="rounded-xl bg-zinc-900 border border-rose-500/30 p-5 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0">
+                      <XCircle className="w-6 h-6 text-rose-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white">Kode QR / ID Member Tidak Ditemukan</h4>
+                      <p className="text-xs text-zinc-400 mt-0.5">{scanResult.message}</p>
+                    </div>
+                  </div>
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      onClick={() => setScanResult(null)}
+                      className="text-xs text-zinc-400 hover:text-white underline cursor-pointer"
+                    >
+                      Tutup Pesan
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* B. Quick Check-in Kasir Manual Widget */}
           <div className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08]">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center">

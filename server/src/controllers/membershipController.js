@@ -230,3 +230,68 @@ export async function deleteMember(req, res) {
     return res.status(500).json({ success: false, message: 'Gagal menghapus member.' });
   }
 }
+
+export async function activateMembership(req, res) {
+  try {
+    const userId = req.user.id;
+    const { planId = 'bulanan' } = req.body;
+
+    const now = new Date();
+    let planName = '';
+    let pricePaid = 100000;
+    let days = 30;
+
+    if (planId === 'harian' || planId === 'per_visit') {
+      planName = 'Paket Per-Visit (Harian)';
+      pricePaid = 25000;
+      days = 1;
+    } else if (planId === 'tahunan') {
+      planName = 'Paket Tahunan (Annual Pass)';
+      pricePaid = 1200000;
+      days = 365;
+    } else {
+      planName = 'Paket Bulanan (Monthly Pass)';
+      pricePaid = 100000;
+      days = 30;
+    }
+
+    const startDate = new Date();
+    const endDate = new Date(now.getTime() + days * 24 * 3600 * 1000);
+    const validUntilStr = endDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+
+    if (isDbConnected) {
+      const membershipId = `mem_${crypto.randomUUID()}`;
+      await pool.query(
+        'INSERT INTO memberships (id, user_id, plan_id, plan_name, status, start_date, end_date, price_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [membershipId, userId, planId, planName, 'active', startDate, endDate, pricePaid]
+      );
+    } else {
+      localStore.addMembership({
+        id: `mem_${Date.now()}`,
+        user_id: userId,
+        plan_id: planId,
+        plan_name: planName,
+        status: 'active',
+        start_date: startDate.toISOString().split('T')[0],
+        end_date: endDate.toISOString().split('T')[0],
+        price_paid: pricePaid
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: `Aktivasi ${planName} berhasil. Masa aktif berlaku s/d ${validUntilStr}.`,
+      data: {
+        planId,
+        planName,
+        validUntil: validUntilStr,
+        status: 'Aktif',
+        hasPaid: true
+      }
+    });
+  } catch (error) {
+    console.error('activateMembership error:', error);
+    return res.status(500).json({ success: false, message: 'Gagal mengaktifkan paket membership.' });
+  }
+}
+

@@ -94,6 +94,19 @@ export const apiService = {
     }
   },
 
+  async activateMembership(planId) {
+    try {
+      const data = await request('/memberships/activate', {
+        method: 'POST',
+        body: JSON.stringify({ planId })
+      });
+      return data;
+    } catch (err) {
+      console.warn('[API Fallback] Activate membership via mock service:', err.message);
+      return mockDataService.activateMembership(planId);
+    }
+  },
+
   logout() {
     setToken(null);
     return mockDataService.logout();

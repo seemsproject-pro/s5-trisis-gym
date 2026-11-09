@@ -14,7 +14,11 @@ import {
   ShieldCheck,
   QrCode,
   Megaphone,
-  Users
+  Users,
+  Lock,
+  AlertCircle,
+  Check,
+  Zap
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import { calculateWorkoutSplit, calculateMacroEstimates } from '../../services/baselineCalculators';
@@ -25,8 +29,10 @@ export default function DashboardView({
   stats, 
   onOpenCheckIn, 
   onOpenCard, 
-  onNavigateTab 
+  onNavigateTab,
+  onOpenPayment
 }) {
+  const isPaid = Boolean(user?.hasPaid || (user?.status === 'Aktif' && user?.planId));
   const workoutSplit = calculateWorkoutSplit(profile);
   const macroEstimates = calculateMacroEstimates(profile);
 
@@ -172,6 +178,122 @@ export default function DashboardView({
         </div>
       </section>
 
+      {/* 2. Pilihan Paket Membership (Tampil jika Belum Bayar atau ingin upgrade) */}
+      {!isPaid && (
+        <section className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-amber-500/30 relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
+                <Zap className="w-5 h-5 text-amber-400" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm md:text-base font-bold text-white">
+                    Pilih & Aktifkan Paket Membership Anda
+                  </h2>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                    MENUNGGU PEMBAYARAN
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  Akun Anda telah terdaftar. Pilih salah satu dari 3 paket di bawah untuk mengaktifkan QR presensi kasir dan akses latihan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 3 Kartu Pilihan Paket Resmi Trisis Gym */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4">
+            {/* Paket 1: Per-Visit */}
+            <div className="bg-zinc-900/60 rounded-xl p-4 border border-white/[0.06] hover:border-zinc-700 transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">FLEKSIBEL</span>
+                <h3 className="text-sm font-bold text-white mt-0.5">Per-Visit (Harian)</h3>
+                <div className="mt-2 mb-3">
+                  <span className="text-xl font-extrabold text-white">Rp 25.000</span>
+                  <span className="text-[11px] text-zinc-400"> / kunjungan</span>
+                </div>
+                <p className="text-[11px] text-zinc-400 leading-relaxed mb-3">
+                  Masa berlaku berlaku <strong className="text-zinc-200">hari ini saja (s/d 21:30 WIB)</strong>. Akses seluruh fasilitas & alat gym.
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenPayment({
+                  id: 'per_visit',
+                  name: 'Paket Per-Visit (Harian)',
+                  price: 25000,
+                  priceStr: 'Rp 25.000',
+                  durationStr: 'Hari Ini (s/d 21:30 WIB)'
+                })}
+                className="w-full py-2.5 px-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-white/[0.08]"
+              >
+                <span>Pilih & Bayar QRIS</span>
+                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
+              </button>
+            </div>
+
+            {/* Paket 2: Bulanan (Paling Populer) */}
+            <div className="bg-zinc-900/90 rounded-xl p-4 border-2 border-amber-400/60 relative flex flex-col justify-between shadow-lg shadow-amber-950/20">
+              <span className="absolute -top-2.5 right-3 bg-amber-400 text-neutral-950 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                PALING POPULER
+              </span>
+              <div>
+                <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">REKOMENDASI</span>
+                <h3 className="text-sm font-bold text-white mt-0.5">Paket Bulanan (Monthly)</h3>
+                <div className="mt-2 mb-3">
+                  <span className="text-xl font-extrabold text-white">Rp 100.000</span>
+                  <span className="text-[11px] text-zinc-400"> / bulan</span>
+                </div>
+                <p className="text-[11px] text-zinc-300 leading-relaxed mb-3">
+                  Masa aktif <strong className="text-amber-300">tepat 30 hari penuh</strong>. Akses setiap hari tanpa batas + program latihan & konsultasi nutrisi.
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenPayment({
+                  id: 'bulanan',
+                  name: 'Paket Bulanan (Monthly Pass)',
+                  price: 100000,
+                  priceStr: 'Rp 100.000',
+                  durationStr: '30 Hari Penuh'
+                })}
+                className="w-full py-2.5 px-3 rounded-lg bg-amber-400 hover:bg-amber-300 text-neutral-950 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md"
+              >
+                <span>Pilih & Bayar QRIS (30 Hari)</span>
+                <ChevronRight className="w-3.5 h-3.5 text-neutral-950" />
+              </button>
+            </div>
+
+            {/* Paket 3: Tahunan (Paling Hemat) */}
+            <div className="bg-zinc-900/60 rounded-xl p-4 border border-white/[0.06] hover:border-zinc-700 transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">HEMAT BIAYA</span>
+                <h3 className="text-sm font-bold text-white mt-0.5">Paket Tahunan (Annual)</h3>
+                <div className="mt-2 mb-3">
+                  <span className="text-xl font-extrabold text-white">Rp 1.200.000</span>
+                  <span className="text-[11px] text-zinc-400"> / tahun</span>
+                </div>
+                <p className="text-[11px] text-zinc-400 leading-relaxed mb-3">
+                  Masa aktif <strong className="text-zinc-200">365 hari penuh</strong>. Gratis konsultasi instruktur & prioritas loker gym.
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenPayment({
+                  id: 'tahunan',
+                  name: 'Paket Tahunan (Annual Pass)',
+                  price: 1200000,
+                  priceStr: 'Rp 1.200.000',
+                  durationStr: '365 Hari (1 Tahun)'
+                })}
+                className="w-full py-2.5 px-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-white/[0.08]"
+              >
+                <span>Pilih & Bayar QRIS</span>
+                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 2. Kartu Membership & Presensi Gym Utama */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Presensi Check-In Card */}
@@ -186,20 +308,45 @@ export default function DashboardView({
                 <p className="text-xs text-zinc-400 mt-0.5">Tunjukkan QR ke kasir saat tiba di gym</p>
               </div>
             </div>
-            <StatusBadge status="ONLINE" size="xs" />
+            <StatusBadge status={isPaid ? "ONLINE" : "BELUM AKTIF"} size="xs" />
           </div>
 
-          <button
-            onClick={onOpenCheckIn}
-            className="w-full py-3 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
-          >
-            <QrCode className="w-4 h-4 text-neutral-950" />
-            Buka QR Presensi
-          </button>
+          {isPaid ? (
+            <button
+              onClick={onOpenCheckIn}
+              className="w-full py-3 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-neutral-950 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <QrCode className="w-4 h-4 text-neutral-950" />
+              Buka QR Presensi
+            </button>
+          ) : (
+            <button
+              onClick={() => onOpenPayment({
+                id: 'bulanan',
+                name: 'Paket Bulanan (Monthly Pass)',
+                price: 100000,
+                priceStr: 'Rp 100.000',
+                durationStr: '30 Hari Penuh'
+              })}
+              className="w-full py-3 px-4 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/40 text-amber-400 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <Lock className="w-4 h-4 text-amber-400" />
+              Aktifkan Paket untuk Presensi (Buka QR)
+            </button>
+          )}
           
           <div className="flex items-center gap-1.5 justify-center text-[11px] text-zinc-400">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Tinggal di-scan petugas kasir / turnstile gym</span>
+            {isPaid ? (
+              <>
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Tinggal di-scan petugas kasir / turnstile gym</span>
+              </>
+            ) : (
+              <>
+                <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                <span>QR aktif setelah Anda menyelesaikan pembayaran paket</span>
+              </>
+            )}
           </div>
         </section>
 
@@ -212,30 +359,51 @@ export default function DashboardView({
               </div>
               <div>
                 <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Membership</span>
-                <h3 className="text-sm font-bold text-white">{user?.planName || 'Annual Regular Pass'}</h3>
+                <h3 className="text-sm font-bold text-white">
+                  {isPaid ? (user?.planName || 'Paket Bulanan (Monthly Pass)') : 'Belum Memilih Paket'}
+                </h3>
               </div>
             </div>
-            <StatusBadge status="AKTIF" size="xs" />
+            <StatusBadge status={isPaid ? "AKTIF" : "MENUNGGU BAYAR"} size="xs" />
           </div>
 
           <div className="bg-zinc-900/60 rounded-xl p-3 border border-white/[0.04] flex items-center justify-between text-xs">
             <div>
               <span className="text-[10px] text-zinc-400 block font-medium">Masa Berlaku</span>
-              <span className="font-semibold text-zinc-200">s/d 31 Desember 2026</span>
+              <span className={`font-semibold ${isPaid ? 'text-zinc-200' : 'text-amber-400'}`}>
+                {isPaid ? (user?.validUntil || 'Aktif s/d 1 Bulan') : 'Belum Aktif (Perlu Bayar)'}
+              </span>
             </div>
             <div className="text-right">
               <span className="text-[10px] text-zinc-400 block font-medium">Status Akses</span>
-              <span className="font-semibold text-emerald-400">Akses Penuh Cabang</span>
+              <span className={`font-semibold ${isPaid ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {isPaid ? 'Akses Penuh Cabang' : 'Akses Terkunci'}
+              </span>
             </div>
           </div>
 
-          <button
-            onClick={onOpenCard}
-            className="w-full py-2.5 px-4 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-zinc-700/60 transition-all cursor-pointer"
-          >
-            <span>Tampilkan Kartu Member Digital</span>
-            <ChevronRight className="w-4 h-4 text-zinc-400" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenCard}
+              className="flex-1 py-2.5 px-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-zinc-700/60 transition-all cursor-pointer"
+            >
+              <span>Kartu Member Digital</span>
+              <ChevronRight className="w-4 h-4 text-zinc-400" />
+            </button>
+            <button
+              onClick={() => onOpenPayment({
+                id: user?.planId || 'bulanan',
+                name: user?.planName || 'Paket Bulanan (Monthly Pass)',
+                price: user?.planId === 'tahunan' ? 1200000 : user?.planId === 'per_visit' ? 25000 : 100000,
+                priceStr: user?.planId === 'tahunan' ? 'Rp 1.200.000' : user?.planId === 'per_visit' ? 'Rp 25.000' : 'Rp 100.000',
+                durationStr: user?.planId === 'tahunan' ? '365 Hari' : user?.planId === 'per_visit' ? '1 Hari' : '30 Hari'
+              })}
+              title="Perpanjang atau ganti paket membership"
+              className="py-2.5 px-3 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border border-amber-400/30 font-bold text-xs transition-all cursor-pointer shrink-0"
+            >
+              {isPaid ? 'Perpanjang' : 'Bayar Paket'}
+            </button>
+          </div>
         </section>
       </div>
 

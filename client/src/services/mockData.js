@@ -281,16 +281,19 @@ export const mockDataService = {
         email: cleanEmail,
         phone: '0812-Google-Auth',
         memberId: `TRISIS-G-2026-${randomNum}`,
-        planId: 'bulanan',
-        planName: 'Paket Bulanan (Monthly Pass)',
-        validUntil: '1 Bulan Mendatang',
-        status: 'Aktif',
-        pricePaid: 'Rp 100.000',
+        planId: null,
+        planName: 'Belum Ada Paket',
+        validUntil: null,
+        status: 'Menunggu Pembayaran',
+        hasPaid: false,
+        pricePaid: 'Rp 0',
         joinedAt: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
       };
       members.push(foundMember);
       setStoredItem(STORAGE_KEYS.MEMBERS, members);
     }
+
+    const isPaid = Boolean(foundMember.hasPaid || (foundMember.status === 'Aktif' && foundMember.planId));
 
     const user = {
       id: foundMember.id,
@@ -298,8 +301,11 @@ export const mockDataService = {
       email: foundMember.email,
       phone: foundMember.phone,
       memberId: foundMember.memberId,
-      planName: foundMember.planName,
-      validUntil: foundMember.validUntil,
+      planName: isPaid ? foundMember.planName : 'Belum Ada Paket (Perlu Pembayaran)',
+      planId: isPaid ? foundMember.planId : null,
+      validUntil: isPaid ? foundMember.validUntil : null,
+      status: isPaid ? 'Aktif' : 'Menunggu Pembayaran',
+      hasPaid: isPaid,
       role: 'member'
     };
 
@@ -307,6 +313,69 @@ export const mockDataService = {
     setStoredItem(STORAGE_KEYS.AUTH, authState);
     this.setActiveRole('member');
     return Promise.resolve({ success: true, user });
+  },
+
+  activateMembership(planId = 'bulanan') {
+    const authStatus = this.getAuthStatus();
+    if (!authStatus.user) return Promise.reject(new Error('Sesi tidak ditemukan.'));
+
+    const now = new Date();
+    let validUntil = '';
+    let planName = '';
+    let pricePaid = '';
+
+    if (planId === 'harian' || planId === 'per_visit') {
+      const todayStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+      validUntil = `${todayStr} (Hari Ini Saja)`;
+      planName = 'Paket Per-Visit (Harian)';
+      pricePaid = 'Rp 25.000';
+    } else if (planId === 'tahunan') {
+      const future = new Date(now.getTime() + 365 * 24 * 3600 * 1000);
+      validUntil = future.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+      planName = 'Paket Tahunan (Annual Pass)';
+      pricePaid = 'Rp 1.200.000';
+    } else {
+      // Bulanan
+      const future = new Date(now.getTime() + 30 * 24 * 3600 * 1000);
+      validUntil = future.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+      planName = 'Paket Bulanan (Monthly Pass)';
+      pricePaid = 'Rp 100.000';
+    }
+
+    const updatedUser = {
+      ...authStatus.user,
+      planId,
+      planName,
+      validUntil,
+      status: 'Aktif',
+      hasPaid: true
+    };
+
+    setStoredItem(STORAGE_KEYS.AUTH, { isAuthenticated: true, user: updatedUser });
+
+    const members = this.getMembers();
+    const mIdx = members.findIndex(m => m.id === updatedUser.id || m.email === updatedUser.email);
+    if (mIdx !== -1) {
+      members[mIdx] = {
+        ...members[mIdx],
+        planId,
+        planName,
+        validUntil,
+        status: 'Aktif',
+        hasPaid: true,
+        pricePaid
+      };
+      setStoredItem(STORAGE_KEYS.MEMBERS, members);
+    }
+
+    this.addActivity({
+      type: 'PAYMENT',
+      title: `Aktivasi ${planName} Berhasil`,
+      description: `Pembayaran ${pricePaid} terverifikasi. Masa aktif berlaku s/d ${validUntil}.`,
+      methodBadge: 'AKTIF'
+    });
+
+    return Promise.resolve({ success: true, user: updatedUser });
   },
 
   logout() {
@@ -351,6 +420,26 @@ export const mockDataService = {
     const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
 
     const user = this.getAuthStatus().user || INITIAL_ACCOUNT;
+    const isPaid = Boolean(user.hasPaid || (user.status === 'Aktif' && user.planId));
+
+    // Validasi 1: Pengguna harus sudah bayar member (tidak boleh check-in tanpa paket aktif)
+    if (!isPaid) {
+      return Promise.reject({
+        code: 'MEMBERSHIP_INACTIVE',
+        message: 'Akun Anda belum memiliki paket membership aktif atau belum membayar. Silakan pilih dan bayar paket membership terlebih dahulu untuk melakukan check-in.'
+      });
+    }
+
+    // Validasi 2: Cek masa berlaku paket
+    if (user.planId === 'harian' || user.planId === 'per_visit') {
+      const todayShort = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+      if (user.validUntil && !user.validUntil.includes(todayShort)) {
+        return Promise.reject({
+          code: 'MEMBERSHIP_EXPIRED',
+          message: 'Paket Per-Visit Anda hanya berlaku pada hari pembelian. Silakan perpanjang kunjungan untuk melakukan check-in hari ini.'
+        });
+      }
+    }
 
     // Cek apakah hari ini sudah check-in
     const alreadyToday = checkIns.find(c => c.date === todayStr && c.memberId === user.memberId);
@@ -508,7 +597,16 @@ export const mockDataService = {
     const members = this.getMembers();
     const member = members.find(m => m.id === memberId || m.memberId === memberId);
     if (!member) {
-      return Promise.reject(new Error('Member tidak ditemukan.'));
+      return Promise.reject(new Error('Member tidak ditemukan dalam database.'));
+    }
+
+    const isPaid = member.hasPaid || (member.status === 'Aktif' && member.planId);
+    if (!isPaid) {
+      return Promise.reject(new Error(`AKSES DITOLAK: Member "${member.name}" (${member.memberId}) belum membayar paket membership. Status saat ini: Menunggu Pembayaran.`));
+    }
+
+    if (member.status === 'Kadaluarsa') {
+      return Promise.reject(new Error(`AKSES DITOLAK: Paket membership "${member.name}" telah kedaluwarsa. Silakan perpanjang paket terlebih dahulu.`));
     }
 
     const checkIns = this.getCheckIns();

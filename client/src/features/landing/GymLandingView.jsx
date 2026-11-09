@@ -21,7 +21,9 @@ import {
   ShieldCheck,
   CheckCircle2,
   LogOut,
-  User
+  User,
+  Star,
+  ExternalLink
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
 import RegisterMemberModal from '../../components/RegisterMemberModal';
@@ -157,15 +159,15 @@ export default function GymLandingView({
     }
   ];
 
-  // Crowd Time Slots Info
+  // Crowd Time Slots Info (Jam Buka Resmi: 07.30 - 21.30 WIB)
   const crowdSlots = {
     pagi: {
-      time: '06.00 - 10.00 WIB',
+      time: '07.30 - 10.30 WIB',
       percent: 30,
       label: 'Sangat Tenang',
       color: 'text-emerald-400 bg-emerald-950/50 border-emerald-800/40',
       barColor: 'bg-emerald-500',
-      note: 'Waktu terbaik untuk latihan fokus tanpa antre alat sama sekali. Udara pagi segar dan adem.'
+      note: 'Waktu terbaik untuk latihan fokus tanpa antre alat sama sekali. Udara pagi segar dan tenang.'
     },
     siang: {
       time: '11.00 - 15.00 WIB',
@@ -173,7 +175,7 @@ export default function GymLandingView({
       label: 'Cukup Lengang',
       color: 'text-blue-400 bg-blue-950/50 border-blue-800/40',
       barColor: 'bg-blue-500',
-      note: 'Ideal untuk mahasiswa di jeda jam kuliah atau pekerja fleksibel. Ruang gerak sangat leluasa.'
+      note: 'Ideal untuk mahasiswa atau pekerja dengan jam istirahat fleksibel. Ruang latihan sangat leluasa.'
     },
     sore: {
       time: '16.00 - 19.30 WIB',
@@ -184,12 +186,12 @@ export default function GymLandingView({
       note: 'Jam puncak sepulang kuliah dan kerja. Suasana sangat bersemangat dan saling memotivasi.'
     },
     malam: {
-      time: '20.00 - 22.00 WIB',
+      time: '19.30 - 21.30 WIB',
       percent: 40,
       label: 'Kondusif & Rileks',
       color: 'text-sky-300 bg-sky-950/50 border-sky-800/40',
       barColor: 'bg-sky-500',
-      note: 'Suasana mulai tenang kembali, cocok untuk sesi latihan malam santai sebelum istirahat.'
+      note: 'Suasana mulai tenang kembali, cocok untuk sesi latihan malam santai sebelum tutup pukul 21.30 WIB.'
     }
   };
 
@@ -387,7 +389,7 @@ export default function GymLandingView({
             <span className="text-zinc-600 hidden sm:inline">•</span>
             <span className="text-amber-300 font-medium">Mulai Rp 25.000 / Sesi</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span>Buka Setiap Hari (06:00 – 22:00 WIB)</span>
+            <span>Buka Setiap Hari (07:30 – 21:30 WIB)</span>
           </div>
         </div>
       </section>
@@ -805,56 +807,110 @@ export default function GymLandingView({
             </div>
           </div>
 
-          {/* KOLOM KANAN: LOKASI & JAM OPERASIONAL */}
+          {/* KOLOM KANAN: LOKASI & JAM OPERASIONAL TRISIS GYM */}
           <div id="lokasi" className="space-y-4 bg-[#111319] p-5 md:p-6 rounded-2xl border border-white/[0.08]">
             <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
                   Lokasi & Akses
                 </span>
-                <h3 className="text-base font-bold text-white mt-1">Kunjungi Trisis Gym Bogor</h3>
+                <h3 className="text-base font-bold text-white mt-1">TRISIS GYM CENTRE</h3>
               </div>
-              <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
-                Buka Sekarang
-              </span>
+              <a
+                href="https://www.google.com/maps/place/TRISIS+GYM+CENTRE/@-6.7129809,106.8290947,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69cb001c39a4d9:0x6c2226826afce7ef!8m2!3d-6.7129809!4d106.8290947!16s%2Fg%2F11wnbh0200?entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/25 px-2.5 py-1 rounded-lg text-[11px] font-bold text-amber-300 transition-colors cursor-pointer group"
+              >
+                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                <span>4.9</span>
+                <span className="text-[10px] text-zinc-400 font-normal group-hover:text-zinc-300">(57 Ulasan Google)</span>
+              </a>
             </div>
 
             <div className="space-y-2.5 text-xs">
-              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-white text-xs">Alamat Gym</strong>
-                  <span className="text-zinc-400 text-[11px]">Kota Bogor, Jawa Barat (Dekat Pusat Kota & Kampus IPB / Pakuan)</span>
+              <a
+                href="https://www.google.com/maps/place/TRISIS+GYM+CENTRE/@-6.7129809,106.8290947,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69cb001c39a4d9:0x6c2226826afce7ef!8m2!3d-6.7129809!4d106.8290947!16s%2Fg%2F11wnbh0200?entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/80 border border-white/[0.06] hover:border-amber-400/30 transition-all group block"
+              >
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <strong className="block text-white text-xs group-hover:text-amber-300 transition-colors">Alamat Resmi</strong>
+                    <span className="text-[10px] text-amber-400 flex items-center gap-1 font-semibold">
+                      Buka di Maps <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </div>
+                  <span className="text-zinc-300 text-[11px] leading-relaxed block mt-0.5">
+                    Jl. Kp. Curug Dengdeng, Caringin, Kec. Caringin, Kabupaten Bogor, Jawa Barat 16740
+                  </span>
+                </div>
+              </a>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="flex items-start gap-2 p-2.5 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
+                  <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-white text-xs">Jam Operasional</strong>
+                    <span className="text-zinc-300 text-[11px]">Buka Setiap Hari</span>
+                    <span className="text-zinc-400 text-[10px] block">07.30 – 21.30 WIB</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2 p-2.5 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
+                  <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-white text-xs">Kontak / Telepon</strong>
+                    <span className="text-zinc-300 text-[11px] font-medium">0821-3013-3208</span>
+                    <span className="text-emerald-400 text-[10px] block font-semibold">WhatsApp Kasir Aktif</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 border border-white/[0.06]">
-                <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-white text-xs">Jam Operasional</strong>
-                  <span className="text-zinc-400 text-[11px]">Senin – Sabtu: 06.00 – 22.00 WIB | Minggu: 07.00 – 20.00 WIB</span>
-                </div>
+              {/* Embedded Google Maps Frame for Direct Interactive Preview */}
+              <div className="relative w-full h-44 rounded-xl overflow-hidden border border-white/[0.08] bg-zinc-900 group">
+                <iframe
+                  title="Lokasi TRISIS GYM CENTRE di Google Maps"
+                  src="https://maps.google.com/maps?q=-6.7129809,106.8290947&z=17&output=embed"
+                  className="w-full h-full border-0 filter grayscale-[15%] contrast-[1.05]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <a
+                  href="https://www.google.com/maps/place/TRISIS+GYM+CENTRE/@-6.7129809,106.8290947,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69cb001c39a4d9:0x6c2226826afce7ef!8m2!3d-6.7129809!4d106.8290947!16s%2Fg%2F11wnbh0200?entry=ttu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-2.5 right-2.5 px-3 py-1.5 rounded-lg bg-neutral-950/90 hover:bg-black text-amber-400 hover:text-amber-300 border border-amber-400/30 text-[10px] font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-md transition-all cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Buka Layar Penuh</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-2 pt-1">
               <a
-                href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20mau%20tanya%20info%20membership"
+                href="https://www.google.com/maps/place/TRISIS+GYM+CENTRE/@-6.7129809,106.8290947,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69cb001c39a4d9:0x6c2226826afce7ef!8m2!3d-6.7129809!4d106.8290947!16s%2Fg%2F11wnbh0200?entry=ttu"
                 target="_blank"
-                rel="noreferrer"
-                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                rel="noopener noreferrer"
+                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-md shadow-amber-400/20 active:scale-95"
               >
-                <Phone className="w-3.5 h-3.5" />
-                <span>WhatsApp Kasir</span>
+                <MapPin className="w-3.5 h-3.5" />
+                <span>Petunjuk Arah Google Maps</span>
               </a>
 
-              <button
-                onClick={onOpenLogin}
-                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white border border-zinc-700/60 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              <a
+                href="https://wa.me/6282130133208?text=Halo%20Admin%20Trisis%20Gym%20Centre,%20saya%20ingin%20tanya%20info%20membership%20dan%20latihan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-1/2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
               >
-                <span>Masuk Member</span>
-                <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
-              </button>
+                <Phone className="w-3.5 h-3.5" />
+                <span>WhatsApp: 0821-3013-3208</span>
+              </a>
             </div>
           </div>
         </div>
@@ -887,25 +943,35 @@ export default function GymLandingView({
               </a>
 
               <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
-                Fasilitas pusat kebugaran modern ramah pemula di Kota Bogor. Dilengkapi unit beban lengkap, suasana latihan fokus, dan portal pintar untuk memantau kemajuan fisik Anda.
+                Pusat kebugaran fisik berfasilitas lengkap di Caringin, Kabupaten Bogor. Suasana latihan fokus, ramah pemula, dan portal pintar untuk kemajuan latihan Anda.
               </p>
 
               {/* Live Operational Status Pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 text-[11px] font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Buka Setiap Hari: 06:00 – 22:00 WIB</span>
+                <span>Buka Setiap Hari: 07:30 – 21:30 WIB</span>
               </div>
 
-              {/* Direct Quick WhatsApp CTA */}
-              <div className="pt-1">
+              {/* Quick Actions: WhatsApp & Instagram */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
                 <a
-                  href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20ingin%20tanya%20info%20membership"
+                  href="https://wa.me/6282130133208?text=Halo%20Admin%20Trisis%20Gym%20Centre,%20saya%20ingin%20tanya%20info%20membership%20dan%20latihan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 font-semibold text-xs transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 font-semibold text-xs transition-all cursor-pointer"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>Chat CS Kasir via WhatsApp</span>
+                  <span>WhatsApp: 0821-3013-3208</span>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/trisis_gym/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800/80 hover:bg-zinc-800 border border-white/10 text-zinc-300 hover:text-white font-medium text-xs transition-all cursor-pointer"
+                >
+                  <span>@trisis_gym</span>
+                  <ExternalLink className="w-3 h-3 text-zinc-400" />
                 </a>
               </div>
             </div>
@@ -919,6 +985,7 @@ export default function GymLandingView({
                 <li><a href="#kalkulator" className="hover:text-amber-400 transition-colors">Kalkulator Penghematan</a></li>
                 <li><a href="#fasilitas" className="hover:text-amber-400 transition-colors">Fasilitas & Alat Beban</a></li>
                 <li><a href="#paket" className="hover:text-amber-400 transition-colors">Pilihan Paket Member</a></li>
+                <li><a href="#lokasi" className="hover:text-amber-400 transition-colors">Peta & Lokasi Gym</a></li>
                 <li><a href="#faq" className="hover:text-amber-400 transition-colors">Tanya Jawab (FAQ)</a></li>
               </ul>
             </div>
@@ -948,19 +1015,29 @@ export default function GymLandingView({
             <div className="lg:col-span-3 space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-white">Lokasi & Jam Buka</h4>
               <div className="space-y-2.5 text-xs text-zinc-400">
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                  <p className="leading-relaxed">
-                    Jl. Trisis Fitness No. 12, Bogor Barat, Kota Bogor, Jawa Barat 16118.
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
+                <a 
+                  href="https://www.google.com/maps/place/TRISIS+GYM+CENTRE/@-6.7129809,106.8290947,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69cb001c39a4d9:0x6c2226826afce7ef!8m2!3d-6.7129809!4d106.8290947!16s%2Fg%2F11wnbh0200?entry=ttu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 hover:text-zinc-200 transition-colors group block"
+                >
+                  <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <span className="text-zinc-200 font-semibold block group-hover:text-amber-300">TRISIS GYM CENTRE</span>
+                    <p className="leading-relaxed text-[11px] mt-0.5 text-zinc-400">
+                      Jl. Kp. Curug Dengdeng, Caringin, Kec. Caringin, Kabupaten Bogor, Jawa Barat 16740.
+                    </p>
+                    <span className="text-[10px] text-amber-400 flex items-center gap-1 mt-1 font-semibold">
+                      Buka di Google Maps <ExternalLink className="w-2.5 h-2.5" />
+                    </span>
+                  </div>
+                </a>
+
+                <div className="flex items-start gap-2 pt-1 border-t border-white/[0.04]">
                   <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-zinc-300 block">Senin – Sabtu:</strong>
-                    <span>06:00 – 22:00 WIB</span>
-                    <strong className="text-zinc-300 block mt-1">Minggu & Libur:</strong>
-                    <span>07:00 – 20:00 WIB</span>
+                    <strong className="text-zinc-300 block">Buka Setiap Hari:</strong>
+                    <span>07:30 – 21:30 WIB</span>
                   </div>
                 </div>
               </div>

@@ -76,6 +76,17 @@
       "member_id": "TRISIS-G-2026-716",
       "is_active": 1,
       "created_at": "2026-11-09T02:57:21.994Z"
+    },
+    {
+      "id": "usr_b272403f-6228-4b26-a5c2-c8de1cf10282",
+      "email": "2411070084@stikomelrahma.ac.id",
+      "password_hash": "$2b$10$oZLqgf1J7kE1Kijjg5TPQOqp5ZLL2D38cjRdb3c/gFoWn7AhMcQe2",
+      "full_name": "Muhammad Syams Dzulqarnain",
+      "phone": null,
+      "role": "member",
+      "member_id": "TRISIS-G-2026-892",
+      "is_active": 1,
+      "created_at": "2026-11-09T07:52:20.256Z"
     }
   ],
   "memberships": [
@@ -138,6 +149,16 @@
       "start_date": "2026-11-09",
       "end_date": "2026-12-09",
       "price_paid": 100000
+    },
+    {
+      "id": "mem_1794210740258",
+      "user_id": "usr_b272403f-6228-4b26-a5c2-c8de1cf10282",
+      "plan_id": "bulanan",
+      "plan_name": "Paket Bulanan (Monthly Pass)",
+      "status": "active",
+      "start_date": "2026-11-09",
+      "end_date": "2026-12-09",
+      "price_paid": 100000
     }
   ],
   "profiles": [
@@ -165,7 +186,15 @@
       "id": "prof_1794187462731",
       "user_id": "usr_3ec3f28e-3342-470b-afc3-c13161fc340d",
       "fitness_goal": "fat_loss",
-      "updated_at": "2026-11-09T01:24:22.731Z"
+      "updated_at": "2026-11-09T07:09:45.139Z",
+      "age": 23,
+      "gender": "male",
+      "height_cm": 172,
+      "weight_kg": 68,
+      "target_weight_kg": 72,
+      "experience_level": "intermediate",
+      "days_per_week": 4,
+      "medical_notes": null
     },
     {
       "id": "prof_1794188614825",
@@ -184,6 +213,12 @@
       "user_id": "usr_f2004034-ecd7-4fd1-a898-e5be4fff3c21",
       "fitness_goal": "general_fitness",
       "updated_at": "2026-11-09T02:57:22.006Z"
+    },
+    {
+      "id": "prof_1794210740260",
+      "user_id": "usr_b272403f-6228-4b26-a5c2-c8de1cf10282",
+      "fitness_goal": "general_fitness",
+      "updated_at": "2026-11-09T07:52:20.260Z"
     }
   ],
   "checkins": [
