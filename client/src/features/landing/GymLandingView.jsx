@@ -103,8 +103,8 @@ export default function GymLandingView({
       price: 'Rp 1.200.000',
       numericPrice: 1200000,
       period: '/ tahun',
-      badge: 'Nilai Terbaik',
-      badgeColor: 'bg-emerald-400/10 text-emerald-400 border-emerald-400/30',
+      badge: 'Nilai Terbaik VIP',
+      badgeColor: 'bg-[#1E0D33] text-purple-300 border-purple-800/40',
       desc: 'Komitmen transformasi 1 tahun dengan harga paling hemat & benefit VIP.',
       features: [
         'Akses 365 hari penuh tanpa batas',
@@ -260,14 +260,14 @@ export default function GymLandingView({
             </div>
           </a>
 
-          {/* Desktop Nav Links (Sleek Floating Pill Navigation) */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.06] rounded-full px-3 py-1 text-xs font-medium text-zinc-300 backdrop-blur-md">
-            <a href="#hero" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Beranda</a>
-            <a href="#kepadatan" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Live Crowd</a>
-            <a href="#fasilitas" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Fasilitas</a>
-            <a href="#kalkulator" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Kalkulator</a>
-            <a href="#paket" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Pilihan Paket</a>
-            <a href="#faq" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">FAQ</a>
+          {/* Desktop Nav Links (Sleek Floating Pill Navigation with Deep Purple Tint) */}
+          <nav className="hidden md:flex items-center gap-1 bg-[#12081F]/60 border border-purple-900/30 rounded-full px-3 py-1 text-xs font-medium text-zinc-300 backdrop-blur-md">
+            <a href="#hero" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">Beranda</a>
+            <a href="#kepadatan" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">Live Crowd</a>
+            <a href="#fasilitas" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">Fasilitas</a>
+            <a href="#kalkulator" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">Kalkulator</a>
+            <a href="#paket" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">Pilihan Paket</a>
+            <a href="#faq" className="px-3.5 py-1.5 rounded-full hover:text-purple-200 hover:bg-purple-950/40 transition-all duration-200">FAQ</a>
           </nav>
 
           {/* Action Buttons: Login / Dashboard / Logout (Pill Style) */}
@@ -325,7 +325,7 @@ export default function GymLandingView({
       {/* ============================================================== */}
       {/* 2. HERO SECTION — CLEAN, MINIMALIST & ELEGAN */}
       {/* ============================================================== */}
-      <section id="hero" className="relative overflow-hidden pt-16 pb-20 md:pt-28 md:pb-32 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E] flex items-center justify-center min-h-[580px]">
+      <section id="hero" className="relative overflow-hidden pt-14 pb-20 md:pt-24 md:pb-30 px-4 md:px-8 border-b border-white/[0.08] bg-[#090A0E] flex items-center justify-center min-h-[580px]">
         {/* Real Gym Community Background Banner — Bright, Clear & Vibrant */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
           <img
@@ -338,11 +338,20 @@ export default function GymLandingView({
           {/* Soft Focused Shadow behind text for razor-sharp legibility */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[440px] bg-black/40 rounded-full blur-[75px]" />
 
-          {/* Ambient Warm Golden Glow */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/10 rounded-full blur-[140px]" />
+          {/* Ambient Warm Golden & Deep Velvet Purple Atmospheric Glows */}
+          <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[320px] bg-amber-500/10 rounded-full blur-[140px]" />
+          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[550px] h-[380px] bg-[#3B1261]/25 rounded-full blur-[150px]" />
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-6 text-center relative z-10">
+        <div className="max-w-3xl mx-auto space-y-5 text-center relative z-10">
+          {/* Minimalist Deep Purple Brand Tag */}
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1A0B2E]/80 border border-purple-500/25 text-purple-200 text-xs font-medium tracking-wide backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span>Trisis Fitness Club • Est. Bogor, Indonesia</span>
+            </div>
+          </div>
+
           {/* Main Headline (Clean, Strong, Confident with shadow for high contrast) */}
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             Latihan Lebih Terarah, <br />
@@ -355,7 +364,7 @@ export default function GymLandingView({
           </p>
 
           {/* Dual CTAs (Sleek, High-End Athletic Pill Buttons) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
             <button
               onClick={() => openRegister('bulanan')}
               className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-xl shadow-amber-400/20 hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
@@ -374,11 +383,11 @@ export default function GymLandingView({
           </div>
 
           {/* Minimalist Footnote Line (Clean & Unobtrusive) */}
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-zinc-400 font-normal">
+          <div className="pt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-zinc-300 font-normal">
             <span>50+ Unit Alat Lengkap</span>
-            <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span>Mulai Rp 25.000 / Sesi</span>
-            <span className="text-zinc-600 hidden sm:inline">•</span>
+            <span className="text-purple-400/60 hidden sm:inline">•</span>
+            <span className="text-amber-300 font-medium">Mulai Rp 25.000 / Sesi</span>
+            <span className="text-purple-400/60 hidden sm:inline">•</span>
             <span>Buka Setiap Hari (06:00 – 22:00 WIB)</span>
           </div>
         </div>
@@ -389,7 +398,7 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="kepadatan" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-5">
         <div className="text-center space-y-1 max-w-xl mx-auto">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-[#1A0B2E] px-3 py-0.5 rounded-full border border-purple-800/40">
             Fitur Cerdas Member
           </span>
           <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
@@ -544,7 +553,7 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="paket" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-6">
         <div className="text-center space-y-1 max-w-xl mx-auto">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-[#1A0B2E] px-3 py-0.5 rounded-full border border-purple-800/40">
             Tawaran Membership
           </span>
           <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
@@ -665,7 +674,7 @@ export default function GymLandingView({
       {/* ============================================================== */}
       <section id="fasilitas" className="py-8 md:py-10 px-4 md:px-8 max-w-6xl mx-auto space-y-6">
         <div className="text-center space-y-1 max-w-xl mx-auto">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-[#1A0B2E] px-3 py-0.5 rounded-full border border-purple-800/40">
             Fasilitas Standar Modern
           </span>
           <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
@@ -754,7 +763,7 @@ export default function GymLandingView({
           {/* KOLOM KIRI: PERTANYAAN UMUM (FAQ) */}
           <div className="space-y-4">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-[#1A0B2E] px-3 py-0.5 rounded-full border border-purple-800/40">
                 FAQ
               </span>
               <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight mt-1">
