@@ -50,7 +50,7 @@ function formatCoachMarkdown(rawText) {
         <ul key={`list-${elements.length}`} className="space-y-1.5 my-2 pl-1">
           {currentList.map((item, idx) => (
             <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
               <span className="leading-relaxed">{renderInlineFormatting(item)}</span>
             </li>
           ))}
@@ -70,7 +70,7 @@ function formatCoachMarkdown(rawText) {
     if (trimmed.startsWith('### ')) {
       flushList();
       elements.push(
-        <h4 key={`h4-${lIdx}`} className="text-xs font-black text-purple-300 pt-3 pb-1 flex items-center gap-1.5 uppercase tracking-wide border-b border-purple-500/20">
+        <h4 key={`h4-${lIdx}`} className="text-xs font-black text-amber-400 pt-3 pb-1 flex items-center gap-1.5 uppercase tracking-wide border-b border-amber-500/20">
           {trimmed.replace(/^###\s*/, '')}
         </h4>
       );
@@ -80,7 +80,7 @@ function formatCoachMarkdown(rawText) {
     } else if (trimmed.startsWith('> ')) {
       flushList();
       elements.push(
-        <div key={`quote-${lIdx}`} className="p-3 rounded-2xl bg-purple-950/40 text-[11px] text-purple-200 border border-purple-800/40 my-2 font-medium leading-relaxed">
+        <div key={`quote-${lIdx}`} className="p-3 rounded-2xl bg-amber-950/20 text-[11px] text-amber-200 border border-amber-800/30 my-2 font-medium leading-relaxed">
           {renderInlineFormatting(trimmed.replace(/^>\s*/, ''))}
         </div>
       );

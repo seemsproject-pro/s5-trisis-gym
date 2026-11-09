@@ -162,10 +162,10 @@ export default function App() {
 
   // 3. TAMPILAN PORTAL MEMBER (DASHBOARD & FITUR PENDAMPING)
   return (
-    <div className="min-h-screen bg-[#0B0D14] text-slate-100 flex font-sans selection:bg-[#4E3F66] selection:text-white">
+    <div className="min-h-screen bg-[#0B0D14] text-slate-100 flex font-sans selection:bg-amber-400 selection:text-neutral-950">
       {/* Toast Notification */}
       {toastMessage && (
-        <div role="status" className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-[#221B30] text-purple-200 border border-purple-500/30 font-bold text-xs rounded-full shadow-xl shadow-black/50 animate-in slide-in-from-top-2 duration-200">
+        <div role="status" className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-zinc-800 text-zinc-100 border border-zinc-700 font-bold text-xs rounded-full shadow-xl shadow-black/50 animate-in slide-in-from-top-2 duration-200">
           {toastMessage}
         </div>
       )}
