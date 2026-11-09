@@ -32,6 +32,17 @@
       "member_id": "TRISIS-R-2026-947",
       "is_active": 1,
       "created_at": "2026-11-09T00:28:17.687Z"
+    },
+    {
+      "id": "usr_3ec3f28e-3342-470b-afc3-c13161fc340d",
+      "email": "syamsdzq@gmail.com",
+      "password_hash": "$2b$10$fJgyacp.tmWkNv1nZZ1lDO8sP219bwv5.EBIch8g4.vCPm24H6hxu",
+      "full_name": "SEM",
+      "phone": "8138355980",
+      "role": "member",
+      "member_id": "TRISIS-R-2026-328",
+      "is_active": 1,
+      "created_at": "2026-11-09T01:24:22.721Z"
     }
   ],
   "memberships": [
@@ -48,6 +59,16 @@
     {
       "id": "mem_1794184097691",
       "user_id": "usr_63d4b639-16e1-46db-820b-b9a9129571c5",
+      "plan_id": "bulanan",
+      "plan_name": "Paket Bulanan (Monthly Pass)",
+      "status": "active",
+      "start_date": "2026-11-09",
+      "end_date": "2026-12-09",
+      "price_paid": 185000
+    },
+    {
+      "id": "mem_1794187462729",
+      "user_id": "usr_3ec3f28e-3342-470b-afc3-c13161fc340d",
       "plan_id": "bulanan",
       "plan_name": "Paket Bulanan (Monthly Pass)",
       "status": "active",
@@ -76,6 +97,12 @@
       "user_id": "usr_63d4b639-16e1-46db-820b-b9a9129571c5",
       "fitness_goal": "muscle_building",
       "updated_at": "2026-11-09T00:28:17.693Z"
+    },
+    {
+      "id": "prof_1794187462731",
+      "user_id": "usr_3ec3f28e-3342-470b-afc3-c13161fc340d",
+      "fitness_goal": "fat_loss",
+      "updated_at": "2026-11-09T01:24:22.731Z"
     }
   ],
   "checkins": [

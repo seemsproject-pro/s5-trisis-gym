@@ -108,6 +108,7 @@ export default function App() {
   const handleLogout = () => {
     apiService.logout();
     setAuth({ isAuthenticated: false, user: null });
+    setViewMode('landing');
     showToast('Berhasil keluar dari akun.');
   };
 
@@ -143,34 +144,32 @@ export default function App() {
   };
 
   const handleQuickAdminLoginFromLanding = () => {
-    const adminUser = {
-      id: 'usr_admin_001',
-      name: 'Admin Trisis Gym',
-      email: 'admin@trisisgym.com',
-      memberId: 'TRISIS-STAFF-001',
-      planName: 'Staff & Receptionist',
-      role: 'admin'
-    };
-    handleLogin(adminUser);
+    setViewMode('login');
   };
 
-  // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM
+  // 1. TAMPILAN HALAMAN DEPAN: PROFIL & PENAWARAN GYM (PUBLIK)
   if (viewMode === 'landing') {
     return (
       <GymLandingView
         auth={auth}
-        onOpenLogin={() => setViewMode('member')}
-        onQuickDemoLogin={handleQuickLoginFromLanding}
-        onQuickAdminLogin={handleQuickAdminLoginFromLanding}
+        onOpenLogin={() => setViewMode('login')}
+        onQuickDemoLogin={() => setViewMode('login')}
+        onQuickAdminLogin={() => setViewMode('login')}
         onRegisterComplete={handleRegisterComplete}
-        onGoToDashboard={() => setViewMode('member')}
+        onGoToDashboard={() => {
+          if (auth.isAuthenticated) {
+            setViewMode('member');
+          } else {
+            setViewMode('login');
+          }
+        }}
         onLogout={handleLogout}
       />
     );
   }
 
-  // 2. JIKA MEMASUKI PORTAL MEMBER TAPI BELUM LOGIN
-  if (!auth.isAuthenticated) {
+  // 2. HALAMAN LOGIN RESMI (EMAIL / KATA SANDI ATAU GOOGLE AUTH)
+  if (viewMode === 'login' || !auth.isAuthenticated) {
     return (
       <>
         <LoginView
@@ -185,7 +184,7 @@ export default function App() {
           onRegisterComplete={handleRegisterComplete}
           onOpenLogin={() => {
             setIsGlobalRegisterOpen(false);
-            setViewMode('member');
+            setViewMode('login');
           }}
         />
       </>
