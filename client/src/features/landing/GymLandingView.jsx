@@ -117,43 +117,43 @@ export default function GymLandingView({
     }
   ];
 
-  // Facilities with Generated Real Images
+  // Facilities with Authentic Trisis Gym Photos & Equipment
   const facilities = [
     {
       id: 'strength',
       category: 'strength',
-      title: 'Free Weights & Strength Zone',
-      tag: 'Beban Bebas & Dumbbell',
-      desc: 'Area angkat beban lengkap dengan Dumbbell set 2 - 40 kg, Olympic Barbells, Power Racks, Smith Machine, Cable Crossover, dan Bench Press terawat.',
-      image: '/images/facilities/freeweight.jpg',
-      highlights: ['Dumbbell 2 - 40 kg', 'Olympic Barbells & Bumper Plates', 'Squat & Power Racks', 'Smith Machine & Cable Stations']
+      title: 'Free Weights & Dumbbell Zone',
+      tag: 'Dumbbell & Benches',
+      desc: 'Area angkat beban lengkap dengan rak dumbbell bertingkat, adjustable incline benches, sepeda statis DHZ Fitness, dan logo 3D Trisis Gym yang ikonik.',
+      image: '/images/facilities/trisis_080449.jpg',
+      highlights: ['Rak Dumbbell Lengkap & Rapi', 'Adjustable Incline Benches', 'Sepeda Statis DHZ Fitness', 'Mirror Wall & 3D Logo Sign']
     },
     {
-      id: 'cardio',
-      category: 'cardio',
-      title: 'Cardio Endurance Zone',
-      tag: 'Kardio & Pembakaran Lemak',
-      desc: 'Barisan treadmill elektrik layar digital, elliptical cross-trainer, dan stationary bikes dengan sensor detak jantung untuk pembakaran kalori optimal.',
-      image: '/images/facilities/cardio.jpg',
-      highlights: ['Treadmill Digital Canggih', 'Elliptical Cross-Trainers', 'Spinning & Stationary Bikes', 'Monitor Heart Rate & Kalori']
+      id: 'power',
+      category: 'power',
+      title: 'Olympic Bench & Power Area',
+      tag: 'Mural & Bench Press',
+      desc: 'Stasiun bench press kokoh dengan Olympic barbell, bumper plate berstandar, dan mural bodybuilder berenergi tinggi dengan pencahayaan neon ambient.',
+      image: '/images/facilities/trisis_mural.jpg',
+      highlights: ['Olympic Flat & Incline Bench', 'Olympic Barbell & Bumper Plates', 'Mural Bodybuilder Ikonik', 'Pencahayaan LED Ambient Biru-Ungu']
     },
     {
-      id: 'functional',
-      category: 'functional',
-      title: 'Functional & Stretching Area',
-      tag: 'Fungsional & Fleksibilitas',
-      desc: 'Area rumput sintetis empuk dan lantai karet untuk pemanasan, latihan HIIT, battle ropes, kettlebells, resistance bands, dan plyometric box.',
-      image: '/images/facilities/functional.jpg',
-      highlights: ['Area Rumput Sintetis / Turf', 'Heavy Battle Ropes', 'Kettlebells Beragam Ukuran', 'Foam Rollers & Yoga Mats']
+      id: 'machine',
+      category: 'machine',
+      title: 'BRTW Machine & Cable Zone',
+      tag: 'Mesin Beban & Kabel',
+      desc: 'Rangkaian alat isolasi pin-loaded merk BRTW terawat, stasiun cable crossover, dan cermin dinding luas untuk koreksi postur repetisi secara presisi.',
+      image: '/images/facilities/trisis_machine.jpg',
+      highlights: ['Selectorized Machine BRTW', 'Cable Station & Lat Pulldown', 'Cermin Luas Koreksi Form', 'Lantai Karet Rubber Gym']
     },
     {
       id: 'locker',
       category: 'amenity',
-      title: 'Locker, Shower & Kenyamanan',
-      tag: 'Fasilitas & Relaksasi',
-      desc: 'Locker penyimpanan barang pribadi dengan keamanan terjamin, kamar mandi shower bersih, air minum isi ulang gratis, dan area santai ber-AC.',
-      image: '/images/facilities/locker.jpg',
-      highlights: ['Locker Kunci Digital Pribadi', 'Kamar Mandi Shower Bersih', 'Air Minum Isi Ulang Gratis', 'Wi-Fi Cepat & Parkir Luas']
+      title: 'Locker Room & Reception Area',
+      tag: 'Loker & Resepsionis',
+      desc: 'Fasilitas loker penyimpanan barang pribadi yang aman dan rapi, area resepsionis ber-AC, timbangan badan presisi, serta display penghargaan kebugaran.',
+      image: '/images/facilities/trisis_locker.jpg',
+      highlights: ['Loker Penyimpanan Pribadi', 'Timbangan Badan Digital', 'Kamar Mandi & Toilet Bersih', 'Display Piala Prestasi Gym']
     }
   ];
 
@@ -690,9 +690,9 @@ export default function GymLandingView({
           {[
             { id: 'all', label: 'Semua Fasilitas' },
             { id: 'strength', label: '🏋️ Area Beban' },
-            { id: 'cardio', label: '🏃 Kardio' },
-            { id: 'functional', label: '🧘 Fungsional' },
-            { id: 'amenity', label: '🚿 Shower & Locker' }
+            { id: 'power', label: '⚡ Bench & Power' },
+            { id: 'machine', label: '⚙️ Mesin BRTW' },
+            { id: 'amenity', label: '🚿 Loker & Resepsionis' }
           ].map((cat) => (
             <button
               key={cat.id}
@@ -717,11 +717,11 @@ export default function GymLandingView({
               className="bg-[#111319] rounded-2xl overflow-hidden border border-white/[0.08] hover:border-zinc-700 transition-all duration-200 group cursor-pointer flex flex-col justify-between"
             >
               {/* Facility Image Cover with compact height */}
-              <div className="relative w-full h-40 sm:h-44 overflow-hidden bg-zinc-900">
+              <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-zinc-900">
                 <img
                   src={fac.image}
                   alt={fac.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111319] via-black/20 to-transparent" />
@@ -1008,11 +1008,11 @@ export default function GymLandingView({
       {selectedFacilityModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="relative w-full max-w-md bg-[#111319] border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden space-y-4">
-            <div className="relative h-48 w-full bg-zinc-900">
+            <div className="relative h-64 sm:h-72 w-full bg-zinc-900">
               <img
                 src={selectedFacilityModal.image}
                 alt={selectedFacilityModal.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_35%]"
               />
               <button
                 onClick={() => setSelectedFacilityModal(null)}
