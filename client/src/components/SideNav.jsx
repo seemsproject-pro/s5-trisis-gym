@@ -8,9 +8,7 @@ export default function SideNav({ activeTab, onSelectTab, currentRole = 'member'
     <aside className="hidden md:flex sticky top-0 h-screen shrink-0 flex-col w-20 lg:w-64 bg-[#090A0E] border-r border-white/[0.08]">
       {/* Brand */}
       <div className="flex items-center justify-center lg:justify-start gap-3 h-[65px] px-4 lg:px-6 border-b border-white/[0.08]">
-        <div className="w-10 h-10 shrink-0 rounded-xl bg-zinc-900 border border-amber-400/30 flex items-center justify-center overflow-hidden p-0.5 shadow-sm shadow-amber-400/10">
-          <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
-        </div>
+        <img src="/logo.png" alt="Trisis Gym Logo" className="h-10 w-auto object-contain shrink-0 drop-shadow-sm" />
         <div className="hidden lg:block">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-base tracking-tight text-white">

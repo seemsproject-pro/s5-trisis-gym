@@ -241,40 +241,40 @@ export default function GymLandingView({
     <div className="min-h-screen bg-[#090A0E] text-zinc-100 font-sans selection:bg-amber-400 selection:text-neutral-950">
 
       {/* ============================================================== */}
-      {/* 1. TOP NAVBAR */}
+      {/* 1. TOP NAVBAR — FLUID, MODERN & ELEGANT */}
       {/* ============================================================== */}
-      <header className="sticky top-0 z-40 bg-[#090A0E]/90 backdrop-blur-md border-b border-white/[0.08] px-4 md:px-8 py-3.5 transition-all">
+      <header className="sticky top-0 z-40 bg-[#090A0E]/80 backdrop-blur-xl border-b border-white/[0.06] px-4 md:px-8 py-3 transition-all duration-300">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-zinc-900 border border-amber-400/30 flex items-center justify-center overflow-hidden p-0.5 shrink-0 shadow-lg shadow-amber-400/15">
-              <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
+          {/* Brand Logo (Unboxed, Natural Floating PNG) */}
+          <a href="#hero" className="flex items-center gap-3 group cursor-pointer select-none">
+            <img 
+              src="/logo.png" 
+              alt="Trisis Gym Logo" 
+              className="h-10 sm:h-11 w-auto object-contain drop-shadow-[0_2px_10px_rgba(245,158,11,0.25)] transition-transform duration-200 group-hover:scale-105" 
+            />
+            <div className="flex flex-col">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white leading-tight group-hover:text-amber-300 transition-colors">
+                TRISIS<span className="text-amber-400 font-extrabold">GYM</span>
+              </span>
+              <p className="text-[10px] text-zinc-400 font-medium tracking-wide leading-none mt-0.5">Fitness Club • Est. Bogor</p>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg tracking-tight text-white">
-                  TRISIS<span className="text-amber-400 font-extrabold">GYM</span>
-                </span>
-              </div>
-              <p className="text-[10px] text-zinc-400 font-medium leading-none">Fitness Club • Est. Bogor, Indonesia</p>
-            </div>
-          </div>
+          </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-400">
-            <a href="#hero" className="hover:text-amber-400 transition-colors">Beranda</a>
-            <a href="#kepadatan" className="hover:text-amber-400 transition-colors">Live Crowd</a>
-            <a href="#fasilitas" className="hover:text-amber-400 transition-colors">Fasilitas</a>
-            <a href="#kalkulator" className="hover:text-amber-400 transition-colors">Kalkulator Hemat</a>
-            <a href="#paket" className="hover:text-amber-400 transition-colors">Pilihan Paket</a>
-            <a href="#faq" className="hover:text-amber-400 transition-colors">FAQ</a>
+          {/* Desktop Nav Links (Sleek Floating Pill Navigation) */}
+          <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.06] rounded-full px-3 py-1 text-xs font-medium text-zinc-300 backdrop-blur-md">
+            <a href="#hero" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Beranda</a>
+            <a href="#kepadatan" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Live Crowd</a>
+            <a href="#fasilitas" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Fasilitas</a>
+            <a href="#kalkulator" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Kalkulator</a>
+            <a href="#paket" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">Pilihan Paket</a>
+            <a href="#faq" className="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.08] transition-all duration-200">FAQ</a>
           </nav>
 
-          {/* Action Buttons: Login / Dashboard / Logout */}
-          <div className="flex items-center gap-2">
+          {/* Action Buttons: Login / Dashboard / Logout (Pill Style) */}
+          <div className="flex items-center gap-2.5">
             {auth?.isAuthenticated ? (
               <>
-                <div className="hidden lg:flex items-center gap-1.5 text-xs bg-zinc-800/60 border border-white/[0.08] px-3 py-1.5 rounded-xl">
+                <div className="hidden lg:flex items-center gap-2 text-xs bg-white/[0.04] border border-white/[0.08] px-3.5 py-1.5 rounded-full">
                   <User className="w-3.5 h-3.5 text-zinc-300" />
                   <span className="font-bold text-white">{auth.user?.name?.split(' ')[0]}</span>
                   <span className="text-[10px] text-amber-400 font-bold uppercase">({auth.user?.role || 'Member'})</span>
@@ -282,7 +282,7 @@ export default function GymLandingView({
 
                 <button
                   onClick={onGoToDashboard}
-                  className="text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5"
+                  className="text-xs font-bold px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-md shadow-amber-400/20 active:scale-95"
                 >
                   <span>Buka Dashboard</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -292,7 +292,7 @@ export default function GymLandingView({
                   <button
                     onClick={onLogout}
                     title="Keluar dari Akun"
-                    className="text-xs font-bold px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-rose-400 border border-zinc-700 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="text-xs font-bold px-3.5 py-2 rounded-full bg-zinc-800/80 hover:bg-zinc-700 text-rose-400 border border-zinc-700/60 transition-all cursor-pointer flex items-center gap-1.5 active:scale-95"
                   >
                     <LogOut className="w-3.5 h-3.5 text-rose-400" />
                     <span className="hidden sm:inline">Keluar</span>
@@ -303,7 +303,7 @@ export default function GymLandingView({
               <>
                 <button
                   onClick={onOpenLogin}
-                  className="text-xs font-semibold px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/[0.08] transition-all cursor-pointer flex items-center gap-1.5"
+                  className="text-xs font-medium px-4 py-2 rounded-full text-zinc-200 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all duration-200 cursor-pointer flex items-center gap-1.5 active:scale-95"
                 >
                   <User className="w-3.5 h-3.5 text-zinc-400" />
                   <span>Login Member</span>
@@ -311,7 +311,7 @@ export default function GymLandingView({
 
                 <button
                   onClick={() => openRegister('bulanan')}
-                  className="text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                  className="text-xs font-bold px-5 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all duration-200 cursor-pointer flex items-center gap-1.5 shadow-md shadow-amber-400/20 hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Zap className="w-3.5 h-3.5 fill-neutral-950 text-neutral-950" />
                   <span>Daftar Member</span>
@@ -858,9 +858,7 @@ export default function GymLandingView({
       <footer className="bg-[#090A0E] border-t border-white/[0.08] py-8 px-4 md:px-8 text-xs text-zinc-400">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-zinc-800 border border-white/[0.08] flex items-center justify-center p-0.5 shrink-0">
-              <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
-            </div>
+            <img src="/logo.png" alt="Trisis Gym Logo" className="h-7 w-auto object-contain shrink-0" />
             <span className="font-extrabold text-white">
               TRISIS <span className="text-amber-400 font-extrabold">GYM</span>
             </span>

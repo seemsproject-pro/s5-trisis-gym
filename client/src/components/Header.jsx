@@ -15,9 +15,7 @@ export default function Header({
       <div className="max-w-md md:max-w-3xl lg:max-w-6xl mx-auto flex items-center justify-between">
         {/* Brand Logo & Name (Mobile) */}
         <div className="flex items-center gap-2.5 md:hidden">
-          <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-amber-400/30 flex items-center justify-center overflow-hidden p-0.5 shrink-0 shadow-sm shadow-amber-400/10">
-            <img src="/logo.png" alt="Trisis Gym Logo" className="w-full h-full object-contain" />
-          </div>
+          <img src="/logo.png" alt="Trisis Gym Logo" className="h-9 w-auto object-contain shrink-0 drop-shadow-sm" />
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-sm tracking-tight text-white">
