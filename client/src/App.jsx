@@ -11,6 +11,7 @@ import RecommendationsView from './features/recommendations/RecommendationsView'
 import ActivityView from './features/activity/ActivityView';
 import GymLandingView from './features/landing/GymLandingView';
 import AdminDashboardView from './features/admin/AdminDashboardView';
+import RegisterMemberModal from './components/RegisterMemberModal';
 import { apiService } from './services/apiService';
 
 export default function App() {
@@ -26,11 +27,37 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
+  const [isGlobalRegisterOpen, setIsGlobalRegisterOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
   const showToast = (msg) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Handler Pendaftaran Member Baru (Sesuai Arahan Owner)
+  const handleRegisterComplete = async (newMember, autoEnter = false) => {
+    try {
+      await apiService.register(newMember);
+      await refreshState();
+      showToast(`Pendaftaran ${newMember.name} berhasil! ID: ${newMember.memberId}`);
+
+      if (autoEnter) {
+        await handleLogin({
+          id: newMember.id,
+          name: newMember.name,
+          email: newMember.email,
+          phone: newMember.phone,
+          memberId: newMember.memberId,
+          planName: newMember.planName,
+          validUntil: newMember.validUntil,
+          role: 'member'
+        });
+      }
+    } catch (err) {
+      console.error('Pendaftaran gagal:', err);
+      showToast('Gagal mendaftar: ' + (err.message || 'Terjadi kesalahan'));
+    }
   };
 
   // Sinkronisasi data saat aksi terjadi
@@ -71,8 +98,8 @@ export default function App() {
       name: 'Budi Santoso',
       email: 'budi.santoso@trisisgym.com',
       memberId: 'TRISIS-2026-089',
-      planName: 'Annual Regular Pass',
-      validUntil: '31 Des 2026',
+      planName: 'Paket Bulanan (Monthly Pass)',
+      validUntil: '10 Feb 2027',
       role: 'member'
     };
     handleLogin(demoUser);
@@ -135,6 +162,7 @@ export default function App() {
         onOpenLogin={() => setViewMode('member')}
         onQuickDemoLogin={handleQuickLoginFromLanding}
         onQuickAdminLogin={handleQuickAdminLoginFromLanding}
+        onRegisterComplete={handleRegisterComplete}
         onGoToDashboard={() => setViewMode('member')}
         onLogout={handleLogout}
       />
@@ -144,10 +172,23 @@ export default function App() {
   // 2. JIKA MEMASUKI PORTAL MEMBER TAPI BELUM LOGIN
   if (!auth.isAuthenticated) {
     return (
-      <LoginView
-        onLoginSuccess={handleLogin}
-        onBackToLanding={() => setViewMode('landing')}
-      />
+      <>
+        <LoginView
+          onLoginSuccess={handleLogin}
+          onBackToLanding={() => setViewMode('landing')}
+          onOpenRegister={() => setIsGlobalRegisterOpen(true)}
+        />
+        <RegisterMemberModal
+          isOpen={isGlobalRegisterOpen}
+          onClose={() => setIsGlobalRegisterOpen(false)}
+          initialPlanId="bulanan"
+          onRegisterComplete={handleRegisterComplete}
+          onOpenLogin={() => {
+            setIsGlobalRegisterOpen(false);
+            setViewMode('member');
+          }}
+        />
+      </>
     );
   }
 

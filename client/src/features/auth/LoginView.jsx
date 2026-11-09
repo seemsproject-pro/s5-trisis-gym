@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { KeyRound, Mail, ArrowRight, ShieldCheck, Sparkles, ArrowLeft } from 'lucide-react';
+import { KeyRound, Mail, ArrowRight, ShieldCheck, Sparkles, ArrowLeft, Zap } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
+import { mockDataService } from '../../services/mockData';
 
-export default function LoginView({ onLoginSuccess, onBackToLanding }) {
+export default function LoginView({ onLoginSuccess, onBackToLanding, onOpenRegister }) {
   const [email, setEmail] = useState('budi.santoso@trisisgym.com');
   const [password, setPassword] = useState('password123');
   const [loading, setLoading] = useState(false);
@@ -14,13 +15,14 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
     setError('');
 
     setTimeout(() => {
-      if (!email.trim() || !password.trim()) {
+      const cleanEmail = email.trim().toLowerCase();
+      if (!cleanEmail || !password.trim()) {
         setError('Harap masukkan email dan kata sandi.');
         setLoading(false);
         return;
       }
 
-      if (email.trim().toLowerCase().includes('admin')) {
+      if (cleanEmail.includes('admin')) {
         onLoginSuccess({
           id: 'usr_admin_001',
           name: 'Admin Trisis Gym',
@@ -29,16 +31,36 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
           role: 'admin'
         });
       } else {
-        onLoginSuccess({
-          id: 'usr_m_089',
-          name: 'Budi Santoso',
-          email: email,
-          memberId: 'TRISIS-2026-089',
-          role: 'member'
-        });
+        const members = mockDataService.getMembers();
+        const found = members.find(
+          (m) => m.email?.toLowerCase() === cleanEmail || m.memberId?.toLowerCase() === cleanEmail
+        );
+
+        if (found) {
+          onLoginSuccess({
+            id: found.id,
+            name: found.name,
+            email: found.email,
+            phone: found.phone,
+            memberId: found.memberId,
+            planName: found.planName,
+            validUntil: found.validUntil,
+            role: 'member'
+          });
+        } else {
+          onLoginSuccess({
+            id: 'usr_m_089',
+            name: 'Budi Santoso',
+            email: cleanEmail,
+            memberId: 'TRISIS-2026-089',
+            planName: 'Paket Bulanan (Monthly Pass)',
+            validUntil: '10 Feb 2027',
+            role: 'member'
+          });
+        }
       }
       setLoading(false);
-    }, 400);
+    }, 350);
   };
 
   const handleQuickDemoLogin = () => {
@@ -152,6 +174,21 @@ export default function LoginView({ onLoginSuccess, onBackToLanding }) {
               {loading ? 'Memverifikasi...' : 'Masuk ke Akun'}
             </button>
           </form>
+
+          {/* Belum punya akun? Daftar Member */}
+          {onOpenRegister && (
+            <div className="p-3 rounded-xl bg-amber-400/[0.05] border border-amber-400/20 text-center space-y-1">
+              <span className="text-[11px] text-zinc-400 block">Belum terdaftar sebagai anggota gym?</span>
+              <button
+                type="button"
+                onClick={onOpenRegister}
+                className="text-xs font-bold text-amber-400 hover:text-amber-300 inline-flex items-center gap-1.5 cursor-pointer transition-colors"
+              >
+                <Zap className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <span>Daftar Member Baru Sekarang</span>
+              </button>
+            </div>
+          )}
 
           {/* Quick 1-Click Access */}
           <div className="pt-3 border-t border-white/[0.08] space-y-2">

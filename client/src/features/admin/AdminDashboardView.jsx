@@ -94,9 +94,8 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
       return;
     }
 
-    let planName = 'Paket Bulanan Reguler';
-    if (newMemberForm.planId === 'annual') planName = 'Annual Regular Pass';
-    if (newMemberForm.planId === 'mahasiswa') planName = 'Paket Mahasiswa (KTM)';
+    let planName = 'Paket Bulanan (Monthly Pass)';
+    if (newMemberForm.planId === 'tahunan') planName = 'Paket Tahunan (Annual Pass)';
     if (newMemberForm.planId === 'per_visit') planName = 'Per-Visit (Harian Flex)';
 
     await mockDataService.addMember({
@@ -109,8 +108,8 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
       name: '',
       email: '',
       phone: '',
-      planId: 'reguler',
-      planName: 'Paket Bulanan Reguler',
+      planId: 'bulanan',
+      planName: 'Paket Bulanan (Monthly Pass)',
       validUntil: '1 Bulan Mendatang',
       goal: 'general_fitness'
     });
@@ -840,10 +839,9 @@ export default function AdminDashboardView({ onSwitchToMemberView, showToast, on
                   onChange={(e) => setNewMemberForm({ ...newMemberForm, planId: e.target.value })}
                   className="w-full bg-zinc-900/80 border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400/80"
                 >
-                  <option value="reguler">Paket Bulanan Reguler (Rp 250.000 / bln)</option>
-                  <option value="mahasiswa">Paket Mahasiswa Pakuan / IPB (Rp 180.000 / bln)</option>
-                  <option value="annual">Annual Regular Pass (Rp 2.400.000 / thn)</option>
-                  <option value="per_visit">Per-Visit Harian (Rp 35.000 / visit)</option>
+                  <option value="bulanan">Paket Bulanan (Monthly Pass) — Rp 100.000 / bln</option>
+                  <option value="tahunan">Paket Tahunan (Annual Pass) — Rp 1.200.000 / thn</option>
+                  <option value="per_visit">Per-Visit (Harian Flex) — Rp 25.000 / visit</option>
                 </select>
               </div>
 

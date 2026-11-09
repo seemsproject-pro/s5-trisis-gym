@@ -24,24 +24,25 @@ import {
   User
 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge';
+import RegisterMemberModal from '../../components/RegisterMemberModal';
 
 export default function GymLandingView({ 
   onOpenLogin, 
   onQuickDemoLogin, 
   onQuickAdminLogin,
+  onRegisterComplete,
   auth, 
   onLogout, 
   onGoToDashboard 
 }) {
-  // Modal State
-  const [selectedPlanModal, setSelectedPlanModal] = useState(null);
-  const [registerSuccess, setRegisterSuccess] = useState(false);
-  const [registerForm, setRegisterForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    plan: 'reguler'
-  });
+  // Modal Registration State
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [registerPlanId, setRegisterPlanId] = useState('bulanan');
+
+  const openRegister = (planId = 'bulanan') => {
+    setRegisterPlanId(planId);
+    setIsRegisterModalOpen(true);
+  };
 
   // Interactive Hero Preview Tab: 'card' | 'streak' | 'coach'
   const [heroInteractiveTab, setHeroInteractiveTab] = useState('card');
@@ -51,7 +52,7 @@ export default function GymLandingView({
 
   // Interactive Pricing Calculator State
   const [workoutDaysPerWeek, setWorkoutDaysPerWeek] = useState(4);
-  const [selectedPlanCategory, setSelectedPlanCategory] = useState('all'); // 'all' | 'monthly' | 'student' | 'daily'
+  const [selectedPlanCategory, setSelectedPlanCategory] = useState('all'); // 'all' | 'monthly' | 'daily'
   const [showComparisonModal, setShowComparisonModal] = useState(false);
 
   // Facility filter: 'all' | 'strength' | 'cardio' | 'functional' | 'amenity'
@@ -61,7 +62,7 @@ export default function GymLandingView({
   // FAQ Accordion State (open question id)
   const [openFaq, setOpenFaq] = useState(0);
 
-  // Packages Data
+  // 3 Pilihan Paket Resmi Trisis Gym (Strict Sesuai Arahan Owner)
   const plans = [
     {
       id: 'per_visit',
@@ -71,47 +72,29 @@ export default function GymLandingView({
       numericPrice: 25000,
       period: '/ kunjungan',
       badge: 'Fleksibel',
-      badgeColor: 'bg-white/10 text-slate-300 border-white/10',
+      badgeColor: 'bg-zinc-800 text-zinc-300 border-zinc-700',
       desc: 'Bayar sekali untuk latihan fleksibel hari ini tanpa komitmen bulanan.',
       features: [
         'Akses penuh semua alat beban & kardio',
-        'Locker harian gratis',
-        'Berlaku satu hari penuh (bebas jam)',
-        'Tanpa biaya pendaftaran'
+        'Locker harian gratis & shower bersih',
+        'Berlaku satu hari penuh (06:00 - 22:00 WIB)',
+        'Tanpa biaya pendaftaran awal'
       ],
       popular: false
     },
     {
-      id: 'mahasiswa',
-      category: 'student',
-      name: 'Paket Mahasiswa / Pelajar',
-      price: 'Rp 175.000',
-      numericPrice: 175000,
-      period: '/ bulan',
-      badge: 'Diskon Kampus',
-      badgeColor: 'bg-blue-950/60 text-blue-300 border-blue-800/40',
-      desc: 'Tarif spesial khusus mahasiswa & pelajar dengan kartu identitas aktif.',
-      features: [
-        'Akses tak terbatas 30 hari penuh',
-        'Gratis konsultasi program awal',
-        'Akses aplikasi pendamping latihan',
-        'Fasilitas shower & locker'
-      ],
-      popular: false
-    },
-    {
-      id: 'reguler',
+      id: 'bulanan',
       category: 'monthly',
-      name: 'Paket Bulanan Reguler',
-      price: 'Rp 225.000',
-      numericPrice: 225000,
+      name: 'Paket Bulanan (Monthly Pass)',
+      price: 'Rp 100.000',
+      numericPrice: 100000,
       period: '/ bulan',
       badge: 'Paling Diminati',
-      badgeColor: 'bg-purple-950/60 text-purple-300 border-purple-800/40',
+      badgeColor: 'bg-amber-400/10 text-amber-400 border-amber-400/30',
       desc: 'Pilihan paling favorit untuk konsistensi pembentukan otot dan kebugaran.',
       features: [
         'Akses tak terbatas 30 hari penuh',
-        'Kartu member digital eksklusif',
+        'Kartu member digital & QR Code resmi',
         'Rekomendasi workout split & target makro',
         'Presensi mandiri & pelacakan streak',
         'Bebas biaya admin perpanjangan'
@@ -119,18 +102,18 @@ export default function GymLandingView({
       popular: true
     },
     {
-      id: 'annual',
+      id: 'tahunan',
       category: 'monthly',
-      name: 'Annual VIP Pass (1 Tahun)',
-      price: 'Rp 1.950.000',
-      numericPrice: 1950000,
+      name: 'Paket Tahunan (Annual Pass)',
+      price: 'Rp 1.200.000',
+      numericPrice: 1200000,
       period: '/ tahun',
-      badge: 'Hemat 30%',
-      badgeColor: 'bg-amber-950/60 text-amber-300 border-amber-800/40',
+      badge: 'Nilai Terbaik',
+      badgeColor: 'bg-emerald-400/10 text-emerald-400 border-emerald-400/30',
       desc: 'Komitmen transformasi 1 tahun dengan harga paling hemat & benefit VIP.',
       features: [
         'Akses 365 hari penuh tanpa batas',
-        'Free T-Shirt Eksklusif Trisis Gym & Shaker',
+        'Free Exclusive Shaker & Merchandise Trisis Gym',
         '2x Sesi panduan privat bersama Senior Trainer',
         'Bisa ajukan cuti / freeze keanggotaan hingga 30 hari',
         'Prioritas akses event & seminar kebugaran'
@@ -222,8 +205,8 @@ export default function GymLandingView({
       a: 'Pasti! Tim trainer kami siap menyambut, mengenalkan fungsi setiap alat, dan memberikan arahan bentuk gerakan (form) yang aman di sesi awal agar kamu tidak canggung atau cedera.'
     },
     {
-      q: 'Apa syarat untuk mendapatkan tarif Paket Mahasiswa (Rp 175rb)?',
-      a: 'Cukup menunjukkan Kartu Tanda Mahasiswa (KTM) atau kartu pelajar yang masih aktif saat verifikasi pertama. Berlaku untuk seluruh kampus di Bogor dan sekitarnya (IPB University, Universitas Pakuan, UIKA, dll).'
+      q: 'Berapa biaya membership di Trisis Gym?',
+      a: 'Trisis Gym menyediakan 3 pilihan transparan tanpa biaya pendaftaran tersembunyi: Per-Visit Harian (Rp 25.000 / kunjungan), Paket Bulanan (Rp 100.000 / bulan), dan Paket Tahunan (Rp 1.200.000 / tahun).'
     },
     {
       q: 'Bagaimana cara kerja kartu member digital dan presensi?',
@@ -254,20 +237,10 @@ export default function GymLandingView({
   // Calculation for Interactive Savings Slider
   const monthlySessions = workoutDaysPerWeek * 4;
   const costIfPerVisit = monthlySessions * 25000;
-  const studentSavings = costIfPerVisit - 175000;
-  const regularSavings = costIfPerVisit - 225000;
-  const costPerSessionStudent = Math.round(175000 / monthlySessions);
-  const costPerSessionRegular = Math.round(225000 / monthlySessions);
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    setRegisterSuccess(true);
-    setTimeout(() => {
-      setRegisterSuccess(false);
-      setSelectedPlanModal(null);
-      onQuickDemoLogin();
-    }, 1600);
-  };
+  const monthlySavings = costIfPerVisit - 100000;
+  const annualSavings = (costIfPerVisit * 12) - 1200000;
+  const costPerSessionMonthly = Math.round(100000 / monthlySessions);
+  const costPerSessionAnnual = Math.round(1200000 / (monthlySessions * 12));
 
   return (
     <div className="min-h-screen bg-[#090A0E] text-zinc-100 font-sans selection:bg-amber-400 selection:text-neutral-950">
@@ -338,26 +311,26 @@ export default function GymLandingView({
                   className="text-xs font-semibold px-3 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/[0.08] transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <User className="w-3.5 h-3.5 text-zinc-400" />
-                  <span>Masuk Member</span>
+                  <span>Login Member</span>
                 </button>
 
                 {onQuickAdminLogin && (
                   <button
                     onClick={onQuickAdminLogin}
-                    className="text-xs font-semibold px-3 py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-amber-400 border border-zinc-700/60 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="text-xs font-semibold px-2.5 py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-amber-400 border border-zinc-700/60 transition-all cursor-pointer flex items-center gap-1.5"
+                    title="Masuk Panel Admin & Kasir Gym"
                   >
                     <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                    <span className="hidden sm:inline">Masuk Admin</span>
-                    <span className="sm:hidden">Admin</span>
+                    <span className="hidden sm:inline">Staff / Admin</span>
                   </button>
                 )}
 
                 <button
-                  onClick={() => setSelectedPlanModal(plans[2])}
-                  className="hidden md:flex text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer items-center gap-1.5"
+                  onClick={() => openRegister('bulanan')}
+                  className="text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
                 >
                   <Zap className="w-3.5 h-3.5 fill-neutral-950 text-neutral-950" />
-                  <span>Daftar</span>
+                  <span>Daftar Member</span>
                 </button>
               </>
             )}
@@ -401,35 +374,37 @@ export default function GymLandingView({
               </span>
               <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center gap-1.5 text-amber-400 font-semibold">
                 <Users className="w-3.5 h-3.5 text-amber-400" />
-                Diskon Khusus Mahasiswa Bogor (IPB, Pakuan, UIKA)
+                Paket Bulanan Hanya Rp 100.000 / Bulan
               </span>
             </div>
 
-            {/* Dual / Triple CTAs */}
+            {/* Dual CTAs: Daftar Member & Login Member */}
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
-              <a
-                href="#paket"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group"
+              <button
+                onClick={() => openRegister('bulanan')}
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group shadow-lg shadow-amber-400/20"
               >
-                <span>Pilih Paket Membership</span>
+                <Zap className="w-4 h-4 fill-neutral-950 text-neutral-950" />
+                <span>Daftar Member Baru</span>
                 <ArrowRight className="w-4 h-4 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />
-              </a>
+              </button>
 
               <button
-                onClick={onQuickDemoLogin}
+                onClick={onOpenLogin}
                 className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/60 text-zinc-200 hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>Masuk Portal Member</span>
+                <User className="w-4 h-4 text-amber-400" />
+                <span>Login Member</span>
               </button>
 
               {onQuickAdminLogin && (
                 <button
                   onClick={onQuickAdminLogin}
-                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-700/40 text-amber-400 font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-4 py-3.5 rounded-xl bg-zinc-800/30 hover:bg-zinc-800/70 border border-zinc-700/40 text-amber-400 font-semibold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  title="Panel Admin Kasir & Pengelola Gym"
                 >
                   <ShieldCheck className="w-4 h-4 text-amber-400" />
-                  <span>Masuk Panel Admin</span>
+                  <span>Staff / Resepsionis</span>
                 </button>
               )}
             </div>
@@ -769,42 +744,42 @@ export default function GymLandingView({
               <div className="space-y-2">
                 <div className="p-3 rounded-xl bg-zinc-900/80 border border-amber-400/20 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Mahasiswa:</span>
+                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Bulanan (Rp 100k):</span>
                     <span className="text-lg font-bold text-amber-400">
-                      Rp {costPerSessionStudent.toLocaleString('id-ID')}
+                      Rp {costPerSessionMonthly.toLocaleString('id-ID')}
                     </span>
                     <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-zinc-400 block">Hemat Bulanan:</span>
+                    <span className="text-[10px] text-zinc-400 block">Hemat per Bulan:</span>
                     <span className="text-sm font-bold text-emerald-400">
-                      +Rp {Math.max(0, studentSavings).toLocaleString('id-ID')}
+                      +Rp {Math.max(0, monthlySavings).toLocaleString('id-ID')}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-900/80 border border-white/[0.04] flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Reguler:</span>
+                    <span className="text-[10px] text-zinc-400 block font-medium">Paket Tahunan (Rp 1.2jt):</span>
                     <span className="text-lg font-bold text-white">
-                      Rp {costPerSessionRegular.toLocaleString('id-ID')}
+                      Rp {costPerSessionAnnual.toLocaleString('id-ID')}
                     </span>
                     <span className="text-[10px] text-zinc-400 ml-1">/ sesi</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-zinc-400 block">Hemat Bulanan:</span>
+                    <span className="text-[10px] text-zinc-400 block">Hemat per Tahun:</span>
                     <span className="text-sm font-bold text-emerald-400">
-                      +Rp {Math.max(0, regularSavings).toLocaleString('id-ID')}
+                      +Rp {Math.max(0, annualSavings).toLocaleString('id-ID')}
                     </span>
                   </div>
                 </div>
               </div>
 
               <button
-                onClick={() => setSelectedPlanModal(plans[1])}
-                className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+                onClick={() => openRegister('bulanan')}
+                className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-400/15"
               >
-                <span>Daftar Paket Rekomendasi Ini</span>
+                <span>Daftar Paket Bulanan Ini</span>
                 <ArrowRight className="w-4 h-4 text-neutral-950" />
               </button>
             </div>
@@ -839,7 +814,7 @@ export default function GymLandingView({
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
-              Semua Paket
+              Semua Paket (3)
             </button>
             <button
               onClick={() => setSelectedPlanCategory('monthly')}
@@ -849,17 +824,7 @@ export default function GymLandingView({
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
-              Bulanan & VIP
-            </button>
-            <button
-              onClick={() => setSelectedPlanCategory('student')}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                selectedPlanCategory === 'student'
-                  ? 'bg-zinc-800 text-white font-bold border border-zinc-700/80'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              Mahasiswa
+              Bulanan & Tahunan
             </button>
             <button
               onClick={() => setSelectedPlanCategory('daily')}
@@ -869,7 +834,7 @@ export default function GymLandingView({
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
-              Harian Flex
+              Harian (Per-Visit)
             </button>
           </div>
 
@@ -882,14 +847,14 @@ export default function GymLandingView({
           </button>
         </div>
 
-        {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        {/* Pricing Cards Grid — 3 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {filteredPlans.map((p) => (
             <div
               key={p.id}
-              className={`rounded-2xl p-5 border flex flex-col justify-between transition-all duration-200 ${
+              className={`rounded-2xl p-6 border flex flex-col justify-between transition-all duration-200 ${
                 p.popular
-                  ? 'border-amber-400/50 bg-[#141620] relative'
+                  ? 'border-amber-400/50 bg-[#141620] relative ring-1 ring-amber-400/30 shadow-xl shadow-amber-400/5'
                   : 'bg-[#111319] border-white/[0.08] hover:border-zinc-700'
               }`}
             >
@@ -897,12 +862,12 @@ export default function GymLandingView({
                 {/* Top Badge */}
                 <div className="flex items-center justify-between mb-3 min-h-[24px]">
                   {p.badge ? (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${p.badgeColor}`}>
                       {p.badge}
                     </span>
                   ) : <span />}
                   {p.popular && (
-                    <span className="text-[10px] font-bold text-neutral-950 bg-amber-400 px-2 py-0.5 rounded flex items-center gap-1">
+                    <span className="text-[10px] font-bold text-neutral-950 bg-amber-400 px-2 py-0.5 rounded flex items-center gap-1 shadow-sm">
                       ⭐ Rekomendasi
                     </span>
                   )}
@@ -912,15 +877,15 @@ export default function GymLandingView({
                 <p className="text-xs text-zinc-400 mt-1 min-h-[34px] leading-relaxed">{p.desc}</p>
 
                 <div className="my-4 pt-4 border-t border-white/[0.06]">
-                  <span className="text-2xl font-bold text-white">{p.price}</span>
+                  <span className="text-3xl font-extrabold text-white">{p.price}</span>
                   <span className="text-xs text-zinc-400 font-medium ml-1">{p.period}</span>
                 </div>
 
                 {/* Features list */}
-                <ul className="space-y-2 text-xs text-zinc-300 mb-6">
+                <ul className="space-y-2.5 text-xs text-zinc-300 mb-6">
                   {p.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -928,14 +893,14 @@ export default function GymLandingView({
               </div>
 
               <button
-                onClick={() => setSelectedPlanModal(p)}
-                className={`w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                onClick={() => openRegister(p.id)}
+                className={`w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   p.popular
-                    ? 'bg-amber-400 hover:bg-amber-300 text-neutral-950'
+                    ? 'bg-amber-400 hover:bg-amber-300 text-neutral-950 shadow-md shadow-amber-400/20'
                     : 'bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60'
                 }`}
               >
-                <span>Daftar Paket Ini</span>
+                <span>Pilih & Daftar Paket Ini</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -1182,104 +1147,19 @@ export default function GymLandingView({
       </footer>
 
       {/* ============================================================== */}
-      {/* 10. MODAL SIMULASI DAFTAR MEMBER */}
+      {/* 10. MODAL ALUR PENDAFTARAN & PEMBAYARAN MEMBER LENGKAP */}
       {/* ============================================================== */}
-      {selectedPlanModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-sm bg-[#111319] border border-white/[0.08] rounded-2xl shadow-2xl p-5 md:p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">Formulir Pendaftaran</span>
-                <h3 className="text-base font-bold text-white">Gabung Jadi Member</h3>
-              </div>
-              <button
-                onClick={() => setSelectedPlanModal(null)}
-                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {registerSuccess ? (
-              <div className="py-6 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                  <UserCheck className="w-6 h-6" />
-                </div>
-                <h4 className="font-bold text-sm text-white">Pendaftaran Member Berhasil!</h4>
-                <p className="text-xs text-zinc-400">
-                  Mengarahkan Anda langsung ke portal dashboard member...
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleRegisterSubmit} className="space-y-3 text-xs">
-                {/* Selected Plan Snapshot */}
-                <div className="p-3 rounded-xl bg-zinc-900 border border-white/[0.06] flex items-center justify-between">
-                  <div>
-                    <span className="font-bold text-white block">{selectedPlanModal.name}</span>
-                    <span className="text-[10px] text-zinc-400">{selectedPlanModal.desc}</span>
-                  </div>
-                  <span className="font-bold text-amber-400">{selectedPlanModal.price}</span>
-                </div>
-
-                <div>
-                  <label htmlFor="reg-name" className="block text-zinc-300 font-semibold mb-1">Nama Lengkap</label>
-                  <input
-                    id="reg-name"
-                    type="text"
-                    required
-                    placeholder="Contoh: Budi Santoso"
-                    value={registerForm.name}
-                    onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="reg-phone" className="block text-zinc-300 font-semibold mb-1">Nomor WhatsApp</label>
-                  <input
-                    id="reg-phone"
-                    type="tel"
-                    required
-                    placeholder="081234567890"
-                    value={registerForm.phone}
-                    onChange={(e) => setRegisterForm({ ...registerForm, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="reg-email" className="block text-zinc-300 font-semibold mb-1">Alamat Email</label>
-                  <input
-                    id="reg-email"
-                    type="email"
-                    required
-                    placeholder="nama@email.com"
-                    value={registerForm.email}
-                    onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div className="pt-2 space-y-2">
-                  <button
-                    type="submit"
-                    className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs cursor-pointer transition-colors"
-                  >
-                    Kirim & Masuk ke Akun Member
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlanModal(null)}
-                    className="w-full py-2 text-zinc-400 hover:text-white font-medium cursor-pointer"
-                  >
-                    Batal
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+      <RegisterMemberModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+        initialPlanId={registerPlanId}
+        onRegisterComplete={(newMember, autoEnter) => {
+          if (onRegisterComplete) {
+            onRegisterComplete(newMember, autoEnter);
+          }
+        }}
+        onOpenLogin={onOpenLogin}
+      />
 
       {/* ============================================================== */}
       {/* 11. MODAL DETAIL FASILITAS */}
@@ -1360,23 +1240,20 @@ export default function GymLandingView({
                 <thead>
                   <tr className="border-b border-white/[0.08] text-zinc-400 text-[10px] uppercase font-bold">
                     <th className="py-2.5">Fasilitas / Benefit</th>
-                    <th className="py-2.5">Per-Visit</th>
-                    <th className="py-2.5 text-amber-400">Mahasiswa</th>
-                    <th className="py-2.5 text-zinc-200">Bulanan</th>
-                    <th className="py-2.5 text-amber-400">Annual VIP</th>
+                    <th className="py-2.5 text-zinc-300">Per-Visit (Rp 25k)</th>
+                    <th className="py-2.5 text-amber-400">Bulanan (Rp 100k)</th>
+                    <th className="py-2.5 text-emerald-400">Tahunan (Rp 1.2jt)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/[0.04] text-zinc-300">
                   <tr>
                     <td className="py-2.5 font-bold text-white">Akses Beban & Kardio</td>
-                    <td className="py-2.5">1 Hari</td>
-                    <td className="py-2.5">30 Hari</td>
-                    <td className="py-2.5">30 Hari</td>
-                    <td className="py-2.5">365 Hari</td>
+                    <td className="py-2.5">1 Hari Penuh</td>
+                    <td className="py-2.5">30 Hari Tanpa Batas</td>
+                    <td className="py-2.5">365 Hari Tanpa Batas</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 font-bold text-white">Locker & Shower</td>
-                    <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
@@ -1386,35 +1263,30 @@ export default function GymLandingView({
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
-                    <td className="py-2.5">✓</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 font-bold text-white">Rekomendasi Workout & Makro</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">✓</td>
                     <td className="py-2.5">✓</td>
-                    <td className="py-2.5">✓</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 font-bold text-white">Konsultasi Privat Trainer</td>
                     <td className="py-2.5">-</td>
-                    <td className="py-2.5">Awal</td>
-                    <td className="py-2.5">Awal</td>
+                    <td className="py-2.5">Sesi Awal</td>
                     <td className="py-2.5">2x Sesi Privat</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 font-bold text-white">Cuti / Freeze Membership</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
-                    <td className="py-2.5">-</td>
                     <td className="py-2.5">Hingga 30 Hari</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 font-bold text-white">Free Merchandise (Shaker/Baju)</td>
+                    <td className="py-2.5 font-bold text-white">Merchandise Eksklusif (Shaker)</td>
                     <td className="py-2.5">-</td>
                     <td className="py-2.5">-</td>
-                    <td className="py-2.5">-</td>
-                    <td className="py-2.5">✓</td>
+                    <td className="py-2.5">✓ Gratis</td>
                   </tr>
                 </tbody>
               </table>

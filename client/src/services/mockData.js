@@ -14,17 +14,18 @@ const STORAGE_KEYS = {
   ACTIVE_ROLE: 'trisis_app_active_role' // 'member' | 'admin'
 };
 
-// Seed Akun & Kartu Member Awal
+// Seed Akun & Kartu Member Awal (Demo Member Budi Santoso)
 const INITIAL_ACCOUNT = {
   id: 'usr_m_089',
   name: 'Budi Santoso',
   email: 'budi.santoso@trisisgym.com',
   phone: '0812-3456-7890',
   memberId: 'TRISIS-2026-089',
-  planName: 'Annual Regular Pass',
+  planName: 'Paket Bulanan (Monthly Pass)',
+  planId: 'bulanan',
   status: 'Aktif',
   joinedDate: '10 Januari 2026',
-  validUntil: '10 Januari 2027',
+  validUntil: '10 Februari 2027',
   emergencyContact: 'Siti Rahma (Istri) - 0813-9876-5432',
   qrCodeSeed: 'TRISIS-QR-089-VERIFIED',
   role: 'member'
@@ -42,7 +43,7 @@ const INITIAL_ADMIN_ACCOUNT = {
   role: 'admin'
 };
 
-// Seed Daftar Member untuk Pengelolaan Admin (Modul 9)
+// Seed Daftar Member untuk Pengelolaan Admin (Modul 9) — 3 Paket Resmi
 const INITIAL_MEMBERS = [
   {
     id: 'usr_m_089',
@@ -50,22 +51,22 @@ const INITIAL_MEMBERS = [
     email: 'budi.santoso@trisisgym.com',
     phone: '0812-3456-7890',
     memberId: 'TRISIS-2026-089',
-    planName: 'Annual Regular Pass',
-    planId: 'annual',
+    planName: 'Paket Bulanan (Monthly Pass)',
+    planId: 'bulanan',
     status: 'Aktif',
     joinedDate: '10 Jan 2026',
-    validUntil: '10 Jan 2027',
+    validUntil: '10 Feb 2027',
     totalCheckIns: 12,
     goal: 'muscle_building'
   },
   {
     id: 'usr_m_012',
     name: 'Siti Nurhaliza',
-    email: 'siti.mhs@pakuan.ac.id',
+    email: 'siti.mhs@gmail.com',
     phone: '0857-1122-3344',
-    memberId: 'TRISIS-M-2026-012',
-    planName: 'Paket Mahasiswa Pakuan',
-    planId: 'mahasiswa',
+    memberId: 'TRISIS-B-2026-012',
+    planName: 'Paket Bulanan (Monthly Pass)',
+    planId: 'bulanan',
     status: 'Aktif',
     joinedDate: '01 Feb 2026',
     validUntil: '01 Mar 2026',
@@ -77,13 +78,13 @@ const INITIAL_MEMBERS = [
     name: 'Ahmad Fauzi',
     email: 'ahmad.fauzi@gmail.com',
     phone: '0813-7788-9900',
-    memberId: 'TRISIS-R-2026-045',
-    planName: 'Paket Bulanan Reguler',
-    planId: 'reguler',
+    memberId: 'TRISIS-T-2026-045',
+    planName: 'Paket Tahunan (Annual Pass)',
+    planId: 'tahunan',
     status: 'Aktif',
     joinedDate: '15 Jan 2026',
-    validUntil: '15 Feb 2026',
-    totalCheckIns: 9,
+    validUntil: '15 Jan 2027',
+    totalCheckIns: 29,
     goal: 'muscle_building'
   },
   {
@@ -103,14 +104,14 @@ const INITIAL_MEMBERS = [
   {
     id: 'usr_m_077',
     name: 'Dinda Permata',
-    email: 'dinda.ipb@apps.ipb.ac.id',
+    email: 'dinda.p@gmail.com',
     phone: '0821-3344-5566',
-    memberId: 'TRISIS-M-2026-077',
-    planName: 'Paket Mahasiswa IPB',
-    planId: 'mahasiswa',
+    memberId: 'TRISIS-T-2026-077',
+    planName: 'Paket Tahunan (Annual Pass)',
+    planId: 'tahunan',
     status: 'Aktif',
     joinedDate: '05 Okt 2026',
-    validUntil: '05 Nov 2026',
+    validUntil: '05 Okt 2027',
     totalCheckIns: 14,
     goal: 'fat_loss'
   }
@@ -212,20 +213,56 @@ export const mockDataService = {
 
   // 2. Autentikasi Pengguna
   getAuthStatus() {
-    const role = this.getActiveRole();
-    const defaultUser = role === 'admin' ? INITIAL_ADMIN_ACCOUNT : INITIAL_ACCOUNT;
     return getStoredItem(STORAGE_KEYS.AUTH, {
-      isAuthenticated: true,
-      user: defaultUser
+      isAuthenticated: false,
+      user: null
     });
   },
 
   login(email, _password) {
-    const isAdmin = email && email.toLowerCase().includes('admin');
-    const user = isAdmin ? { ...INITIAL_ADMIN_ACCOUNT, email } : { ...INITIAL_ACCOUNT, email: email || INITIAL_ACCOUNT.email };
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const isAdmin = cleanEmail.includes('admin');
+
+    if (isAdmin) {
+      const user = { ...INITIAL_ADMIN_ACCOUNT, email: cleanEmail || INITIAL_ADMIN_ACCOUNT.email };
+      const authState = { isAuthenticated: true, user };
+      setStoredItem(STORAGE_KEYS.AUTH, authState);
+      this.setActiveRole('admin');
+      return Promise.resolve({ success: true, user });
+    }
+
+    // Cari dari daftar member yang terdaftar di localStorage
+    const members = this.getMembers();
+    const foundMember = members.find(
+      (m) => m.email?.toLowerCase() === cleanEmail || m.memberId?.toLowerCase() === cleanEmail
+    );
+
+    let user;
+    if (foundMember) {
+      user = {
+        id: foundMember.id,
+        name: foundMember.name,
+        email: foundMember.email,
+        phone: foundMember.phone,
+        memberId: foundMember.memberId,
+        planName: foundMember.planName,
+        planId: foundMember.planId,
+        validUntil: foundMember.validUntil,
+        status: foundMember.status || 'Aktif',
+        role: 'member'
+      };
+    } else {
+      // Default demo member (Budi Santoso) jika login demo
+      user = { 
+        ...INITIAL_ACCOUNT, 
+        email: cleanEmail || INITIAL_ACCOUNT.email,
+        name: cleanEmail && !cleanEmail.includes('budi') ? cleanEmail.split('@')[0] : INITIAL_ACCOUNT.name
+      };
+    }
+
     const authState = { isAuthenticated: true, user };
     setStoredItem(STORAGE_KEYS.AUTH, authState);
-    this.setActiveRole(user.role);
+    this.setActiveRole('member');
     return Promise.resolve({ success: true, user });
   },
 
@@ -376,7 +413,13 @@ export const mockDataService = {
   addMember(memberData) {
     const members = this.getMembers();
     const newId = `usr_${Date.now()}`;
-    const newMemberId = `TRISIS-${memberData.planId === 'mahasiswa' ? 'M' : memberData.planId === 'per_visit' ? 'V' : 'R'}-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const planId = memberData.planId || 'bulanan';
+    const prefix = planId === 'per_visit' ? 'V' : planId === 'tahunan' ? 'T' : 'B';
+    const newMemberId = `TRISIS-${prefix}-2026-${Math.floor(100 + Math.random() * 900)}`;
+
+    let defaultPlanName = 'Paket Bulanan (Monthly Pass)';
+    if (planId === 'per_visit') defaultPlanName = 'Per-Visit (Harian Flex)';
+    if (planId === 'tahunan') defaultPlanName = 'Paket Tahunan (Annual Pass)';
 
     const newMember = {
       id: newId,
@@ -384,11 +427,12 @@ export const mockDataService = {
       name: memberData.name || 'Member Baru',
       email: memberData.email || 'member@trisisgym.com',
       phone: memberData.phone || '0812-0000-0000',
-      planName: memberData.planName || 'Paket Bulanan Reguler',
-      planId: memberData.planId || 'reguler',
+      password: memberData.password || 'password123',
+      planName: memberData.planName || defaultPlanName,
+      planId: planId,
       status: 'Aktif',
-      joinedDate: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
-      validUntil: memberData.validUntil || '1 Bulan Mendatang',
+      joinedDate: memberData.joinedDate || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
+      validUntil: memberData.validUntil || (planId === 'tahunan' ? '1 Tahun Mendatang' : planId === 'per_visit' ? '1 Hari' : '1 Bulan Mendatang'),
       totalCheckIns: 0,
       goal: memberData.goal || 'general_fitness'
     };
