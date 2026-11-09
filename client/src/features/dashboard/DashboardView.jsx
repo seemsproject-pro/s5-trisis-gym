@@ -114,16 +114,16 @@ export default function DashboardView({
         </section>
       )}
 
-      {/* 1. Header & Sapaan Pengguna + Streak Card */}
+      {/* 1. Header & Sapaan Pengguna + Streak Card with Real Gym Banner */}
       <section className="bg-[#111319] rounded-2xl p-5 md:p-6 border border-white/[0.08] relative overflow-hidden">
-        {/* Subtle Gym Community Banner Background */}
-        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none select-none">
+        {/* Real Gym Community Banner Background */}
+        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none select-none">
           <img
             src="/gym-hero-banner.jpg"
-            alt="Trisis Gym Banner"
-            className="w-full h-full object-cover object-[center_28%] filter contrast-125"
+            alt="Suasana Komunitas Trisis Gym Bogor"
+            className="w-full h-full object-cover object-[center_30%] filter brightness-90 contrast-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111319] via-[#111319]/70 to-[#111319]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111319] via-[#111319]/80 to-[#111319]/70" />
         </div>
 
         <div className="relative z-10 flex items-center justify-between gap-4">
