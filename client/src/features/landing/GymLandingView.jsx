@@ -862,28 +862,128 @@ export default function GymLandingView({
       </section>
 
       {/* ============================================================== */}
-      {/* 9. FOOTER */}
+      {/* 9. FOOTER — PRESTISIUS, LENGKAP & ELEGAN */}
       {/* ============================================================== */}
-      <footer className="bg-[#090A0E] border-t border-white/[0.08] py-8 px-4 md:px-8 text-xs text-zinc-400">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <img src="/logo.png" alt="Trisis Gym Logo" className="h-7 w-auto object-contain shrink-0" />
-            <span className="font-extrabold text-white">
-              TRISIS <span className="text-amber-400 font-extrabold">GYM</span>
-            </span>
-            <span>• Est. Bogor, Indonesia</span>
+      <footer className="bg-[#06070A] border-t border-white/[0.08] pt-14 pb-8 px-4 md:px-8 text-xs text-zinc-400 relative overflow-hidden">
+        {/* Subtle Ambient Purple / Gold Glow at bottom corner */}
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[250px] bg-[#3B1261]/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[400px] h-[200px] bg-amber-500/5 rounded-full blur-[130px] pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto space-y-12 relative z-10">
+          {/* Main Footer Grid: 4 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Col 1: Brand & Identity (4 Cols) */}
+            <div className="lg:col-span-4 space-y-4">
+              <a href="#hero" className="flex items-center gap-3 group inline-flex select-none">
+                <img 
+                  src="/logo.png" 
+                  alt="Trisis Gym Logo" 
+                  className="h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(245,158,11,0.25)] transition-transform duration-200 group-hover:scale-105" 
+                />
+                <div className="flex flex-col">
+                  <span className="font-black text-lg tracking-tight text-white leading-tight">
+                    TRISIS<span className="text-amber-400 font-extrabold">GYM</span>
+                  </span>
+                  <p className="text-[10px] text-zinc-400 font-medium tracking-wide leading-none mt-0.5">Fitness Club • Est. Bogor, Indonesia</p>
+                </div>
+              </a>
+
+              <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
+                Fasilitas pusat kebugaran modern ramah pemula di Kota Bogor. Dilengkapi unit beban lengkap, suasana latihan fokus, dan portal pintar untuk memantau kemajuan fisik Anda.
+              </p>
+
+              {/* Live Operational Status Pill */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A0B2E]/70 border border-purple-500/25 text-purple-200 text-[11px] font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Buka Setiap Hari: 06:00 – 22:00 WIB</span>
+              </div>
+
+              {/* Direct Quick WhatsApp CTA */}
+              <div className="pt-1">
+                <a
+                  href="https://wa.me/6281234567890?text=Halo%20Admin%20Trisis%20Gym,%20saya%20ingin%20tanya%20info%20membership"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 font-semibold text-xs transition-all cursor-pointer"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Chat CS Kasir via WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Col 2: Navigasi Website (2 Cols) */}
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white">Eksplorasi</h4>
+              <ul className="space-y-2 text-xs">
+                <li><a href="#hero" className="hover:text-amber-400 transition-colors">Beranda Utama</a></li>
+                <li><a href="#kepadatan" className="hover:text-amber-400 transition-colors">Live Okupansi Alat</a></li>
+                <li><a href="#kalkulator" className="hover:text-amber-400 transition-colors">Kalkulator Penghematan</a></li>
+                <li><a href="#fasilitas" className="hover:text-amber-400 transition-colors">Fasilitas & Alat Beban</a></li>
+                <li><a href="#paket" className="hover:text-amber-400 transition-colors">Pilihan Paket Member</a></li>
+                <li><a href="#faq" className="hover:text-amber-400 transition-colors">Tanya Jawab (FAQ)</a></li>
+              </ul>
+            </div>
+
+            {/* Col 3: Portal & Fitur Pintar (3 Cols) */}
+            <div className="lg:col-span-3 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white">Layanan & Member</h4>
+              <ul className="space-y-2 text-xs">
+                <li>
+                  <button onClick={onOpenLogin} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                    Masuk Portal Member
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => openRegister('bulanan')} className="hover:text-amber-400 transition-colors text-left cursor-pointer">
+                    Daftar Akun Member Baru
+                  </button>
+                </li>
+                <li><span className="text-zinc-500">QR Code Presensi Mandiri</span></li>
+                <li><span className="text-zinc-500">Rekomendasi Workout Split</span></li>
+                <li><span className="text-zinc-500">Kalkulator Makronutrisi Harian</span></li>
+                <li><span className="text-zinc-500">Pelacak Konsistensi & Streak</span></li>
+              </ul>
+            </div>
+
+            {/* Col 4: Alamat & Kontak (3 Cols) */}
+            <div className="lg:col-span-3 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white">Lokasi & Jam Buka</h4>
+              <div className="space-y-2.5 text-xs text-zinc-400">
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <p className="leading-relaxed">
+                    Jl. Trisis Fitness No. 12, Bogor Barat, Kota Bogor, Jawa Barat 16118.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Clock className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-zinc-300 block">Senin – Sabtu:</strong>
+                    <span>06:00 – 22:00 WIB</span>
+                    <strong className="text-zinc-300 block mt-1">Minggu & Libur:</strong>
+                    <span>07:00 – 20:00 WIB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4 text-zinc-400">
-            <button onClick={onOpenLogin} className="hover:text-white transition-colors">Portal Member</button>
-            <a href="#paket" className="hover:text-white transition-colors">Tawaran Membership</a>
-            <a href="#fasilitas" className="hover:text-white transition-colors">Fasilitas</a>
-            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
-          </div>
+          {/* Bottom Divider & Legal / Copyright Bar */}
+          <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500">
+            <div className="flex items-center gap-2">
+              <span className="text-zinc-400">© 2026 Trisis Gym Bogor.</span>
+              <span>Hak cipta dilindungi undang-undang.</span>
+            </div>
 
-          <p className="text-[10px] text-zinc-500">
-            Aplikasi Web & Android Member Trisis Gym Centre Bogor.
-          </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span className="text-zinc-400">Tanpa Biaya Admin Tersembunyi</span>
+              <span className="text-zinc-700 hidden sm:inline">•</span>
+              <span className="text-zinc-400">Aplikasi Member Resmi</span>
+              <span className="text-zinc-700 hidden sm:inline">•</span>
+              <span className="text-purple-400/80">Bogor, Jawa Barat</span>
+            </div>
+          </div>
         </div>
       </footer>
 
